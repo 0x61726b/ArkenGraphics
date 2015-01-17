@@ -49,7 +49,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Application;Events;Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -62,7 +62,9 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <PostBuildEvent>
-      <Command>copy Utility\*.h ..\SDK\Include</Command>
+      <Command>copy Utility\*.h ..\SDK\Include
+copy Application\*.h ..\SDK\Include
+copy Events\*.h ..\SDK\Include</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,9 +82,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Application\Application.h" />
+    <ClInclude Include="Application\D3D11RenderApplication.h" />
+    <ClInclude Include="Application\IWndProc.h" />
+    <ClInclude Include="Application\RenderWindow.h" />
+    <ClInclude Include="Application\Win32RenderWindow.h" />
+    <ClInclude Include="Events\EKeyboard.h" />
+    <ClInclude Include="Events\EKeyDown.h" />
+    <ClInclude Include="Events\EventManager.h" />
+    <ClInclude Include="Events\EWindow.h" />
+    <ClInclude Include="Events\IEvent.h" />
+    <ClInclude Include="Events\IEventListener.h" />
     <ClInclude Include="Utility\Pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application\Application.cpp" />
+    <ClCompile Include="Application\D3D11RenderApplication.cpp" />
+    <ClCompile Include="Application\Main.cpp" />
+    <ClCompile Include="Application\RenderWindow.cpp" />
+    <ClCompile Include="Application\Win32RenderWindow.cpp" />
+    <ClCompile Include="Events\EKeyboard.cpp" />
+    <ClCompile Include="Events\EKeyDown.cpp" />
+    <ClCompile Include="Events\EventManager.cpp" />
+    <ClCompile Include="Events\EWindow.cpp" />
+    <ClCompile Include="Events\IEventListener.cpp" />
     <ClCompile Include="Utility\Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildThisFileDirectory)../../build/native/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

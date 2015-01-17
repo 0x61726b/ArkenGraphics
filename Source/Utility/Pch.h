@@ -16,8 +16,12 @@
 //Standart C++ Libraries
 #include <fstream>
 #include <string>
+#include <map>
+#include <list>
+#include <sstream>
 #include <algorithm>
 #include <vector>
+#include <exception>
 //
 
 //Standard C Library includes
@@ -31,7 +35,7 @@
 //Direct3D Includes
 #include <d3d11.h>
 #include <d3dcompiler.h>
-
+#include <DirectXMath.h>
 
 #include <wrl.h>
 

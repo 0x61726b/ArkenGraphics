@@ -4,60 +4,55 @@
 //
 //Copyright (c) Alperen Gezer.All rights reserved.
 //
-//App.cpp
+//EKeyboard.cpp
 //--------------------------------------------------------------------------------
-#include "App.h"
-#include "EventManager.h"
-#include "EKeyDown.h"
+#include "Pch.h"
+#include "EKeyboard.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
-App AppInstance;
-//--------------------------------------------------------------------------------
-App::App()
+EKeyboard::EKeyboard( HWND hwnd, unsigned int wParam,long lParam )
+	: EWindow( hwnd,wParam,lParam )
 {
 
 }
 //--------------------------------------------------------------------------------
-bool App::ConfigureEngineComponents()
-{
-	if(!ConfigureRenderingEngineComponents(800,480,D3D_FEATURE_LEVEL_11_0)) {
-		return(false);
-	}
-
-	if(!ConfigureRenderingSetup()) {
-		return(false);
-	}
-
-	return true;
-}
-//--------------------------------------------------------------------------------
-void App::ShutdownEngineComponents()
-{
-	ShutdownRenderingSetup();
-	ShutdownRenderingEngineComponents();
-}
-//--------------------------------------------------------------------------------
-void App::Initialize()
-{
-
-}
-//--------------------------------------------------------------------------------
-void App::Update()
+EKeyboard::~EKeyboard()
 {
 }
 //--------------------------------------------------------------------------------
-void App::Shutdown()
+unsigned int EKeyboard::GetCharacterCode()
 {
+	return(m_iWParam);
 }
 //--------------------------------------------------------------------------------
-bool App::HandleEvent(EventPtr e)
+unsigned int EKeyboard::GetRepeatCount()
 {
-	return Application::HandleEvent( e );
+	return(0xffff&m_iLParam);
 }
 //--------------------------------------------------------------------------------
-std::wstring App::GetName()
+unsigned int EKeyboard::GetScanCode()
 {
-	return L"Basic App";
+	return((0xf0000&m_iLParam)>>16);
+}
+//--------------------------------------------------------------------------------
+bool EKeyboard::GetExtendedKey()
+{
+	return((0x01000000&m_iLParam) > 0);
+}
+//--------------------------------------------------------------------------------
+bool EKeyboard::GetContextCode()
+{
+	return((0x20000000&m_iLParam) > 0);
+}
+//--------------------------------------------------------------------------------
+bool EKeyboard::GetPreviousKeyState()
+{
+	return((0x40000000&m_iLParam) > 0);
+}
+//--------------------------------------------------------------------------------
+bool EKeyboard::GetTransitionState()
+{
+	return((0x80000000&m_iLParam) > 0);
 }
 //--------------------------------------------------------------------------------

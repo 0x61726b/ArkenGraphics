@@ -4,15 +4,90 @@
     <Filter Include="Utility">
       <UniqueIdentifier>{db94bf4e-3ceb-4c32-8c7f-e5098db99a04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{b8338c1d-2a1c-42b7-8dd7-ea20b4012659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{52c4ab78-39dc-4309-8fcd-da53e9d465d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\WindowMessages">
+      <UniqueIdentifier>{71ce8e3c-9ab4-48b7-9d31-58bcf6acb66c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\WindowMessages\Keyboard">
+      <UniqueIdentifier>{99b7e75f-8ad7-4495-9b00-49d520b67cf7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Pch.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="Application\Application.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\IWndProc.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EventManager.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\IEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\IEventListener.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EKeyDown.h">
+      <Filter>Events\WindowMessages\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EWindow.h">
+      <Filter>Events\WindowMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EKeyboard.h">
+      <Filter>Events\WindowMessages\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\RenderWindow.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Win32RenderWindow.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\D3D11RenderApplication.h">
+      <Filter>Application</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
       <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\IEventListener.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EventManager.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EWindow.cpp">
+      <Filter>Events\WindowMessages</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EKeyboard.cpp">
+      <Filter>Events\WindowMessages\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EKeyDown.cpp">
+      <Filter>Events\WindowMessages\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Main.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\RenderWindow.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Win32RenderWindow.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\D3D11RenderApplication.cpp">
+      <Filter>Application</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
