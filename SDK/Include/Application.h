@@ -17,6 +17,7 @@
 #include "IWndProc.h"
 
 #include "EKeyDown.h"
+#include "EWindowResize.h"
 //--------------------------------------------------------------------------------
 
 namespace Arkeng

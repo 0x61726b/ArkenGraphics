@@ -37,4 +37,10 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+	GlobalSection(CppDepend) = preSolution
+		Project = ".\ArkenGraphics.cdproj"
+	EndGlobalSection
 EndGlobal

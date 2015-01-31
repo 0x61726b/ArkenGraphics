@@ -4,34 +4,31 @@
 //
 //Copyright (c) Alperen Gezer.All rights reserved.
 //
-//EWindow.h
+//Dx11RenderTargetView.h
 //--------------------------------------------------------------------------------
-#ifndef __EWindow_h__
-#define __EWindow_h__
+#ifndef __Dx11ShaderResourceView__
+#define __Dx11ShaderResourceView__
 //--------------------------------------------------------------------------------
-#include "Pch.h"
-#include "IEvent.h"
+#include "PipelineManager.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
-	class EWindow : public IEvent
+	class Dx11ShaderResourceView
 	{
 	public:
-		EWindow( HWND hwnd, unsigned int wparam, long lparam );
-		virtual ~EWindow();
+		Dx11ShaderResourceView( ShaderResourceViewComPtr );
+		~Dx11ShaderResourceView();
 
-		HWND GetWindowHandle();
-		unsigned int GetWParam();
-		unsigned int GetLParam();
+		ID3D11ShaderResourceView* GetSRV();
 
 	protected:
-		HWND			m_pHwnd;
-		unsigned int    m_iWParam;
-		unsigned int    m_iLParam;
-	};
+		ShaderResourceViewComPtr			m_pShaderResourceView;
 
-	typedef std::shared_ptr<EWindow> EWindowPtr;
+		friend PipelineManager;
+		friend D3D11Renderer;
+	};
 };
 
 
-#endif //__EWindow_h__
+//--------------------------------------------------------------------------------
+#endif

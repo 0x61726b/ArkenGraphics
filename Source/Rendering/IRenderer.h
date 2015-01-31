@@ -4,34 +4,32 @@
 //
 //Copyright (c) Alperen Gezer.All rights reserved.
 //
-//EWindow.h
+//Pch.h
 //--------------------------------------------------------------------------------
-#ifndef __EWindow_h__
-#define __EWindow_h__
+#ifndef _IRenderer_h__
+#define _IRenderer_h__
 //--------------------------------------------------------------------------------
 #include "Pch.h"
-#include "IEvent.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
-	class EWindow : public IEvent
+	enum RendererType
 	{
-	public:
-		EWindow( HWND hwnd, unsigned int wparam, long lparam );
-		virtual ~EWindow();
-
-		HWND GetWindowHandle();
-		unsigned int GetWParam();
-		unsigned int GetLParam();
-
-	protected:
-		HWND			m_pHwnd;
-		unsigned int    m_iWParam;
-		unsigned int    m_iLParam;
+		Direct3D11
 	};
 
-	typedef std::shared_ptr<EWindow> EWindowPtr;
+	class IRenderer
+	{
+	public:
+		virtual ~IRenderer() {}
+
+		virtual bool Initialize(int w,int h,bool windowed,HWND handle) { return false; };
+		virtual void Shutdown() = 0;
+		virtual void Present(HWND hWnd = 0,int SwapChain = -1) = 0;
+
+	protected:
+		IRenderer& operator=(const IRenderer&);
+	};
 };
-
-
-#endif //__EWindow_h__
+//--------------------------------------------------------------------------------
+#endif

@@ -10,11 +10,20 @@
     <Filter Include="Events">
       <UniqueIdentifier>{52c4ab78-39dc-4309-8fcd-da53e9d465d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Events\WindowMessages">
+    <Filter Include="Events\WindowsMessages">
       <UniqueIdentifier>{71ce8e3c-9ab4-48b7-9d31-58bcf6acb66c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Events\WindowMessages\Keyboard">
+    <Filter Include="Events\WindowsMessages\Keyboard">
       <UniqueIdentifier>{99b7e75f-8ad7-4495-9b00-49d520b67cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\WindowsMessages\Window">
+      <UniqueIdentifier>{6ddfd9ed-76a4-4262-850c-660ec3cb62ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{e4627d94-386b-4088-be51-d042a1e19688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11">
+      <UniqueIdentifier>{644af289-b6ce-4f57-ba9a-1b90c66ffff0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,13 +46,13 @@
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="Events\EKeyDown.h">
-      <Filter>Events\WindowMessages\Keyboard</Filter>
+      <Filter>Events\WindowsMessages\Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="Events\EWindow.h">
-      <Filter>Events\WindowMessages</Filter>
+      <Filter>Events\WindowsMessages</Filter>
     </ClInclude>
     <ClInclude Include="Events\EKeyboard.h">
-      <Filter>Events\WindowMessages\Keyboard</Filter>
+      <Filter>Events\WindowsMessages\Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="Application\RenderWindow.h">
       <Filter>Application</Filter>
@@ -53,6 +62,60 @@
     </ClInclude>
     <ClInclude Include="Application\D3D11RenderApplication.h">
       <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EWindowResize.h">
+      <Filter>Events\WindowsMessages\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\IRenderer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\D3D11Renderer.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\PipelineManager.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11Texture2D.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11SwapChain.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11Resource.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11Texture2DConfig.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11RenderTargetView.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11RenderTargetViewConfig.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11ShaderResourceView.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11ShaderResourceViewConfig.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11DepthStencilView.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11DepthStencilViewConfig.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11SwapChainConfig.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11ResourceProxy.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\DxOutputMergerStage.h">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\DxOutputMergerState.h">
+      <Filter>Rendering\Direct3D11</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -69,13 +132,13 @@
       <Filter>Events</Filter>
     </ClCompile>
     <ClCompile Include="Events\EWindow.cpp">
-      <Filter>Events\WindowMessages</Filter>
+      <Filter>Events\WindowsMessages</Filter>
     </ClCompile>
     <ClCompile Include="Events\EKeyboard.cpp">
-      <Filter>Events\WindowMessages\Keyboard</Filter>
+      <Filter>Events\WindowsMessages\Keyboard</Filter>
     </ClCompile>
     <ClCompile Include="Events\EKeyDown.cpp">
-      <Filter>Events\WindowMessages\Keyboard</Filter>
+      <Filter>Events\WindowsMessages\Keyboard</Filter>
     </ClCompile>
     <ClCompile Include="Application\Main.cpp">
       <Filter>Application</Filter>
@@ -88,6 +151,57 @@
     </ClCompile>
     <ClCompile Include="Application\D3D11RenderApplication.cpp">
       <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EWindowResize.cpp">
+      <Filter>Events\WindowsMessages\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\D3D11Renderer.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\PipelineManager.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11Resource.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11Texture2D.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11Texture2DConfig.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11RenderTargetView.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11RenderTargetViewConfig.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11ShaderResourceView.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11ResourceProxy.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11ShaderResourceViewConfig.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11DepthStencilView.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11DepthStencilViewConfig.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11SwapChain.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11SwapChainConfig.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\DxOutputMergerStage.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\DxOutputMergerState.cpp">
+      <Filter>Rendering\Direct3D11</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

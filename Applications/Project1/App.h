@@ -9,14 +9,15 @@
 
 #include "D3D11RenderApplication.h"
 #include "Win32RenderWindow.h"
+#include "D3D11Renderer.h"
 
 using namespace Arkeng;
 
-class App : public D3D11RenderApplication 
+class App : public D3D11RenderApplication
 {
 public:
 	App();
-
+	~App();
 	virtual void Initialize();
 	virtual void Update();
 	virtual void Shutdown();
@@ -26,4 +27,6 @@ public:
 
 	virtual bool HandleEvent(EventPtr pEvent);
 	virtual std::wstring GetName();
+
+	
 };

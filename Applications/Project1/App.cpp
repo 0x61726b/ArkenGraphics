@@ -7,6 +7,7 @@
 //App.cpp
 //--------------------------------------------------------------------------------
 #include "App.h"
+#include "Dx11RenderTargetView.h"
 #include "EventManager.h"
 #include "EKeyDown.h"
 //--------------------------------------------------------------------------------
@@ -19,9 +20,12 @@ App::App()
 
 }
 //--------------------------------------------------------------------------------
+App::~App()
+{
+}
 bool App::ConfigureEngineComponents()
 {
-	if(!ConfigureRenderingEngineComponents(800,480,D3D_FEATURE_LEVEL_11_0)) {
+	if(!ConfigureRenderingEngineComponents(1920,1080,D3D_FEATURE_LEVEL_11_0)) {
 		return(false);
 	}
 
@@ -40,11 +44,15 @@ void App::ShutdownEngineComponents()
 //--------------------------------------------------------------------------------
 void App::Initialize()
 {
-
+	
 }
 //--------------------------------------------------------------------------------
 void App::Update()
 {
+	float color[4] = { 1,0,0,0 };
+	m_pRenderer->pPipeline->ClearBuffers(color,1000.0f);
+
+	m_pRenderer->Present( m_pWindow->GetHandle(),m_pWindow->GetSwapChain() );
 }
 //--------------------------------------------------------------------------------
 void App::Shutdown()
@@ -53,7 +61,7 @@ void App::Shutdown()
 //--------------------------------------------------------------------------------
 bool App::HandleEvent(EventPtr e)
 {
-	return Application::HandleEvent( e );
+	return D3D11RenderApplication::HandleEvent( e );
 }
 //--------------------------------------------------------------------------------
 std::wstring App::GetName()

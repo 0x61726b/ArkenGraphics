@@ -30,6 +30,10 @@
 #include <math.h>
 #include <memory>
 #include <assert.h>
+
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 //
 
 //Direct3D Includes
@@ -41,7 +45,8 @@
 
 
 #define COM_Release( x ) {if(x){(x)->Release();(x)=NULL;}}
-#define COM_Delete( x ) {if(x){delete (x);(x)=NULL;}}
+#define Safe_Delete( x ) {if(x){delete (x);(x)=NULL;}}
+#define HR_CHECK( x ) { if( FAILED(x) ) return false;}
 
 
 //--------------------------------------------------------------------------------

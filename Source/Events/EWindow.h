@@ -4,7 +4,7 @@
 //
 //Copyright (c) Alperen Gezer.All rights reserved.
 //
-//EKeyDown.h
+//EWindow.h
 //--------------------------------------------------------------------------------
 #ifndef __EWindow_h__
 #define __EWindow_h__

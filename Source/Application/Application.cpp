@@ -34,6 +34,7 @@ Application* Application::Get()
 //--------------------------------------------------------------------------------
 void Application::RequestExit()
 {
+	_CrtDumpMemoryLeaks();
 	PostQuitMessage(0);
 }
 //--------------------------------------------------------------------------------
@@ -109,7 +110,11 @@ LRESULT Application::WindowProc(HWND hwnd,UINT msg,WPARAM wparam,LPARAM lparam)
 			// This message is sent when a window or an application should
 			// terminate.
 		} break;
-
+		case WM_SIZE:
+		{
+			EWindowResizePtr pEvent = EWindowResizePtr( new EWindowResize(hwnd,wparam,lparam) );
+			EvtManager.ProcessEvent(pEvent);
+		} break;
 		case WM_DESTROY:
 		{
 			// This message is sent when a window has been destroyed.

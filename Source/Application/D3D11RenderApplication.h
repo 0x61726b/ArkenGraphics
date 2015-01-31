@@ -14,6 +14,7 @@
 #include "Pch.h"
 #include "Application.h"
 #include "Win32RenderWindow.h"
+#include "D3D11Renderer.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -36,7 +37,11 @@ namespace Arkeng
 		virtual Win32RenderWindow* CreateRenderWindow();
 
 	protected:
+		D3D11Renderer*			m_pRenderer;
 		Win32RenderWindow*		m_pWindow;
+
+		ID3D11RenderTargetView*				m_pBackBuffer;
+		ResourcePtr							m_testBackBuffer;
 
 		UINT					m_iWidth;
 		UINT					m_iHeight;
