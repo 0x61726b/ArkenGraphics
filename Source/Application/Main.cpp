@@ -7,13 +7,21 @@
 //Main.cpp
 //--------------------------------------------------------------------------------
 #include "Pch.h"
-#include "Application.h"
+#include "ArkApplication.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE h_Inst,HINSTANCE h_PrevInst,LPSTR lpcmdline,int ncmdshow)
 {
-	Application* m_pApp = Application::Get();
+	HANDLE hLogFile;
+	hLogFile = CreateFile(L"C:\\Users\\alperen\\Desktop\\ArkenGraphics\\__CRTLOG__.txt",GENERIC_WRITE,
+		FILE_SHARE_WRITE,NULL,CREATE_ALWAYS,
+		FILE_ATTRIBUTE_NORMAL,NULL);
+
+	_CrtSetReportFile(_CRT_ERROR,hLogFile);
+	_CrtSetReportMode(_CRT_ERROR,_CRTDBG_MODE_DEBUG);
+	
+	ArkApplication* m_pApp = ArkApplication::Get();
 	if(!m_pApp)
 	{
 		return -1;

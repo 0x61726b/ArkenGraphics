@@ -81,12 +81,17 @@ void Win32RenderWindow::Initialize(IWndProc* WindowProcObj)
 	long lleft = (long)m_iLeft;	
 	long ltop = (long)m_iTop;
 
+	std::wstring log = L"Attempting to create a Win32 window W = ";
+	log.append(std::to_wstring(m_iWidth));
+	log.append(L" H = ");
+	log.append(std::to_wstring(m_iHeight));
 
+	ArkLog::Get( Arkeng::LogType::Renderer ).Output(log);
 	// Create an instance of the window
 	m_hWnd = CreateWindowEx(
 		NULL,							// extended style
 		wc.lpszClassName, 				// class name
-		m_sCaption.c_str(),				// instance title
+		L"Arkengine Build 0.1",				// instance title
 		m_dStyle,						// window style
 		lleft, ltop,					// initial x, y
 		lwidth,							// initial width
@@ -95,7 +100,7 @@ void Win32RenderWindow::Initialize(IWndProc* WindowProcObj)
 		NULL,							// handle to menu
 		NULL,							// instance of this application
 		NULL );							// extra creation parms
-	
+	ArkLog::Get(LogType::Renderer).Output(L"Success!");
 
 	// Update the size of the window according to the client area that was 
 	// created.  Due to limitations about the desktop size, this can cause some
@@ -116,6 +121,7 @@ void Win32RenderWindow::Initialize(IWndProc* WindowProcObj)
 		ShowWindow( m_hWnd, SW_SHOWNORMAL );
 		UpdateWindow( m_hWnd );
 	}
+	
 }
 //--------------------------------------------------------------------------------
 void Win32RenderWindow::Shutdown()

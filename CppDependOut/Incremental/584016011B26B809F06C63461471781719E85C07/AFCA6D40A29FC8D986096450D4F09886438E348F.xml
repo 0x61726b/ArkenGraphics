@@ -1,0 +1,1093 @@
+<Root>
+<Comments>
+<c f="1" b="1" e="1"/>
+<c f="1" b="2" e="2"/>
+<c f="1" b="3" e="3"/>
+<c f="1" b="4" e="4"/>
+<c f="1" b="5" e="5"/>
+<c f="1" b="6" e="6"/>
+<c f="1" b="7" e="7"/>
+<c f="1" b="8" e="8"/>
+<c f="1" b="9" e="8"/>
+<c f="1" b="12" e="12"/>
+<c f="1" b="13" e="12"/>
+<c f="1" b="14" e="14"/>
+<c f="1" b="15" e="14"/>
+<c f="1" b="19" e="19"/>
+<c f="1" b="20" e="19"/>
+<c f="1" b="36" e="36"/>
+<c f="1" b="37" e="36"/>
+<c f="1" b="48" e="48"/>
+<c f="1" b="49" e="48"/>
+<c f="1" b="64" e="64"/>
+<c f="1" b="65" e="64"/>
+</Comments>
+<Macros/>
+<Comments>
+<c f="2" b="1" e="1"/>
+<c f="2" b="2" e="2"/>
+<c f="2" b="3" e="3"/>
+<c f="2" b="4" e="4"/>
+<c f="2" b="5" e="5"/>
+<c f="2" b="6" e="6"/>
+<c f="2" b="7" e="7"/>
+<c f="2" b="8" e="8"/>
+<c f="2" b="9" e="8"/>
+<c f="2" b="11" e="11"/>
+<c f="2" b="12" e="11"/>
+<c f="2" b="14" e="14"/>
+<c f="2" b="15" e="14"/>
+</Comments>
+<Macros/>
+<tun>
+<ns name="Arkeng" id="c7c50146e644cefcc04f4c0340ec2c64_3c3972cc97a7bba367d9b9e52bee78f4" file="2" linestart="15" lineend="36" original="">
+<cr namespace="Arkeng" access="none" kind="class" name="EventManager" id="c7c50146e644cefcc04f4c0340ec2c64_2a4c6de94fa4c1160ba955dc524ffaf6" file="2" linestart="17" lineend="17"/>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="IEventListener" id="c7c50146e644cefcc04f4c0340ec2c64_96c834437641e2e4c94b5e569bcd184b" file="2" linestart="19" lineend="35">
+<cr access="public" kind="class" name="IEventListener" id="c7c50146e644cefcc04f4c0340ec2c64_e553913e6405a4f5b36dab8895bb5915" file="2" linestart="19" lineend="19"/>
+<Decl access="public"/>
+<c name="IEventListener" id="c7c50146e644cefcc04f4c0340ec2c64_2adaaab177f42c3ad9f39fb93808ae8c" file="2" linestart="22" lineend="22" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<d name="~IEventListener" id="c7c50146e644cefcc04f4c0340ec2c64_efeb6f21af79cef6b32bc29e5223a38a" file="2" linestart="23" lineend="23" virtual="true" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+</d>
+<m name="GetName" id="c7c50146e644cefcc04f4c0340ec2c64_78a6b3a497228dbd9a51a3e01fee8eb2" file="2" linestart="25" lineend="25" pure="true" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="std::wstring">
+<ety>
+<Tdef>
+<tss>
+<templatebase id="9dee112e4a6fea24ef9a3716860c428f_6ecc822215ca97386606c5e8e95c56fb"/>
+<template_arguments>
+<bt name="wchar_t"/>
+<tss>
+<templatebase id="3c123fd929b65516fb618c95fb096637_bf3447e13ccfc57e5fa847f5d78e7639"/>
+<template_arguments>
+<bt name="wchar_t"/>
+</template_arguments>
+</tss>
+<tss>
+<templatebase id="69514fbdf49e9f7e95574496d2c38810_07566aa809aee0bdf1c0fac16e19fa85"/>
+<template_arguments>
+<bt name="wchar_t"/>
+</template_arguments>
+</tss>
+</template_arguments>
+</tss>
+</Tdef>
+</ety>
+</fpt>
+</m>
+<m name="HandleEvent" id="c7c50146e644cefcc04f4c0340ec2c64_db4587e38c43f69ac023e6d351f8ad2b" file="2" linestart="26" lineend="26" pure="true" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<p name="pEvent" proto="EventPtr" access2="none">
+<Tdef>
+<ety>
+<tss>
+<templatebase id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493"/>
+<template_arguments>
+<rt>
+<cr id="58f82f4eec22bfb601914dffe03912bb_4e59f5ffc492f595326e2252f89db417"/>
+</rt>
+</template_arguments>
+</tss>
+</ety>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="RequestEvent" id="c7c50146e644cefcc04f4c0340ec2c64_25596e9f5aef753ef6fab756720880da" file="2" linestart="28" lineend="28" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="e" proto="Arkeng::eEvent" isLiteral="true" access2="none">
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="UnRequestEvent" id="c7c50146e644cefcc04f4c0340ec2c64_98aa3c082e79119868d599db2a517957" file="2" linestart="29" lineend="29" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="e" proto="Arkeng::eEvent" isLiteral="true" access2="none">
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetEventManager" id="c7c50146e644cefcc04f4c0340ec2c64_93c8a0053b875a2bf57008c20ae858e6" file="2" linestart="30" lineend="30" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pEventManager" proto="Arkeng::EventManager *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="ee343146e9cbf3cc6d2432ee0c54d29c_2a4c6de94fa4c1160ba955dc524ffaf6"/>
+</rt>
+</pt>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<Decl access="private"/>
+<fl name="m_pEventManager" id="c7c50146e644cefcc04f4c0340ec2c64_d8a278313bedeb149575ea6aea60fe96" file="2" linestart="33" lineend="33" isPtr="true" isLiteral="true" access="private" proto="Arkeng::EventManager *">
+<pt>
+<rt>
+<cr id="ee343146e9cbf3cc6d2432ee0c54d29c_2a4c6de94fa4c1160ba955dc524ffaf6"/>
+</rt>
+</pt>
+</fl>
+<fl name="m_vRequestedEvents" id="c7c50146e644cefcc04f4c0340ec2c64_bbac50ab9d48bef6fcd8d7a039ba6de1" file="2" linestart="34" lineend="34" access="private" proto="std::vector&lt;eEvent&gt;">
+<ety>
+<tss>
+<templatebase id="96f32a1ea2a4337d746014e0da7a91da_3d0ab7465d6b9448b8c01dc907d3e25b"/>
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</tss>
+</ety>
+</fl>
+<m name="operator=" id="c7c50146e644cefcc04f4c0340ec2c64_1758d3732066c12208e6f00243de41bd" file="2" linestart="19" implicit="true" operator="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="Arkeng::IEventListener &amp;">
+<lrf>
+<rt>
+<cr id="c7c50146e644cefcc04f4c0340ec2c64_96c834437641e2e4c94b5e569bcd184b"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const Arkeng::IEventListener &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="c7c50146e644cefcc04f4c0340ec2c64_96c834437641e2e4c94b5e569bcd184b"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<c name="IEventListener" id="c7c50146e644cefcc04f4c0340ec2c64_085a99d8920ebb72ae175d21ce29fc28" file="2" linestart="19" lineend="19" copyconst="true" implicit="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="const Arkeng::IEventListener &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="c7c50146e644cefcc04f4c0340ec2c64_96c834437641e2e4c94b5e569bcd184b"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</c>
+</cr>
+</ns>
+<NamedDecl name="&lt;using-directive&gt;" id="d59eff0c18fd5122dbc85f33ca297c7b_6728b6b0f829183eb7bbd3d3d987c87d" file="1" linestart="13" lineend="13"/>
+<c name="IEventListener" id="d59eff0c18fd5122dbc85f33ca297c7b_2adaaab177f42c3ad9f39fb93808ae8c" file="1" linestart="15" lineend="18" previous="c7c50146e644cefcc04f4c0340ec2c64_2adaaab177f42c3ad9f39fb93808ae8c" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<initlist id="c7c50146e644cefcc04f4c0340ec2c64_d8a278313bedeb149575ea6aea60fe96">
+<Stmt>
+<n32 lb="16" cb="21">
+<n16 lb="16" cb="21">
+<exp pvirg="true"/>
+</n16>
+</n32>
+
+</Stmt>
+</initlist>
+<Stmt>
+<u lb="17" cb="1" le="18" ce="1"/>
+
+</Stmt>
+</c>
+<d name="~IEventListener" id="d59eff0c18fd5122dbc85f33ca297c7b_efeb6f21af79cef6b32bc29e5223a38a" file="1" linestart="20" lineend="23" previous="c7c50146e644cefcc04f4c0340ec2c64_efeb6f21af79cef6b32bc29e5223a38a" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+<Stmt>
+<u lb="21" cb="1" le="23" ce="1">
+<mce lb="22" cb="2" le="22" ce="27" nbparm="1" id="c7c50146e644cefcc04f4c0340ec2c64_93c8a0053b875a2bf57008c20ae858e6">
+<exp pvirg="true"/>
+<mex lb="22" cb="2" id="c7c50146e644cefcc04f4c0340ec2c64_93c8a0053b875a2bf57008c20ae858e6" nm="SetEventManager" arrow="1">
+<n19 lb="22" cb="2"/>
+</mex>
+<n32 lb="22" cb="19">
+<n16 lb="22" cb="19">
+<exp pvirg="true"/>
+</n16>
+</n32>
+</mce>
+</u>
+
+</Stmt>
+</d>
+<m name="RequestEvent" id="d59eff0c18fd5122dbc85f33ca297c7b_25596e9f5aef753ef6fab756720880da" file="1" linestart="24" lineend="47" previous="c7c50146e644cefcc04f4c0340ec2c64_25596e9f5aef753ef6fab756720880da" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="e" proto="Arkeng::eEvent" isLiteral="true" access2="none">
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="25" cb="1" le="47" ce="1">
+<dst lb="26" cb="2" le="26" ce="32">
+<exp pvirg="true"/>
+<Var nm="bAlreadyRequested" value="true">
+<bt name="bool"/>
+<n9 lb="26" cb="27"/>
+</Var>
+</dst>
+<frs lb="28" cb="2" le="32" ce="2">
+<dst lb="28" cb="21">
+<exp pvirg="true"/>
+<Var nm="__range">
+<lrf>
+<rt>
+<cts id="96f32a1ea2a4337d746014e0da7a91da_3d0ab7465d6b9448b8c01dc907d3e25b">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+<rt>
+<cts id="69514fbdf49e9f7e95574496d2c38810_07566aa809aee0bdf1c0fac16e19fa85">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</cts>
+</rt>
+</lrf>
+<mex lb="28" cb="21" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_bbac50ab9d48bef6fcd8d7a039ba6de1" nm="m_vRequestedEvents" arrow="1">
+<n19 lb="28" cb="21"/>
+</mex>
+</Var>
+</dst>
+<dst lb="28" cb="20">
+<exp pvirg="true"/>
+<Var nm="__begin" value="true">
+<Type/>
+<n37 lb="28" cb="20">
+<n10 lb="28" cb="20">
+<typeptr id="96f32a1ea2a4337d746014e0da7a91da_861a52351704dab0cbc7e78df761ea5d">
+<template_arguments>
+<rt>
+<cts id="96f32a1ea2a4337d746014e0da7a91da_2d19cd24e0e0434835874d345df47fd5">
+<template_arguments>
+<rt>
+<cts id="69514fbdf49e9f7e95574496d2c38810_d16a5f6f5bc0b20f10361aff0d9f12b0">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</typeptr>
+<temp/>
+<mte lb="28" cb="20">
+<exp pvirg="true"/>
+<n8 lb="28" cb="20" >
+<temp/>
+<mce lb="28" cb="20" nbparm="0" id="96f32a1ea2a4337d746014e0da7a91da_de8a9d48785e0506760a39ca20325c3f">
+<exp pvirg="true"/>
+<mex lb="28" cb="20" id="96f32a1ea2a4337d746014e0da7a91da_de8a9d48785e0506760a39ca20325c3f" nm="begin" point="1">
+<drx lb="28" cb="20" kind="lvalue" nm="__range"/>
+</mex>
+</mce>
+</n8>
+</mte>
+</n10>
+</n37>
+</Var>
+<Var nm="__end" value="true" virg="true">
+<Type/>
+<n37 lb="28" cb="20">
+<n10 lb="28" cb="20">
+<typeptr id="96f32a1ea2a4337d746014e0da7a91da_861a52351704dab0cbc7e78df761ea5d">
+<template_arguments>
+<rt>
+<cts id="96f32a1ea2a4337d746014e0da7a91da_2d19cd24e0e0434835874d345df47fd5">
+<template_arguments>
+<rt>
+<cts id="69514fbdf49e9f7e95574496d2c38810_d16a5f6f5bc0b20f10361aff0d9f12b0">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</typeptr>
+<temp/>
+<mte lb="28" cb="20">
+<exp pvirg="true"/>
+<n8 lb="28" cb="20" >
+<temp/>
+<mce lb="28" cb="20" nbparm="0" id="96f32a1ea2a4337d746014e0da7a91da_f110db10e5d92da68a9caaaa2ea25c7a">
+<exp pvirg="true"/>
+<mex lb="28" cb="20" id="96f32a1ea2a4337d746014e0da7a91da_f110db10e5d92da68a9caaaa2ea25c7a" nm="end" point="1">
+<drx lb="28" cb="20" kind="lvalue" nm="__range"/>
+</mex>
+</mce>
+</n8>
+</mte>
+</n10>
+</n37>
+</Var>
+</dst>
+<ocx lb="28" cb="20" nbparm="2" id="96f32a1ea2a4337d746014e0da7a91da_25125e062a987bdcc3dcfa86eb960b5b">
+<exp pvirg="true"/>
+<n32 lb="28" cb="20">
+<drx lb="28" cb="20" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_25125e062a987bdcc3dcfa86eb960b5b" nm="operator!="/>
+</n32>
+<n32 lb="28" cb="20">
+<drx lb="28" cb="20" kind="lvalue" nm="__begin"/>
+</n32>
+<n32 lb="28" cb="20">
+<n32 lb="28" cb="20">
+<drx lb="28" cb="20" kind="lvalue" nm="__end"/>
+</n32>
+</n32>
+</ocx>
+<ocx lb="28" cb="20" nbparm="1" id="96f32a1ea2a4337d746014e0da7a91da_275e464b8d053864bee6faa859ce8763">
+<exp pvirg="true"/>
+<n32 lb="28" cb="20">
+<drx lb="28" cb="20" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_275e464b8d053864bee6faa859ce8763" nm="operator++"/>
+</n32>
+<drx lb="28" cb="20" kind="lvalue" nm="__begin"/>
+</ocx>
+<dst lb="28" cb="6" le="28" ce="39">
+<exp pvirg="true"/>
+<Var nm="requested" value="true">
+<Type/>
+<n32 lb="28" cb="20">
+<ocx lb="28" cb="20" nbparm="1" id="96f32a1ea2a4337d746014e0da7a91da_cca45f4bce6fd19e2cb9c96a16ca2523">
+<exp pvirg="true"/>
+<n32 lb="28" cb="20">
+<drx lb="28" cb="20" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_cca45f4bce6fd19e2cb9c96a16ca2523" nm="operator*"/>
+</n32>
+<n32 lb="28" cb="20">
+<drx lb="28" cb="20" kind="lvalue" nm="__begin"/>
+</n32>
+</ocx>
+</n32>
+</Var>
+</dst>
+<u lb="29" cb="2" le="32" ce="2">
+<if lb="30" cb="3" le="31" ce="24">
+<xop lb="30" cb="6" le="30" ce="17" kind="==">
+<n32 lb="30" cb="6">
+<n32 lb="30" cb="6">
+<drx lb="30" cb="6" kind="lvalue" nm="requested"/>
+</n32>
+</n32>
+<n32 lb="30" cb="17">
+<n32 lb="30" cb="17">
+<drx lb="30" cb="17" kind="lvalue" nm="e"/>
+</n32>
+</n32>
+</xop>
+<xop lb="31" cb="4" le="31" ce="24" kind="=">
+<drx lb="31" cb="4" kind="lvalue" nm="bAlreadyRequested"/>
+<n9 lb="31" cb="24"/>
+</xop>
+</if>
+</u>
+</frs>
+<if lb="34" cb="2" le="46" ce="2" else="true" elselb="39" elsecb="2">
+<n32 lb="34" cb="5">
+<drx lb="34" cb="5" kind="lvalue" nm="bAlreadyRequested"/>
+</n32>
+<u lb="35" cb="2" le="37" ce="2"/>
+<u lb="39" cb="2" le="46" ce="2">
+<mce lb="41" cb="3" le="41" ce="33" nbparm="1" id="96f32a1ea2a4337d746014e0da7a91da_1c83e7b73b142304d6ba2d86ad19d7c1">
+<exp pvirg="true"/>
+<mex lb="41" cb="3" le="41" ce="22" id="96f32a1ea2a4337d746014e0da7a91da_1c83e7b73b142304d6ba2d86ad19d7c1" nm="push_back" point="1">
+<mex lb="41" cb="3" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_bbac50ab9d48bef6fcd8d7a039ba6de1" nm="m_vRequestedEvents" arrow="1">
+<n19 lb="41" cb="3"/>
+</mex>
+</mex>
+<n32 lb="41" cb="32">
+<drx lb="41" cb="32" kind="lvalue" nm="e"/>
+</n32>
+</mce>
+<if lb="43" cb="3" le="45" ce="3">
+<n32 lb="43" cb="6">
+<n32 lb="43" cb="6">
+<mex lb="43" cb="6" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_d8a278313bedeb149575ea6aea60fe96" nm="m_pEventManager" arrow="1">
+<n19 lb="43" cb="6"/>
+</mex>
+</n32>
+</n32>
+<u lb="43" cb="23" le="45" ce="3">
+<mce lb="44" cb="4" le="44" ce="44" nbparm="2" id="ee343146e9cbf3cc6d2432ee0c54d29c_7eb25475d6022ca2499d06bc52e3369e">
+<exp pvirg="true"/>
+<mex lb="44" cb="4" le="44" ce="21" id="ee343146e9cbf3cc6d2432ee0c54d29c_7eb25475d6022ca2499d06bc52e3369e" nm="AddEventListener" arrow="1">
+<n32 lb="44" cb="4">
+<mex lb="44" cb="4" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_d8a278313bedeb149575ea6aea60fe96" nm="m_pEventManager" arrow="1">
+<n19 lb="44" cb="4"/>
+</mex>
+</n32>
+</mex>
+<n32 lb="44" cb="38">
+<drx lb="44" cb="38" kind="lvalue" nm="e"/>
+</n32>
+<n19 lb="44" cb="40"/>
+</mce>
+</u>
+</if>
+</u>
+</if>
+</u>
+
+</Stmt>
+</m>
+<m name="UnRequestEvent" id="d59eff0c18fd5122dbc85f33ca297c7b_98aa3c082e79119868d599db2a517957" file="1" linestart="49" lineend="63" previous="c7c50146e644cefcc04f4c0340ec2c64_98aa3c082e79119868d599db2a517957" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="e" proto="Arkeng::eEvent" isLiteral="true" access2="none">
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="50" cb="1" le="63" ce="1">
+<fx lb="51" cb="2" le="57" ce="2">
+<dst lb="51" cb="6" le="51" ce="67">
+<exp pvirg="true"/>
+<Var nm="it" value="true">
+<ety>
+<Tdef>
+<ety>
+<Tdef>
+<tss>
+<templatebase id="96f32a1ea2a4337d746014e0da7a91da_dba628d08bbaf73e696cb0d4b6e80686"/>
+<template_arguments>
+<Tdef>
+<tss>
+<templatebase id="96f32a1ea2a4337d746014e0da7a91da_2d19cd24e0e0434835874d345df47fd5"/>
+<template_arguments>
+<sttp/>
+</template_arguments>
+</tss>
+</Tdef>
+</template_arguments>
+</tss>
+</Tdef>
+</ety>
+</Tdef>
+</ety>
+<n37 lb="51" cb="41" le="51" ce="66">
+<n10 lb="51" cb="41" le="51" ce="66">
+<typeptr id="96f32a1ea2a4337d746014e0da7a91da_861a52351704dab0cbc7e78df761ea5d">
+<template_arguments>
+<rt>
+<cts id="96f32a1ea2a4337d746014e0da7a91da_2d19cd24e0e0434835874d345df47fd5">
+<template_arguments>
+<rt>
+<cts id="69514fbdf49e9f7e95574496d2c38810_d16a5f6f5bc0b20f10361aff0d9f12b0">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</typeptr>
+<temp/>
+<mte lb="51" cb="41" le="51" ce="66">
+<exp pvirg="true"/>
+<n8 lb="51" cb="41" le="51" ce="66" >
+<temp/>
+<mce lb="51" cb="41" le="51" ce="66" nbparm="0" id="96f32a1ea2a4337d746014e0da7a91da_de8a9d48785e0506760a39ca20325c3f">
+<exp pvirg="true"/>
+<mex lb="51" cb="41" le="51" ce="60" id="96f32a1ea2a4337d746014e0da7a91da_de8a9d48785e0506760a39ca20325c3f" nm="begin" point="1">
+<mex lb="51" cb="41" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_bbac50ab9d48bef6fcd8d7a039ba6de1" nm="m_vRequestedEvents" arrow="1">
+<n19 lb="51" cb="41"/>
+</mex>
+</mex>
+</mce>
+</n8>
+</mte>
+</n10>
+</n37>
+</Var>
+</dst>
+<n37 lb="51" cb="69" le="51" ce="96">
+<ocx lb="51" cb="69" le="51" ce="96" nbparm="2" id="96f32a1ea2a4337d746014e0da7a91da_25125e062a987bdcc3dcfa86eb960b5b">
+<exp pvirg="true"/>
+<n32 lb="51" cb="71">
+<drx lb="51" cb="71" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_25125e062a987bdcc3dcfa86eb960b5b" nm="operator!="/>
+</n32>
+<n32 lb="51" cb="69">
+<drx lb="51" cb="69" kind="lvalue" nm="it"/>
+</n32>
+<mte lb="51" cb="73" le="51" ce="96">
+<exp pvirg="true"/>
+<n32 lb="51" cb="73" le="51" ce="96">
+<n32 lb="51" cb="73" le="51" ce="96">
+<n8 lb="51" cb="73" le="51" ce="96" >
+<temp/>
+<mce lb="51" cb="73" le="51" ce="96" nbparm="0" id="96f32a1ea2a4337d746014e0da7a91da_f110db10e5d92da68a9caaaa2ea25c7a">
+<exp pvirg="true"/>
+<mex lb="51" cb="73" le="51" ce="92" id="96f32a1ea2a4337d746014e0da7a91da_f110db10e5d92da68a9caaaa2ea25c7a" nm="end" point="1">
+<mex lb="51" cb="73" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_bbac50ab9d48bef6fcd8d7a039ba6de1" nm="m_vRequestedEvents" arrow="1">
+<n19 lb="51" cb="73"/>
+</mex>
+</mex>
+</mce>
+</n8>
+</n32>
+</n32>
+</mte>
+</ocx>
+</n37>
+<ocx lb="51" cb="99" le="51" ce="101" nbparm="1" id="96f32a1ea2a4337d746014e0da7a91da_275e464b8d053864bee6faa859ce8763">
+<exp pvirg="true"/>
+<n32 lb="51" cb="99">
+<drx lb="51" cb="99" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_275e464b8d053864bee6faa859ce8763" nm="operator++"/>
+</n32>
+<drx lb="51" cb="101" kind="lvalue" nm="it"/>
+</ocx>
+<u lb="52" cb="2" le="57" ce="2">
+<if lb="53" cb="3" le="56" ce="3">
+<xop lb="53" cb="6" le="53" ce="11" kind="==">
+<n32 lb="53" cb="6" le="53" ce="7">
+<n32 lb="53" cb="6" le="53" ce="7">
+<ocx lb="53" cb="6" le="53" ce="7" nbparm="1" id="96f32a1ea2a4337d746014e0da7a91da_cca45f4bce6fd19e2cb9c96a16ca2523">
+<exp pvirg="true"/>
+<n32 lb="53" cb="6">
+<drx lb="53" cb="6" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_cca45f4bce6fd19e2cb9c96a16ca2523" nm="operator*"/>
+</n32>
+<n32 lb="53" cb="7">
+<drx lb="53" cb="7" kind="lvalue" nm="it"/>
+</n32>
+</ocx>
+</n32>
+</n32>
+<n32 lb="53" cb="11">
+<n32 lb="53" cb="11">
+<drx lb="53" cb="11" kind="lvalue" nm="e"/>
+</n32>
+</n32>
+</xop>
+<u lb="54" cb="3" le="56" ce="3">
+<n37 lb="55" cb="4" le="55" ce="36">
+<ocx lb="55" cb="4" le="55" ce="36" nbparm="2" id="96f32a1ea2a4337d746014e0da7a91da_2d3ab01ef66409385aa37f6ddf3334cd">
+<exp pvirg="true"/>
+<n32 lb="55" cb="7">
+<drx lb="55" cb="7" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_2d3ab01ef66409385aa37f6ddf3334cd" nm="operator="/>
+</n32>
+<drx lb="55" cb="4" kind="lvalue" nm="it"/>
+<mte lb="55" cb="9" le="55" ce="36">
+<exp pvirg="true"/>
+<n8 lb="55" cb="9" le="55" ce="36" >
+<temp/>
+<mce lb="55" cb="9" le="55" ce="36" nbparm="1" id="96f32a1ea2a4337d746014e0da7a91da_017ee6726ea77663af99d7114001de06">
+<exp pvirg="true"/>
+<mex lb="55" cb="9" le="55" ce="28" id="96f32a1ea2a4337d746014e0da7a91da_017ee6726ea77663af99d7114001de06" nm="erase" point="1">
+<mex lb="55" cb="9" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_bbac50ab9d48bef6fcd8d7a039ba6de1" nm="m_vRequestedEvents" arrow="1">
+<n19 lb="55" cb="9"/>
+</mex>
+</mex>
+<n8 lb="55" cb="34" >
+<temp/>
+<n10 lb="55" cb="34">
+<typeptr id="96f32a1ea2a4337d746014e0da7a91da_11127d2e74fd5b67af2d0761057d5198">
+<template_arguments>
+<rt>
+<cts id="96f32a1ea2a4337d746014e0da7a91da_2d19cd24e0e0434835874d345df47fd5">
+<template_arguments>
+<rt>
+<cts id="69514fbdf49e9f7e95574496d2c38810_d16a5f6f5bc0b20f10361aff0d9f12b0">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</typeptr>
+<temp/>
+<n32 lb="55" cb="34">
+<n32 lb="55" cb="34">
+<drx lb="55" cb="34" kind="lvalue" nm="it"/>
+</n32>
+</n32>
+</n10>
+</n8>
+</mce>
+</n8>
+</mte>
+</ocx>
+</n37>
+</u>
+</if>
+</u>
+</fx>
+<if lb="59" cb="2" le="62" ce="2">
+<n32 lb="59" cb="5">
+<n32 lb="59" cb="5">
+<mex lb="59" cb="5" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_d8a278313bedeb149575ea6aea60fe96" nm="m_pEventManager" arrow="1">
+<n19 lb="59" cb="5"/>
+</mex>
+</n32>
+</n32>
+<u lb="60" cb="2" le="62" ce="2">
+<mce lb="61" cb="3" le="61" ce="43" nbparm="2" id="ee343146e9cbf3cc6d2432ee0c54d29c_1821d2b33d0cf0b3c5fa39aaba55bf77">
+<exp pvirg="true"/>
+<mex lb="61" cb="3" le="61" ce="20" id="ee343146e9cbf3cc6d2432ee0c54d29c_1821d2b33d0cf0b3c5fa39aaba55bf77" nm="DelEventListener" arrow="1">
+<n32 lb="61" cb="3">
+<mex lb="61" cb="3" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_d8a278313bedeb149575ea6aea60fe96" nm="m_pEventManager" arrow="1">
+<n19 lb="61" cb="3"/>
+</mex>
+</n32>
+</mex>
+<n32 lb="61" cb="37">
+<drx lb="61" cb="37" kind="lvalue" nm="e"/>
+</n32>
+<n19 lb="61" cb="39"/>
+</mce>
+</u>
+</if>
+</u>
+
+</Stmt>
+</m>
+<m name="SetEventManager" id="d59eff0c18fd5122dbc85f33ca297c7b_93c8a0053b875a2bf57008c20ae858e6" file="1" linestart="65" lineend="83" previous="c7c50146e644cefcc04f4c0340ec2c64_93c8a0053b875a2bf57008c20ae858e6" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pEventManager" proto="Arkeng::EventManager *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="ee343146e9cbf3cc6d2432ee0c54d29c_2a4c6de94fa4c1160ba955dc524ffaf6"/>
+</rt>
+</pt>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="66" cb="1" le="83" ce="1">
+<if lb="67" cb="2" le="73" ce="2">
+<n32 lb="67" cb="5">
+<n32 lb="67" cb="5">
+<mex lb="67" cb="5" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_d8a278313bedeb149575ea6aea60fe96" nm="m_pEventManager" arrow="1">
+<n19 lb="67" cb="5"/>
+</mex>
+</n32>
+</n32>
+<u lb="68" cb="2" le="73" ce="2">
+<frs lb="69" cb="3" le="72" ce="3">
+<dst lb="69" cb="14">
+<exp pvirg="true"/>
+<Var nm="__range">
+<lrf>
+<rt>
+<cts id="96f32a1ea2a4337d746014e0da7a91da_3d0ab7465d6b9448b8c01dc907d3e25b">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+<rt>
+<cts id="69514fbdf49e9f7e95574496d2c38810_07566aa809aee0bdf1c0fac16e19fa85">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</cts>
+</rt>
+</lrf>
+<mex lb="69" cb="14" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_bbac50ab9d48bef6fcd8d7a039ba6de1" nm="m_vRequestedEvents" arrow="1">
+<n19 lb="69" cb="14"/>
+</mex>
+</Var>
+</dst>
+<dst lb="69" cb="13">
+<exp pvirg="true"/>
+<Var nm="__begin" value="true">
+<Type/>
+<n37 lb="69" cb="13">
+<n10 lb="69" cb="13">
+<typeptr id="96f32a1ea2a4337d746014e0da7a91da_861a52351704dab0cbc7e78df761ea5d">
+<template_arguments>
+<rt>
+<cts id="96f32a1ea2a4337d746014e0da7a91da_2d19cd24e0e0434835874d345df47fd5">
+<template_arguments>
+<rt>
+<cts id="69514fbdf49e9f7e95574496d2c38810_d16a5f6f5bc0b20f10361aff0d9f12b0">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</typeptr>
+<temp/>
+<mte lb="69" cb="13">
+<exp pvirg="true"/>
+<n8 lb="69" cb="13" >
+<temp/>
+<mce lb="69" cb="13" nbparm="0" id="96f32a1ea2a4337d746014e0da7a91da_de8a9d48785e0506760a39ca20325c3f">
+<exp pvirg="true"/>
+<mex lb="69" cb="13" id="96f32a1ea2a4337d746014e0da7a91da_de8a9d48785e0506760a39ca20325c3f" nm="begin" point="1">
+<drx lb="69" cb="13" kind="lvalue" nm="__range"/>
+</mex>
+</mce>
+</n8>
+</mte>
+</n10>
+</n37>
+</Var>
+<Var nm="__end" value="true" virg="true">
+<Type/>
+<n37 lb="69" cb="13">
+<n10 lb="69" cb="13">
+<typeptr id="96f32a1ea2a4337d746014e0da7a91da_861a52351704dab0cbc7e78df761ea5d">
+<template_arguments>
+<rt>
+<cts id="96f32a1ea2a4337d746014e0da7a91da_2d19cd24e0e0434835874d345df47fd5">
+<template_arguments>
+<rt>
+<cts id="69514fbdf49e9f7e95574496d2c38810_d16a5f6f5bc0b20f10361aff0d9f12b0">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</typeptr>
+<temp/>
+<mte lb="69" cb="13">
+<exp pvirg="true"/>
+<n8 lb="69" cb="13" >
+<temp/>
+<mce lb="69" cb="13" nbparm="0" id="96f32a1ea2a4337d746014e0da7a91da_f110db10e5d92da68a9caaaa2ea25c7a">
+<exp pvirg="true"/>
+<mex lb="69" cb="13" id="96f32a1ea2a4337d746014e0da7a91da_f110db10e5d92da68a9caaaa2ea25c7a" nm="end" point="1">
+<drx lb="69" cb="13" kind="lvalue" nm="__range"/>
+</mex>
+</mce>
+</n8>
+</mte>
+</n10>
+</n37>
+</Var>
+</dst>
+<ocx lb="69" cb="13" nbparm="2" id="96f32a1ea2a4337d746014e0da7a91da_25125e062a987bdcc3dcfa86eb960b5b">
+<exp pvirg="true"/>
+<n32 lb="69" cb="13">
+<drx lb="69" cb="13" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_25125e062a987bdcc3dcfa86eb960b5b" nm="operator!="/>
+</n32>
+<n32 lb="69" cb="13">
+<drx lb="69" cb="13" kind="lvalue" nm="__begin"/>
+</n32>
+<n32 lb="69" cb="13">
+<n32 lb="69" cb="13">
+<drx lb="69" cb="13" kind="lvalue" nm="__end"/>
+</n32>
+</n32>
+</ocx>
+<ocx lb="69" cb="13" nbparm="1" id="96f32a1ea2a4337d746014e0da7a91da_275e464b8d053864bee6faa859ce8763">
+<exp pvirg="true"/>
+<n32 lb="69" cb="13">
+<drx lb="69" cb="13" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_275e464b8d053864bee6faa859ce8763" nm="operator++"/>
+</n32>
+<drx lb="69" cb="13" kind="lvalue" nm="__begin"/>
+</ocx>
+<dst lb="69" cb="7" le="69" ce="32">
+<exp pvirg="true"/>
+<Var nm="e" value="true">
+<Type/>
+<n32 lb="69" cb="13">
+<ocx lb="69" cb="13" nbparm="1" id="96f32a1ea2a4337d746014e0da7a91da_cca45f4bce6fd19e2cb9c96a16ca2523">
+<exp pvirg="true"/>
+<n32 lb="69" cb="13">
+<drx lb="69" cb="13" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_cca45f4bce6fd19e2cb9c96a16ca2523" nm="operator*"/>
+</n32>
+<n32 lb="69" cb="13">
+<drx lb="69" cb="13" kind="lvalue" nm="__begin"/>
+</n32>
+</ocx>
+</n32>
+</Var>
+</dst>
+<u lb="70" cb="3" le="72" ce="3">
+<mce lb="71" cb="4" le="71" ce="44" nbparm="2" id="ee343146e9cbf3cc6d2432ee0c54d29c_1821d2b33d0cf0b3c5fa39aaba55bf77">
+<exp pvirg="true"/>
+<mex lb="71" cb="4" le="71" ce="21" id="ee343146e9cbf3cc6d2432ee0c54d29c_1821d2b33d0cf0b3c5fa39aaba55bf77" nm="DelEventListener" arrow="1">
+<n32 lb="71" cb="4">
+<mex lb="71" cb="4" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_d8a278313bedeb149575ea6aea60fe96" nm="m_pEventManager" arrow="1">
+<n19 lb="71" cb="4"/>
+</mex>
+</n32>
+</mex>
+<n32 lb="71" cb="38">
+<drx lb="71" cb="38" kind="lvalue" nm="e"/>
+</n32>
+<n19 lb="71" cb="40"/>
+</mce>
+</u>
+</frs>
+</u>
+</if>
+<xop lb="74" cb="2" le="74" ce="20" kind="=">
+<mex lb="74" cb="2" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_d8a278313bedeb149575ea6aea60fe96" nm="m_pEventManager" arrow="1">
+<n19 lb="74" cb="2"/>
+</mex>
+<n32 lb="74" cb="20">
+<drx lb="74" cb="20" kind="lvalue" nm="pEventManager"/>
+</n32>
+</xop>
+<if lb="76" cb="2" le="82" ce="2">
+<n32 lb="76" cb="5">
+<n32 lb="76" cb="5">
+<mex lb="76" cb="5" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_d8a278313bedeb149575ea6aea60fe96" nm="m_pEventManager" arrow="1">
+<n19 lb="76" cb="5"/>
+</mex>
+</n32>
+</n32>
+<u lb="77" cb="2" le="82" ce="2">
+<frs lb="78" cb="3" le="81" ce="3">
+<dst lb="78" cb="14">
+<exp pvirg="true"/>
+<Var nm="__range">
+<lrf>
+<rt>
+<cts id="96f32a1ea2a4337d746014e0da7a91da_3d0ab7465d6b9448b8c01dc907d3e25b">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+<rt>
+<cts id="69514fbdf49e9f7e95574496d2c38810_07566aa809aee0bdf1c0fac16e19fa85">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</cts>
+</rt>
+</lrf>
+<mex lb="78" cb="14" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_bbac50ab9d48bef6fcd8d7a039ba6de1" nm="m_vRequestedEvents" arrow="1">
+<n19 lb="78" cb="14"/>
+</mex>
+</Var>
+</dst>
+<dst lb="78" cb="13">
+<exp pvirg="true"/>
+<Var nm="__begin" value="true">
+<Type/>
+<n37 lb="78" cb="13">
+<n10 lb="78" cb="13">
+<typeptr id="96f32a1ea2a4337d746014e0da7a91da_861a52351704dab0cbc7e78df761ea5d">
+<template_arguments>
+<rt>
+<cts id="96f32a1ea2a4337d746014e0da7a91da_2d19cd24e0e0434835874d345df47fd5">
+<template_arguments>
+<rt>
+<cts id="69514fbdf49e9f7e95574496d2c38810_d16a5f6f5bc0b20f10361aff0d9f12b0">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</typeptr>
+<temp/>
+<mte lb="78" cb="13">
+<exp pvirg="true"/>
+<n8 lb="78" cb="13" >
+<temp/>
+<mce lb="78" cb="13" nbparm="0" id="96f32a1ea2a4337d746014e0da7a91da_de8a9d48785e0506760a39ca20325c3f">
+<exp pvirg="true"/>
+<mex lb="78" cb="13" id="96f32a1ea2a4337d746014e0da7a91da_de8a9d48785e0506760a39ca20325c3f" nm="begin" point="1">
+<drx lb="78" cb="13" kind="lvalue" nm="__range"/>
+</mex>
+</mce>
+</n8>
+</mte>
+</n10>
+</n37>
+</Var>
+<Var nm="__end" value="true" virg="true">
+<Type/>
+<n37 lb="78" cb="13">
+<n10 lb="78" cb="13">
+<typeptr id="96f32a1ea2a4337d746014e0da7a91da_861a52351704dab0cbc7e78df761ea5d">
+<template_arguments>
+<rt>
+<cts id="96f32a1ea2a4337d746014e0da7a91da_2d19cd24e0e0434835874d345df47fd5">
+<template_arguments>
+<rt>
+<cts id="69514fbdf49e9f7e95574496d2c38810_d16a5f6f5bc0b20f10361aff0d9f12b0">
+<template_arguments>
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</typeptr>
+<temp/>
+<mte lb="78" cb="13">
+<exp pvirg="true"/>
+<n8 lb="78" cb="13" >
+<temp/>
+<mce lb="78" cb="13" nbparm="0" id="96f32a1ea2a4337d746014e0da7a91da_f110db10e5d92da68a9caaaa2ea25c7a">
+<exp pvirg="true"/>
+<mex lb="78" cb="13" id="96f32a1ea2a4337d746014e0da7a91da_f110db10e5d92da68a9caaaa2ea25c7a" nm="end" point="1">
+<drx lb="78" cb="13" kind="lvalue" nm="__range"/>
+</mex>
+</mce>
+</n8>
+</mte>
+</n10>
+</n37>
+</Var>
+</dst>
+<ocx lb="78" cb="13" nbparm="2" id="96f32a1ea2a4337d746014e0da7a91da_25125e062a987bdcc3dcfa86eb960b5b">
+<exp pvirg="true"/>
+<n32 lb="78" cb="13">
+<drx lb="78" cb="13" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_25125e062a987bdcc3dcfa86eb960b5b" nm="operator!="/>
+</n32>
+<n32 lb="78" cb="13">
+<drx lb="78" cb="13" kind="lvalue" nm="__begin"/>
+</n32>
+<n32 lb="78" cb="13">
+<n32 lb="78" cb="13">
+<drx lb="78" cb="13" kind="lvalue" nm="__end"/>
+</n32>
+</n32>
+</ocx>
+<ocx lb="78" cb="13" nbparm="1" id="96f32a1ea2a4337d746014e0da7a91da_275e464b8d053864bee6faa859ce8763">
+<exp pvirg="true"/>
+<n32 lb="78" cb="13">
+<drx lb="78" cb="13" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_275e464b8d053864bee6faa859ce8763" nm="operator++"/>
+</n32>
+<drx lb="78" cb="13" kind="lvalue" nm="__begin"/>
+</ocx>
+<dst lb="78" cb="7" le="78" ce="32">
+<exp pvirg="true"/>
+<Var nm="e" value="true">
+<Type/>
+<n32 lb="78" cb="13">
+<ocx lb="78" cb="13" nbparm="1" id="96f32a1ea2a4337d746014e0da7a91da_cca45f4bce6fd19e2cb9c96a16ca2523">
+<exp pvirg="true"/>
+<n32 lb="78" cb="13">
+<drx lb="78" cb="13" kind="lvalue" id="96f32a1ea2a4337d746014e0da7a91da_cca45f4bce6fd19e2cb9c96a16ca2523" nm="operator*"/>
+</n32>
+<n32 lb="78" cb="13">
+<drx lb="78" cb="13" kind="lvalue" nm="__begin"/>
+</n32>
+</ocx>
+</n32>
+</Var>
+</dst>
+<u lb="79" cb="3" le="81" ce="3">
+<mce lb="80" cb="4" le="80" ce="44" nbparm="2" id="ee343146e9cbf3cc6d2432ee0c54d29c_7eb25475d6022ca2499d06bc52e3369e">
+<exp pvirg="true"/>
+<mex lb="80" cb="4" le="80" ce="21" id="ee343146e9cbf3cc6d2432ee0c54d29c_7eb25475d6022ca2499d06bc52e3369e" nm="AddEventListener" arrow="1">
+<n32 lb="80" cb="4">
+<mex lb="80" cb="4" kind="lvalue" id="c7c50146e644cefcc04f4c0340ec2c64_d8a278313bedeb149575ea6aea60fe96" nm="m_pEventManager" arrow="1">
+<n19 lb="80" cb="4"/>
+</mex>
+</n32>
+</mex>
+<n32 lb="80" cb="38">
+<drx lb="80" cb="38" kind="lvalue" nm="e"/>
+</n32>
+<n19 lb="80" cb="40"/>
+</mce>
+</u>
+</frs>
+</u>
+</if>
+</u>
+
+</Stmt>
+</m>
+</tun>
+</Root>

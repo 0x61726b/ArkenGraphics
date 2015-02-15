@@ -1,0 +1,717 @@
+<Root>
+<Comments>
+<c f="1" b="1" e="1"/>
+<c f="1" b="2" e="2"/>
+<c f="1" b="3" e="3"/>
+<c f="1" b="4" e="4"/>
+<c f="1" b="5" e="5"/>
+<c f="1" b="6" e="6"/>
+<c f="1" b="7" e="7"/>
+<c f="1" b="8" e="8"/>
+<c f="1" b="9" e="8"/>
+<c f="1" b="11" e="11"/>
+<c f="1" b="12" e="11"/>
+<c f="1" b="13" e="13"/>
+<c f="1" b="14" e="13"/>
+<c f="1" b="21" e="21"/>
+<c f="1" b="22" e="21"/>
+<c f="1" b="25" e="25"/>
+<c f="1" b="26" e="25"/>
+<c f="1" b="30" e="30"/>
+<c f="1" b="31" e="30"/>
+<c f="1" b="40" e="40"/>
+<c f="1" b="41" e="40"/>
+<c f="1" b="45" e="45"/>
+<c f="1" b="46" e="45"/>
+<c f="1" b="50" e="50"/>
+<c f="1" b="51" e="50"/>
+<c f="1" b="55" e="55"/>
+<c f="1" b="56" e="55"/>
+<c f="1" b="65" e="65"/>
+<c f="1" b="66" e="65"/>
+<c f="1" b="71" e="71"/>
+</Comments>
+<Macros>
+<m f="1" bl="18" bc="2" el="18" ec="2"/>
+<m f="1" bl="19" bc="2" el="19" ec="2"/>
+<m f="1" bl="33" bc="2" el="33" ec="2"/>
+</Macros>
+<Comments>
+<c f="2" b="1" e="1"/>
+<c f="2" b="2" e="2"/>
+<c f="2" b="3" e="3"/>
+<c f="2" b="4" e="4"/>
+<c f="2" b="5" e="5"/>
+<c f="2" b="6" e="6"/>
+<c f="2" b="7" e="7"/>
+<c f="2" b="8" e="8"/>
+<c f="2" b="9" e="8"/>
+<c f="2" b="11" e="11"/>
+<c f="2" b="12" e="11"/>
+<c f="2" b="13" e="13"/>
+<c f="2" b="14" e="13"/>
+<c f="2" b="41" e="41"/>
+<c f="2" b="42" e="41"/>
+</Comments>
+<Macros/>
+<tun>
+<ns name="Arkeng" id="42789f2becdc7ea5b062b07a0c0fb5f3_3c3972cc97a7bba367d9b9e52bee78f4" file="2" linestart="14" lineend="40" original="">
+<cr namespace="Arkeng" access="none" depth="1" kind="class" name="Dx11Texture2D" id="42789f2becdc7ea5b062b07a0c0fb5f3_fd7aeaab42bc4ba337b698843598ed4b" file="2" linestart="16" lineend="39">
+<base access="public">
+<rt>
+<cr id="24274a177afecd72fc6f537131ad09ff_15b03297c6157f0b81a6f3b32d953fc9"/>
+</rt>
+</base>
+<cr access="public" kind="class" name="Dx11Texture2D" id="42789f2becdc7ea5b062b07a0c0fb5f3_e641d1d3626d8961e45d20bf2d2bbdb1" file="2" linestart="16" lineend="16"/>
+<c name="Dx11Texture2D" id="42789f2becdc7ea5b062b07a0c0fb5f3_5569bc9aa64d340021bcdee8675d9a91" file="2" linestart="18" lineend="18" explicit="true" access="private" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pTex" proto="Microsoft::WRL::ComPtr&lt;ID3D11Texture2D&gt;" access2="none">
+<ety>
+<tss>
+<templatebase id="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff"/>
+<template_arguments>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_15d4ffa0b97964d02b62478725dec3ca"/>
+</rt>
+</template_arguments>
+</tss>
+</ety>
+<Stmt>
+
+</Stmt>
+</p>
+</c>
+<d name="~Dx11Texture2D" id="42789f2becdc7ea5b062b07a0c0fb5f3_124d9645234541f4288ed207cf07866f" file="2" linestart="19" lineend="19" virtual="true" access="private" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+</d>
+<m name="GetActualDescription" id="42789f2becdc7ea5b062b07a0c0fb5f3_570f5a41d3c2af043249d9ce9f5738ee" file="2" linestart="21" lineend="21" access="private" hasbody="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEXTURE2D_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</fpt>
+</m>
+<m name="GetDesiredDescription" id="42789f2becdc7ea5b062b07a0c0fb5f3_eb0968e1c57619707faa977f6868bde4" file="2" linestart="22" lineend="22" access="private" hasbody="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEXTURE2D_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</fpt>
+</m>
+<m name="SetDesiredDescription" id="42789f2becdc7ea5b062b07a0c0fb5f3_289dcb43f16e916152a36ef3d414690f" file="2" linestart="23" lineend="23" access="private" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="description" proto="D3D11_TEXTURE2D_DESC" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="CreateTexture" id="42789f2becdc7ea5b062b07a0c0fb5f3_e991405adfb9e22f831db5c6f35ea80c" file="2" linestart="25" lineend="25" access="private">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pData" proto="void *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<bt name="void"/>
+</pt>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="GetType" id="42789f2becdc7ea5b062b07a0c0fb5f3_79bbed0b38b897e16c0833d4977a26dc" file="2" linestart="27" lineend="27" virtual="true" access="private" hasbody="true">
+<fpt cc="x86_thiscall" proto="Arkeng::ResourceType">
+<et>
+<e id="695c4e605f1bcf3b02de8492dc8b3c3b_b7c565454d0621536b36249aaed18421"/>
+</et>
+</fpt>
+</m>
+<m name="GetResource" id="42789f2becdc7ea5b062b07a0c0fb5f3_1d78956ec62faa749cec83692f904ba4" file="2" linestart="28" lineend="28" virtual="true" access="private" hasbody="true">
+<fpt cc="x86_thiscall" proto="ID3D11Resource *">
+<pt>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_723206a6ae14935d73bb0a4a2d5329c0"/>
+</rt>
+</pt>
+</fpt>
+</m>
+<m name="GetEvictionPriority" id="42789f2becdc7ea5b062b07a0c0fb5f3_b59d3b7e161f25d238224c458c4fb0ce" file="2" linestart="30" lineend="30" virtual="true" access="private" hasbody="true">
+<fpt cc="x86_thiscall" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fpt>
+</m>
+<m name="SetEvictionPriority" id="42789f2becdc7ea5b062b07a0c0fb5f3_698a261d000c27473e0af33693708920" file="2" linestart="31" lineend="31" virtual="true" access="private" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="EvictionPriority" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<Decl access="protected"/>
+<fl name="m_pTexture" id="42789f2becdc7ea5b062b07a0c0fb5f3_74c6a0a390679f8bc35a5b24230caeec" file="2" linestart="34" lineend="34" access="protected" proto="Microsoft::WRL::ComPtr&lt;ID3D11Texture2D&gt;">
+<ety>
+<tss>
+<templatebase id="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff"/>
+<template_arguments>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_15d4ffa0b97964d02b62478725dec3ca"/>
+</rt>
+</template_arguments>
+</tss>
+</ety>
+</fl>
+<fl name="m_DesiredDesc" id="42789f2becdc7ea5b062b07a0c0fb5f3_8d39f44a0fe18baeb1d4d7ee003e25f0" file="2" linestart="35" lineend="35" isLiteral="true" access="protected" proto="D3D11_TEXTURE2D_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="m_ActualDesc" id="42789f2becdc7ea5b062b07a0c0fb5f3_7a078d334c70c2efeb968df7bd8aea5d" file="2" linestart="36" lineend="36" isLiteral="true" access="protected" proto="D3D11_TEXTURE2D_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<Decl>
+<rt>
+<cr id="695c4e605f1bcf3b02de8492dc8b3c3b_de162f9aec055a3643a17afc906cd168"/>
+</rt>
+</Decl>
+<m name="operator=" id="42789f2becdc7ea5b062b07a0c0fb5f3_08887fb51c20e6bf7b3823c35f81bcb3" file="2" linestart="16" implicit="true" operator="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="Arkeng::Dx11Texture2D &amp;">
+<lrf>
+<rt>
+<cr id="42789f2becdc7ea5b062b07a0c0fb5f3_fd7aeaab42bc4ba337b698843598ed4b"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const Arkeng::Dx11Texture2D &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="42789f2becdc7ea5b062b07a0c0fb5f3_fd7aeaab42bc4ba337b698843598ed4b"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<c name="Dx11Texture2D" id="42789f2becdc7ea5b062b07a0c0fb5f3_fc5d6bd1b8a4d15842198c8e811daed0" file="2" linestart="16" lineend="16" copyconst="true" implicit="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="const Arkeng::Dx11Texture2D &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="42789f2becdc7ea5b062b07a0c0fb5f3_fd7aeaab42bc4ba337b698843598ed4b"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</c>
+</cr>
+</ns>
+<Decl/>
+<NamedDecl name="&lt;using-directive&gt;" id="eac6cc24d915fcb448cdeb0f6f623c18_6728b6b0f829183eb7bbd3d3d987c87d" file="1" linestart="12" lineend="12"/>
+<c name="Dx11Texture2D" id="eac6cc24d915fcb448cdeb0f6f623c18_5569bc9aa64d340021bcdee8675d9a91" file="1" linestart="14" lineend="20" previous="42789f2becdc7ea5b062b07a0c0fb5f3_5569bc9aa64d340021bcdee8675d9a91" explicit="true" access="private" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="pTex" proto="Microsoft::WRL::ComPtr&lt;ID3D11Texture2D&gt;" access2="none">
+<ety>
+<tss>
+<templatebase id="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff"/>
+<template_arguments>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_15d4ffa0b97964d02b62478725dec3ca"/>
+</rt>
+</template_arguments>
+</tss>
+</ety>
+<Stmt>
+
+</Stmt>
+</p>
+<BaseInit>
+<n10 lb="14" cb="16">
+<typeptr id="24274a177afecd72fc6f537131ad09ff_95d321876beb59baff8f361562c5d6e4"/>
+<temp/>
+</n10>
+
+</BaseInit>
+<Stmt>
+<u lb="15" cb="1" le="20" ce="1">
+<ocx lb="16" cb="2" le="16" ce="15" nbparm="2" id="2413c784050c7460db5d4cf92fa652c7_d876dd221c27ddf8ce4f6fe8b4db5c7f">
+<exp pvirg="true"/>
+<n32 lb="16" cb="13">
+<drx lb="16" cb="13" kind="lvalue" id="2413c784050c7460db5d4cf92fa652c7_d876dd221c27ddf8ce4f6fe8b4db5c7f" nm="operator="/>
+</n32>
+<mex lb="16" cb="2" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_74c6a0a390679f8bc35a5b24230caeec" nm="m_pTexture" arrow="1">
+<n19 lb="16" cb="2"/>
+</mex>
+<n32 lb="16" cb="15">
+<drx lb="16" cb="15" kind="lvalue" nm="pTex"/>
+</n32>
+</ocx>
+<ce lb="18" cb="2" le="18" ce="2" nbparm="3" id="6c3da6453e7588251e1aa4c3928b8b0c_01f056bb0311297cf054435e7cf7ee95">
+<exp pvirg="true"/>
+<n32 lb="18" cb="2">
+<drx lb="18" cb="2" kind="lvalue" id="6c3da6453e7588251e1aa4c3928b8b0c_01f056bb0311297cf054435e7cf7ee95" nm="memset"/>
+</n32>
+<n32 lb="18" cb="2" le="18" ce="2">
+<n46 lb="18" cb="2" le="18" ce="2">
+<exp pvirg="true"/>
+<uo lb="18" cb="2" le="18" ce="2" kind="&amp;">
+<mex lb="18" cb="2" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_8d39f44a0fe18baeb1d4d7ee003e25f0" nm="m_DesiredDesc" arrow="1">
+<n19 lb="18" cb="2"/>
+</mex>
+</uo>
+</n46>
+</n32>
+<n45 lb="18" cb="2">
+<flit/>
+</n45>
+<n46 lb="18" cb="2" le="18" ce="2">
+<exp pvirg="true"/>
+<n55 lb="18" cb="2" le="18" ce="2">
+<sizeof>
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</sizeof>
+</n55>
+</n46>
+</ce>
+<ce lb="19" cb="2" le="19" ce="2" nbparm="3" id="6c3da6453e7588251e1aa4c3928b8b0c_01f056bb0311297cf054435e7cf7ee95">
+<exp pvirg="true"/>
+<n32 lb="19" cb="2">
+<drx lb="19" cb="2" kind="lvalue" id="6c3da6453e7588251e1aa4c3928b8b0c_01f056bb0311297cf054435e7cf7ee95" nm="memset"/>
+</n32>
+<n32 lb="19" cb="2" le="19" ce="2">
+<n46 lb="19" cb="2" le="19" ce="2">
+<exp pvirg="true"/>
+<uo lb="19" cb="2" le="19" ce="2" kind="&amp;">
+<mex lb="19" cb="2" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_7a078d334c70c2efeb968df7bd8aea5d" nm="m_ActualDesc" arrow="1">
+<n19 lb="19" cb="2"/>
+</mex>
+</uo>
+</n46>
+</n32>
+<n45 lb="19" cb="2"/>
+<n46 lb="19" cb="2" le="19" ce="2">
+<exp pvirg="true"/>
+<n55 lb="19" cb="2" le="19" ce="2">
+<sizeof>
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</sizeof>
+</n55>
+</n46>
+</ce>
+</u>
+
+</Stmt>
+</c>
+<d name="~Dx11Texture2D" id="eac6cc24d915fcb448cdeb0f6f623c18_124d9645234541f4288ed207cf07866f" file="1" linestart="22" lineend="24" previous="42789f2becdc7ea5b062b07a0c0fb5f3_124d9645234541f4288ed207cf07866f" access="private" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+<Stmt>
+<u lb="23" cb="1" le="24" ce="1"/>
+
+</Stmt>
+</d>
+<m name="GetType" id="eac6cc24d915fcb448cdeb0f6f623c18_79bbed0b38b897e16c0833d4977a26dc" file="1" linestart="26" lineend="29" previous="42789f2becdc7ea5b062b07a0c0fb5f3_79bbed0b38b897e16c0833d4977a26dc" access="private" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="Arkeng::ResourceType">
+<et>
+<e id="695c4e605f1bcf3b02de8492dc8b3c3b_b7c565454d0621536b36249aaed18421"/>
+</et>
+</fpt>
+<Stmt>
+<u lb="27" cb="1" le="29" ce="1">
+<rx lb="28" cb="2" le="28" ce="23" pvirg="true">
+<n46 lb="28" cb="8" le="28" ce="23">
+<exp pvirg="true"/>
+<drx lb="28" cb="10" id="695c4e605f1bcf3b02de8492dc8b3c3b_a0b0a54a3991d528e943717ad06e321b" nm="RT_TEXTURE2D"/>
+</n46>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="GetActualDescription" id="eac6cc24d915fcb448cdeb0f6f623c18_570f5a41d3c2af043249d9ce9f5738ee" file="1" linestart="31" lineend="39" previous="42789f2becdc7ea5b062b07a0c0fb5f3_570f5a41d3c2af043249d9ce9f5738ee" access="private" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEXTURE2D_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</fpt>
+<Stmt>
+<u lb="32" cb="1" le="39" ce="1">
+<ce lb="33" cb="2" le="33" ce="2" nbparm="3" id="6c3da6453e7588251e1aa4c3928b8b0c_01f056bb0311297cf054435e7cf7ee95">
+<exp pvirg="true"/>
+<n32 lb="33" cb="2">
+<drx lb="33" cb="2" kind="lvalue" id="6c3da6453e7588251e1aa4c3928b8b0c_01f056bb0311297cf054435e7cf7ee95" nm="memset"/>
+</n32>
+<n32 lb="33" cb="2" le="33" ce="2">
+<n46 lb="33" cb="2" le="33" ce="2">
+<exp pvirg="true"/>
+<uo lb="33" cb="2" le="33" ce="2" kind="&amp;">
+<mex lb="33" cb="2" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_7a078d334c70c2efeb968df7bd8aea5d" nm="m_ActualDesc" arrow="1">
+<n19 lb="33" cb="2"/>
+</mex>
+</uo>
+</n46>
+</n32>
+<n45 lb="33" cb="2">
+<flit/>
+</n45>
+<n46 lb="33" cb="2" le="33" ce="2">
+<exp pvirg="true"/>
+<n55 lb="33" cb="2" le="33" ce="2">
+<sizeof>
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</sizeof>
+</n55>
+</n46>
+</ce>
+<if lb="35" cb="2" le="36" ce="38">
+<n32 lb="35" cb="7">
+<n32 lb="35" cb="7">
+<mce lb="35" cb="7" nbparm="0" id="2413c784050c7460db5d4cf92fa652c7_11c115bd833655dfcc71298a7f786cb5">
+<exp pvirg="true"/>
+<mex lb="35" cb="7" id="2413c784050c7460db5d4cf92fa652c7_11c115bd833655dfcc71298a7f786cb5" nm="operator int Microsoft::WRL::Details::BoolStruct::*" point="1">
+<n32 lb="35" cb="7">
+<mex lb="35" cb="7" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_74c6a0a390679f8bc35a5b24230caeec" nm="m_pTexture" arrow="1">
+<n19 lb="35" cb="7"/>
+</mex>
+</n32>
+</mex>
+</mce>
+</n32>
+</n32>
+<mce lb="36" cb="3" le="36" ce="38" nbparm="1" id="937c62aeccd23cb28e89e33bdd7d6017_f0858a5be8e3a1e1d52946b011aac285">
+<exp pvirg="true"/>
+<mex lb="36" cb="3" le="36" ce="15" id="937c62aeccd23cb28e89e33bdd7d6017_f0858a5be8e3a1e1d52946b011aac285" nm="GetDesc" arrow="1">
+<n32 lb="36" cb="3">
+<ocx lb="36" cb="3" nbparm="1" id="2413c784050c7460db5d4cf92fa652c7_a7ff9135e7456211a343e3fe1bbea34d">
+<exp pvirg="true"/>
+<n32 lb="36" cb="13">
+<drx lb="36" cb="13" kind="lvalue" id="2413c784050c7460db5d4cf92fa652c7_a7ff9135e7456211a343e3fe1bbea34d" nm="operator-&gt;"/>
+</n32>
+<n32 lb="36" cb="3">
+<mex lb="36" cb="3" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_74c6a0a390679f8bc35a5b24230caeec" nm="m_pTexture" arrow="1">
+<n19 lb="36" cb="3"/>
+</mex>
+</n32>
+</ocx>
+</n32>
+</mex>
+<uo lb="36" cb="24" le="36" ce="25" kind="&amp;">
+<mex lb="36" cb="25" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_7a078d334c70c2efeb968df7bd8aea5d" nm="m_ActualDesc" arrow="1">
+<n19 lb="36" cb="25"/>
+</mex>
+</uo>
+</mce>
+</if>
+<rx lb="38" cb="2" le="38" ce="23" pvirg="true">
+<n10 lb="38" cb="8" le="38" ce="23">
+<typeptr id="937c62aeccd23cb28e89e33bdd7d6017_5e1920fdd15926a1093037671e966023"/>
+<temp/>
+<n32 lb="38" cb="8" le="38" ce="23">
+<n46 lb="38" cb="8" le="38" ce="23">
+<exp pvirg="true"/>
+<mex lb="38" cb="10" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_7a078d334c70c2efeb968df7bd8aea5d" nm="m_ActualDesc" arrow="1">
+<n19 lb="38" cb="10"/>
+</mex>
+</n46>
+</n32>
+</n10>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="GetDesiredDescription" id="eac6cc24d915fcb448cdeb0f6f623c18_eb0968e1c57619707faa977f6868bde4" file="1" linestart="41" lineend="44" previous="42789f2becdc7ea5b062b07a0c0fb5f3_eb0968e1c57619707faa977f6868bde4" access="private" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEXTURE2D_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</fpt>
+<Stmt>
+<u lb="42" cb="1" le="44" ce="1">
+<rx lb="43" cb="2" le="43" ce="24" pvirg="true">
+<n10 lb="43" cb="8" le="43" ce="24">
+<typeptr id="937c62aeccd23cb28e89e33bdd7d6017_5e1920fdd15926a1093037671e966023"/>
+<temp/>
+<n32 lb="43" cb="8" le="43" ce="24">
+<n46 lb="43" cb="8" le="43" ce="24">
+<exp pvirg="true"/>
+<mex lb="43" cb="10" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_8d39f44a0fe18baeb1d4d7ee003e25f0" nm="m_DesiredDesc" arrow="1">
+<n19 lb="43" cb="10"/>
+</mex>
+</n46>
+</n32>
+</n10>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="SetDesiredDescription" id="eac6cc24d915fcb448cdeb0f6f623c18_289dcb43f16e916152a36ef3d414690f" file="1" linestart="46" lineend="49" previous="42789f2becdc7ea5b062b07a0c0fb5f3_289dcb43f16e916152a36ef3d414690f" access="private" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="description" proto="D3D11_TEXTURE2D_DESC" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="47" cb="1" le="49" ce="1">
+<ocx lb="48" cb="2" le="48" ce="18" nbparm="2" id="937c62aeccd23cb28e89e33bdd7d6017_e715418cd2e36c556ced437a8b84b27d">
+<exp pvirg="true"/>
+<n32 lb="48" cb="16">
+<drx lb="48" cb="16" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_e715418cd2e36c556ced437a8b84b27d" nm="operator="/>
+</n32>
+<mex lb="48" cb="2" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_8d39f44a0fe18baeb1d4d7ee003e25f0" nm="m_DesiredDesc" arrow="1">
+<n19 lb="48" cb="2"/>
+</mex>
+<n32 lb="48" cb="18">
+<drx lb="48" cb="18" kind="lvalue" nm="description"/>
+</n32>
+</ocx>
+</u>
+
+</Stmt>
+</m>
+<m name="GetResource" id="eac6cc24d915fcb448cdeb0f6f623c18_1d78956ec62faa749cec83692f904ba4" file="1" linestart="51" lineend="54" previous="42789f2becdc7ea5b062b07a0c0fb5f3_1d78956ec62faa749cec83692f904ba4" access="private" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="ID3D11Resource *">
+<pt>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_723206a6ae14935d73bb0a4a2d5329c0"/>
+</rt>
+</pt>
+</fpt>
+<Stmt>
+<u lb="52" cb="1" le="54" ce="1">
+<rx lb="53" cb="2" le="53" ce="27" pvirg="true">
+<n32 lb="53" cb="8" le="53" ce="27">
+<n46 lb="53" cb="8" le="53" ce="27">
+<exp pvirg="true"/>
+<mce lb="53" cb="10" le="53" ce="25" nbparm="0" id="2413c784050c7460db5d4cf92fa652c7_6cf3168fc3c7c49d833b653a39d01d7b">
+<exp pvirg="true"/>
+<mex lb="53" cb="10" le="53" ce="21" id="2413c784050c7460db5d4cf92fa652c7_6cf3168fc3c7c49d833b653a39d01d7b" nm="Get" point="1">
+<n32 lb="53" cb="10">
+<mex lb="53" cb="10" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_74c6a0a390679f8bc35a5b24230caeec" nm="m_pTexture" arrow="1">
+<n19 lb="53" cb="10"/>
+</mex>
+</n32>
+</mex>
+</mce>
+</n46>
+</n32>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="GetEvictionPriority" id="eac6cc24d915fcb448cdeb0f6f623c18_b59d3b7e161f25d238224c458c4fb0ce" file="1" linestart="56" lineend="64" previous="42789f2becdc7ea5b062b07a0c0fb5f3_b59d3b7e161f25d238224c458c4fb0ce" access="private" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fpt>
+<Stmt>
+<u lb="57" cb="1" le="64" ce="1">
+<dst lb="58" cb="2" le="58" ce="19">
+<exp pvirg="true"/>
+<Var nm="priority" value="true">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<n32 lb="58" cb="18">
+<n45 lb="58" cb="18">
+<flit/>
+</n45>
+</n32>
+</Var>
+</dst>
+<if lb="60" cb="2" le="61" ce="46">
+<n32 lb="60" cb="7">
+<n32 lb="60" cb="7">
+<mce lb="60" cb="7" nbparm="0" id="2413c784050c7460db5d4cf92fa652c7_11c115bd833655dfcc71298a7f786cb5">
+<exp pvirg="true"/>
+<mex lb="60" cb="7" id="2413c784050c7460db5d4cf92fa652c7_11c115bd833655dfcc71298a7f786cb5" nm="operator int Microsoft::WRL::Details::BoolStruct::*" point="1">
+<n32 lb="60" cb="7">
+<mex lb="60" cb="7" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_74c6a0a390679f8bc35a5b24230caeec" nm="m_pTexture" arrow="1">
+<n19 lb="60" cb="7"/>
+</mex>
+</n32>
+</mex>
+</mce>
+</n32>
+</n32>
+<xop lb="61" cb="3" le="61" ce="46" kind="=">
+<drx lb="61" cb="3" kind="lvalue" nm="priority"/>
+<mce lb="61" cb="14" le="61" ce="46" nbparm="0" id="937c62aeccd23cb28e89e33bdd7d6017_cf3cc3bcb9902e597627ebb39e310519">
+<exp pvirg="true"/>
+<mex lb="61" cb="14" le="61" ce="26" id="937c62aeccd23cb28e89e33bdd7d6017_cf3cc3bcb9902e597627ebb39e310519" nm="GetEvictionPriority" arrow="1">
+<n32 lb="61" cb="14">
+<ocx lb="61" cb="14" nbparm="1" id="2413c784050c7460db5d4cf92fa652c7_a7ff9135e7456211a343e3fe1bbea34d">
+<exp pvirg="true"/>
+<n32 lb="61" cb="24">
+<drx lb="61" cb="24" kind="lvalue" id="2413c784050c7460db5d4cf92fa652c7_a7ff9135e7456211a343e3fe1bbea34d" nm="operator-&gt;"/>
+</n32>
+<n32 lb="61" cb="14">
+<mex lb="61" cb="14" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_74c6a0a390679f8bc35a5b24230caeec" nm="m_pTexture" arrow="1">
+<n19 lb="61" cb="14"/>
+</mex>
+</n32>
+</ocx>
+</n32>
+</mex>
+</mce>
+</xop>
+</if>
+<rx lb="63" cb="2" le="63" ce="19" pvirg="true">
+<n32 lb="63" cb="8" le="63" ce="19">
+<n46 lb="63" cb="8" le="63" ce="19">
+<exp pvirg="true"/>
+<drx lb="63" cb="10" kind="lvalue" nm="priority"/>
+</n46>
+</n32>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="SetEvictionPriority" id="eac6cc24d915fcb448cdeb0f6f623c18_698a261d000c27473e0af33693708920" file="1" linestart="66" lineend="70" previous="42789f2becdc7ea5b062b07a0c0fb5f3_698a261d000c27473e0af33693708920" access="private" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="EvictionPriority" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="67" cb="1" le="70" ce="1">
+<if lb="68" cb="2" le="69" ce="53">
+<n32 lb="68" cb="7">
+<n32 lb="68" cb="7">
+<mce lb="68" cb="7" nbparm="0" id="2413c784050c7460db5d4cf92fa652c7_11c115bd833655dfcc71298a7f786cb5">
+<exp pvirg="true"/>
+<mex lb="68" cb="7" id="2413c784050c7460db5d4cf92fa652c7_11c115bd833655dfcc71298a7f786cb5" nm="operator int Microsoft::WRL::Details::BoolStruct::*" point="1">
+<n32 lb="68" cb="7">
+<mex lb="68" cb="7" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_74c6a0a390679f8bc35a5b24230caeec" nm="m_pTexture" arrow="1">
+<n19 lb="68" cb="7"/>
+</mex>
+</n32>
+</mex>
+</mce>
+</n32>
+</n32>
+<mce lb="69" cb="3" le="69" ce="53" nbparm="1" id="937c62aeccd23cb28e89e33bdd7d6017_5ac21b7d0110c5a681791f835a81671d">
+<exp pvirg="true"/>
+<mex lb="69" cb="3" le="69" ce="15" id="937c62aeccd23cb28e89e33bdd7d6017_5ac21b7d0110c5a681791f835a81671d" nm="SetEvictionPriority" arrow="1">
+<n32 lb="69" cb="3">
+<ocx lb="69" cb="3" nbparm="1" id="2413c784050c7460db5d4cf92fa652c7_a7ff9135e7456211a343e3fe1bbea34d">
+<exp pvirg="true"/>
+<n32 lb="69" cb="13">
+<drx lb="69" cb="13" kind="lvalue" id="2413c784050c7460db5d4cf92fa652c7_a7ff9135e7456211a343e3fe1bbea34d" nm="operator-&gt;"/>
+</n32>
+<n32 lb="69" cb="3">
+<mex lb="69" cb="3" kind="lvalue" id="42789f2becdc7ea5b062b07a0c0fb5f3_74c6a0a390679f8bc35a5b24230caeec" nm="m_pTexture" arrow="1">
+<n19 lb="69" cb="3"/>
+</mex>
+</n32>
+</ocx>
+</n32>
+</mex>
+<n32 lb="69" cb="36">
+<drx lb="69" cb="36" kind="lvalue" nm="EvictionPriority"/>
+</n32>
+</mce>
+</if>
+</u>
+
+</Stmt>
+</m>
+</tun>
+</Root>

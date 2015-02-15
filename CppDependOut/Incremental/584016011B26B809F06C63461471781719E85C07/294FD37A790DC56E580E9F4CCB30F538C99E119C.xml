@@ -1,0 +1,212 @@
+<Root>
+<Comments>
+<c f="1" b="1" e="1"/>
+<c f="1" b="2" e="2"/>
+<c f="1" b="3" e="3"/>
+<c f="1" b="4" e="4"/>
+<c f="1" b="5" e="5"/>
+<c f="1" b="6" e="6"/>
+<c f="1" b="7" e="7"/>
+<c f="1" b="8" e="8"/>
+<c f="1" b="9" e="8"/>
+<c f="1" b="11" e="11"/>
+<c f="1" b="12" e="11"/>
+<c f="1" b="13" e="13"/>
+<c f="1" b="14" e="13"/>
+<c f="1" b="15" e="15"/>
+<c f="1" b="16" e="15"/>
+<c f="1" b="21" e="21"/>
+<c f="1" b="22" e="21"/>
+<c f="1" b="25" e="25"/>
+<c f="1" b="26" e="25"/>
+<c f="1" b="30" e="30"/>
+</Comments>
+<Macros/>
+<Comments>
+<c f="2" b="1" e="1"/>
+<c f="2" b="2" e="2"/>
+<c f="2" b="3" e="3"/>
+<c f="2" b="4" e="4"/>
+<c f="2" b="5" e="5"/>
+<c f="2" b="6" e="6"/>
+<c f="2" b="7" e="7"/>
+<c f="2" b="8" e="8"/>
+<c f="2" b="9" e="8"/>
+<c f="2" b="10" e="10"/>
+<c f="2" b="11" e="10"/>
+<c f="2" b="13" e="13"/>
+<c f="2" b="14" e="13"/>
+<c f="2" b="35" e="35"/>
+<c f="2" b="36" e="35"/>
+</Comments>
+<Macros/>
+<tun>
+<ns name="Arkeng" id="24274a177afecd72fc6f537131ad09ff_3c3972cc97a7bba367d9b9e52bee78f4" file="2" linestart="14" lineend="33" original="">
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="DX11Resource" id="24274a177afecd72fc6f537131ad09ff_15b03297c6157f0b81a6f3b32d953fc9" file="2" linestart="16" lineend="32">
+<cr access="public" kind="class" name="DX11Resource" id="24274a177afecd72fc6f537131ad09ff_b620a42464a2e098f0ffad9ce4f65425" file="2" linestart="16" lineend="16"/>
+<Decl access="public"/>
+<c name="DX11Resource" id="24274a177afecd72fc6f537131ad09ff_95d321876beb59baff8f361562c5d6e4" file="2" linestart="19" lineend="19" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<d name="~DX11Resource" id="24274a177afecd72fc6f537131ad09ff_774aa6ac2f71ef7416c83c654cf9e18a" file="2" linestart="20" lineend="20" virtual="true" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</d>
+<m name="GetType" id="24274a177afecd72fc6f537131ad09ff_fd92fb2775e8d69e1c64430f56ea8911" file="2" linestart="22" lineend="22" pure="true" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="Arkeng::ResourceType">
+<et>
+<e id="695c4e605f1bcf3b02de8492dc8b3c3b_b7c565454d0621536b36249aaed18421"/>
+</et>
+</fpt>
+</m>
+<m name="GetResource" id="24274a177afecd72fc6f537131ad09ff_d429a5494b3b860a944fe142ab7543ab" file="2" linestart="23" lineend="23" pure="true" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="ID3D11Resource *">
+<pt>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_723206a6ae14935d73bb0a4a2d5329c0"/>
+</rt>
+</pt>
+</fpt>
+</m>
+<m name="GetEvictionPriority" id="24274a177afecd72fc6f537131ad09ff_86c1dfceb0fb6538b2aba632dc51eabc" file="2" linestart="25" lineend="25" pure="true" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fpt>
+</m>
+<m name="SetEvictionPriority" id="24274a177afecd72fc6f537131ad09ff_0858ad9e5e38d8cd2cd72e3226c22d82" file="2" linestart="26" lineend="26" pure="true" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="EvictionPriority" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="GetInnerID" id="24274a177afecd72fc6f537131ad09ff_ab110abac83310beac9bf0bf955c0206" file="2" linestart="28" lineend="28" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="unsigned short">
+<bt name="unsigned short"/>
+</fpt>
+</m>
+<v name="s_usResourceUID" proto="unsigned short" isLiteral="true" isPrimitive="true" id="24274a177afecd72fc6f537131ad09ff_eb37b29d0f75b2e7ca2999197bb9c3d9" file="2" linestart="30" lineend="30" storage="static" access2="public">
+<bt name="unsigned short"/>
+<Stmt>
+
+</Stmt>
+</v>
+<fl name="m_usInnerID" id="24274a177afecd72fc6f537131ad09ff_25c524939e8f33228409e7335c2a70da" file="2" linestart="31" lineend="31" isLiteral="true" access="public" proto="unsigned short">
+<bt name="unsigned short"/>
+</fl>
+<m name="operator=" id="24274a177afecd72fc6f537131ad09ff_fcd94856445c116d54de4996b7a2fb3b" file="2" linestart="16" implicit="true" operator="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="Arkeng::DX11Resource &amp;">
+<lrf>
+<rt>
+<cr id="24274a177afecd72fc6f537131ad09ff_15b03297c6157f0b81a6f3b32d953fc9"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const Arkeng::DX11Resource &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="24274a177afecd72fc6f537131ad09ff_15b03297c6157f0b81a6f3b32d953fc9"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<c name="DX11Resource" id="24274a177afecd72fc6f537131ad09ff_bbf10958b490eeeb5c732d3348ab9bc7" file="2" linestart="16" lineend="16" copyconst="true" implicit="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="const Arkeng::DX11Resource &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="24274a177afecd72fc6f537131ad09ff_15b03297c6157f0b81a6f3b32d953fc9"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</c>
+</cr>
+</ns>
+<Decl/>
+<NamedDecl name="&lt;using-directive&gt;" id="08390e93367d668a233e2b2915c7ae30_6728b6b0f829183eb7bbd3d3d987c87d" file="1" linestart="12" lineend="12"/>
+<v name="s_usResourceUID" proto="unsigned short" isLiteral="true" isPrimitive="true" id="08390e93367d668a233e2b2915c7ae30_eb37b29d0f75b2e7ca2999197bb9c3d9" file="1" linestart="14" lineend="14" previous="24274a177afecd72fc6f537131ad09ff_eb37b29d0f75b2e7ca2999197bb9c3d9" init="true" access2="public">
+<bt name="unsigned short"/>
+<Stmt>
+<n32 lb="14" cb="48">
+<n45 lb="14" cb="48">
+<flit/>
+</n45>
+</n32>
+
+</Stmt>
+</v>
+<c name="DX11Resource" id="08390e93367d668a233e2b2915c7ae30_95d321876beb59baff8f361562c5d6e4" file="1" linestart="16" lineend="20" previous="24274a177afecd72fc6f537131ad09ff_95d321876beb59baff8f361562c5d6e4" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<Stmt>
+<u lb="17" cb="1" le="20" ce="1">
+<xop lb="18" cb="2" le="18" ce="16" kind="=">
+<mex lb="18" cb="2" kind="lvalue" id="24274a177afecd72fc6f537131ad09ff_25c524939e8f33228409e7335c2a70da" nm="m_usInnerID" arrow="1">
+<n19 lb="18" cb="2"/>
+</mex>
+<n32 lb="18" cb="16">
+<drx lb="18" cb="16" kind="lvalue" id="08390e93367d668a233e2b2915c7ae30_eb37b29d0f75b2e7ca2999197bb9c3d9" nm="s_usResourceUID"/>
+</n32>
+</xop>
+<uo lb="19" cb="2" le="19" ce="17" kind="++">
+<drx lb="19" cb="2" kind="lvalue" id="08390e93367d668a233e2b2915c7ae30_eb37b29d0f75b2e7ca2999197bb9c3d9" nm="s_usResourceUID"/>
+</uo>
+</u>
+
+</Stmt>
+</c>
+<d name="~DX11Resource" id="08390e93367d668a233e2b2915c7ae30_774aa6ac2f71ef7416c83c654cf9e18a" file="1" linestart="22" lineend="24" previous="24274a177afecd72fc6f537131ad09ff_774aa6ac2f71ef7416c83c654cf9e18a" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<Stmt>
+<u lb="23" cb="1" le="24" ce="1"/>
+
+</Stmt>
+</d>
+<m name="GetInnerID" id="08390e93367d668a233e2b2915c7ae30_ab110abac83310beac9bf0bf955c0206" file="1" linestart="26" lineend="29" previous="24274a177afecd72fc6f537131ad09ff_ab110abac83310beac9bf0bf955c0206" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="unsigned short">
+<bt name="unsigned short"/>
+</fpt>
+<Stmt>
+<u lb="27" cb="1" le="29" ce="1">
+<rx lb="28" cb="2" le="28" ce="22" pvirg="true">
+<n32 lb="28" cb="8" le="28" ce="22">
+<n46 lb="28" cb="8" le="28" ce="22">
+<exp pvirg="true"/>
+<mex lb="28" cb="10" kind="lvalue" id="24274a177afecd72fc6f537131ad09ff_25c524939e8f33228409e7335c2a70da" nm="m_usInnerID" arrow="1">
+<n19 lb="28" cb="10"/>
+</mex>
+</n46>
+</n32>
+</rx>
+</u>
+
+</Stmt>
+</m>
+</tun>
+</Root>

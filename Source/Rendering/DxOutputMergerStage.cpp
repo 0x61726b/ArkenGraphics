@@ -33,18 +33,18 @@ void DxOutputMergerStage::ClearState()
 //--------------------------------------------------------------------------------
 void DxOutputMergerStage::ApplyRenderTargets( ID3D11DeviceContext* pContext )
 {
-	const int rtvCount = State.RenderTargetViews.size();
+	const int rtvCount = State.GetRenderTargetCount();
 
-	if(State.RenderTargetViews.size() > 0 )
+	if(rtvCount > 0 )
 	{
-		D3D11Renderer* pRenderer = D3D11Renderer::Get();
+		ArkRenderer11* pRenderer = ArkRenderer11::Get();
 		
 		
 		std::vector< ID3D11RenderTargetView* > rtvs( rtvCount );
 
 		for( int i=0; i < rtvCount; ++i )
 		{
-			Dx11RenderTargetView& rView = pRenderer->GetRenderTargetViewByIndex( State.RenderTargetViews[i] );
+			Dx11RenderTargetView& rView = pRenderer->GetRenderTargetViewByIndex( State.GetRenderTargetView( i ) );
 			rtvs[i] = rView.m_pRenderTargetView.Get();
 			if( rtvs[i] == nullptr )
 			{

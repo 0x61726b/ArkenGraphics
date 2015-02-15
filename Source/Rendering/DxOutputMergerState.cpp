@@ -19,18 +19,46 @@ DxOutputMergerState::~DxOutputMergerState()
 {
 }
 //--------------------------------------------------------------------------------
-void DxOutputMergerState::SetFeatureLevel( D3D_FEATURE_LEVEL FeatureLevel )
+void DxOutputMergerState::SetFeatureLevel(D3D_FEATURE_LEVEL FeatureLevel)
 {
 	m_eFeatureLevel = FeatureLevel;
 }
 //--------------------------------------------------------------------------------
 int DxOutputMergerState::GetRenderTargetCount() const
 {
-	return RenderTargetViews.size();
+	return m_vRenderTargetViews.size();
 }
 //--------------------------------------------------------------------------------
 void DxOutputMergerState::ClearState()
 {
-	
+	m_vRenderTargetViews.clear();
 }
+//--------------------------------------------------------------------------------
+void DxOutputMergerState::AddRenderTargetView(int ID)
+{
+	for(int i=0; i < m_vRenderTargetViews.size(); ++i)
+	{
+		if(m_vRenderTargetViews[i] == ID)
+			return;
+	}
+	m_vRenderTargetViews.push_back(ID);
+}
+//--------------------------------------------------------------------------------
+int DxOutputMergerState::GetRenderTargetView(int ID)
+{
+	return m_vRenderTargetViews[ID];
+
+}
+//--------------------------------------------------------------------------------
+bool DxOutputMergerState::CheckIfRTVExists(int ID)
+{
+	//for(int i=0; i < m_vRenderTargetViews.size(); ++i)
+	//{
+	//	if(m_vRenderTargetViews[] == ID)
+	//		return true;
+	//}
+	return false;
+}
+//--------------------------------------------------------------------------------
+
 

@@ -1,0 +1,1096 @@
+<Root>
+<Comments>
+<c f="1" b="1" e="1"/>
+<c f="1" b="2" e="2"/>
+<c f="1" b="3" e="3"/>
+<c f="1" b="4" e="4"/>
+<c f="1" b="5" e="5"/>
+<c f="1" b="6" e="6"/>
+<c f="1" b="7" e="7"/>
+<c f="1" b="8" e="8"/>
+<c f="1" b="9" e="8"/>
+<c f="1" b="11" e="11"/>
+<c f="1" b="12" e="11"/>
+<c f="1" b="13" e="13"/>
+<c f="1" b="14" e="13"/>
+<c f="1" b="18" e="18"/>
+<c f="1" b="19" e="18"/>
+<c f="1" b="22" e="22"/>
+<c f="1" b="23" e="22"/>
+<c f="1" b="25" e="25"/>
+<c f="1" b="26" e="26"/>
+<c f="1" b="28" e="26"/>
+<c f="1" b="40" e="40"/>
+<c f="1" b="41" e="40"/>
+<c f="1" b="55" e="55"/>
+<c f="1" b="56" e="55"/>
+<c f="1" b="70" e="70"/>
+<c f="1" b="71" e="70"/>
+<c f="1" b="75" e="75"/>
+<c f="1" b="76" e="75"/>
+<c f="1" b="80" e="80"/>
+<c f="1" b="81" e="80"/>
+<c f="1" b="85" e="85"/>
+<c f="1" b="86" e="85"/>
+<c f="1" b="90" e="90"/>
+<c f="1" b="91" e="90"/>
+<c f="1" b="95" e="95"/>
+<c f="1" b="96" e="95"/>
+<c f="1" b="100" e="100"/>
+<c f="1" b="101" e="100"/>
+<c f="1" b="105" e="105"/>
+<c f="1" b="106" e="105"/>
+<c f="1" b="110" e="110"/>
+<c f="1" b="111" e="110"/>
+<c f="1" b="115" e="115"/>
+<c f="1" b="116" e="115"/>
+<c f="1" b="120" e="120"/>
+<c f="1" b="121" e="120"/>
+<c f="1" b="125" e="125"/>
+</Comments>
+<Macros/>
+<Comments>
+<c f="2" b="1" e="1"/>
+<c f="2" b="2" e="2"/>
+<c f="2" b="3" e="3"/>
+<c f="2" b="4" e="4"/>
+<c f="2" b="5" e="5"/>
+<c f="2" b="6" e="6"/>
+<c f="2" b="7" e="7"/>
+<c f="2" b="8" e="8"/>
+<c f="2" b="9" e="8"/>
+<c f="2" b="11" e="11"/>
+<c f="2" b="12" e="11"/>
+<c f="2" b="13" e="13"/>
+<c f="2" b="14" e="13"/>
+</Comments>
+<Macros/>
+<tun>
+<ns name="Arkeng" id="975318529b26a88f429292f70a1a44f6_3c3972cc97a7bba367d9b9e52bee78f4" file="2" linestart="14" lineend="44" original="">
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="Dx11Texture2DConfig" id="975318529b26a88f429292f70a1a44f6_04fddde2a89bb777f43b02c6e3e00182" file="2" linestart="16" lineend="43">
+<cr access="public" kind="class" name="Dx11Texture2DConfig" id="975318529b26a88f429292f70a1a44f6_fc974d18c120cd3f800c8b9e7f83212b" file="2" linestart="16" lineend="16"/>
+<Decl access="public"/>
+<c name="Dx11Texture2DConfig" id="975318529b26a88f429292f70a1a44f6_aa0de5e718a145bdd81ebb562a5c15d0" file="2" linestart="19" lineend="19" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<d name="~Dx11Texture2DConfig" id="975318529b26a88f429292f70a1a44f6_448089c4e74f04b6984e87a90de311d6" file="2" linestart="20" lineend="20" virtual="true" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</d>
+<m name="SetDefaults" id="975318529b26a88f429292f70a1a44f6_cdc6130dd9cb192bc286f7f6fdf1cd71" file="2" linestart="22" lineend="22" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</m>
+<m name="SetDepthBuffer" id="975318529b26a88f429292f70a1a44f6_a439c64dfe1660d59cea636a31a70fff" file="2" linestart="23" lineend="23" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="width" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="height" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetColorBuffer" id="975318529b26a88f429292f70a1a44f6_2511b19273d9fd1aab564a2fb82c325f" file="2" linestart="24" lineend="24" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="width" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="height" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetWidth" id="975318529b26a88f429292f70a1a44f6_9713b06809ee435d53507ffb9c5256f9" file="2" linestart="26" lineend="26" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetHeight" id="975318529b26a88f429292f70a1a44f6_812703db1def11509f6a03c787908ab3" file="2" linestart="27" lineend="27" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetMipLevels" id="975318529b26a88f429292f70a1a44f6_8fb271ba6c62ab4caff12789aac9aca4" file="2" linestart="28" lineend="28" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetArraySize" id="975318529b26a88f429292f70a1a44f6_61e3242ef19289e66da6e625cabdfa13" file="2" linestart="29" lineend="29" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetFormat" id="975318529b26a88f429292f70a1a44f6_3f0bb8f0cd65c882886956c48376e2be" file="2" linestart="30" lineend="30" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="DXGI_FORMAT" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<et>
+<e id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf"/>
+</et>
+</ety>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetSampleDesc" id="975318529b26a88f429292f70a1a44f6_80656a7529028ec3ef89ac774158d7dc" file="2" linestart="31" lineend="31" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="DXGI_SAMPLE_DESC" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<rt>
+<cr id="e12bff9b09ae6113a2391c345f90b0fc_452901a4152b6048815b24ee8d5fcda9"/>
+</rt>
+</ety>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetUsage" id="975318529b26a88f429292f70a1a44f6_3d5870bb07f2d0f8efef7e1c52f3bddf" file="2" linestart="32" lineend="32" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="D3D11_USAGE" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<et>
+<e id="937c62aeccd23cb28e89e33bdd7d6017_c63ab4507803b63a73795ef6d82a8404"/>
+</et>
+</ety>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetBindFlags" id="975318529b26a88f429292f70a1a44f6_ecbf3dce149865b75189957e5c180558" file="2" linestart="33" lineend="33" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetCPUAccessFlags" id="975318529b26a88f429292f70a1a44f6_84c42c80725582e010fbbd68d24288c3" file="2" linestart="34" lineend="34" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="SetMiscFlags" id="975318529b26a88f429292f70a1a44f6_cfa3160054319110fafc01cdf443abc3" file="2" linestart="35" lineend="35" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<m name="GetTextureDesc" id="975318529b26a88f429292f70a1a44f6_530aea2f99acb9bb53cfa21e2a091dd7" file="2" linestart="37" lineend="37" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEXTURE2D_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</fpt>
+</m>
+<Decl access="protected"/>
+<fl name="m_State" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" file="2" linestart="40" lineend="40" isLiteral="true" access="protected" proto="D3D11_TEXTURE2D_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<Decl>
+<rt>
+<cr id="695c4e605f1bcf3b02de8492dc8b3c3b_de162f9aec055a3643a17afc906cd168"/>
+</rt>
+</Decl>
+<m name="operator=" id="975318529b26a88f429292f70a1a44f6_8d9edc01830a9d8d9f276b6b2edbffbe" file="2" linestart="16" implicit="true" operator="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="Arkeng::Dx11Texture2DConfig &amp;">
+<lrf>
+<rt>
+<cr id="975318529b26a88f429292f70a1a44f6_04fddde2a89bb777f43b02c6e3e00182"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const Arkeng::Dx11Texture2DConfig &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="975318529b26a88f429292f70a1a44f6_04fddde2a89bb777f43b02c6e3e00182"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<c name="Dx11Texture2DConfig" id="975318529b26a88f429292f70a1a44f6_62b0a2d126fdfc5c99c201e05a6793bc" file="2" linestart="16" lineend="16" copyconst="true" implicit="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="const Arkeng::Dx11Texture2DConfig &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="975318529b26a88f429292f70a1a44f6_04fddde2a89bb777f43b02c6e3e00182"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</c>
+</cr>
+</ns>
+<Decl/>
+<NamedDecl name="&lt;using-directive&gt;" id="e799e162f60e77ebea88b604a3ffbc9c_6728b6b0f829183eb7bbd3d3d987c87d" file="1" linestart="12" lineend="12"/>
+<c name="Dx11Texture2DConfig" id="e799e162f60e77ebea88b604a3ffbc9c_aa0de5e718a145bdd81ebb562a5c15d0" file="1" linestart="14" lineend="17" previous="975318529b26a88f429292f70a1a44f6_aa0de5e718a145bdd81ebb562a5c15d0" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<Stmt>
+<u lb="15" cb="1" le="17" ce="1">
+<mce lb="16" cb="2" le="16" ce="14" nbparm="0" id="975318529b26a88f429292f70a1a44f6_cdc6130dd9cb192bc286f7f6fdf1cd71">
+<exp pvirg="true"/>
+<mex lb="16" cb="2" id="975318529b26a88f429292f70a1a44f6_cdc6130dd9cb192bc286f7f6fdf1cd71" nm="SetDefaults" arrow="1">
+<n19 lb="16" cb="2"/>
+</mex>
+</mce>
+</u>
+
+</Stmt>
+</c>
+<d name="~Dx11Texture2DConfig" id="e799e162f60e77ebea88b604a3ffbc9c_448089c4e74f04b6984e87a90de311d6" file="1" linestart="19" lineend="21" previous="975318529b26a88f429292f70a1a44f6_448089c4e74f04b6984e87a90de311d6" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<Stmt>
+<u lb="20" cb="1" le="21" ce="1"/>
+
+</Stmt>
+</d>
+<m name="SetDefaults" id="e799e162f60e77ebea88b604a3ffbc9c_cdc6130dd9cb192bc286f7f6fdf1cd71" file="1" linestart="23" lineend="39" previous="975318529b26a88f429292f70a1a44f6_cdc6130dd9cb192bc286f7f6fdf1cd71" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<Stmt>
+<u lb="24" cb="1" le="39" ce="1">
+<xop lb="28" cb="5" le="28" ce="21" kind="=">
+<mex lb="28" cb="5" le="28" ce="13" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_997c139aedbd308b84f5eccdae7d0d5e" nm="Width" point="1">
+<mex lb="28" cb="5" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="28" cb="5"/>
+</mex>
+</mex>
+<n32 lb="28" cb="21">
+<n45 lb="28" cb="21">
+<flit/>
+</n45>
+</n32>
+</xop>
+<xop lb="29" cb="2" le="29" ce="19" kind="=">
+<mex lb="29" cb="2" le="29" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_e20899bb53bfcf8a4cf0661d4cca61ce" nm="Height" point="1">
+<mex lb="29" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="29" cb="2"/>
+</mex>
+</mex>
+<n32 lb="29" cb="19">
+<n45 lb="29" cb="19"/>
+</n32>
+</xop>
+<xop lb="30" cb="5" le="30" ce="25" kind="=">
+<mex lb="30" cb="5" le="30" ce="13" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_57c66c46df555abea69b3790189c5325" nm="MipLevels" point="1">
+<mex lb="30" cb="5" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="30" cb="5"/>
+</mex>
+</mex>
+<n32 lb="30" cb="25">
+<n45 lb="30" cb="25"/>
+</n32>
+</xop>
+<xop lb="31" cb="5" le="31" ce="25" kind="=">
+<mex lb="31" cb="5" le="31" ce="13" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_0313d581e6aa05a871da5bd4fa673262" nm="ArraySize" point="1">
+<mex lb="31" cb="5" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="31" cb="5"/>
+</mex>
+</mex>
+<n32 lb="31" cb="25">
+<n45 lb="31" cb="25"/>
+</n32>
+</xop>
+<xop lb="32" cb="5" le="32" ce="22" kind="=">
+<mex lb="32" cb="5" le="32" ce="13" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_cb9eafc36a265c735f2e3f8c7609870f" nm="Format" point="1">
+<mex lb="32" cb="5" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="32" cb="5"/>
+</mex>
+</mex>
+<drx lb="32" cb="22" id="25adb24a197efe36b5ea439e0ef7fbfb_a7e4456661275bdd6ce9653ea4f61b84" nm="DXGI_FORMAT_R32G32B32A32_FLOAT"/>
+</xop>
+<xop lb="33" cb="2" le="33" ce="29" kind="=">
+<mex lb="33" cb="2" le="33" ce="21" kind="lvalue" id="e12bff9b09ae6113a2391c345f90b0fc_9be639b6ef67f31728cbdb0b8c10a9df" nm="Count" point="1">
+<mex lb="33" cb="2" le="33" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_ec961e28985eb83baaa92378f561ff9e" nm="SampleDesc" point="1">
+<mex lb="33" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="33" cb="2"/>
+</mex>
+</mex>
+</mex>
+<n32 lb="33" cb="29">
+<n45 lb="33" cb="29"/>
+</n32>
+</xop>
+<xop lb="34" cb="2" le="34" ce="31" kind="=">
+<mex lb="34" cb="2" le="34" ce="21" kind="lvalue" id="e12bff9b09ae6113a2391c345f90b0fc_fa2db81f606584598eee140e802a311d" nm="Quality" point="1">
+<mex lb="34" cb="2" le="34" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_ec961e28985eb83baaa92378f561ff9e" nm="SampleDesc" point="1">
+<mex lb="34" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="34" cb="2"/>
+</mex>
+</mex>
+</mex>
+<n32 lb="34" cb="31">
+<n45 lb="34" cb="31">
+<flit/>
+</n45>
+</n32>
+</xop>
+<xop lb="35" cb="5" le="35" ce="21" kind="=">
+<mex lb="35" cb="5" le="35" ce="13" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_4f639e4d1ac3a16b6f26ffe26cd1b3f4" nm="Usage" point="1">
+<mex lb="35" cb="5" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="35" cb="5"/>
+</mex>
+</mex>
+<drx lb="35" cb="21" id="937c62aeccd23cb28e89e33bdd7d6017_2989675783e57c89009a5f29dd5a8fd4" nm="D3D11_USAGE_DEFAULT"/>
+</xop>
+<xop lb="36" cb="5" le="36" ce="25" kind="=">
+<mex lb="36" cb="5" le="36" ce="13" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_01e1ca71b5925d0714cd2c342dcf370b" nm="BindFlags" point="1">
+<mex lb="36" cb="5" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="36" cb="5"/>
+</mex>
+</mex>
+<n32 lb="36" cb="25">
+<drx lb="36" cb="25" id="937c62aeccd23cb28e89e33bdd7d6017_c156e2b9bb7316d3a5f7f8f73c78b675" nm="D3D11_BIND_SHADER_RESOURCE"/>
+</n32>
+</xop>
+<xop lb="37" cb="5" le="37" ce="30" kind="=">
+<mex lb="37" cb="5" le="37" ce="13" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_b4725010801a68137952a300b3b3535d" nm="CPUAccessFlags" point="1">
+<mex lb="37" cb="5" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="37" cb="5"/>
+</mex>
+</mex>
+<n32 lb="37" cb="30">
+<n45 lb="37" cb="30"/>
+</n32>
+</xop>
+<xop lb="38" cb="5" le="38" ce="25" kind="=">
+<mex lb="38" cb="5" le="38" ce="13" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_58a843c920f0e35bd64e77878eaf0f12" nm="MiscFlags" point="1">
+<mex lb="38" cb="5" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="38" cb="5"/>
+</mex>
+</mex>
+<n32 lb="38" cb="25">
+<n45 lb="38" cb="25"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="SetDepthBuffer" id="e799e162f60e77ebea88b604a3ffbc9c_a439c64dfe1660d59cea636a31a70fff" file="1" linestart="41" lineend="54" previous="975318529b26a88f429292f70a1a44f6_a439c64dfe1660d59cea636a31a70fff" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="width" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="height" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="42" cb="1" le="54" ce="1">
+<xop lb="43" cb="2" le="43" ce="18" kind="=">
+<mex lb="43" cb="2" le="43" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_997c139aedbd308b84f5eccdae7d0d5e" nm="Width" point="1">
+<mex lb="43" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="43" cb="2"/>
+</mex>
+</mex>
+<n32 lb="43" cb="18">
+<drx lb="43" cb="18" kind="lvalue" nm="width"/>
+</n32>
+</xop>
+<xop lb="44" cb="2" le="44" ce="19" kind="=">
+<mex lb="44" cb="2" le="44" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_e20899bb53bfcf8a4cf0661d4cca61ce" nm="Height" point="1">
+<mex lb="44" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="44" cb="2"/>
+</mex>
+</mex>
+<n32 lb="44" cb="19">
+<drx lb="44" cb="19" kind="lvalue" nm="height"/>
+</n32>
+</xop>
+<xop lb="45" cb="2" le="45" ce="22" kind="=">
+<mex lb="45" cb="2" le="45" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_57c66c46df555abea69b3790189c5325" nm="MipLevels" point="1">
+<mex lb="45" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="45" cb="2"/>
+</mex>
+</mex>
+<n32 lb="45" cb="22">
+<n45 lb="45" cb="22">
+<flit/>
+</n45>
+</n32>
+</xop>
+<xop lb="46" cb="2" le="46" ce="22" kind="=">
+<mex lb="46" cb="2" le="46" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_0313d581e6aa05a871da5bd4fa673262" nm="ArraySize" point="1">
+<mex lb="46" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="46" cb="2"/>
+</mex>
+</mex>
+<n32 lb="46" cb="22">
+<n45 lb="46" cb="22"/>
+</n32>
+</xop>
+<xop lb="47" cb="2" le="47" ce="19" kind="=">
+<mex lb="47" cb="2" le="47" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_cb9eafc36a265c735f2e3f8c7609870f" nm="Format" point="1">
+<mex lb="47" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="47" cb="2"/>
+</mex>
+</mex>
+<drx lb="47" cb="19" id="25adb24a197efe36b5ea439e0ef7fbfb_9406d521132615f70c1f8799e6f85d67" nm="DXGI_FORMAT_D32_FLOAT"/>
+</xop>
+<xop lb="48" cb="2" le="48" ce="29" kind="=">
+<mex lb="48" cb="2" le="48" ce="21" kind="lvalue" id="e12bff9b09ae6113a2391c345f90b0fc_9be639b6ef67f31728cbdb0b8c10a9df" nm="Count" point="1">
+<mex lb="48" cb="2" le="48" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_ec961e28985eb83baaa92378f561ff9e" nm="SampleDesc" point="1">
+<mex lb="48" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="48" cb="2"/>
+</mex>
+</mex>
+</mex>
+<n32 lb="48" cb="29">
+<n45 lb="48" cb="29"/>
+</n32>
+</xop>
+<xop lb="49" cb="2" le="49" ce="31" kind="=">
+<mex lb="49" cb="2" le="49" ce="21" kind="lvalue" id="e12bff9b09ae6113a2391c345f90b0fc_fa2db81f606584598eee140e802a311d" nm="Quality" point="1">
+<mex lb="49" cb="2" le="49" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_ec961e28985eb83baaa92378f561ff9e" nm="SampleDesc" point="1">
+<mex lb="49" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="49" cb="2"/>
+</mex>
+</mex>
+</mex>
+<n32 lb="49" cb="31">
+<n45 lb="49" cb="31">
+<flit/>
+</n45>
+</n32>
+</xop>
+<xop lb="50" cb="2" le="50" ce="18" kind="=">
+<mex lb="50" cb="2" le="50" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_4f639e4d1ac3a16b6f26ffe26cd1b3f4" nm="Usage" point="1">
+<mex lb="50" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="50" cb="2"/>
+</mex>
+</mex>
+<drx lb="50" cb="18" id="937c62aeccd23cb28e89e33bdd7d6017_2989675783e57c89009a5f29dd5a8fd4" nm="D3D11_USAGE_DEFAULT"/>
+</xop>
+<xop lb="51" cb="2" le="51" ce="22" kind="=">
+<mex lb="51" cb="2" le="51" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_01e1ca71b5925d0714cd2c342dcf370b" nm="BindFlags" point="1">
+<mex lb="51" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="51" cb="2"/>
+</mex>
+</mex>
+<n32 lb="51" cb="22">
+<drx lb="51" cb="22" id="937c62aeccd23cb28e89e33bdd7d6017_431047a337b450a2c059fa30fc15a805" nm="D3D11_BIND_DEPTH_STENCIL"/>
+</n32>
+</xop>
+<xop lb="52" cb="2" le="52" ce="27" kind="=">
+<mex lb="52" cb="2" le="52" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_b4725010801a68137952a300b3b3535d" nm="CPUAccessFlags" point="1">
+<mex lb="52" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="52" cb="2"/>
+</mex>
+</mex>
+<n32 lb="52" cb="27">
+<n45 lb="52" cb="27"/>
+</n32>
+</xop>
+<xop lb="53" cb="2" le="53" ce="22" kind="=">
+<mex lb="53" cb="2" le="53" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_58a843c920f0e35bd64e77878eaf0f12" nm="MiscFlags" point="1">
+<mex lb="53" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="53" cb="2"/>
+</mex>
+</mex>
+<n32 lb="53" cb="22">
+<n45 lb="53" cb="22"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="SetColorBuffer" id="e799e162f60e77ebea88b604a3ffbc9c_2511b19273d9fd1aab564a2fb82c325f" file="1" linestart="56" lineend="69" previous="975318529b26a88f429292f70a1a44f6_2511b19273d9fd1aab564a2fb82c325f" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="width" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="height" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="57" cb="1" le="69" ce="1">
+<xop lb="58" cb="2" le="58" ce="18" kind="=">
+<mex lb="58" cb="2" le="58" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_997c139aedbd308b84f5eccdae7d0d5e" nm="Width" point="1">
+<mex lb="58" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="58" cb="2"/>
+</mex>
+</mex>
+<n32 lb="58" cb="18">
+<drx lb="58" cb="18" kind="lvalue" nm="width"/>
+</n32>
+</xop>
+<xop lb="59" cb="2" le="59" ce="19" kind="=">
+<mex lb="59" cb="2" le="59" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_e20899bb53bfcf8a4cf0661d4cca61ce" nm="Height" point="1">
+<mex lb="59" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="59" cb="2"/>
+</mex>
+</mex>
+<n32 lb="59" cb="19">
+<drx lb="59" cb="19" kind="lvalue" nm="height"/>
+</n32>
+</xop>
+<xop lb="60" cb="2" le="60" ce="22" kind="=">
+<mex lb="60" cb="2" le="60" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_57c66c46df555abea69b3790189c5325" nm="MipLevels" point="1">
+<mex lb="60" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="60" cb="2"/>
+</mex>
+</mex>
+<n32 lb="60" cb="22">
+<n45 lb="60" cb="22">
+<flit/>
+</n45>
+</n32>
+</xop>
+<xop lb="61" cb="2" le="61" ce="22" kind="=">
+<mex lb="61" cb="2" le="61" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_0313d581e6aa05a871da5bd4fa673262" nm="ArraySize" point="1">
+<mex lb="61" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="61" cb="2"/>
+</mex>
+</mex>
+<n32 lb="61" cb="22">
+<n45 lb="61" cb="22"/>
+</n32>
+</xop>
+<xop lb="62" cb="2" le="62" ce="19" kind="=">
+<mex lb="62" cb="2" le="62" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_cb9eafc36a265c735f2e3f8c7609870f" nm="Format" point="1">
+<mex lb="62" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="62" cb="2"/>
+</mex>
+</mex>
+<drx lb="62" cb="19" id="25adb24a197efe36b5ea439e0ef7fbfb_e36189ab1711798955fdcc05518127ff" nm="DXGI_FORMAT_R16G16B16A16_FLOAT"/>
+</xop>
+<xop lb="63" cb="2" le="63" ce="29" kind="=">
+<mex lb="63" cb="2" le="63" ce="21" kind="lvalue" id="e12bff9b09ae6113a2391c345f90b0fc_9be639b6ef67f31728cbdb0b8c10a9df" nm="Count" point="1">
+<mex lb="63" cb="2" le="63" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_ec961e28985eb83baaa92378f561ff9e" nm="SampleDesc" point="1">
+<mex lb="63" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="63" cb="2"/>
+</mex>
+</mex>
+</mex>
+<n32 lb="63" cb="29">
+<n45 lb="63" cb="29"/>
+</n32>
+</xop>
+<xop lb="64" cb="2" le="64" ce="31" kind="=">
+<mex lb="64" cb="2" le="64" ce="21" kind="lvalue" id="e12bff9b09ae6113a2391c345f90b0fc_fa2db81f606584598eee140e802a311d" nm="Quality" point="1">
+<mex lb="64" cb="2" le="64" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_ec961e28985eb83baaa92378f561ff9e" nm="SampleDesc" point="1">
+<mex lb="64" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="64" cb="2"/>
+</mex>
+</mex>
+</mex>
+<n32 lb="64" cb="31">
+<n45 lb="64" cb="31">
+<flit/>
+</n45>
+</n32>
+</xop>
+<xop lb="65" cb="2" le="65" ce="18" kind="=">
+<mex lb="65" cb="2" le="65" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_4f639e4d1ac3a16b6f26ffe26cd1b3f4" nm="Usage" point="1">
+<mex lb="65" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="65" cb="2"/>
+</mex>
+</mex>
+<drx lb="65" cb="18" id="937c62aeccd23cb28e89e33bdd7d6017_2989675783e57c89009a5f29dd5a8fd4" nm="D3D11_USAGE_DEFAULT"/>
+</xop>
+<xop lb="66" cb="2" le="66" ce="22" kind="=">
+<mex lb="66" cb="2" le="66" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_01e1ca71b5925d0714cd2c342dcf370b" nm="BindFlags" point="1">
+<mex lb="66" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="66" cb="2"/>
+</mex>
+</mex>
+<n32 lb="66" cb="22">
+<drx lb="66" cb="22" id="937c62aeccd23cb28e89e33bdd7d6017_c156e2b9bb7316d3a5f7f8f73c78b675" nm="D3D11_BIND_SHADER_RESOURCE"/>
+</n32>
+</xop>
+<xop lb="67" cb="2" le="67" ce="27" kind="=">
+<mex lb="67" cb="2" le="67" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_b4725010801a68137952a300b3b3535d" nm="CPUAccessFlags" point="1">
+<mex lb="67" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="67" cb="2"/>
+</mex>
+</mex>
+<n32 lb="67" cb="27">
+<n45 lb="67" cb="27"/>
+</n32>
+</xop>
+<xop lb="68" cb="2" le="68" ce="22" kind="=">
+<mex lb="68" cb="2" le="68" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_58a843c920f0e35bd64e77878eaf0f12" nm="MiscFlags" point="1">
+<mex lb="68" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="68" cb="2"/>
+</mex>
+</mex>
+<n32 lb="68" cb="22">
+<n45 lb="68" cb="22"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="SetWidth" id="e799e162f60e77ebea88b604a3ffbc9c_9713b06809ee435d53507ffb9c5256f9" file="1" linestart="71" lineend="74" previous="975318529b26a88f429292f70a1a44f6_9713b06809ee435d53507ffb9c5256f9" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="72" cb="1" le="74" ce="1">
+<xop lb="73" cb="2" le="73" ce="18" kind="=">
+<mex lb="73" cb="2" le="73" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_997c139aedbd308b84f5eccdae7d0d5e" nm="Width" point="1">
+<mex lb="73" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="73" cb="2"/>
+</mex>
+</mex>
+<n32 lb="73" cb="18">
+<drx lb="73" cb="18" kind="lvalue" nm="state"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="SetHeight" id="e799e162f60e77ebea88b604a3ffbc9c_812703db1def11509f6a03c787908ab3" file="1" linestart="76" lineend="79" previous="975318529b26a88f429292f70a1a44f6_812703db1def11509f6a03c787908ab3" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="77" cb="1" le="79" ce="1">
+<xop lb="78" cb="2" le="78" ce="19" kind="=">
+<mex lb="78" cb="2" le="78" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_e20899bb53bfcf8a4cf0661d4cca61ce" nm="Height" point="1">
+<mex lb="78" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="78" cb="2"/>
+</mex>
+</mex>
+<n32 lb="78" cb="19">
+<drx lb="78" cb="19" kind="lvalue" nm="state"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="SetMipLevels" id="e799e162f60e77ebea88b604a3ffbc9c_8fb271ba6c62ab4caff12789aac9aca4" file="1" linestart="81" lineend="84" previous="975318529b26a88f429292f70a1a44f6_8fb271ba6c62ab4caff12789aac9aca4" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="82" cb="1" le="84" ce="1">
+<xop lb="83" cb="2" le="83" ce="22" kind="=">
+<mex lb="83" cb="2" le="83" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_57c66c46df555abea69b3790189c5325" nm="MipLevels" point="1">
+<mex lb="83" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="83" cb="2"/>
+</mex>
+</mex>
+<n32 lb="83" cb="22">
+<drx lb="83" cb="22" kind="lvalue" nm="state"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="SetArraySize" id="e799e162f60e77ebea88b604a3ffbc9c_61e3242ef19289e66da6e625cabdfa13" file="1" linestart="86" lineend="89" previous="975318529b26a88f429292f70a1a44f6_61e3242ef19289e66da6e625cabdfa13" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="87" cb="1" le="89" ce="1">
+<xop lb="88" cb="2" le="88" ce="22" kind="=">
+<mex lb="88" cb="2" le="88" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_0313d581e6aa05a871da5bd4fa673262" nm="ArraySize" point="1">
+<mex lb="88" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="88" cb="2"/>
+</mex>
+</mex>
+<n32 lb="88" cb="22">
+<drx lb="88" cb="22" kind="lvalue" nm="state"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="SetFormat" id="e799e162f60e77ebea88b604a3ffbc9c_3f0bb8f0cd65c882886956c48376e2be" file="1" linestart="91" lineend="94" previous="975318529b26a88f429292f70a1a44f6_3f0bb8f0cd65c882886956c48376e2be" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="DXGI_FORMAT" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<et>
+<e id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf"/>
+</et>
+</ety>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="92" cb="1" le="94" ce="1">
+<xop lb="93" cb="2" le="93" ce="19" kind="=">
+<mex lb="93" cb="2" le="93" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_cb9eafc36a265c735f2e3f8c7609870f" nm="Format" point="1">
+<mex lb="93" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="93" cb="2"/>
+</mex>
+</mex>
+<n32 lb="93" cb="19">
+<drx lb="93" cb="19" kind="lvalue" nm="state"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="SetSampleDesc" id="e799e162f60e77ebea88b604a3ffbc9c_80656a7529028ec3ef89ac774158d7dc" file="1" linestart="96" lineend="99" previous="975318529b26a88f429292f70a1a44f6_80656a7529028ec3ef89ac774158d7dc" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="DXGI_SAMPLE_DESC" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<rt>
+<cr id="e12bff9b09ae6113a2391c345f90b0fc_452901a4152b6048815b24ee8d5fcda9"/>
+</rt>
+</ety>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="97" cb="1" le="99" ce="1">
+<ocx lb="98" cb="2" le="98" ce="23" nbparm="2" id="e12bff9b09ae6113a2391c345f90b0fc_0d3c50a06188a9a689db0e2d89534249">
+<exp pvirg="true"/>
+<n32 lb="98" cb="21">
+<drx lb="98" cb="21" kind="lvalue" id="e12bff9b09ae6113a2391c345f90b0fc_0d3c50a06188a9a689db0e2d89534249" nm="operator="/>
+</n32>
+<mex lb="98" cb="2" le="98" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_ec961e28985eb83baaa92378f561ff9e" nm="SampleDesc" point="1">
+<mex lb="98" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="98" cb="2"/>
+</mex>
+</mex>
+<n32 lb="98" cb="23">
+<drx lb="98" cb="23" kind="lvalue" nm="state"/>
+</n32>
+</ocx>
+</u>
+
+</Stmt>
+</m>
+<m name="SetUsage" id="e799e162f60e77ebea88b604a3ffbc9c_3d5870bb07f2d0f8efef7e1c52f3bddf" file="1" linestart="101" lineend="104" previous="975318529b26a88f429292f70a1a44f6_3d5870bb07f2d0f8efef7e1c52f3bddf" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="D3D11_USAGE" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<et>
+<e id="937c62aeccd23cb28e89e33bdd7d6017_c63ab4507803b63a73795ef6d82a8404"/>
+</et>
+</ety>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="102" cb="1" le="104" ce="1">
+<xop lb="103" cb="2" le="103" ce="18" kind="=">
+<mex lb="103" cb="2" le="103" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_4f639e4d1ac3a16b6f26ffe26cd1b3f4" nm="Usage" point="1">
+<mex lb="103" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="103" cb="2"/>
+</mex>
+</mex>
+<n32 lb="103" cb="18">
+<drx lb="103" cb="18" kind="lvalue" nm="state"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="SetBindFlags" id="e799e162f60e77ebea88b604a3ffbc9c_ecbf3dce149865b75189957e5c180558" file="1" linestart="106" lineend="109" previous="975318529b26a88f429292f70a1a44f6_ecbf3dce149865b75189957e5c180558" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="107" cb="1" le="109" ce="1">
+<xop lb="108" cb="2" le="108" ce="22" kind="=">
+<mex lb="108" cb="2" le="108" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_01e1ca71b5925d0714cd2c342dcf370b" nm="BindFlags" point="1">
+<mex lb="108" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="108" cb="2"/>
+</mex>
+</mex>
+<n32 lb="108" cb="22">
+<drx lb="108" cb="22" kind="lvalue" nm="state"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="SetCPUAccessFlags" id="e799e162f60e77ebea88b604a3ffbc9c_84c42c80725582e010fbbd68d24288c3" file="1" linestart="111" lineend="114" previous="975318529b26a88f429292f70a1a44f6_84c42c80725582e010fbbd68d24288c3" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="112" cb="1" le="114" ce="1">
+<xop lb="113" cb="2" le="113" ce="27" kind="=">
+<mex lb="113" cb="2" le="113" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_b4725010801a68137952a300b3b3535d" nm="CPUAccessFlags" point="1">
+<mex lb="113" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="113" cb="2"/>
+</mex>
+</mex>
+<n32 lb="113" cb="27">
+<drx lb="113" cb="27" kind="lvalue" nm="state"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="SetMiscFlags" id="e799e162f60e77ebea88b604a3ffbc9c_cfa3160054319110fafc01cdf443abc3" file="1" linestart="116" lineend="119" previous="975318529b26a88f429292f70a1a44f6_cfa3160054319110fafc01cdf443abc3" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="state" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<Stmt>
+<u lb="117" cb="1" le="119" ce="1">
+<xop lb="118" cb="2" le="118" ce="22" kind="=">
+<mex lb="118" cb="2" le="118" ce="10" kind="lvalue" id="937c62aeccd23cb28e89e33bdd7d6017_58a843c920f0e35bd64e77878eaf0f12" nm="MiscFlags" point="1">
+<mex lb="118" cb="2" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="118" cb="2"/>
+</mex>
+</mex>
+<n32 lb="118" cb="22">
+<drx lb="118" cb="22" kind="lvalue" nm="state"/>
+</n32>
+</xop>
+</u>
+
+</Stmt>
+</m>
+<m name="GetTextureDesc" id="e799e162f60e77ebea88b604a3ffbc9c_530aea2f99acb9bb53cfa21e2a091dd7" file="1" linestart="121" lineend="124" previous="975318529b26a88f429292f70a1a44f6_530aea2f99acb9bb53cfa21e2a091dd7" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEXTURE2D_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</fpt>
+<Stmt>
+<u lb="122" cb="1" le="124" ce="1">
+<rx lb="123" cb="2" le="123" ce="18" pvirg="true">
+<n10 lb="123" cb="8" le="123" ce="18">
+<typeptr id="937c62aeccd23cb28e89e33bdd7d6017_5e1920fdd15926a1093037671e966023"/>
+<temp/>
+<n32 lb="123" cb="8" le="123" ce="18">
+<n46 lb="123" cb="8" le="123" ce="18">
+<exp pvirg="true"/>
+<mex lb="123" cb="10" kind="lvalue" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" nm="m_State" arrow="1">
+<n19 lb="123" cb="10"/>
+</mex>
+</n46>
+</n32>
+</n10>
+</rx>
+</u>
+
+</Stmt>
+</m>
+</tun>
+</Root>

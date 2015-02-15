@@ -1,0 +1,676 @@
+<Root>
+<Comments>
+<c f="1" b="1" e="1"/>
+<c f="1" b="2" e="2"/>
+<c f="1" b="3" e="3"/>
+<c f="1" b="4" e="4"/>
+<c f="1" b="5" e="5"/>
+<c f="1" b="6" e="6"/>
+<c f="1" b="7" e="7"/>
+<c f="1" b="8" e="8"/>
+<c f="1" b="9" e="8"/>
+<c f="1" b="11" e="11"/>
+<c f="1" b="12" e="11"/>
+<c f="1" b="13" e="13"/>
+<c f="1" b="14" e="13"/>
+<c f="1" b="18" e="18"/>
+<c f="1" b="19" e="18"/>
+<c f="1" b="22" e="22"/>
+<c f="1" b="23" e="22"/>
+<c f="1" b="27" e="27"/>
+<c f="1" b="28" e="27"/>
+<c f="1" b="32" e="32"/>
+<c f="1" b="33" e="32"/>
+<c f="1" b="37" e="37"/>
+<c f="1" b="38" e="37"/>
+<c f="1" b="42" e="42"/>
+<c f="1" b="43" e="42"/>
+<c f="1" b="43" e="43"/>
+<c f="1" b="44" e="43"/>
+<c f="1" b="50" e="50"/>
+<c f="1" b="51" e="50"/>
+<c f="1" b="51" e="51"/>
+<c f="1" b="52" e="51"/>
+<c f="1" b="58" e="58"/>
+<c f="1" b="59" e="58"/>
+<c f="1" b="59" e="59"/>
+<c f="1" b="60" e="59"/>
+<c f="1" b="66" e="66"/>
+<c f="1" b="67" e="66"/>
+<c f="1" b="67" e="67"/>
+<c f="1" b="68" e="67"/>
+<c f="1" b="74" e="74"/>
+<c f="1" b="75" e="74"/>
+<c f="1" b="75" e="75"/>
+<c f="1" b="76" e="75"/>
+</Comments>
+<Macros>
+<m f="1" bl="45" bc="20" el="45" ec="20"/>
+<m f="1" bl="53" bc="20" el="53" ec="20"/>
+<m f="1" bl="61" bc="20" el="61" ec="20"/>
+<m f="1" bl="69" bc="20" el="69" ec="20"/>
+<m f="1" bl="77" bc="20" el="77" ec="20"/>
+</Macros>
+<Comments>
+<c f="2" b="1" e="1"/>
+<c f="2" b="2" e="2"/>
+<c f="2" b="3" e="3"/>
+<c f="2" b="4" e="4"/>
+<c f="2" b="5" e="5"/>
+<c f="2" b="6" e="6"/>
+<c f="2" b="7" e="7"/>
+<c f="2" b="8" e="8"/>
+<c f="2" b="9" e="8"/>
+<c f="2" b="11" e="11"/>
+<c f="2" b="12" e="11"/>
+<c f="2" b="13" e="13"/>
+<c f="2" b="14" e="13"/>
+<c f="2" b="27" e="27"/>
+<c f="2" b="28" e="27"/>
+<c f="2" b="28" e="28"/>
+<c f="2" b="29" e="28"/>
+<c f="2" b="29" e="29"/>
+<c f="2" b="30" e="29"/>
+<c f="2" b="30" e="30"/>
+<c f="2" b="31" e="30"/>
+<c f="2" b="31" e="31"/>
+<c f="2" b="32" e="31"/>
+<c f="2" b="35" e="35"/>
+<c f="2" b="36" e="35"/>
+</Comments>
+<Macros/>
+<tun>
+<ns name="Arkeng" id="b7f280a603c7b553db7a123703854a8e_3c3972cc97a7bba367d9b9e52bee78f4" file="2" linestart="14" lineend="34" original="">
+<cr namespace="Arkeng" access="none" depth="2" kind="class" name="EWindowResize" id="b7f280a603c7b553db7a123703854a8e_95f5cd21c5caebcb79dbdaffeee04ee6" file="2" linestart="16" lineend="32">
+<base access="public">
+<rt>
+<cr id="2732a5c0fbebd57a1451b898ea8ee72e_14b494cd92671fd4b61cd29c00495576"/>
+</rt>
+</base>
+<cr access="public" kind="class" name="EWindowResize" id="b7f280a603c7b553db7a123703854a8e_14efebeb856ab37603dbe18493749abd" file="2" linestart="16" lineend="16"/>
+<Decl access="public"/>
+<c name="EWindowResize" id="b7f280a603c7b553db7a123703854a8e_fe08fd65ba774a37d77f54bf1e48c7db" file="2" linestart="19" lineend="19" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="hwnd" proto="HWND" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="f8c7bb7766b7ee6e6614d6ac86f6c998_5847ad6971421591ff7da5abaa1ba10e"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="wparam" proto="unsigned int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="unsigned int"/>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="lparam" proto="long" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="long"/>
+<Stmt>
+
+</Stmt>
+</p>
+</c>
+<d name="~EWindowResize" id="b7f280a603c7b553db7a123703854a8e_e86b6205d37a07ea02554bae35b5f5d0" file="2" linestart="20" lineend="20" virtual="true" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</d>
+<m name="GetEventName" id="b7f280a603c7b553db7a123703854a8e_410955119fe4c05f1d1206b9ff37bfd3" file="2" linestart="22" lineend="22" virtual="true" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="std::wstring">
+<ety>
+<Tdef>
+<tss>
+<templatebase id="9dee112e4a6fea24ef9a3716860c428f_6ecc822215ca97386606c5e8e95c56fb"/>
+<template_arguments>
+<bt name="wchar_t"/>
+<tss>
+<templatebase id="3c123fd929b65516fb618c95fb096637_bf3447e13ccfc57e5fa847f5d78e7639"/>
+<template_arguments>
+<bt name="wchar_t"/>
+</template_arguments>
+</tss>
+<tss>
+<templatebase id="69514fbdf49e9f7e95574496d2c38810_07566aa809aee0bdf1c0fac16e19fa85"/>
+<template_arguments>
+<bt name="wchar_t"/>
+</template_arguments>
+</tss>
+</template_arguments>
+</tss>
+</Tdef>
+</ety>
+</fpt>
+</m>
+<m name="GetEventType" id="b7f280a603c7b553db7a123703854a8e_3cc544a98102781d9a0edaecf06b4767" file="2" linestart="23" lineend="23" virtual="true" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="Arkeng::eEvent">
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</fpt>
+</m>
+<m name="NewWidth" id="b7f280a603c7b553db7a123703854a8e_e7f4bd8612a85daccce9a629d742a5e1" file="2" linestart="25" lineend="25" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="int">
+<bt name="int"/>
+</fpt>
+</m>
+<m name="NewHeight" id="b7f280a603c7b553db7a123703854a8e_1fcdf2abc439b7e46788675a9605a996" file="2" linestart="26" lineend="26" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="int">
+<bt name="int"/>
+</fpt>
+</m>
+<m name="IsMaxHide" id="b7f280a603c7b553db7a123703854a8e_1e0e052255f954c5967e227cace7fb30" file="2" linestart="27" lineend="27" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+</m>
+<m name="IsMaximized" id="b7f280a603c7b553db7a123703854a8e_89a84cf2c9e2ab0d8512a0376cede42b" file="2" linestart="28" lineend="28" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+</m>
+<m name="IsMaxShow" id="b7f280a603c7b553db7a123703854a8e_142f1a931c504941b2e9675d73214119" file="2" linestart="29" lineend="29" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+</m>
+<m name="IsMinimized" id="b7f280a603c7b553db7a123703854a8e_7396a0eeb86d04447da07c32ec6fb1bd" file="2" linestart="30" lineend="30" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+</m>
+<m name="IsRestored" id="b7f280a603c7b553db7a123703854a8e_f44d87ed80a472b6a4734bdf8e651486" file="2" linestart="31" lineend="31" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+</m>
+<m name="operator=" id="b7f280a603c7b553db7a123703854a8e_0b6e4b833f8708740a7d6a44a944fa7f" file="2" linestart="16" implicit="true" operator="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="Arkeng::EWindowResize &amp;">
+<lrf>
+<rt>
+<cr id="b7f280a603c7b553db7a123703854a8e_95f5cd21c5caebcb79dbdaffeee04ee6"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const Arkeng::EWindowResize &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="b7f280a603c7b553db7a123703854a8e_95f5cd21c5caebcb79dbdaffeee04ee6"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<c name="EWindowResize" id="b7f280a603c7b553db7a123703854a8e_77b37c372463a2ddabdd4b24668c2994" file="2" linestart="16" lineend="16" copyconst="true" implicit="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="const Arkeng::EWindowResize &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="b7f280a603c7b553db7a123703854a8e_95f5cd21c5caebcb79dbdaffeee04ee6"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</c>
+</cr>
+<tyd name="EWindowResizePtr" id="b7f280a603c7b553db7a123703854a8e_c782db511fee4b5b2bd097727354b745" file="2" linestart="33" lineend="33">
+<ety>
+<tss>
+<templatebase id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493"/>
+<template_arguments>
+<rt>
+<cr id="b7f280a603c7b553db7a123703854a8e_95f5cd21c5caebcb79dbdaffeee04ee6"/>
+</rt>
+</template_arguments>
+</tss>
+</ety>
+</tyd>
+</ns>
+<Decl/>
+<NamedDecl name="&lt;using-directive&gt;" id="3ed5e2dcc086447e532877cfbb66bf9b_6728b6b0f829183eb7bbd3d3d987c87d" file="1" linestart="12" lineend="12"/>
+<c name="EWindowResize" id="3ed5e2dcc086447e532877cfbb66bf9b_fe08fd65ba774a37d77f54bf1e48c7db" file="1" linestart="14" lineend="17" previous="b7f280a603c7b553db7a123703854a8e_fe08fd65ba774a37d77f54bf1e48c7db" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="hwnd" proto="HWND" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="f8c7bb7766b7ee6e6614d6ac86f6c998_5847ad6971421591ff7da5abaa1ba10e"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="wparam" proto="unsigned int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="unsigned int"/>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="lparam" proto="long" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="long"/>
+<Stmt>
+
+</Stmt>
+</p>
+<BaseInit>
+<n10 lb="15" cb="4" le="15" ce="30">
+<typeptr id="2732a5c0fbebd57a1451b898ea8ee72e_8c89e66224f35d5f10a1149879b662a6"/>
+<temp/>
+<n32 lb="15" cb="12">
+<drx lb="15" cb="12" kind="lvalue" nm="hwnd"/>
+</n32>
+<n32 lb="15" cb="17">
+<drx lb="15" cb="17" kind="lvalue" nm="wparam"/>
+</n32>
+<n32 lb="15" cb="24">
+<drx lb="15" cb="24" kind="lvalue" nm="lparam"/>
+</n32>
+</n10>
+
+</BaseInit>
+<Stmt>
+<u lb="16" cb="1" le="17" ce="1"/>
+
+</Stmt>
+</c>
+<d name="~EWindowResize" id="3ed5e2dcc086447e532877cfbb66bf9b_e86b6205d37a07ea02554bae35b5f5d0" file="1" linestart="19" lineend="21" previous="b7f280a603c7b553db7a123703854a8e_e86b6205d37a07ea02554bae35b5f5d0" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<Stmt>
+<u lb="20" cb="1" le="21" ce="1"/>
+
+</Stmt>
+</d>
+<m name="GetEventName" id="3ed5e2dcc086447e532877cfbb66bf9b_410955119fe4c05f1d1206b9ff37bfd3" file="1" linestart="23" lineend="26" previous="b7f280a603c7b553db7a123703854a8e_410955119fe4c05f1d1206b9ff37bfd3" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="std::wstring">
+<ety>
+<Tdef>
+<tss>
+<templatebase id="9dee112e4a6fea24ef9a3716860c428f_6ecc822215ca97386606c5e8e95c56fb"/>
+<template_arguments>
+<bt name="wchar_t"/>
+<tss>
+<templatebase id="3c123fd929b65516fb618c95fb096637_bf3447e13ccfc57e5fa847f5d78e7639"/>
+<template_arguments>
+<bt name="wchar_t"/>
+</template_arguments>
+</tss>
+<tss>
+<templatebase id="69514fbdf49e9f7e95574496d2c38810_07566aa809aee0bdf1c0fac16e19fa85"/>
+<template_arguments>
+<bt name="wchar_t"/>
+</template_arguments>
+</tss>
+</template_arguments>
+</tss>
+</Tdef>
+</ety>
+</fpt>
+<Stmt>
+<u lb="24" cb="1" le="26" ce="1">
+<rx lb="25" cb="2" le="25" ce="39" pvirg="true">
+<n37 lb="25" cb="9" le="25" ce="39">
+<n10 lb="25" cb="9" le="25" ce="39">
+<typeptr id="9dee112e4a6fea24ef9a3716860c428f_e3eb16c4c3462a2d9004e988dec04a31">
+<template_arguments>
+<bt name="wchar_t"/>
+<rt>
+<cts id="3c123fd929b65516fb618c95fb096637_7d637fda5b9c2af11eaf2c7631b154c8">
+<template_arguments>
+<bt name="wchar_t"/>
+</template_arguments>
+</cts>
+</rt>
+<rt>
+<cts id="3c123fd929b65516fb618c95fb096637_07566aa809aee0bdf1c0fac16e19fa85">
+<template_arguments>
+<bt name="wchar_t"/>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</typeptr>
+<temp/>
+<mte lb="25" cb="9" le="25" ce="39">
+<exp pvirg="true"/>
+<n26 lb="25" cb="9" le="25" ce="39">
+<n8 lb="25" cb="9" le="25" ce="22" >
+<temp/>
+<n10 lb="25" cb="9" le="25" ce="22">
+<typeptr id="9dee112e4a6fea24ef9a3716860c428f_27c29e5ae4008e8e02d1117a50805d4f">
+<template_arguments>
+<bt name="wchar_t"/>
+<rt>
+<cts id="3c123fd929b65516fb618c95fb096637_7d637fda5b9c2af11eaf2c7631b154c8">
+<template_arguments>
+<bt name="wchar_t"/>
+</template_arguments>
+</cts>
+</rt>
+<rt>
+<cts id="3c123fd929b65516fb618c95fb096637_07566aa809aee0bdf1c0fac16e19fa85">
+<template_arguments>
+<bt name="wchar_t"/>
+</template_arguments>
+</cts>
+</rt>
+</template_arguments>
+</typeptr>
+<temp/>
+<n32 lb="25" cb="22">
+<n52 lb="25" cb="22">
+<slit/>
+</n52>
+</n32>
+</n10>
+</n8>
+</n26>
+</mte>
+</n10>
+</n37>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="GetEventType" id="3ed5e2dcc086447e532877cfbb66bf9b_3cc544a98102781d9a0edaecf06b4767" file="1" linestart="28" lineend="31" previous="b7f280a603c7b553db7a123703854a8e_3cc544a98102781d9a0edaecf06b4767" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="Arkeng::eEvent">
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</fpt>
+<Stmt>
+<u lb="29" cb="1" le="31" ce="1">
+<rx lb="30" cb="2" le="30" ce="9" pvirg="true">
+<drx lb="30" cb="9" id="58f82f4eec22bfb601914dffe03912bb_0b5060d589bf3ced174f9564dc47ab77" nm="WINDOW_RESIZE"/>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="NewWidth" id="3ed5e2dcc086447e532877cfbb66bf9b_e7f4bd8612a85daccce9a629d742a5e1" file="1" linestart="33" lineend="36" previous="b7f280a603c7b553db7a123703854a8e_e7f4bd8612a85daccce9a629d742a5e1" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="int">
+<bt name="int"/>
+</fpt>
+<Stmt>
+<u lb="34" cb="1" le="36" ce="1">
+<rx lb="35" cb="2" le="35" ce="29" pvirg="true">
+<n32 lb="35" cb="8" le="35" ce="29">
+<n46 lb="35" cb="8" le="35" ce="29">
+<exp pvirg="true"/>
+<xop lb="35" cb="10" le="35" ce="22" kind="&amp;">
+<n32 lb="35" cb="10">
+<mex lb="35" cb="10" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_aac2d9319f29ee9db0e67679264c2d40" nm="m_iLParam" arrow="1">
+<n32 lb="35" cb="10">
+<n19 lb="35" cb="10"/>
+</n32>
+</mex>
+</n32>
+<n32 lb="35" cb="22">
+<n45 lb="35" cb="22">
+<flit/>
+</n45>
+</n32>
+</xop>
+</n46>
+</n32>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="NewHeight" id="3ed5e2dcc086447e532877cfbb66bf9b_1fcdf2abc439b7e46788675a9605a996" file="1" linestart="38" lineend="41" previous="b7f280a603c7b553db7a123703854a8e_1fcdf2abc439b7e46788675a9605a996" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="int">
+<bt name="int"/>
+</fpt>
+<Stmt>
+<u lb="39" cb="1" le="41" ce="1">
+<rx lb="40" cb="2" le="40" ce="43" pvirg="true">
+<n32 lb="40" cb="8" le="40" ce="43">
+<n46 lb="40" cb="8" le="40" ce="43">
+<exp pvirg="true"/>
+<xop lb="40" cb="10" le="40" ce="40" kind="&gt;&gt;">
+<n46 lb="40" cb="10" le="40" ce="35">
+<exp pvirg="true"/>
+<xop lb="40" cb="12" le="40" ce="24" kind="&amp;">
+<n32 lb="40" cb="12">
+<mex lb="40" cb="12" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_aac2d9319f29ee9db0e67679264c2d40" nm="m_iLParam" arrow="1">
+<n32 lb="40" cb="12">
+<n19 lb="40" cb="12"/>
+</n32>
+</mex>
+</n32>
+<n45 lb="40" cb="24">
+<flit/>
+</n45>
+</xop>
+</n46>
+<n45 lb="40" cb="40">
+<flit/>
+</n45>
+</xop>
+</n46>
+</n32>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="IsMaxHide" id="3ed5e2dcc086447e532877cfbb66bf9b_1e0e052255f954c5967e227cace7fb30" file="1" linestart="43" lineend="49" previous="b7f280a603c7b553db7a123703854a8e_1e0e052255f954c5967e227cace7fb30" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<Stmt>
+<u lb="44" cb="1" le="49" ce="1">
+<if lb="45" cb="2" le="48" ce="17" else="true" elselb="48" elsecb="3">
+<xop lb="45" cb="7" le="45" ce="20" kind="==">
+<n32 lb="45" cb="7">
+<mex lb="45" cb="7" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_4de57197c2f9b231f5f09d16279d6fcf" nm="m_iWParam" arrow="1">
+<n32 lb="45" cb="7">
+<n19 lb="45" cb="7"/>
+</n32>
+</mex>
+</n32>
+<n32 lb="45" cb="20">
+<n45 lb="45" cb="20">
+<flit/>
+</n45>
+</n32>
+</xop>
+<rx lb="46" cb="3" le="46" ce="16" pvirg="true">
+<n46 lb="46" cb="9" le="46" ce="16">
+<exp pvirg="true"/>
+<n9 lb="46" cb="11"/>
+</n46>
+</rx>
+<rx lb="48" cb="3" le="48" ce="17" pvirg="true">
+<n46 lb="48" cb="9" le="48" ce="17">
+<exp pvirg="true"/>
+<n9 lb="48" cb="11"/>
+</n46>
+</rx>
+</if>
+</u>
+
+</Stmt>
+</m>
+<m name="IsMaximized" id="3ed5e2dcc086447e532877cfbb66bf9b_89a84cf2c9e2ab0d8512a0376cede42b" file="1" linestart="51" lineend="57" previous="b7f280a603c7b553db7a123703854a8e_89a84cf2c9e2ab0d8512a0376cede42b" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<Stmt>
+<u lb="52" cb="1" le="57" ce="1">
+<if lb="53" cb="2" le="56" ce="17" else="true" elselb="56" elsecb="3">
+<xop lb="53" cb="7" le="53" ce="20" kind="==">
+<n32 lb="53" cb="7">
+<mex lb="53" cb="7" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_4de57197c2f9b231f5f09d16279d6fcf" nm="m_iWParam" arrow="1">
+<n32 lb="53" cb="7">
+<n19 lb="53" cb="7"/>
+</n32>
+</mex>
+</n32>
+<n32 lb="53" cb="20">
+<n45 lb="53" cb="20">
+<flit/>
+</n45>
+</n32>
+</xop>
+<rx lb="54" cb="3" le="54" ce="16" pvirg="true">
+<n46 lb="54" cb="9" le="54" ce="16">
+<exp pvirg="true"/>
+<n9 lb="54" cb="11"/>
+</n46>
+</rx>
+<rx lb="56" cb="3" le="56" ce="17" pvirg="true">
+<n46 lb="56" cb="9" le="56" ce="17">
+<exp pvirg="true"/>
+<n9 lb="56" cb="11"/>
+</n46>
+</rx>
+</if>
+</u>
+
+</Stmt>
+</m>
+<m name="IsMaxShow" id="3ed5e2dcc086447e532877cfbb66bf9b_142f1a931c504941b2e9675d73214119" file="1" linestart="59" lineend="65" previous="b7f280a603c7b553db7a123703854a8e_142f1a931c504941b2e9675d73214119" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<Stmt>
+<u lb="60" cb="1" le="65" ce="1">
+<if lb="61" cb="2" le="64" ce="17" else="true" elselb="64" elsecb="3">
+<xop lb="61" cb="7" le="61" ce="20" kind="==">
+<n32 lb="61" cb="7">
+<mex lb="61" cb="7" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_4de57197c2f9b231f5f09d16279d6fcf" nm="m_iWParam" arrow="1">
+<n32 lb="61" cb="7">
+<n19 lb="61" cb="7"/>
+</n32>
+</mex>
+</n32>
+<n32 lb="61" cb="20">
+<n45 lb="61" cb="20">
+<flit/>
+</n45>
+</n32>
+</xop>
+<rx lb="62" cb="3" le="62" ce="16" pvirg="true">
+<n46 lb="62" cb="9" le="62" ce="16">
+<exp pvirg="true"/>
+<n9 lb="62" cb="11"/>
+</n46>
+</rx>
+<rx lb="64" cb="3" le="64" ce="17" pvirg="true">
+<n46 lb="64" cb="9" le="64" ce="17">
+<exp pvirg="true"/>
+<n9 lb="64" cb="11"/>
+</n46>
+</rx>
+</if>
+</u>
+
+</Stmt>
+</m>
+<m name="IsMinimized" id="3ed5e2dcc086447e532877cfbb66bf9b_7396a0eeb86d04447da07c32ec6fb1bd" file="1" linestart="67" lineend="73" previous="b7f280a603c7b553db7a123703854a8e_7396a0eeb86d04447da07c32ec6fb1bd" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<Stmt>
+<u lb="68" cb="1" le="73" ce="1">
+<if lb="69" cb="2" le="72" ce="17" else="true" elselb="72" elsecb="3">
+<xop lb="69" cb="7" le="69" ce="20" kind="==">
+<n32 lb="69" cb="7">
+<mex lb="69" cb="7" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_4de57197c2f9b231f5f09d16279d6fcf" nm="m_iWParam" arrow="1">
+<n32 lb="69" cb="7">
+<n19 lb="69" cb="7"/>
+</n32>
+</mex>
+</n32>
+<n32 lb="69" cb="20">
+<n45 lb="69" cb="20">
+<flit/>
+</n45>
+</n32>
+</xop>
+<rx lb="70" cb="3" le="70" ce="16" pvirg="true">
+<n46 lb="70" cb="9" le="70" ce="16">
+<exp pvirg="true"/>
+<n9 lb="70" cb="11"/>
+</n46>
+</rx>
+<rx lb="72" cb="3" le="72" ce="17" pvirg="true">
+<n46 lb="72" cb="9" le="72" ce="17">
+<exp pvirg="true"/>
+<n9 lb="72" cb="11"/>
+</n46>
+</rx>
+</if>
+</u>
+
+</Stmt>
+</m>
+<m name="IsRestored" id="3ed5e2dcc086447e532877cfbb66bf9b_f44d87ed80a472b6a4734bdf8e651486" file="1" linestart="75" lineend="81" previous="b7f280a603c7b553db7a123703854a8e_f44d87ed80a472b6a4734bdf8e651486" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<Stmt>
+<u lb="76" cb="1" le="81" ce="1">
+<if lb="77" cb="2" le="80" ce="17" else="true" elselb="80" elsecb="3">
+<xop lb="77" cb="7" le="77" ce="20" kind="==">
+<n32 lb="77" cb="7">
+<mex lb="77" cb="7" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_4de57197c2f9b231f5f09d16279d6fcf" nm="m_iWParam" arrow="1">
+<n32 lb="77" cb="7">
+<n19 lb="77" cb="7"/>
+</n32>
+</mex>
+</n32>
+<n32 lb="77" cb="20">
+<n45 lb="77" cb="20">
+<flit/>
+</n45>
+</n32>
+</xop>
+<rx lb="78" cb="3" le="78" ce="16" pvirg="true">
+<n46 lb="78" cb="9" le="78" ce="16">
+<exp pvirg="true"/>
+<n9 lb="78" cb="11"/>
+</n46>
+</rx>
+<rx lb="80" cb="3" le="80" ce="17" pvirg="true">
+<n46 lb="80" cb="9" le="80" ce="17">
+<exp pvirg="true"/>
+<n9 lb="80" cb="11"/>
+</n46>
+</rx>
+</if>
+</u>
+
+</Stmt>
+</m>
+</tun>
+</Root>

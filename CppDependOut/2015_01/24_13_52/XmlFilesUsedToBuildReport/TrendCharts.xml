@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<TrendCharts>
+  <TrendChart><![CDATA[
+
+<hr/>
+<div id='chart0' class='chart'>
+    <h4>Lines of Code</h4>
+</div>
+<hr/>
+<div id='chart1' class='chart'>
+    <h4>Rules Violated</h4>
+</div>
+<hr/>
+<div id='chart2' class='chart'>
+    <h4>Rules Violations</h4>
+</div>
+<hr/>
+<div id='chart3' class='chart'>
+    <h4>Max</h4>
+</div>
+<hr/>
+<div id='chart4' class='chart'>
+    <h4>Average</h4>
+</div>
+<hr/>
+<div id='chart5' class='chart'>
+    <h4>Third-Party Usage</h4>
+</div>
+
+
+<script>
+var ChartData0 = {
+ChartLabels: [
+    ['date', "Date"],
+    ['x0',"# Lines of Code",'line'],
+    ['x1',"# Lines of Code (NotMyCode)",'area'],
+    ['x2',"# Lines of Comments",'line'],
+    ['tooltip',"Version"]
+],
+ChartValues: [
+    {date: new Date(2015,0,24,13,51,43),
+    x0: 551,
+    x1: 0,
+    x2: 266,
+    tooltip: "v1.0",
+    annotation: "v1.0"},
+    {date: new Date(2015,0,24,13,52,43),
+    x0: 551,
+    x1: 0,
+    x2: 266,
+    tooltip: "v1.0"},
+]
+};
+var ChartData1 = {
+ChartLabels: [
+    ['date', "Date"],
+    ['x0',"# Rules",'line'],
+    ['x1',"# Rules Violated",'area'],
+    ['x2',"# Critical Rules Violated",'area'],
+    ['tooltip',"Version"]
+],
+ChartValues: [
+    {date: new Date(2015,0,24,13,51,43),
+    x0: 73,
+    x1: 24,
+    x2: 0,
+    tooltip: "v1.0",
+    annotation: "v1.0"},
+    {date: new Date(2015,0,24,13,52,43),
+    x0: 73,
+    x1: 24,
+    x2: 0,
+    tooltip: "v1.0"},
+]
+};
+var ChartData2 = {
+ChartLabels: [
+    ['date', "Date"],
+    ['x0',"# Rules Violations",'area'],
+    ['x1',"# Critical Rules Violations",'area'],
+    ['tooltip',"Version"]
+],
+ChartValues: [
+    {date: new Date(2015,0,24,13,51,43),
+    x0: 250,
+    x1: 0,
+    tooltip: "v1.0",
+    annotation: "v1.0"},
+    {date: new Date(2015,0,24,13,52,43),
+    x0: 250,
+    x1: 0,
+    tooltip: "v1.0"},
+]
+};
+var ChartData3 = {
+ChartLabels: [
+    ['date', "Date"],
+    ['x0',"Max Cyclomatic Complexity for Methods",'line'],
+    ['x1',"Max Cyclomatic Complexity for Types",'line'],
+    ['x2',"Max # Lines of Code for Methods (JustMyCode)",'line'],
+    ['x3',"Max # of Methods for Types",'line'],
+    ['x4',"Max Nesting Depth for Methods",'line'],
+    ['tooltip',"Version"]
+],
+ChartValues: [
+    {date: new Date(2015,0,24,13,51,43),
+    x0: 7,
+    x1: 26,
+    x2: 34,
+    x3: 24,
+    x4: 5,
+    tooltip: "v1.0",
+    annotation: "v1.0"},
+    {date: new Date(2015,0,24,13,52,43),
+    x0: 7,
+    x1: 26,
+    x2: 34,
+    x3: 24,
+    x4: 5,
+    tooltip: "v1.0"},
+]
+};
+var ChartData4 = {
+ChartLabels: [
+    ['date', "Date"],
+    ['x0',"Average Cyclomatic Complexity for Methods",'line'],
+    ['x1',"Average Cyclomatic Complexity for Types",'line'],
+    ['x2',"Average # Lines of Code for Methods",'line'],
+    ['x3',"Average # Methods for Types",'line'],
+    ['x4',"Average Nesting Depth for Methods",'line'],
+    ['tooltip',"Version"]
+],
+ChartValues: [
+    {date: new Date(2015,0,24,13,51,43),
+    x0: 1.42,
+    x1: 13.29,
+    x2: 3.47,
+    x3: 9.77,
+    x4: 0.91,
+    tooltip: "v1.0",
+    annotation: "v1.0"},
+    {date: new Date(2015,0,24,13,52,43),
+    x0: 1.42,
+    x1: 13.29,
+    x2: 3.47,
+    x3: 9.77,
+    x4: 0.91,
+    tooltip: "v1.0"},
+]
+};
+var ChartData5 = {
+ChartLabels: [
+    ['date', "Date"],
+    ['x0',"# Third-Party Types Used",'line'],
+    ['x1',"# Third-Party Methods Used",'line'],
+    ['x2',"# Third-Party Projects Used  x 10",'line'],
+    ['x3',"# Third-Party Namespaces Used  x 10",'line'],
+    ['x4',"# Third-Party Fields Used  x 10",'line'],
+    ['tooltip',"Version"]
+],
+ChartValues: [
+    {date: new Date(2015,0,24,13,51,43),
+    x0: 88,
+    x1: 123,
+    x2: 20,
+    x3: 60,
+    x4: 1270,
+    tooltip: "v1.0",
+    annotation: "v1.0"},
+    {date: new Date(2015,0,24,13,52,43),
+    x0: 88,
+    x1: 123,
+    x2: 20,
+    x3: 60,
+    x4: 1270,
+    tooltip: "v1.0"},
+]
+};
+
+</script>
+
+
+<script>
+    (function ($) {
+        var MND3 = {
+            init: function (target, obj) {
+                if (!obj) {
+                    console.log('No data available');
+                    return false;
+                }
+
+                var data = obj.ChartValues;
+		        if(data.length == 0) {
+		            console.log('No data value available');
+                    return false;
+		        }
+
+                if (!MND3.initiated) {
+                   $(document).mousemove(function(event) {
+                      MND3.x = event.pageX;
+                      MND3.y = event.pageY;
+                   });
+                   MND3.initiated = 1;
+                }
+     
+                var labels = obj.ChartLabels;
+                var lines = [];
+
+                var minDate = data[0].date,
+                    maxDate = data[data.length - 1].date;
+
+                $(labels).each(function () {
+                    var exclude = ['date', 'tooltip', 'annotation'];
+                    if (exclude.indexOf(this[0]) === -1) {
+                        lines.push([this[0], this[2], data[0][this[0]]]);
+                    }
+                });
+
+                var minValue = data[0][lines[0][0]],
+                    maxValue = data[0][lines[0][0]];
+
+                var minDate = data[0]['date'],
+                    maxDate = data[0]['date'];
+
+                $(data).each(function () {
+                    var _this = this;
+                    $(lines).each(function () {
+                        var value = _this[this[0]];
+                        if (value < minValue) {
+                            minValue = value;
+                        }
+                        if (value > maxValue) {
+                            maxValue = value;
+                        }
+                        if (value > this[2]) {
+                            this[2] = value;
+                        }
+                    });
+                    var date = this['date'];
+                    if (date < minDate) {
+                       minDate = date;
+                    }
+                    if (date > maxDate) {
+                       maxDate = date;
+                    }
+                });
+
+                lines.sort(MND3.sortLayers);
+
+                var w = 620,
+                    h = 380,
+                    pl = 60,
+                    pr = 0,
+                    pb = 70,
+                    pt = 15,
+                    th = h + pt + pb,
+                    tw = w + pr + pl,
+                    y = d3.scale.linear().domain([minValue, maxValue]).range([h, 0]),
+                    x = d3.time.scale().domain([minDate, maxDate]).range([0, w]);
+
+                var vis = d3.select(target)
+                .data([data])
+                .append("svg:svg")
+                .attr("width", tw)
+                .attr("height", th)
+                .append("svg:g")
+                .attr("transform", "translate(" + pl + ", " + pt + ")");
+
+                target = $(target);
+                this.populateTooltip(labels, target);
+                this.populateDefinitions(labels, lines, target);
+
+                var text = vis.selectAll("text")
+                            .data(data)
+                            .enter()
+                            .append("text");
+
+                var versionCount = 0;
+
+                var textLabels = text
+                     .attr("x", function (d) { return x(d.date); })
+                     .attr("y", function (d) { return th - 20; })
+                     .text(function (d) {
+                         if (d['annotation']) {
+                             versionCount++;
+                             return d['annotation'];
+                         }
+                     });
+
+                var axisTick = Math.floor(20 / versionCount);
+
+                vis.append("svg:path")
+                .attr("class", "annotation")
+                .attr("d", d3.svg.line()
+                    .x(function (d) { return x(d.date) })
+                    .y(function (d) { if (d['annotation']) { versionCount-- }; return (th - 50 + (versionCount * axisTick)); })
+                );
+
+                
+                
+
+                // Define the right date tick to show on chart x-axis
+                var ticks;
+                var timeDiff = (maxDate - minDate) / 60 / 60 / 24;  
+
+                // In timeDiff one day equals 1000  
+                if (timeDiff < 10) {  // 10 is like 7 minutes, tick every minute  (1440 minutes in a day)
+                    ticks = [d3.time.minute, 1];
+
+                } else if (timeDiff < 250) {  // 250 is like 6h, tick every hour
+                    ticks = [d3.time.hour, 1];
+
+                } else if (timeDiff < 6*1000) { // 6 days, tick every day
+                    ticks = [d3.time.day, 1];
+
+                } else if (timeDiff < 3*7*1000) { // 3 weeks, tick every 3 days
+                    ticks = [d3.time.day, 3];
+
+                } else if (timeDiff < 6*7*1000) { // 6 weeks, tick every week
+                    ticks = [d3.time.week, 1];
+
+                } else if (timeDiff < 3*30*1000) { // 3 months, tick every 2 weeks
+                    ticks = [d3.time.week, 2];
+
+                } else if (timeDiff < 6*30*1000) { // 6 monthes, tick every month
+                    ticks = [d3.time.month, 1];
+
+                } else if (timeDiff < 18*30*1000) { // 18 monthes, tick every 3 monthes
+                    ticks = [d3.time.month, 3];
+
+                } else if (timeDiff < 36*30*1000) { // 36 monthes, tick every 6 monthes
+                    ticks = [d3.time.month, 6];
+
+                } else if (timeDiff < 10*365*1000) { // 10 years, tick every year
+                    ticks = [d3.time.year, 1];
+
+                } else { // Tick every 3 years
+                    ticks = [d3.time.year, 3];
+                }
+  
+                var dateFormat;
+                if (timeDiff < 36*30*1000) { // 36 months, 3 years, show the day!
+                    dateFormat = "%m/%d/%Y";
+                } else {
+                    dateFormat = "%m/%Y";
+                }
+
+                var xAxis = d3.svg.axis()
+                  .outerTickSize(2)
+                  .scale(x)
+                  .orient("bottom")
+                  .ticks(ticks[0], ticks[1])
+                  .tickFormat(d3.time.format(dateFormat));
+
+                vis.append("g")
+                  .attr("class", "x axis")
+                  .attr("transform", "translate(0, " + h + ")")
+                  .call(xAxis);
+
+                var yAxis = d3.svg.axis()
+                  .outerTickSize(2)
+                  .scale(y)
+                  .orient("left");
+
+                vis.append("g")
+                  .attr("class", "y axis")
+                  .call(yAxis);
+
+                vis.append("g")
+                    .attr("class", "grid")
+                    .attr("transform", "translate(0," + h + ")")
+                    .call(xAxis
+                        .tickSize(-h, 0, 0)
+                        .tickFormat("")
+                    )
+
+                vis.append("g")
+                    .attr("class", "grid")
+                    .call(yAxis
+                        .tickSize(-w, 0, 0)
+                        .tickFormat("")
+                    )
+                $(lines).each(function () {
+
+                    var lineLabel = this[0];
+                    var lineType = this[1];
+
+                    if (lineType === 'line') {
+                        vis.append("svg:path")
+                        .attr("class", "line")
+                        .attr("data-group", lineLabel)
+                        .attr("data-type", 'line')
+                        .attr("d", d3.svg.line()
+                            .x(function (d) { return x(d.date) })
+                            .y(function (d) { return y(d[lineLabel]) })
+                        )
+                        .on('mouseover', MND3.nearestPointFocus)
+                        .on('mousemove', MND3.nearestPointFocus)
+                        .on('click', MND3.lockTooltip);
+                    }
+                    if (lineType === 'area') {
+                        vis.append("svg:path")
+                        .attr("class", "area")
+                        .attr("data-group", lineLabel)
+                        .attr("data-type", 'area')
+                        .attr("d", d3.svg.area()
+                            .x(function (d) { return x(d.date) })
+                            .y0(function (d) { return y(minValue) })
+                            .y1(function (d) { return y(d[lineLabel]) })
+                        )
+                        .on('mouseover', MND3.nearestPointFocus)
+                        .on('mousemove', MND3.nearestPointFocus)
+                        .on('click', MND3.lockTooltip);
+                    }
+
+                    vis.selectAll("circle.line")
+                    .data(data)
+                    .enter().append("svg:circle")
+                    .attr("class", "point")
+                    .attr("data-group", lineLabel)
+                    .attr("data-value", function(d) { return d[lineLabel] })
+                    .attr("data-date", function(d) { return d.date })
+                    .attr("data-version", function(d) { return d['tooltip'] })
+                    .attr("cx", function (d) { return x(d.date) })
+                    .attr("cy", function (d) { return y(d[lineLabel]) })
+                    .attr("r", 3)
+                    .on('mouseover', MND3.pointFocus)
+                    .on('click', MND3.lockTooltip);
+
+                });
+
+            },
+            nearestPointFocus: function(useless, useless2, useless3, _this) {
+                _this = _this || this;
+                var target = $(_this).parents('.chart');
+                if (target.hasClass('locked')) {
+                    return false;
+                }
+                var grp = $(_this).attr('data-group');
+                var nearest = $.nearest(
+                    {x: MND3.x, y: MND3.y},
+                    target.find(".point[data-group='" + grp + "']"),
+                    {onlyX: true}
+                ).first();
+                if (nearest[0] !== MND3.last) {
+                    MND3.groupBlur(target);
+                    MND3.pointFocus({}, null, null, nearest[0]);
+                }
+            },
+            pointFocus: function(data, useless, useless2, _this) {
+                _this = _this || this;
+                var target = $(_this).parents('.chart');
+                if (target.hasClass('locked')) {
+                    return false;
+                }
+                MND3.groupBlur(target);
+                var grp = $(_this).attr('data-group');
+                var type = $(_this).attr('data-type');
+                var line = target.find("path[data-group='" + grp + "']");
+                if (type === 'line') {
+                    line.attr("class", "active line");
+                }
+                if (type === 'area') {
+                    line.attr("class", "active area");
+                }
+
+                var groupCoord = $(_this).attr('data-date');
+                var circleOffset = $(_this).offset();
+                var chartOffset = $(target).offset();
+                var tooltipPosition = {top: circleOffset.top - chartOffset.top, left: circleOffset.left - chartOffset.left};
+  
+
+                MND3.groupFocus(groupCoord, target);
+                MND3.updateTooltip(groupCoord, target, tooltipPosition, grp);
+            },
+            groupFocus: function(groupCoord, target){
+                target.find(".point[data-date='" + groupCoord + "']").attr('r', 5).attr('class','point active');
+            },
+            pointBlur: function () {
+                var target = $(this).parents('.chart');
+                var grp = $(this).attr('data-group');
+                var type = $(this).attr('data-type');
+                var line = target.find("path[data-group='" + grp + "']");
+                if (type === 'line') {
+                    line.attr("class", "active line");
+                }
+                if (type === 'area') {
+                    line.attr("class", "active area");
+                }
+
+                MND3.groupBlur(target);
+            },
+            groupBlur: function (target) {
+                target.find('.point.active').attr('r', 3).attr('class', 'point');
+                target.find('.tooltip .focused').removeClass('focused');
+                target.find('.tooltip').hide();
+            },
+            populateTooltip: function (labels, target) {
+                var tooltip = $("<div class='tooltip'><div class='close'>x</div></div>");
+                var row = $("<div class='row'><span class='color'></span><span class='label'></span><span class='value'></span></div>");
+                $(labels).each(function () {
+                    var thisRow = row.clone();
+                    thisRow.attr('data-group', this[0]);
+                    thisRow.find('.label').html(this[1] + ' : ');
+                    tooltip.append(thisRow);
+                });
+                $(target).on('click', '.tooltip .close', function() {
+                    MND3.groupBlur(target);
+                    MND3.unlockTooltip(target);
+                });
+                target.append(tooltip);
+            },
+            updateTooltip: function(groupCoord, target, tooltipPosition, grp){
+                target.find('.tooltip').css('top', tooltipPosition.top);
+                target.find('.tooltip').css('left', tooltipPosition.left + 20);
+
+                target.find('.tooltip .row').hide();
+
+                var date = new Date(groupCoord);
+                var format = d3.time.format("%m/%d/%Y %H:%M:%S");
+                date = date ? format(date) : 'N/A';
+                target.find(".tooltip .row[data-group='date']").show().find('.value').text(date);
+
+                var one = target.find(".point[data-date='" + groupCoord + "']").first();
+                var version = one.attr('data-version');
+                target.find(".tooltip .row[data-group='tooltip']").show().find('.value').text(version);
+
+                target.find(".point[data-date='" + groupCoord + "']").each(function(){
+                    var group = $(this).attr('data-group');
+                    var row = target.find(".tooltip .row[data-group='"+ group +"']");
+                    if(grp === group){
+                        row.addClass('focused');
+                    }
+                    var val = $(this).attr('data-value');
+                    row.find(".value").text(val);
+                    row.show();
+                });
+
+                target.find('.tooltip').show();
+            },        
+            lockTooltip: function() {
+                var target = $(this).parents('.chart');
+                if (target.hasClass('locked')) {
+                    MND3.unlockTooltip(target);
+                    MND3.nearestPointFocus(null, null, null, this);
+                } else {
+                    target.addClass('locked');
+                }
+            },
+            unlockTooltip: function(target) {
+                target.removeClass('locked');
+            },
+            populateDefinitions: function (labels, lines, target) {
+                var definitions = $("<div class='definitions'></div>");
+                var row = $("<div class='row'><span class='color'></span><span class='label'></span></div>");
+                $(lines).each(function () {
+                    var thisRow = row.clone();
+                    thisRow.attr('data-group', this[0]);
+                    definitions.append(thisRow);
+                });
+                $(labels).each(function () {
+                    definitions.find("[data-group='" + this[0] + "'] .label").html(this[1]);
+                });
+                target.append(definitions);
+            },
+            sortLayers: function (a, b) {
+                if (a[2] < b[2])
+                    return 1;
+                if (a[2] > b[2])
+                    return -1;
+                return 0;
+            },
+            x:0,
+            y:0,
+            last:{},
+            initiated:0
+        };
+
+        $(document).ready(function () {
+                MND3.init('#chart0', ChartData0);
+    MND3.init('#chart1', ChartData1);
+    MND3.init('#chart2', ChartData2);
+    MND3.init('#chart3', ChartData3);
+    MND3.init('#chart4', ChartData4);
+    MND3.init('#chart5', ChartData5);
+
+        });
+    }(jQuery));
+</script>
+<style type='text/css'>
+.chart{
+    font-family:Arial; 
+    font-size:14px;
+    position: relative;
+    width:940px;
+    float:left;
+    padding-bottom:30px;
+}
+.chart > svg{
+    position:relative;
+    float:left;
+}
+.tooltip{
+    display: none;
+    position: absolute;
+    background: white;
+    padding: 5px;
+    border: solid black 1px;
+    border-radius: 5px;
+}
+.tooltip .color, .definitions .color{
+    display:block;
+    float:left;
+    width:12px;
+    height:12px;
+    margin-top:2px;
+    margin-right:6px;
+}
+.tooltip .focused{
+    font-weight:bold;
+}
+.tooltip .close{
+    position: absolute;
+    top:0;
+    right:5px;
+    cursor:pointer;
+}
+.tooltip .close:hover{
+    font-weight:bold;
+}
+.definitions{
+    float:right;
+}
+.grid{
+    stroke:#888888;
+}
+
+.annotation {
+    fill: none;
+    stroke: black;
+    stroke-width: 1px;
+}
+
+.line {
+    fill: none;
+    stroke-width: 3px;
+}
+.line.active, .line:hover {
+    stroke-width: 5px;
+}
+
+.area {
+    fill-opacity: 0.6;
+    stroke-width: 3px;
+}
+.area.active, .area:hover {
+    stroke-width: 5px;
+}
+
+.point {
+    stroke: none;
+    fill-opacity: 0;
+}
+
+.point.active {
+    fill-opacity: 1;
+}
+
+#chart0 .line[data-group="x0"]{stroke: #00BFFF;}
+#chart0 .line[data-group="x1"]{stroke: #A9A9A9;}
+#chart0 .line[data-group="x2"]{stroke: #008000;}
+#chart0 .area[data-group="x0"]{stroke: #00BFFF; fill: #00D2FF;}
+#chart0 .area[data-group="x1"]{stroke: #A9A9A9; fill: #B9B9B9;}
+#chart0 .area[data-group="x2"]{stroke: #008000; fill: #008C00;}
+#chart0 .point[data-group="x0"]{fill: #00BFFF;}
+#chart0 .point[data-group="x1"]{fill: #A9A9A9;}
+#chart0 .point[data-group="x2"]{fill: #008000;}
+#chart0 .row[data-group="x0"] .color{background: #00BFFF;}
+#chart0 .row[data-group="x1"] .color{background: #A9A9A9;}
+#chart0 .row[data-group="x2"] .color{background: #008000;}
+
+#chart1 .line[data-group="x0"]{stroke: #66CDAA;}
+#chart1 .line[data-group="x1"]{stroke: #FF8C00;}
+#chart1 .line[data-group="x2"]{stroke: #FF0000;}
+#chart1 .area[data-group="x0"]{stroke: #66CDAA; fill: #70E1BB;}
+#chart1 .area[data-group="x1"]{stroke: #FF8C00; fill: #FF9A00;}
+#chart1 .area[data-group="x2"]{stroke: #FF0000; fill: #FF0000;}
+#chart1 .point[data-group="x0"]{fill: #66CDAA;}
+#chart1 .point[data-group="x1"]{fill: #FF8C00;}
+#chart1 .point[data-group="x2"]{fill: #FF0000;}
+#chart1 .row[data-group="x0"] .color{background: #66CDAA;}
+#chart1 .row[data-group="x1"] .color{background: #FF8C00;}
+#chart1 .row[data-group="x2"] .color{background: #FF0000;}
+
+#chart2 .line[data-group="x0"]{stroke: #FF8C00;}
+#chart2 .line[data-group="x1"]{stroke: #FF0000;}
+#chart2 .area[data-group="x0"]{stroke: #FF8C00; fill: #FF9A00;}
+#chart2 .area[data-group="x1"]{stroke: #FF0000; fill: #FF0000;}
+#chart2 .point[data-group="x0"]{fill: #FF8C00;}
+#chart2 .point[data-group="x1"]{fill: #FF0000;}
+#chart2 .row[data-group="x0"] .color{background: #FF8C00;}
+#chart2 .row[data-group="x1"] .color{background: #FF0000;}
+
+#chart3 .line[data-group="x0"]{stroke: #FF0000;}
+#chart3 .line[data-group="x1"]{stroke: #FF0000;}
+#chart3 .line[data-group="x2"]{stroke: #0000FF;}
+#chart3 .line[data-group="x3"]{stroke: #32CD32;}
+#chart3 .line[data-group="x4"]{stroke: #FFD700;}
+#chart3 .area[data-group="x0"]{stroke: #FF0000; fill: #FF0000;}
+#chart3 .area[data-group="x1"]{stroke: #FF0000; fill: #FF0000;}
+#chart3 .area[data-group="x2"]{stroke: #0000FF; fill: #0000FF;}
+#chart3 .area[data-group="x3"]{stroke: #32CD32; fill: #37E137;}
+#chart3 .area[data-group="x4"]{stroke: #FFD700; fill: #FFEC00;}
+#chart3 .point[data-group="x0"]{fill: #FF0000;}
+#chart3 .point[data-group="x1"]{fill: #FF0000;}
+#chart3 .point[data-group="x2"]{fill: #0000FF;}
+#chart3 .point[data-group="x3"]{fill: #32CD32;}
+#chart3 .point[data-group="x4"]{fill: #FFD700;}
+#chart3 .row[data-group="x0"] .color{background: #FF0000;}
+#chart3 .row[data-group="x1"] .color{background: #FF0000;}
+#chart3 .row[data-group="x2"] .color{background: #0000FF;}
+#chart3 .row[data-group="x3"] .color{background: #32CD32;}
+#chart3 .row[data-group="x4"] .color{background: #FFD700;}
+
+#chart4 .line[data-group="x0"]{stroke: #FF0000;}
+#chart4 .line[data-group="x1"]{stroke: #FF0000;}
+#chart4 .line[data-group="x2"]{stroke: #0000FF;}
+#chart4 .line[data-group="x3"]{stroke: #32CD32;}
+#chart4 .line[data-group="x4"]{stroke: #FFD700;}
+#chart4 .area[data-group="x0"]{stroke: #FF0000; fill: #FF0000;}
+#chart4 .area[data-group="x1"]{stroke: #FF0000; fill: #FF0000;}
+#chart4 .area[data-group="x2"]{stroke: #0000FF; fill: #0000FF;}
+#chart4 .area[data-group="x3"]{stroke: #32CD32; fill: #37E137;}
+#chart4 .area[data-group="x4"]{stroke: #FFD700; fill: #FFEC00;}
+#chart4 .point[data-group="x0"]{fill: #FF0000;}
+#chart4 .point[data-group="x1"]{fill: #FF0000;}
+#chart4 .point[data-group="x2"]{fill: #0000FF;}
+#chart4 .point[data-group="x3"]{fill: #32CD32;}
+#chart4 .point[data-group="x4"]{fill: #FFD700;}
+#chart4 .row[data-group="x0"] .color{background: #FF0000;}
+#chart4 .row[data-group="x1"] .color{background: #FF0000;}
+#chart4 .row[data-group="x2"] .color{background: #0000FF;}
+#chart4 .row[data-group="x3"] .color{background: #32CD32;}
+#chart4 .row[data-group="x4"] .color{background: #FFD700;}
+
+#chart5 .line[data-group="x0"]{stroke: #0000FF;}
+#chart5 .line[data-group="x1"]{stroke: #FF0000;}
+#chart5 .line[data-group="x2"]{stroke: #646464;}
+#chart5 .line[data-group="x3"]{stroke: #32CD32;}
+#chart5 .line[data-group="x4"]{stroke: #FFD700;}
+#chart5 .area[data-group="x0"]{stroke: #0000FF; fill: #0000FF;}
+#chart5 .area[data-group="x1"]{stroke: #FF0000; fill: #FF0000;}
+#chart5 .area[data-group="x2"]{stroke: #646464; fill: #6E6E6E;}
+#chart5 .area[data-group="x3"]{stroke: #32CD32; fill: #37E137;}
+#chart5 .area[data-group="x4"]{stroke: #FFD700; fill: #FFEC00;}
+#chart5 .point[data-group="x0"]{fill: #0000FF;}
+#chart5 .point[data-group="x1"]{fill: #FF0000;}
+#chart5 .point[data-group="x2"]{fill: #646464;}
+#chart5 .point[data-group="x3"]{fill: #32CD32;}
+#chart5 .point[data-group="x4"]{fill: #FFD700;}
+#chart5 .row[data-group="x0"] .color{background: #0000FF;}
+#chart5 .row[data-group="x1"] .color{background: #FF0000;}
+#chart5 .row[data-group="x2"] .color{background: #646464;}
+#chart5 .row[data-group="x3"] .color{background: #32CD32;}
+#chart5 .row[data-group="x4"] .color{background: #FFD700;}
+
+
+
+</style>
+
+]]></TrendChart>
+</TrendCharts>

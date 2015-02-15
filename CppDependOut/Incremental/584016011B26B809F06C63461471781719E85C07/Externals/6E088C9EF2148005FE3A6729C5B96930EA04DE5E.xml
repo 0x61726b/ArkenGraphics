@@ -1,0 +1,780 @@
+<Externals>
+<cr namespace="std" access="none" depth="1" kind="struct" name="char_traits" id="3c123fd929b65516fb618c95fb096637_bf3447e13ccfc57e5fa847f5d78e7639" file="12" linestart="260" lineend="263">
+<base access="public">
+<tss>
+<templatebase id="3c123fd929b65516fb618c95fb096637_0e14667e7fa909cae787013e4a665cda"/>
+<template_arguments>
+<ttp/>
+<bt name="long"/>
+</template_arguments>
+</tss>
+</base>
+</cr>
+<cr namespace="std" access="none" depth="3" kind="class" name="basic_string" id="9dee112e4a6fea24ef9a3716860c428f_6ecc822215ca97386606c5e8e95c56fb" file="13" linestart="692" lineend="2297" previous="9dee112e4a6fea24ef9a3716860c428f_6ecc822215ca97386606c5e8e95c56fb">
+<base access="public">
+<tss>
+<templatebase id="9dee112e4a6fea24ef9a3716860c428f_fd6b90577893febf1782c3472e44b788"/>
+<template_arguments>
+<tss>
+<templatebase id="9dee112e4a6fea24ef9a3716860c428f_15e8cc19f33496752ccbe61f65b7379c"/>
+<template_arguments>
+<ttp/>
+<ttp/>
+</template_arguments>
+</tss>
+</template_arguments>
+</tss>
+</base>
+</cr>
+<cr namespace="std" access="none" depth="1" kind="class" name="allocator" id="69514fbdf49e9f7e95574496d2c38810_07566aa809aee0bdf1c0fac16e19fa85" file="14" linestart="507" lineend="614" previous="3c123fd929b65516fb618c95fb096637_07566aa809aee0bdf1c0fac16e19fa85">
+<base access="public">
+<tss>
+<templatebase id="69514fbdf49e9f7e95574496d2c38810_88cdcaf24b75beed0de34443253840d2"/>
+<template_arguments>
+<ttp/>
+</template_arguments>
+</tss>
+</base>
+<tm parent="69514fbdf49e9f7e95574496d2c38810_07566aa809aee0bdf1c0fac16e19fa85" access="none" depth="0" pod="true" kind="struct" name="rebind" id="69514fbdf49e9f7e95574496d2c38810_38c2be5a786a253bb82af3c54854f921" file="14" linestart="536" lineend="540">
+<template_parameters>
+<ttp name="_Other" id="69514fbdf49e9f7e95574496d2c38810_5cb4d687f09ee7cb5b3575605cef20a8" depth="" index="" proto="type-parameter-1-0"/>
+</template_parameters>
+</tm>
+</cr>
+<cr access="none" depth="0" pod="true" kind="union" name="__m128" id="88183320d0319dbc916d9536e48c5f34_919a9d003ae106f009ae217ca012edfe" file="15" linestart="60" lineend="70"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="HWND__" id="f8c7bb7766b7ee6e6614d6ac86f6c998_5847ad6971421591ff7da5abaa1ba10e" file="16" linestart="39" lineend="39"/>
+<tm namespace="std" access="none" depth="1" kind="class" name="shared_ptr" id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493" file="17" linestart="467" lineend="738" previous="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493">
+<template_parameters>
+<ttp name="_Ty" id="76dede1c9a0aaac07250dde6aac56483_2dc0f9e05828bacd8b8a754ed4f8cb88" depth="" index="" proto="type-parameter-0-0"/>
+</template_parameters>
+<cr namespace="std" access="none" depth="1" kind="class" name="shared_ptr" id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493" file="17" linestart="468" lineend="738" previous="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493">
+<base access="public">
+<tss>
+<templatebase id="76dede1c9a0aaac07250dde6aac56483_32f35ab29bb69966d21a87eb554e1130"/>
+<template_arguments>
+<ttp/>
+</template_arguments>
+</tss>
+</base>
+<cr access="public" kind="class" name="shared_ptr" id="76dede1c9a0aaac07250dde6aac56483_aafcbf70ed9e3a8c1431868cd52af18f" file="17" linestart="468" lineend="468"/>
+<c name="shared_ptr&lt;_Ty&gt;" id="76dede1c9a0aaac07250dde6aac56483_878d52625cd14c94ddad229bcf35c4c0" file="17" linestart="523" lineend="526" copyconst="true" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+<p name="_Other" proto="const _Myt &amp;" isRef="true" access2="none">
+<lrf>
+<QualType const="true">
+<Tdef>
+<tss>
+<templatebase id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493"/>
+<template_arguments>
+<ttp/>
+</template_arguments>
+</tss>
+</Tdef>
+</QualType>
+</lrf>
+</p>
+</c>
+<c name="shared_ptr&lt;_Ty&gt;" id="76dede1c9a0aaac07250dde6aac56483_dd8a22110240b7f19c7748a77ee8a4ab" file="17" linestart="567" lineend="570" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+<exception_specifiers nothrow="true"/>
+</fpt>
+<p name="_Right" proto="_Myt &amp;&amp;" isRef="true" access2="none">
+<rrf>
+<Tdef>
+<tss>
+<templatebase id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493"/>
+<template_arguments>
+<ttp/>
+</template_arguments>
+</tss>
+</Tdef>
+</rrf>
+</p>
+</c>
+<m name="operator-&gt;" id="76dede1c9a0aaac07250dde6aac56483_bd082d2d00167c698295e05c45feeb9c" file="17" linestart="674" lineend="677" operator="true" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" const="true" proto="_Ty *">
+<pt>
+<ttp/>
+</pt>
+<exception_specifiers nothrow="true"/>
+</fpt>
+</m>
+</cr>
+</tm>
+<cr namespace="std" access="none" depth="3" kind="class" name="vector" id="96f32a1ea2a4337d746014e0da7a91da_3d0ab7465d6b9448b8c01dc907d3e25b" file="18" linestart="649" lineend="1783">
+<base access="public">
+<tss>
+<templatebase id="96f32a1ea2a4337d746014e0da7a91da_05d3bbcccbfa4b3b58c141a4ec6ed389"/>
+<template_arguments>
+<tss>
+<templatebase id="96f32a1ea2a4337d746014e0da7a91da_6a7cfa317aaf33a284de4e9d43f7bf95"/>
+<template_arguments>
+<ttp/>
+<ttp/>
+</template_arguments>
+</tss>
+</template_arguments>
+</tss>
+</base>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="tagWNDCLASSEXW" id="9ab27b076b23b23e1b27248b78942396_2351670c9bc67aefe50a9fafdd10c3f9" file="19" linestart="1689" lineend="1704"/>
+<e access="none" name="DXGI_FORMAT" id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf" file="20" linestart="10" lineend="129" fixed="true">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="DXGI_FORMAT_R8G8B8A8_UNORM_SRGB" id="25adb24a197efe36b5ea439e0ef7fbfb_920f2f782824c843af954b1b1ac5069b" file="20" linestart="41" lineend="41">
+<et>
+<e id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf"/>
+</et>
+</ec>
+</e>
+<cr access="none" depth="0" pod="true" kind="struct" name="DXGI_RATIONAL" id="e12bff9b09ae6113a2391c345f90b0fc_25ccc5b80c425579e076755ad7d04c5a" file="21" linestart="65" lineend="69">
+<fl name="Numerator" id="e12bff9b09ae6113a2391c345f90b0fc_0c99530a80d76ccbd9778f9fc6248c3d" file="21" linestart="67" lineend="67" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="Denominator" id="e12bff9b09ae6113a2391c345f90b0fc_e56fb63d66075090b57df3b4e701f522" file="21" linestart="68" lineend="68" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+</cr>
+<e access="none" name="DXGI_MODE_SCANLINE_ORDER" id="e12bff9b09ae6113a2391c345f90b0fc_d872e940ed4f29d8a23eb2b387d7aca4" file="21" linestart="71" lineend="77" fixed="true">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED" id="e12bff9b09ae6113a2391c345f90b0fc_2640113d2a2f7db2dceaf053782bd0e2" file="21" linestart="73" lineend="73">
+<et>
+<e id="e12bff9b09ae6113a2391c345f90b0fc_d872e940ed4f29d8a23eb2b387d7aca4"/>
+</et>
+</ec>
+</e>
+<e access="none" name="DXGI_MODE_SCALING" id="e12bff9b09ae6113a2391c345f90b0fc_31ced90caa2006ca4d42f2a267fae505" file="21" linestart="79" lineend="84" fixed="true">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="DXGI_MODE_SCALING_UNSPECIFIED" id="e12bff9b09ae6113a2391c345f90b0fc_626f8a248d16eec6f09a71e3b2eba62a" file="21" linestart="81" lineend="81">
+<et>
+<e id="e12bff9b09ae6113a2391c345f90b0fc_31ced90caa2006ca4d42f2a267fae505"/>
+</et>
+</ec>
+</e>
+<cr access="none" depth="0" pod="true" kind="struct" name="DXGI_MODE_DESC" id="e12bff9b09ae6113a2391c345f90b0fc_cadd8fcc46da3c77ffeba977ba4109db" file="21" linestart="95" lineend="103">
+<fl name="Width" id="e12bff9b09ae6113a2391c345f90b0fc_455fd0adcc05e534fba6b3dc3e9e4c0e" file="21" linestart="97" lineend="97" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="Height" id="e12bff9b09ae6113a2391c345f90b0fc_d0cf923429049f54191b3ddda740f13c" file="21" linestart="98" lineend="98" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="RefreshRate" id="e12bff9b09ae6113a2391c345f90b0fc_9722fa5aa4ab94b6fb0bee082f14495a" file="21" linestart="99" lineend="99" isLiteral="true" access="public" proto="DXGI_RATIONAL">
+<Tdef>
+<ety>
+<rt>
+<cr id="e12bff9b09ae6113a2391c345f90b0fc_25ccc5b80c425579e076755ad7d04c5a"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="Format" id="e12bff9b09ae6113a2391c345f90b0fc_d7d512671e2f7495a5c02f3b17f6e30a" file="21" linestart="100" lineend="100" isLiteral="true" access="public" proto="DXGI_FORMAT">
+<Tdef>
+<ety>
+<et>
+<e id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf"/>
+</et>
+</ety>
+</Tdef>
+</fl>
+<fl name="ScanlineOrdering" id="e12bff9b09ae6113a2391c345f90b0fc_9a49c9ab8154af9ee5d99b76619b9275" file="21" linestart="101" lineend="101" isLiteral="true" access="public" proto="DXGI_MODE_SCANLINE_ORDER">
+<Tdef>
+<ety>
+<et>
+<e id="e12bff9b09ae6113a2391c345f90b0fc_d872e940ed4f29d8a23eb2b387d7aca4"/>
+</et>
+</ety>
+</Tdef>
+</fl>
+<fl name="Scaling" id="e12bff9b09ae6113a2391c345f90b0fc_72b48dad84dc2c5097a35ba6c9c00163" file="21" linestart="102" lineend="102" isLiteral="true" access="public" proto="DXGI_MODE_SCALING">
+<Tdef>
+<ety>
+<et>
+<e id="e12bff9b09ae6113a2391c345f90b0fc_31ced90caa2006ca4d42f2a267fae505"/>
+</et>
+</ety>
+</Tdef>
+</fl>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="DXGI_SAMPLE_DESC" id="e12bff9b09ae6113a2391c345f90b0fc_452901a4152b6048815b24ee8d5fcda9" file="21" linestart="105" lineend="109">
+<fl name="Count" id="e12bff9b09ae6113a2391c345f90b0fc_9be639b6ef67f31728cbdb0b8c10a9df" file="21" linestart="107" lineend="107" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="Quality" id="e12bff9b09ae6113a2391c345f90b0fc_fa2db81f606584598eee140e802a311d" file="21" linestart="108" lineend="108" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+</cr>
+<e access="none" name="DXGI_SWAP_EFFECT" id="f1cf59f2566b690d5f5b9538096dd933_1daae13afde87a1e618da0a7a1b19ede" file="22" linestart="256" lineend="261" fixed="true">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="DXGI_SWAP_EFFECT_DISCARD" id="f1cf59f2566b690d5f5b9538096dd933_97f2f9452b9bb9e9ad6ecaa8757f1185" file="22" linestart="258" lineend="258">
+<et>
+<e id="f1cf59f2566b690d5f5b9538096dd933_1daae13afde87a1e618da0a7a1b19ede"/>
+</et>
+</ec>
+</e>
+<cr access="none" depth="0" pod="true" kind="struct" name="DXGI_SWAP_CHAIN_DESC" id="f1cf59f2566b690d5f5b9538096dd933_4fc2cc46f51ab3d1d823742cb2d86657" file="22" linestart="278" lineend="288">
+<fl name="BufferDesc" id="f1cf59f2566b690d5f5b9538096dd933_60db56467021cc4142c9e91a50b6b4d9" file="22" linestart="280" lineend="280" isLiteral="true" access="public" proto="DXGI_MODE_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="e12bff9b09ae6113a2391c345f90b0fc_cadd8fcc46da3c77ffeba977ba4109db"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="SampleDesc" id="f1cf59f2566b690d5f5b9538096dd933_db6cde9a295fd5ca03a4602acded8b11" file="22" linestart="281" lineend="281" isLiteral="true" access="public" proto="DXGI_SAMPLE_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="e12bff9b09ae6113a2391c345f90b0fc_452901a4152b6048815b24ee8d5fcda9"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="BufferUsage" id="f1cf59f2566b690d5f5b9538096dd933_4ee00614ed8aed083b73d3f571d7300f" file="22" linestart="282" lineend="282" isLiteral="true" access="public" proto="DXGI_USAGE">
+<Tdef>
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</Tdef>
+</fl>
+<fl name="BufferCount" id="f1cf59f2566b690d5f5b9538096dd933_fcd7939c6424d75b1238f20b703a6314" file="22" linestart="283" lineend="283" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="OutputWindow" id="f1cf59f2566b690d5f5b9538096dd933_22bd83305af3585707a88e10eed09038" file="22" linestart="284" lineend="284" isPtr="true" isLiteral="true" access="public" proto="HWND">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="f8c7bb7766b7ee6e6614d6ac86f6c998_5847ad6971421591ff7da5abaa1ba10e"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</fl>
+<fl name="Windowed" id="f1cf59f2566b690d5f5b9538096dd933_d969c51fcd303e5192fea7e206553f5a" file="22" linestart="285" lineend="285" isLiteral="true" access="public" proto="BOOL">
+<Tdef>
+<bt name="int"/>
+</Tdef>
+</fl>
+<fl name="SwapEffect" id="f1cf59f2566b690d5f5b9538096dd933_113fd0ec0098656a524628acaa97f9d2" file="22" linestart="286" lineend="286" isLiteral="true" access="public" proto="DXGI_SWAP_EFFECT">
+<Tdef>
+<ety>
+<et>
+<e id="f1cf59f2566b690d5f5b9538096dd933_1daae13afde87a1e618da0a7a1b19ede"/>
+</et>
+</ety>
+</Tdef>
+</fl>
+<fl name="Flags" id="f1cf59f2566b690d5f5b9538096dd933_0da36bec43b9d06011cb6d89cd18fd5b" file="22" linestart="287" lineend="287" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<c name="DXGI_SWAP_CHAIN_DESC" id="f1cf59f2566b690d5f5b9538096dd933_868a184d8ecca3843fb302f54c327289" file="22" linestart="278" lineend="278" implicit="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<c name="DXGI_SWAP_CHAIN_DESC" id="f1cf59f2566b690d5f5b9538096dd933_d489514487f0ed09afeb3639a6f24fb9" file="22" linestart="278" lineend="278" copyconst="true" implicit="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="const DXGI_SWAP_CHAIN_DESC &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="f1cf59f2566b690d5f5b9538096dd933_4fc2cc46f51ab3d1d823742cb2d86657"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</c>
+</cr>
+<cr access="none" depth="3" kind="interface" name="IDXGISwapChain" id="f1cf59f2566b690d5f5b9538096dd933_73e2087b983a7df9dd738fbb9cd2e81f" file="22" linestart="1704" lineend="1757" previous="f1cf59f2566b690d5f5b9538096dd933_1628f9031850048902bb78d155f2a6ce">
+<base access="public">
+<rt>
+<cr id="f1cf59f2566b690d5f5b9538096dd933_f2341bad0cf22df6147bb15931c82781"/>
+</rt>
+</base>
+</cr>
+<e access="none" name="D3D_DRIVER_TYPE" id="036b95e0ea91df34ad2860727e547612_dc48bec3d004e2b094ddea0debc1a042" file="23" linestart="63" lineend="71" fixed="true">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="D3D_DRIVER_TYPE_HARDWARE" id="036b95e0ea91df34ad2860727e547612_5d3bdf7925fcba04e19d6e42c568b3c1" file="23" linestart="66" lineend="66">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_dc48bec3d004e2b094ddea0debc1a042"/>
+</et>
+</ec>
+</e>
+<cr access="none" depth="3" kind="interface" name="ID3D11Texture2D" id="937c62aeccd23cb28e89e33bdd7d6017_15d4ffa0b97964d02b62478725dec3ca" file="24" linestart="2800" lineend="2808" previous="937c62aeccd23cb28e89e33bdd7d6017_cabd8ee04d0149a167b96c080dcb01c2">
+<base access="public">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_723206a6ae14935d73bb0a4a2d5329c0"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="3" kind="interface" name="ID3D11ShaderResourceView" id="937c62aeccd23cb28e89e33bdd7d6017_d8273441c0a4005c9654fa2fe3774dc0" file="24" linestart="3616" lineend="3624" previous="937c62aeccd23cb28e89e33bdd7d6017_62db643ff13fb22b042dfccaab03c890">
+<base access="public">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_98672936f5e67440ec998a3571e4a301"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="3" kind="interface" name="ID3D11RenderTargetView" id="937c62aeccd23cb28e89e33bdd7d6017_25144cc812a06d2e2459e5ceec15eaa5" file="24" linestart="3991" lineend="3999" previous="937c62aeccd23cb28e89e33bdd7d6017_54090de9d6b1c6dd5e839b4f9a5c75f9">
+<base access="public">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_98672936f5e67440ec998a3571e4a301"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="3" kind="interface" name="ID3D11DepthStencilView" id="937c62aeccd23cb28e89e33bdd7d6017_5bd3806f60e543fe9de0893f4480d610" file="24" linestart="4464" lineend="4472" previous="937c62aeccd23cb28e89e33bdd7d6017_9da267c8c5ef3c9c2ab6d58924e17ec8">
+<base access="public">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_98672936f5e67440ec998a3571e4a301"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="2" kind="interface" name="ID3D11DeviceContext" id="937c62aeccd23cb28e89e33bdd7d6017_f3a567f9f4c43149dbcfbe3b24f5b4b8" file="24" linestart="7428" lineend="8233" previous="937c62aeccd23cb28e89e33bdd7d6017_4618478bd25ceafd765fd1fa452792dc">
+<base access="public">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_49c089f44288b6784449f2ffc8fb7024"/>
+</rt>
+</base>
+</cr>
+<cr access="none" depth="1" kind="interface" name="ID3D11Device" id="937c62aeccd23cb28e89e33bdd7d6017_64af2cad329ae5de698d8988270a83db" file="24" linestart="13490" lineend="13790" previous="937c62aeccd23cb28e89e33bdd7d6017_bcb817dbaafa6d08243df99b293ddeba">
+<base access="public">
+<rt>
+<cr id="112f61c5e8c0575933db23c4db1393ea_6b30c935079209804768d2401c9e7119"/>
+</rt>
+</base>
+</cr>
+<cr namespace="Microsoft.WRL" access="none" kind="class" name="ComPtr" id="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff" file="25" linestart="168" lineend="168" previous="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff"/>
+<e namespace="Arkeng" access="none" name="eEvent" id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463" file="26" linestart="17" lineend="24" fixed="true">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="SYSTEM_KEYBOARD_KEYDOWN" id="58f82f4eec22bfb601914dffe03912bb_77d20703187fe825cc7932edd7736918" file="26" linestart="19" lineend="19">
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</ec>
+<ec name="WINDOW_RESIZE" id="58f82f4eec22bfb601914dffe03912bb_0b5060d589bf3ced174f9564dc47ab77" file="26" linestart="22" lineend="22">
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</ec>
+</e>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="IEvent" id="58f82f4eec22bfb601914dffe03912bb_4e59f5ffc492f595326e2252f89db417" file="26" linestart="25" lineend="30">
+<m name="GetEventType" id="58f82f4eec22bfb601914dffe03912bb_f0a5e1184ad4bd7f2cf6b3478df01b02" file="26" linestart="29" lineend="29" pure="true" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="Arkeng::eEvent">
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</fpt>
+</m>
+</cr>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="IEventListener" id="c7c50146e644cefcc04f4c0340ec2c64_96c834437641e2e4c94b5e569bcd184b" file="27" linestart="19" lineend="35">
+<m name="RequestEvent" id="c7c50146e644cefcc04f4c0340ec2c64_25596e9f5aef753ef6fab756720880da" file="27" linestart="28" lineend="28" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="e" proto="Arkeng::eEvent" isLiteral="true" access2="none">
+<et>
+<e id="58f82f4eec22bfb601914dffe03912bb_a73e3a1425062aa934c274468bc73463"/>
+</et>
+</p>
+</m>
+</cr>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="EventManager" id="ee343146e9cbf3cc6d2432ee0c54d29c_2a4c6de94fa4c1160ba955dc524ffaf6" file="3" linestart="19" lineend="40" previous="c7c50146e644cefcc04f4c0340ec2c64_2a4c6de94fa4c1160ba955dc524ffaf6"/>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="IWndProc" id="c257ce29ffc5f416e755b82fb6a96cb0_c9f028a0d718ca9c09fe71e05869f5ea" file="28" linestart="16" lineend="21"/>
+<cr namespace="Arkeng" access="none" depth="1" kind="class" name="EWindow" id="2732a5c0fbebd57a1451b898ea8ee72e_14b494cd92671fd4b61cd29c00495576" file="4" linestart="17" lineend="31">
+<base access="public">
+<rt>
+<cr id="58f82f4eec22bfb601914dffe03912bb_4e59f5ffc492f595326e2252f89db417"/>
+</rt>
+</base>
+<m name="GetWindowHandle" id="2732a5c0fbebd57a1451b898ea8ee72e_d4638cadfb54b51a342d7a6c08e4f7ff" file="4" linestart="23" lineend="23" access="public">
+<fpt cc="x86_thiscall" proto="HWND">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="f8c7bb7766b7ee6e6614d6ac86f6c998_5847ad6971421591ff7da5abaa1ba10e"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</fpt>
+</m>
+</cr>
+<cr namespace="Arkeng" access="none" depth="2" kind="class" name="EKeyboard" id="bf50458eb62d6fd04043c412ba63ee67_fd3f7ef3f1c446d7ce48e56b74ff8b7f" file="5" linestart="13" lineend="26">
+<base access="public">
+<rt>
+<cr id="2732a5c0fbebd57a1451b898ea8ee72e_14b494cd92671fd4b61cd29c00495576"/>
+</rt>
+</base>
+<m name="GetCharacterCode" id="bf50458eb62d6fd04043c412ba63ee67_cbf0010d39c2156430b39ffc7e9706ba" file="5" linestart="19" lineend="19" access="public">
+<fpt cc="x86_thiscall" proto="unsigned int">
+<bt name="unsigned int"/>
+</fpt>
+</m>
+</cr>
+<cr namespace="Arkeng" access="none" depth="3" kind="class" name="EKeyDown" id="338dccdca0a8809b91dfa9a7b7bd31af_3f233ecbd24902909aa6160486fda5ed" file="6" linestart="16" lineend="24">
+<base access="public">
+<rt>
+<cr id="bf50458eb62d6fd04043c412ba63ee67_fd3f7ef3f1c446d7ce48e56b74ff8b7f"/>
+</rt>
+</base>
+</cr>
+<cr namespace="Arkeng" access="none" depth="2" kind="class" name="EWindowResize" id="b7f280a603c7b553db7a123703854a8e_95f5cd21c5caebcb79dbdaffeee04ee6" file="7" linestart="16" lineend="32">
+<base access="public">
+<rt>
+<cr id="2732a5c0fbebd57a1451b898ea8ee72e_14b494cd92671fd4b61cd29c00495576"/>
+</rt>
+</base>
+<m name="NewWidth" id="b7f280a603c7b553db7a123703854a8e_e7f4bd8612a85daccce9a629d742a5e1" file="7" linestart="25" lineend="25" access="public">
+<fpt cc="x86_thiscall" proto="int">
+<bt name="int"/>
+</fpt>
+</m>
+<m name="NewHeight" id="b7f280a603c7b553db7a123703854a8e_1fcdf2abc439b7e46788675a9605a996" file="7" linestart="26" lineend="26" access="public">
+<fpt cc="x86_thiscall" proto="int">
+<bt name="int"/>
+</fpt>
+</m>
+</cr>
+<cr namespace="Arkeng" access="none" depth="1" kind="class" name="Application" id="87d5bade2f30f49ba9fb141b125d5fbe_10a32bb98d68f2e76a88f6f7180ebc6b" file="8" linestart="25" lineend="56">
+<base access="public">
+<rt>
+<cr id="c7c50146e644cefcc04f4c0340ec2c64_96c834437641e2e4c94b5e569bcd184b"/>
+</rt>
+</base>
+<base access="public">
+<rt>
+<cr id="c257ce29ffc5f416e755b82fb6a96cb0_c9f028a0d718ca9c09fe71e05869f5ea"/>
+</rt>
+</base>
+<c name="Application" id="87d5bade2f30f49ba9fb141b125d5fbe_d56acc5bbea44aff4a982b85eb30089c" file="8" linestart="28" lineend="28" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<m name="HandleEvent" id="87d5bade2f30f49ba9fb141b125d5fbe_067a041912b63f0e61a1943843ac5dd9" file="8" linestart="47" lineend="47" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<p name="pEvent" proto="EventPtr" access2="none">
+<Tdef>
+<ety>
+<tss>
+<templatebase id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493"/>
+<template_arguments>
+<rt>
+<cr id="58f82f4eec22bfb601914dffe03912bb_4e59f5ffc492f595326e2252f89db417"/>
+</rt>
+</template_arguments>
+</tss>
+</ety>
+</Tdef>
+</p>
+</m>
+<m name="RequestExit" id="87d5bade2f30f49ba9fb141b125d5fbe_4fc52b5b3b0be388f3421aa0b1a99e05" file="8" linestart="49" lineend="49" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</m>
+</cr>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="RenderWindow" id="c1127c76053abec285f82df0056bccbe_1cf1162bd6d524cd260fd13075946e3c" file="9" linestart="16" lineend="66">
+<m name="GetHandle" id="c1127c76053abec285f82df0056bccbe_6cce0314c4edfa1a093a703f9bd117f4" file="9" linestart="26" lineend="26" access="public">
+<fpt cc="x86_thiscall" proto="HWND">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="f8c7bb7766b7ee6e6614d6ac86f6c998_5847ad6971421591ff7da5abaa1ba10e"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</fpt>
+</m>
+<m name="SetSize" id="c1127c76053abec285f82df0056bccbe_ca4eab8fdaeb8b8d9d9b2e74303d2049" file="9" linestart="36" lineend="36" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="width" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="height" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+<m name="SetPosition" id="c1127c76053abec285f82df0056bccbe_8efb79abf77d199584d490e9361693c5" file="9" linestart="37" lineend="37" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="left" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="top" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+<m name="ResizeWindow" id="c1127c76053abec285f82df0056bccbe_8a4bf595c2532889cf7d1b257c9b5277" file="9" linestart="39" lineend="39" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="width" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="height" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+<m name="SetSwapChain" id="c1127c76053abec285f82df0056bccbe_ee32ed90ae9ab8f45c19cea0421e0967" file="9" linestart="42" lineend="42" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="swapchain" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+</m>
+</cr>
+<cr namespace="Arkeng" access="none" depth="1" kind="class" name="Win32RenderWindow" id="042669903a35d3a52fa8b54e91fe38fb_b0137924bbae351cce8c13d43595692b" file="10" linestart="17" lineend="28">
+<base access="public">
+<rt>
+<cr id="c1127c76053abec285f82df0056bccbe_1cf1162bd6d524cd260fd13075946e3c"/>
+</rt>
+</base>
+<c name="Win32RenderWindow" id="042669903a35d3a52fa8b54e91fe38fb_c8163ff4206ad4324f58ab5830dca4e7" file="10" linestart="20" lineend="20" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<m name="Initialize" id="042669903a35d3a52fa8b54e91fe38fb_6cd72d5d9ab095b2722c5f5adacbea15" file="10" linestart="23" lineend="23" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="Arkeng::IWndProc *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<rt>
+<cr id="c257ce29ffc5f416e755b82fb6a96cb0_c9f028a0d718ca9c09fe71e05869f5ea"/>
+</rt>
+</pt>
+</p>
+</m>
+<m name="Shutdown" id="042669903a35d3a52fa8b54e91fe38fb_63522fc259d9e7fd8fcb6339bc172b37" file="10" linestart="24" lineend="24" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</m>
+</cr>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="IRenderer" id="4a89be1941797dc9e69ce7c4321a42d0_84d26f714d1a61eeede3815ded52a0fe" file="29" linestart="21" lineend="32"/>
+<cr namespace="Arkeng" access="none" depth="1" kind="class" name="D3D11Renderer" id="695c4e605f1bcf3b02de8492dc8b3c3b_de162f9aec055a3643a17afc906cd168" file="11" linestart="36" lineend="62">
+<base access="public">
+<rt>
+<cr id="4a89be1941797dc9e69ce7c4321a42d0_84d26f714d1a61eeede3815ded52a0fe"/>
+</rt>
+</base>
+<c name="D3D11Renderer" id="695c4e605f1bcf3b02de8492dc8b3c3b_5465c0216bbdf3819d4edcd5b07e75a6" file="11" linestart="39" lineend="39" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<m name="Initialize" id="695c4e605f1bcf3b02de8492dc8b3c3b_42f7ffa91b64e19744de043908bb5a73" file="11" linestart="44" lineend="44" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<p name="DriverType" proto="D3D_DRIVER_TYPE" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_dc48bec3d004e2b094ddea0debc1a042"/>
+</et>
+</ety>
+</Tdef>
+</p>
+<p name="FeatureLevel" proto="D3D_FEATURE_LEVEL" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_35d5416333218398f9a65d043af8b34a"/>
+</et>
+</ety>
+</Tdef>
+</p>
+</m>
+<m name="Shutdown" id="695c4e605f1bcf3b02de8492dc8b3c3b_74bd041bf239b3420c5aab21d274bed6" file="11" linestart="45" lineend="45" virtual="true" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</m>
+<m name="CreateSwapChain" id="695c4e605f1bcf3b02de8492dc8b3c3b_3c6e182f7b7c1bac4916968ea950d613" file="11" linestart="49" lineend="49" access="public">
+<fpt cc="x86_thiscall" proto="int">
+<bt name="int"/>
+</fpt>
+<p name="desc" proto="DXGI_SWAP_CHAIN_DESC" isLiteral="true" access2="none">
+<Tdef>
+<ety>
+<rt>
+<cr id="f1cf59f2566b690d5f5b9538096dd933_4fc2cc46f51ab3d1d823742cb2d86657"/>
+</rt>
+</ety>
+</Tdef>
+</p>
+</m>
+</cr>
+<f name="memset" id="6c3da6453e7588251e1aa4c3928b8b0c_01f056bb0311297cf054435e7cf7ee95" file="30" linestart="94" lineend="94" extC="true" access="none">
+<Attributed/>
+<p name="_Dst" proto="void *" isPtr="true" isLiteral="true" access2="none">
+<pt>
+<bt name="void"/>
+</pt>
+</p>
+<p name="_Val" proto="int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="int"/>
+</p>
+<p name="_Size" proto="size_t" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</f>
+<f namespace="std" name="static_pointer_cast" id="76dede1c9a0aaac07250dde6aac56483_5dd5505769fa9035ceb770a549a061c1" file="17" linestart="893" lineend="897" access="none" hasbody="true" isdef="true">
+<fpt cc="cdecl" proto="shared_ptr&lt;_Ty1&gt;">
+<tss>
+<templatebase id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493"/>
+<template_arguments>
+<ttp/>
+</template_arguments>
+</tss>
+<exception_specifiers nothrow="true"/>
+</fpt>
+<p name="_Other" proto="const shared_ptr&lt;_Ty2&gt; &amp;" isRef="true" access2="none">
+<lrf>
+<QualType const="true">
+<tss>
+<templatebase id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493"/>
+<template_arguments>
+<ttp/>
+</template_arguments>
+</tss>
+</QualType>
+</lrf>
+</p>
+</f>
+<ft name="static_pointer_cast" id="76dede1c9a0aaac07250dde6aac56483_31edc7e19f37589d37eb160b0472356d" file="17" linestart="891" lineend="897">
+<template_parameters>
+<ttp name="_Ty1" id="76dede1c9a0aaac07250dde6aac56483_d3a56faf8857ee225beb639746822c3a" depth="" index="" proto="type-parameter-0-0"/>
+<ttp name="_Ty2" id="76dede1c9a0aaac07250dde6aac56483_c8404254f6c772103c61ff21e9cbad88" depth="" index="" proto="type-parameter-0-1"/>
+</template_parameters>
+<f namespace="std" name="static_pointer_cast" id="76dede1c9a0aaac07250dde6aac56483_5dd5505769fa9035ceb770a549a061c1" file="17" linestart="893" lineend="897" access="none" hasbody="true" isdef="true">
+<fpt cc="cdecl" proto="shared_ptr&lt;_Ty1&gt;">
+<tss>
+<templatebase id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493"/>
+<template_arguments>
+<ttp/>
+</template_arguments>
+</tss>
+<exception_specifiers nothrow="true"/>
+</fpt>
+<p name="_Other" proto="const shared_ptr&lt;_Ty2&gt; &amp;" isRef="true" access2="none">
+<lrf>
+<QualType const="true">
+<tss>
+<templatebase id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493"/>
+<template_arguments>
+<ttp/>
+</template_arguments>
+</tss>
+</QualType>
+</lrf>
+</p>
+</f>
+</ft>
+<f name="MessageBoxW" id="9ab27b076b23b23e1b27248b78942396_d8e353492b5ac29cd5b9c7fb745a03da" file="19" linestart="8694" lineend="8701" extC="true" imported="true" access="none">
+<Attributed/>
+<p name="hWnd" proto="HWND" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="f8c7bb7766b7ee6e6614d6ac86f6c998_5847ad6971421591ff7da5abaa1ba10e"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+</p>
+<p name="lpText" proto="LPCWSTR" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<QualType const="true">
+<Tdef>
+<bt name="wchar_t"/>
+</Tdef>
+</QualType>
+</pt>
+</Tdef>
+</p>
+<p name="lpCaption" proto="LPCWSTR" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<QualType const="true">
+<Tdef>
+<bt name="wchar_t"/>
+</Tdef>
+</QualType>
+</pt>
+</Tdef>
+</p>
+<p name="uType" proto="UINT" isLiteral="true" isPrimitive="true" access2="none">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</p>
+</f>
+</Externals>

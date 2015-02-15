@@ -12,12 +12,16 @@
 #define __Application_h__
 //--------------------------------------------------------------------------------
 #include "Pch.h"
+#include "Log.h"
+#include "DxDebugHelper.h"
 #include "EventManager.h"
 #include "IEventListener.h"
 #include "IWndProc.h"
 
 #include "EKeyDown.h"
 #include "EWindowResize.h"
+
+#include "Scene.h"
 //--------------------------------------------------------------------------------
 
 namespace Arkeng
@@ -50,9 +54,12 @@ namespace Arkeng
 		EventManager EvtManager;
 
 		bool m_bLoop;
-
+	protected:
+		Scene*				m_pScene;
 	private:
 		static Application* m_pApplication;
+
+
 	};
 }
 

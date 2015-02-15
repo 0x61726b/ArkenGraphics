@@ -1,0 +1,486 @@
+<Root>
+<Comments>
+<c f="1" b="1" e="1"/>
+<c f="1" b="2" e="2"/>
+<c f="1" b="3" e="3"/>
+<c f="1" b="4" e="4"/>
+<c f="1" b="5" e="5"/>
+<c f="1" b="6" e="6"/>
+<c f="1" b="7" e="7"/>
+<c f="1" b="8" e="8"/>
+<c f="1" b="9" e="8"/>
+<c f="1" b="11" e="11"/>
+<c f="1" b="12" e="11"/>
+<c f="1" b="13" e="13"/>
+<c f="1" b="14" e="13"/>
+<c f="1" b="19" e="19"/>
+<c f="1" b="20" e="19"/>
+<c f="1" b="23" e="23"/>
+<c f="1" b="24" e="23"/>
+<c f="1" b="28" e="28"/>
+<c f="1" b="29" e="28"/>
+<c f="1" b="33" e="33"/>
+<c f="1" b="34" e="33"/>
+<c f="1" b="38" e="38"/>
+<c f="1" b="39" e="38"/>
+<c f="1" b="43" e="43"/>
+<c f="1" b="44" e="43"/>
+<c f="1" b="48" e="48"/>
+<c f="1" b="49" e="48"/>
+<c f="1" b="53" e="53"/>
+<c f="1" b="54" e="53"/>
+</Comments>
+<Macros/>
+<Comments>
+<c f="2" b="1" e="1"/>
+<c f="2" b="2" e="2"/>
+<c f="2" b="3" e="3"/>
+<c f="2" b="4" e="4"/>
+<c f="2" b="5" e="5"/>
+<c f="2" b="6" e="6"/>
+<c f="2" b="7" e="7"/>
+<c f="2" b="8" e="8"/>
+<c f="2" b="9" e="8"/>
+<c f="2" b="10" e="10"/>
+<c f="2" b="11" e="10"/>
+</Comments>
+<Macros/>
+<tun>
+<ns name="Arkeng" id="bf50458eb62d6fd04043c412ba63ee67_3c3972cc97a7bba367d9b9e52bee78f4" file="2" linestart="11" lineend="29" original="">
+<cr namespace="Arkeng" access="none" depth="2" kind="class" name="EKeyboard" id="bf50458eb62d6fd04043c412ba63ee67_fd3f7ef3f1c446d7ce48e56b74ff8b7f" file="2" linestart="13" lineend="26">
+<base access="public">
+<rt>
+<cr id="2732a5c0fbebd57a1451b898ea8ee72e_14b494cd92671fd4b61cd29c00495576"/>
+</rt>
+</base>
+<cr access="public" kind="class" name="EKeyboard" id="bf50458eb62d6fd04043c412ba63ee67_f5d46b0b15cf223082f53bc23a9c5f45" file="2" linestart="13" lineend="13"/>
+<Decl access="public"/>
+<c name="EKeyboard" id="bf50458eb62d6fd04043c412ba63ee67_892f47565d63b9f6ec1b6ed7dfd79612" file="2" linestart="16" lineend="16" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="hwnd" proto="HWND" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="f8c7bb7766b7ee6e6614d6ac86f6c998_5847ad6971421591ff7da5abaa1ba10e"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="wParam" proto="unsigned int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="unsigned int"/>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="lParam" proto="long" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="long"/>
+<Stmt>
+
+</Stmt>
+</p>
+</c>
+<d name="~EKeyboard" id="bf50458eb62d6fd04043c412ba63ee67_6bd8ab5a41d0cf868554860b0b52baeb" file="2" linestart="17" lineend="17" virtual="true" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</d>
+<m name="GetCharacterCode" id="bf50458eb62d6fd04043c412ba63ee67_cbf0010d39c2156430b39ffc7e9706ba" file="2" linestart="19" lineend="19" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="unsigned int">
+<bt name="unsigned int"/>
+</fpt>
+</m>
+<m name="GetRepeatCount" id="bf50458eb62d6fd04043c412ba63ee67_fab18fa721efc332a1cd6312792fc48d" file="2" linestart="20" lineend="20" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="unsigned int">
+<bt name="unsigned int"/>
+</fpt>
+</m>
+<m name="GetScanCode" id="bf50458eb62d6fd04043c412ba63ee67_6fc62c2f42f4be1572fbfd4664c140ca" file="2" linestart="21" lineend="21" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="unsigned int">
+<bt name="unsigned int"/>
+</fpt>
+</m>
+<m name="GetExtendedKey" id="bf50458eb62d6fd04043c412ba63ee67_21f70f93d79af677c1cfb1ea1882d7e6" file="2" linestart="22" lineend="22" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+</m>
+<m name="GetContextCode" id="bf50458eb62d6fd04043c412ba63ee67_21987fb881e40c58cd3d4e7a4578f5f9" file="2" linestart="23" lineend="23" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+</m>
+<m name="GetPreviousKeyState" id="bf50458eb62d6fd04043c412ba63ee67_ef24f5c1774075060adda2157bf8d3e9" file="2" linestart="24" lineend="24" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+</m>
+<m name="GetTransitionState" id="bf50458eb62d6fd04043c412ba63ee67_0cc3230024406de0fdf85172c5dcebb3" file="2" linestart="25" lineend="25" access="public" hasbody="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+</m>
+<m name="operator=" id="bf50458eb62d6fd04043c412ba63ee67_b837492c68c32f153cf82cb47597310b" file="2" linestart="13" implicit="true" operator="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="Arkeng::EKeyboard &amp;">
+<lrf>
+<rt>
+<cr id="bf50458eb62d6fd04043c412ba63ee67_fd3f7ef3f1c446d7ce48e56b74ff8b7f"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const Arkeng::EKeyboard &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="bf50458eb62d6fd04043c412ba63ee67_fd3f7ef3f1c446d7ce48e56b74ff8b7f"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</m>
+<c name="EKeyboard" id="bf50458eb62d6fd04043c412ba63ee67_591ce1d80ef82e499cf6cdf62a68036b" file="2" linestart="13" lineend="13" copyconst="true" implicit="true" access="public" inline="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="const Arkeng::EKeyboard &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="bf50458eb62d6fd04043c412ba63ee67_fd3f7ef3f1c446d7ce48e56b74ff8b7f"/>
+</rt>
+</QualType>
+</lrf>
+<Stmt>
+
+</Stmt>
+</p>
+</c>
+</cr>
+<tyd name="EKeyboardPtr" id="bf50458eb62d6fd04043c412ba63ee67_388c85bca84ca24b6df60e8159a4057d" file="2" linestart="28" lineend="28">
+<ety>
+<tss>
+<templatebase id="76dede1c9a0aaac07250dde6aac56483_657452b32ba868fc91dcb03961fc8493"/>
+<template_arguments>
+<rt>
+<cr id="bf50458eb62d6fd04043c412ba63ee67_fd3f7ef3f1c446d7ce48e56b74ff8b7f"/>
+</rt>
+</template_arguments>
+</tss>
+</ety>
+</tyd>
+</ns>
+<Decl/>
+<NamedDecl name="&lt;using-directive&gt;" id="dec98206e0dd674c7f3b06e98517e925_6728b6b0f829183eb7bbd3d3d987c87d" file="1" linestart="12" lineend="12"/>
+<c name="EKeyboard" id="dec98206e0dd674c7f3b06e98517e925_892f47565d63b9f6ec1b6ed7dfd79612" file="1" linestart="14" lineend="18" previous="bf50458eb62d6fd04043c412ba63ee67_892f47565d63b9f6ec1b6ed7dfd79612" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="hwnd" proto="HWND" isPtr="true" isLiteral="true" access2="none">
+<Tdef>
+<pt>
+<ety>
+<rt>
+<cr id="f8c7bb7766b7ee6e6614d6ac86f6c998_5847ad6971421591ff7da5abaa1ba10e"/>
+</rt>
+</ety>
+</pt>
+</Tdef>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="wParam" proto="unsigned int" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="unsigned int"/>
+<Stmt>
+
+</Stmt>
+</p>
+<p name="lParam" proto="long" isLiteral="true" isPrimitive="true" access2="none">
+<bt name="long"/>
+<Stmt>
+
+</Stmt>
+</p>
+<BaseInit>
+<n10 lb="15" cb="4" le="15" ce="32">
+<typeptr id="2732a5c0fbebd57a1451b898ea8ee72e_8c89e66224f35d5f10a1149879b662a6"/>
+<temp/>
+<n32 lb="15" cb="13">
+<drx lb="15" cb="13" kind="lvalue" nm="hwnd"/>
+</n32>
+<n32 lb="15" cb="18">
+<drx lb="15" cb="18" kind="lvalue" nm="wParam"/>
+</n32>
+<n32 lb="15" cb="25">
+<drx lb="15" cb="25" kind="lvalue" nm="lParam"/>
+</n32>
+</n10>
+
+</BaseInit>
+<Stmt>
+<u lb="16" cb="1" le="18" ce="1"/>
+
+</Stmt>
+</c>
+<d name="~EKeyboard" id="dec98206e0dd674c7f3b06e98517e925_6bd8ab5a41d0cf868554860b0b52baeb" file="1" linestart="20" lineend="22" previous="bf50458eb62d6fd04043c412ba63ee67_6bd8ab5a41d0cf868554860b0b52baeb" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<Stmt>
+<u lb="21" cb="1" le="22" ce="1"/>
+
+</Stmt>
+</d>
+<m name="GetCharacterCode" id="dec98206e0dd674c7f3b06e98517e925_cbf0010d39c2156430b39ffc7e9706ba" file="1" linestart="24" lineend="27" previous="bf50458eb62d6fd04043c412ba63ee67_cbf0010d39c2156430b39ffc7e9706ba" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="unsigned int">
+<bt name="unsigned int"/>
+</fpt>
+<Stmt>
+<u lb="25" cb="1" le="27" ce="1">
+<rx lb="26" cb="2" le="26" ce="18" pvirg="true">
+<n32 lb="26" cb="8" le="26" ce="18">
+<n46 lb="26" cb="8" le="26" ce="18">
+<exp pvirg="true"/>
+<mex lb="26" cb="9" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_4de57197c2f9b231f5f09d16279d6fcf" nm="m_iWParam" arrow="1">
+<n32 lb="26" cb="9">
+<n19 lb="26" cb="9"/>
+</n32>
+</mex>
+</n46>
+</n32>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="GetRepeatCount" id="dec98206e0dd674c7f3b06e98517e925_fab18fa721efc332a1cd6312792fc48d" file="1" linestart="29" lineend="32" previous="bf50458eb62d6fd04043c412ba63ee67_fab18fa721efc332a1cd6312792fc48d" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="unsigned int">
+<bt name="unsigned int"/>
+</fpt>
+<Stmt>
+<u lb="30" cb="1" le="32" ce="1">
+<rx lb="31" cb="2" le="31" ce="25" pvirg="true">
+<n46 lb="31" cb="8" le="31" ce="25">
+<exp pvirg="true"/>
+<xop lb="31" cb="9" le="31" ce="16" kind="&amp;">
+<n32 lb="31" cb="9">
+<n45 lb="31" cb="9">
+<flit/>
+</n45>
+</n32>
+<n32 lb="31" cb="16">
+<mex lb="31" cb="16" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_aac2d9319f29ee9db0e67679264c2d40" nm="m_iLParam" arrow="1">
+<n32 lb="31" cb="16">
+<n19 lb="31" cb="16"/>
+</n32>
+</mex>
+</n32>
+</xop>
+</n46>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="GetScanCode" id="dec98206e0dd674c7f3b06e98517e925_6fc62c2f42f4be1572fbfd4664c140ca" file="1" linestart="34" lineend="37" previous="bf50458eb62d6fd04043c412ba63ee67_6fc62c2f42f4be1572fbfd4664c140ca" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="unsigned int">
+<bt name="unsigned int"/>
+</fpt>
+<Stmt>
+<u lb="35" cb="1" le="37" ce="1">
+<rx lb="36" cb="2" le="36" ce="32" pvirg="true">
+<n46 lb="36" cb="8" le="36" ce="32">
+<exp pvirg="true"/>
+<xop lb="36" cb="9" le="36" ce="30" kind="&gt;&gt;">
+<n46 lb="36" cb="9" le="36" ce="27">
+<exp pvirg="true"/>
+<xop lb="36" cb="10" le="36" ce="18" kind="&amp;">
+<n32 lb="36" cb="10">
+<n45 lb="36" cb="10">
+<flit/>
+</n45>
+</n32>
+<n32 lb="36" cb="18">
+<mex lb="36" cb="18" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_aac2d9319f29ee9db0e67679264c2d40" nm="m_iLParam" arrow="1">
+<n32 lb="36" cb="18">
+<n19 lb="36" cb="18"/>
+</n32>
+</mex>
+</n32>
+</xop>
+</n46>
+<n45 lb="36" cb="30">
+<flit/>
+</n45>
+</xop>
+</n46>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="GetExtendedKey" id="dec98206e0dd674c7f3b06e98517e925_21f70f93d79af677c1cfb1ea1882d7e6" file="1" linestart="39" lineend="42" previous="bf50458eb62d6fd04043c412ba63ee67_21f70f93d79af677c1cfb1ea1882d7e6" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<Stmt>
+<u lb="40" cb="1" le="42" ce="1">
+<rx lb="41" cb="2" le="41" ce="35" pvirg="true">
+<n46 lb="41" cb="8" le="41" ce="35">
+<exp pvirg="true"/>
+<xop lb="41" cb="9" le="41" ce="34" kind="&gt;">
+<n46 lb="41" cb="9" le="41" ce="30">
+<exp pvirg="true"/>
+<xop lb="41" cb="10" le="41" ce="21" kind="&amp;">
+<n32 lb="41" cb="10">
+<n45 lb="41" cb="10">
+<flit/>
+</n45>
+</n32>
+<n32 lb="41" cb="21">
+<mex lb="41" cb="21" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_aac2d9319f29ee9db0e67679264c2d40" nm="m_iLParam" arrow="1">
+<n32 lb="41" cb="21">
+<n19 lb="41" cb="21"/>
+</n32>
+</mex>
+</n32>
+</xop>
+</n46>
+<n32 lb="41" cb="34">
+<n45 lb="41" cb="34">
+<flit/>
+</n45>
+</n32>
+</xop>
+</n46>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="GetContextCode" id="dec98206e0dd674c7f3b06e98517e925_21987fb881e40c58cd3d4e7a4578f5f9" file="1" linestart="44" lineend="47" previous="bf50458eb62d6fd04043c412ba63ee67_21987fb881e40c58cd3d4e7a4578f5f9" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<Stmt>
+<u lb="45" cb="1" le="47" ce="1">
+<rx lb="46" cb="2" le="46" ce="35" pvirg="true">
+<n46 lb="46" cb="8" le="46" ce="35">
+<exp pvirg="true"/>
+<xop lb="46" cb="9" le="46" ce="34" kind="&gt;">
+<n46 lb="46" cb="9" le="46" ce="30">
+<exp pvirg="true"/>
+<xop lb="46" cb="10" le="46" ce="21" kind="&amp;">
+<n32 lb="46" cb="10">
+<n45 lb="46" cb="10">
+<flit/>
+</n45>
+</n32>
+<n32 lb="46" cb="21">
+<mex lb="46" cb="21" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_aac2d9319f29ee9db0e67679264c2d40" nm="m_iLParam" arrow="1">
+<n32 lb="46" cb="21">
+<n19 lb="46" cb="21"/>
+</n32>
+</mex>
+</n32>
+</xop>
+</n46>
+<n32 lb="46" cb="34">
+<n45 lb="46" cb="34">
+<flit/>
+</n45>
+</n32>
+</xop>
+</n46>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="GetPreviousKeyState" id="dec98206e0dd674c7f3b06e98517e925_ef24f5c1774075060adda2157bf8d3e9" file="1" linestart="49" lineend="52" previous="bf50458eb62d6fd04043c412ba63ee67_ef24f5c1774075060adda2157bf8d3e9" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<Stmt>
+<u lb="50" cb="1" le="52" ce="1">
+<rx lb="51" cb="2" le="51" ce="35" pvirg="true">
+<n46 lb="51" cb="8" le="51" ce="35">
+<exp pvirg="true"/>
+<xop lb="51" cb="9" le="51" ce="34" kind="&gt;">
+<n46 lb="51" cb="9" le="51" ce="30">
+<exp pvirg="true"/>
+<xop lb="51" cb="10" le="51" ce="21" kind="&amp;">
+<n32 lb="51" cb="10">
+<n45 lb="51" cb="10">
+<flit/>
+</n45>
+</n32>
+<n32 lb="51" cb="21">
+<mex lb="51" cb="21" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_aac2d9319f29ee9db0e67679264c2d40" nm="m_iLParam" arrow="1">
+<n32 lb="51" cb="21">
+<n19 lb="51" cb="21"/>
+</n32>
+</mex>
+</n32>
+</xop>
+</n46>
+<n32 lb="51" cb="34">
+<n45 lb="51" cb="34">
+<flit/>
+</n45>
+</n32>
+</xop>
+</n46>
+</rx>
+</u>
+
+</Stmt>
+</m>
+<m name="GetTransitionState" id="dec98206e0dd674c7f3b06e98517e925_0cc3230024406de0fdf85172c5dcebb3" file="1" linestart="54" lineend="57" previous="bf50458eb62d6fd04043c412ba63ee67_0cc3230024406de0fdf85172c5dcebb3" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="bool">
+<bt name="bool"/>
+</fpt>
+<Stmt>
+<u lb="55" cb="1" le="57" ce="1">
+<rx lb="56" cb="2" le="56" ce="35" pvirg="true">
+<n46 lb="56" cb="8" le="56" ce="35">
+<exp pvirg="true"/>
+<xop lb="56" cb="9" le="56" ce="34" kind="&gt;">
+<n46 lb="56" cb="9" le="56" ce="30">
+<exp pvirg="true"/>
+<xop lb="56" cb="10" le="56" ce="21" kind="&amp;">
+<n45 lb="56" cb="10">
+<flit/>
+</n45>
+<n32 lb="56" cb="21">
+<mex lb="56" cb="21" kind="lvalue" id="2732a5c0fbebd57a1451b898ea8ee72e_aac2d9319f29ee9db0e67679264c2d40" nm="m_iLParam" arrow="1">
+<n32 lb="56" cb="21">
+<n19 lb="56" cb="21"/>
+</n32>
+</mex>
+</n32>
+</xop>
+</n46>
+<n32 lb="56" cb="34">
+<n45 lb="56" cb="34">
+<flit/>
+</n45>
+</n32>
+</xop>
+</n46>
+</rx>
+</u>
+
+</Stmt>
+</m>
+</tun>
+</Root>

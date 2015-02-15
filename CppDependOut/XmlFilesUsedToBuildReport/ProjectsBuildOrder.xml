@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<AssemblySortForCompilOrObfusk>
+  <Assembly Assembly="Arkeng.Desktop">3</Assembly>
+  <Assembly Assembly="Project1">4</Assembly>
+</AssemblySortForCompilOrObfusk>

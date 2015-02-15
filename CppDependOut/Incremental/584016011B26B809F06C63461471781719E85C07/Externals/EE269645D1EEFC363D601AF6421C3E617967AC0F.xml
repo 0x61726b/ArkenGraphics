@@ -1,0 +1,438 @@
+<Externals>
+<e access="none" name="DXGI_FORMAT" id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf" file="3" linestart="10" lineend="129" fixed="true">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="DXGI_FORMAT_UNKNOWN" id="25adb24a197efe36b5ea439e0ef7fbfb_969a5c33ac055bc08e9b8b225ec8fadd" file="3" linestart="12" lineend="12">
+<et>
+<e id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf"/>
+</et>
+</ec>
+</e>
+<e access="none" name="D3D_SRV_DIMENSION" id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d" file="4" linestart="287" lineend="334" fixed="true">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="D3D11_SRV_DIMENSION_UNKNOWN" id="036b95e0ea91df34ad2860727e547612_90a2e8dc073c546f97178dac3c9748df" file="4" linestart="322" lineend="322">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+<ec name="D3D11_SRV_DIMENSION_BUFFER" id="036b95e0ea91df34ad2860727e547612_70b6f5cdf72e281e862c32fd849f2788" file="4" linestart="323" lineend="323">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+<ec name="D3D11_SRV_DIMENSION_TEXTURE1D" id="036b95e0ea91df34ad2860727e547612_b88fcb38fb9eacf0e847caf0da895c36" file="4" linestart="324" lineend="324">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+<ec name="D3D11_SRV_DIMENSION_TEXTURE1DARRAY" id="036b95e0ea91df34ad2860727e547612_07fe96b06c3294605301d45f91c77520" file="4" linestart="325" lineend="325">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+<ec name="D3D11_SRV_DIMENSION_TEXTURE2D" id="036b95e0ea91df34ad2860727e547612_a685317a42aa3b999427b02aba98cd2a" file="4" linestart="326" lineend="326">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+<ec name="D3D11_SRV_DIMENSION_TEXTURE2DARRAY" id="036b95e0ea91df34ad2860727e547612_d327a96e11b68f9eabf75ec233a2a8d6" file="4" linestart="327" lineend="327">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+<ec name="D3D11_SRV_DIMENSION_TEXTURE2DMS" id="036b95e0ea91df34ad2860727e547612_b269c7b04a22fbffab14c04c5642eefc" file="4" linestart="328" lineend="328">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+<ec name="D3D11_SRV_DIMENSION_TEXTURE2DMSARRAY" id="036b95e0ea91df34ad2860727e547612_88854bca45b4887db23bf4425429ecd4" file="4" linestart="329" lineend="329">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+<ec name="D3D11_SRV_DIMENSION_TEXTURE3D" id="036b95e0ea91df34ad2860727e547612_bcb09f8abcb1ed55a955457dc96bfc1d" file="4" linestart="330" lineend="330">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+<ec name="D3D11_SRV_DIMENSION_TEXTURECUBE" id="036b95e0ea91df34ad2860727e547612_de9f0f7119bcb05818e3670f7c1b4669" file="4" linestart="331" lineend="331">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+<ec name="D3D11_SRV_DIMENSION_TEXTURECUBEARRAY" id="036b95e0ea91df34ad2860727e547612_6a0115d0b9f84ae9959d67a397350dac" file="4" linestart="332" lineend="332">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+<ec name="D3D11_SRV_DIMENSION_BUFFEREX" id="036b95e0ea91df34ad2860727e547612_8e060319674cbbc73dcb67fe864b3df6" file="4" linestart="333" lineend="333">
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ec>
+</e>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_BUFFER_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_f341ec5adaf7694a91f556293614590f" file="5" linestart="3288" lineend="3300">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_c5ad3e7523acdbe520fbdfd4f23e49b2" file="5" linestart="3288" lineend="3288" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_BUFFER_SRV &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_f341ec5adaf7694a91f556293614590f"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_BUFFER_SRV &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_f341ec5adaf7694a91f556293614590f"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_BUFFEREX_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_a1c51b0c72b25cf1ceaffcd4070560b8" file="5" linestart="3308" lineend="3313">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_d263873dd94ae153b513454217cab0fd" file="5" linestart="3308" lineend="3308" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_BUFFEREX_SRV &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_a1c51b0c72b25cf1ceaffcd4070560b8"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_BUFFEREX_SRV &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_a1c51b0c72b25cf1ceaffcd4070560b8"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX1D_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_3c94b4b0f3a60861aae239669c481ea2" file="5" linestart="3315" lineend="3319">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_7ef82b856800fefb308f66456f585a24" file="5" linestart="3315" lineend="3315" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEX1D_SRV &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_3c94b4b0f3a60861aae239669c481ea2"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_TEX1D_SRV &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_3c94b4b0f3a60861aae239669c481ea2"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX1D_ARRAY_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_37c69301e8ea9c6f31ef4432050b7622" file="5" linestart="3321" lineend="3327">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_a53ede2984da7e64baf2f273f67320c6" file="5" linestart="3321" lineend="3321" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEX1D_ARRAY_SRV &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_37c69301e8ea9c6f31ef4432050b7622"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_TEX1D_ARRAY_SRV &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_37c69301e8ea9c6f31ef4432050b7622"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2D_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_7b688490dd87254bac4af45e4fcc5030" file="5" linestart="3329" lineend="3333">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_aa9f8aa7b650baebccd3269331e13944" file="5" linestart="3329" lineend="3329" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEX2D_SRV &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_7b688490dd87254bac4af45e4fcc5030"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_TEX2D_SRV &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_7b688490dd87254bac4af45e4fcc5030"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2D_ARRAY_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_7d5e4514919c61d6c8bafb3fc833eeb0" file="5" linestart="3335" lineend="3341">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_24158fd3f9a9ee69b0bad151c06c2168" file="5" linestart="3335" lineend="3335" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEX2D_ARRAY_SRV &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_7d5e4514919c61d6c8bafb3fc833eeb0"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_TEX2D_ARRAY_SRV &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_7d5e4514919c61d6c8bafb3fc833eeb0"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX3D_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_b8c300fb295b0525eb684104b1352ced" file="5" linestart="3343" lineend="3347">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_3b4c80c8b2e3b466d3484fdd60b25921" file="5" linestart="3343" lineend="3343" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEX3D_SRV &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_b8c300fb295b0525eb684104b1352ced"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_TEX3D_SRV &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_b8c300fb295b0525eb684104b1352ced"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEXCUBE_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_902b1f363eb175eba8f2e52ffa16ab3b" file="5" linestart="3349" lineend="3353">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_f99c68439583dc47db162f1e17fd2f92" file="5" linestart="3349" lineend="3349" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEXCUBE_SRV &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_902b1f363eb175eba8f2e52ffa16ab3b"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_TEXCUBE_SRV &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_902b1f363eb175eba8f2e52ffa16ab3b"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEXCUBE_ARRAY_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_a5c81fd16f309c2b5f96ca084a0a86f1" file="5" linestart="3355" lineend="3361">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_b5a106f6490d655361991fb83af727d8" file="5" linestart="3355" lineend="3355" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEXCUBE_ARRAY_SRV &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_a5c81fd16f309c2b5f96ca084a0a86f1"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_TEXCUBE_ARRAY_SRV &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_a5c81fd16f309c2b5f96ca084a0a86f1"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2DMS_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_ec33cdd9ba2d9d5482482647a4d9f380" file="5" linestart="3363" lineend="3366">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_d99b765a3623b679fedc207ed3b0fb75" file="5" linestart="3363" lineend="3363" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEX2DMS_SRV &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_ec33cdd9ba2d9d5482482647a4d9f380"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_TEX2DMS_SRV &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_ec33cdd9ba2d9d5482482647a4d9f380"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2DMS_ARRAY_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_a43765ce68b60fdfb356b1db79bb5d72" file="5" linestart="3368" lineend="3372">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_e7baf3676c0ce81f90567dd797be8b80" file="5" linestart="3368" lineend="3368" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEX2DMS_ARRAY_SRV &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_a43765ce68b60fdfb356b1db79bb5d72"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_TEX2DMS_ARRAY_SRV &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_a43765ce68b60fdfb356b1db79bb5d72"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_SHADER_RESOURCE_VIEW_DESC" id="937c62aeccd23cb28e89e33bdd7d6017_1afbc53837f517337aa98a45a0aff5a6" file="5" linestart="3374" lineend="3392">
+<fl name="Format" id="937c62aeccd23cb28e89e33bdd7d6017_660912df430c3f860a593c00a35fe2d1" file="5" linestart="3376" lineend="3376" isLiteral="true" access="public" proto="DXGI_FORMAT">
+<Tdef>
+<ety>
+<et>
+<e id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf"/>
+</et>
+</ety>
+</Tdef>
+</fl>
+<fl name="ViewDimension" id="937c62aeccd23cb28e89e33bdd7d6017_9eb9dafaed2296c44313893cc4c4bb33" file="5" linestart="3377" lineend="3377" isLiteral="true" access="public" proto="D3D11_SRV_DIMENSION">
+<Tdef>
+<Tdef>
+<ety>
+<et>
+<e id="036b95e0ea91df34ad2860727e547612_58c00204b01d0f861e7c58283afa546d"/>
+</et>
+</ety>
+</Tdef>
+</Tdef>
+</fl>
+<cr parent="937c62aeccd23cb28e89e33bdd7d6017_1afbc53837f517337aa98a45a0aff5a6" access="public" depth="0" pod="true" kind="union" name="" id="937c62aeccd23cb28e89e33bdd7d6017_5a057d6e1e83306bd0c44961829a0c00" file="5" linestart="3378" lineend="3391">
+<fl name="Buffer" id="937c62aeccd23cb28e89e33bdd7d6017_be20395f3b8fbf1d5157ad0c1dfa63c6" file="5" linestart="3380" lineend="3380" isLiteral="true" access="public" proto="D3D11_BUFFER_SRV">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_f341ec5adaf7694a91f556293614590f"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="Texture1D" id="937c62aeccd23cb28e89e33bdd7d6017_113ba805c5b2b4bd474faa7b26ffc9da" file="5" linestart="3381" lineend="3381" isLiteral="true" access="public" proto="D3D11_TEX1D_SRV">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_3c94b4b0f3a60861aae239669c481ea2"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="Texture1DArray" id="937c62aeccd23cb28e89e33bdd7d6017_b7a1005f74433b241fa4791ed5736f1c" file="5" linestart="3382" lineend="3382" isLiteral="true" access="public" proto="D3D11_TEX1D_ARRAY_SRV">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_37c69301e8ea9c6f31ef4432050b7622"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="Texture2D" id="937c62aeccd23cb28e89e33bdd7d6017_5b41018b8575a7b4551050ed39210441" file="5" linestart="3383" lineend="3383" isLiteral="true" access="public" proto="D3D11_TEX2D_SRV">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_7b688490dd87254bac4af45e4fcc5030"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="Texture2DArray" id="937c62aeccd23cb28e89e33bdd7d6017_24b271fac23d2f85eeb3b9d7316620bc" file="5" linestart="3384" lineend="3384" isLiteral="true" access="public" proto="D3D11_TEX2D_ARRAY_SRV">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_7d5e4514919c61d6c8bafb3fc833eeb0"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="Texture2DMS" id="937c62aeccd23cb28e89e33bdd7d6017_a9244143ce17313f5cc02dc4b82e838f" file="5" linestart="3385" lineend="3385" isLiteral="true" access="public" proto="D3D11_TEX2DMS_SRV">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_ec33cdd9ba2d9d5482482647a4d9f380"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="Texture2DMSArray" id="937c62aeccd23cb28e89e33bdd7d6017_c7c9c6e3f8c0d2dcc7b8dfa58df698c6" file="5" linestart="3386" lineend="3386" isLiteral="true" access="public" proto="D3D11_TEX2DMS_ARRAY_SRV">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_a43765ce68b60fdfb356b1db79bb5d72"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="Texture3D" id="937c62aeccd23cb28e89e33bdd7d6017_296231ee44daf0876145b0630a08ce07" file="5" linestart="3387" lineend="3387" isLiteral="true" access="public" proto="D3D11_TEX3D_SRV">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_b8c300fb295b0525eb684104b1352ced"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="TextureCube" id="937c62aeccd23cb28e89e33bdd7d6017_1a3d316c3cb6382b57e222c94973209a" file="5" linestart="3388" lineend="3388" isLiteral="true" access="public" proto="D3D11_TEXCUBE_SRV">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_902b1f363eb175eba8f2e52ffa16ab3b"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="TextureCubeArray" id="937c62aeccd23cb28e89e33bdd7d6017_e930a471291b30320bd53a7e7a542eaa" file="5" linestart="3389" lineend="3389" isLiteral="true" access="public" proto="D3D11_TEXCUBE_ARRAY_SRV">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_a5c81fd16f309c2b5f96ca084a0a86f1"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="BufferEx" id="937c62aeccd23cb28e89e33bdd7d6017_9336439db83ef8871b1c2a321c4be74e" file="5" linestart="3390" lineend="3390" isLiteral="true" access="public" proto="D3D11_BUFFEREX_SRV">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_a1c51b0c72b25cf1ceaffcd4070560b8"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+</cr>
+<fl name="" id="937c62aeccd23cb28e89e33bdd7d6017_cdd294b829f1a5f31261a47acbb3c54d" file="5" linestart="3378" lineend="3378" isLiteral="true" access="public" proto="D3D11_SHADER_RESOURCE_VIEW_DESC::(anonymous union at c:\program files (x86)\windows kits\8.1\include\um/d3d11.h:3378:5)">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_5a057d6e1e83306bd0c44961829a0c00"/>
+</rt>
+</fl>
+</cr>
+<cr namespace="Arkeng" access="none" depth="1" kind="class" name="D3D11Renderer" id="695c4e605f1bcf3b02de8492dc8b3c3b_de162f9aec055a3643a17afc906cd168" file="6" linestart="36" lineend="62">
+<base access="public">
+<rt>
+<cr id="4a89be1941797dc9e69ce7c4321a42d0_84d26f714d1a61eeede3815ded52a0fe"/>
+</rt>
+</base>
+</cr>
+</Externals>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<InfoWarnings>
+  <Info>01.24.2015 13:51:44 Begin full analysis with CppDepend v5.0.0.712</Info>
+  <Info>No Baseline for Comparison loaded.</Info>
+  <Info>The parser used is Clang</Info>
+  <Info>6 Cores are used, you can change this value from the menu Tools-&gt;Options-&gt;Parser Configuration</Info>
+  <Info>No dependency cycle detected in projects referencement graph.</Info>
+  <Info>01.24.2015 13:52:19 Analyse dependencies of your application.</Info>
+  <Info>01.24.2015 13:52:19 Building the report (standard).</Info>
+  <Info>01.24.2015 13:52:23 Log trend metrics values.</Info>
+  <Info>01.24.2015 13:52:24 Execute queries and rules</Info>
+  <Info>01.24.2015 13:52:27 CppDepend analysis done. Duration: 00:00:43</Info>
+</InfoWarnings>

@@ -29,6 +29,7 @@ void PipelineManager::SetDeviceContext( DeviceContextComPtr Context,D3D_FEATURE_
 	m_FeatureLevel = FeatureLevel;
 
 	OutputMergerStage.SetFeatureLevel( FeatureLevel );
+	RasterizerStage.SetFeatureLevel( FeatureLevel );
 }
 //--------------------------------------------------------------------------------
 void PipelineManager::ApplyRenderTargets()
@@ -44,8 +45,19 @@ void PipelineManager::ClearRenderTargets()
 void PipelineManager::ClearPipelineState()
 {
 	OutputMergerStage.ClearState();
+	RasterizerStage.ClearState();
 
 	m_pContext->ClearState();
+}
+//--------------------------------------------------------------------------------
+void PipelineManager::ApplyPipelineResources()
+{
+	RasterizerStage.ApplyState( m_pContext.Get() );
+}
+//--------------------------------------------------------------------------------
+void PipelineManager::ClearPipelineResources()
+{
+
 }
 //--------------------------------------------------------------------------------
 void PipelineManager::ClearBuffers(float color[],float depth)
@@ -55,8 +67,8 @@ void PipelineManager::ClearBuffers(float color[],float depth)
 
 	for( UINT i = 0; i < viewCount; ++i )
 	{
-		int rtv = OutputMergerStage.GetCurrentState().RenderTargetViews[i];
-		Dx11RenderTargetView& rtView = D3D11Renderer::Get()->GetRenderTargetViewByIndex(rtv);
+		int rtv = OutputMergerStage.State.GetRenderTargetView(i);
+		Dx11RenderTargetView& rtView = ArkRenderer11::Get()->GetRenderTargetViewByIndex(rtv);
 		pRenderTargetViews[i] = rtView.m_pRenderTargetView.Get();
 
 		if( pRenderTargetViews[i] != nullptr )

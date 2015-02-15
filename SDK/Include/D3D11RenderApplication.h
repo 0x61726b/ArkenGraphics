@@ -12,13 +12,15 @@
 #define __D3D11RenderApplication_h__
 //--------------------------------------------------------------------------------
 #include "Pch.h"
-#include "Application.h"
+#include "ArkApplication.h"
 #include "Win32RenderWindow.h"
 #include "D3D11Renderer.h"
+#include "RenderTask.h"
+#include "Camera.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
-	class D3D11RenderApplication : public Application
+	class D3D11RenderApplication : public ArkApplication
 	{
 	public:
 		D3D11RenderApplication();
@@ -39,8 +41,11 @@ namespace Arkeng
 	protected:
 		D3D11Renderer*			m_pRenderer;
 		Win32RenderWindow*		m_pWindow;
+		RenderTask*				m_pRenderView;
 
-		ID3D11RenderTargetView*				m_pBackBuffer;
+		Camera*					m_pCamera;
+
+		ResourcePtr						m_pBackBuffer;
 		ResourcePtr							m_testBackBuffer;
 
 		UINT					m_iWidth;

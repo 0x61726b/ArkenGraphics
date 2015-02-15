@@ -12,7 +12,7 @@
 #include "Dx11DepthStencilViewConfig.h"
 #include "Dx11ShaderResourceViewConfig.h"
 #include "Dx11RenderTargetViewConfig.h"
-#include "D3D11Renderer.h"
+#include "ArkRenderer11.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ Dx11ResourceProxy::~Dx11ResourceProxy()
 	Safe_Delete(m_pSRVConfig);
 	Safe_Delete(m_pDSVConfig);
 }
-Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig,D3D11Renderer* pRenderer,Dx11ShaderResourceViewConfig* pSRVConfig,
+Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig,ArkRenderer11* pRenderer,Dx11ShaderResourceViewConfig* pSRVConfig,
 	Dx11RenderTargetViewConfig* pRTVConfig,
 	Dx11DepthStencilViewConfig* pDSVConfig)
 {
@@ -45,7 +45,7 @@ Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig
 	*m_pTexture2dConfig = *pConfig;
 }
 
-void Dx11ResourceProxy::CommonConstructor(UINT BindFlags,int ResourceID,D3D11Renderer* pRenderer,
+void Dx11ResourceProxy::CommonConstructor(UINT BindFlags,int ResourceID,ArkRenderer11* pRenderer,
 	Dx11ShaderResourceViewConfig* pSRVConfig,
 	Dx11RenderTargetViewConfig* pRTVConfig,
 	Dx11DepthStencilViewConfig* pDSVConfig)

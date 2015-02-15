@@ -49,7 +49,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>Rendering;Application;Events;Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Logging;Scene;Rendering;Application;Events;Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -65,7 +65,9 @@
       <Command>copy Utility\*.h ..\SDK\Include
 copy Application\*.h ..\SDK\Include
 copy Events\*.h ..\SDK\Include
-copy Rendering\*.h ..\SDK\Include</Command>
+copy Rendering\*.h ..\SDK\Include
+copy Scene\*.h ..\SDK\Include
+copy Logging\*.h ..\SDK\Include</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -83,8 +85,9 @@ copy Rendering\*.h ..\SDK\Include</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Application\Application.h" />
-    <ClInclude Include="Application\D3D11RenderApplication.h" />
+    <ClInclude Include="Application\ArkApplication.h" />
+    <ClInclude Include="Application\ArkRenderApplication11.h" />
+    <ClInclude Include="Application\ArkConfigFile.h" />
     <ClInclude Include="Application\IWndProc.h" />
     <ClInclude Include="Application\RenderWindow.h" />
     <ClInclude Include="Application\Win32RenderWindow.h" />
@@ -95,6 +98,9 @@ copy Rendering\*.h ..\SDK\Include</Command>
     <ClInclude Include="Events\EWindowResize.h" />
     <ClInclude Include="Events\IEvent.h" />
     <ClInclude Include="Events\IEventListener.h" />
+    <ClInclude Include="Logging\ArkFileSystem.h" />
+    <ClInclude Include="Logging\DxDebugHelper.h" />
+    <ClInclude Include="Logging\ArkLog.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilView.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilViewConfig.h" />
     <ClInclude Include="Rendering\Dx11RenderTargetView.h" />
@@ -104,19 +110,29 @@ copy Rendering\*.h ..\SDK\Include</Command>
     <ClInclude Include="Rendering\Dx11ShaderResourceViewConfig.h" />
     <ClInclude Include="Rendering\Dx11SwapChainConfig.h" />
     <ClInclude Include="Rendering\Dx11Texture2DConfig.h" />
+    <ClInclude Include="Rendering\Dx11ViewPort.h" />
     <ClInclude Include="Rendering\DxOutputMergerStage.h" />
     <ClInclude Include="Rendering\DxOutputMergerState.h" />
+    <ClInclude Include="Rendering\DxRasterizerStage.h" />
+    <ClInclude Include="Rendering\DxRasterizerState.h" />
     <ClInclude Include="Rendering\IRenderer.h" />
-    <ClInclude Include="Rendering\D3D11Renderer.h" />
+    <ClInclude Include="Rendering\ArkRenderer11.h" />
+    <ClInclude Include="Rendering\PerspectiveView.h" />
     <ClInclude Include="Rendering\PipelineManager.h" />
     <ClInclude Include="Rendering\Dx11Resource.h" />
     <ClInclude Include="Rendering\Dx11SwapChain.h" />
     <ClInclude Include="Rendering\Dx11Texture2D.h" />
+    <ClInclude Include="Rendering\RenderTask.h" />
+    <ClInclude Include="Rendering\TaskCore.h" />
+    <ClInclude Include="Scene\Actor.h" />
+    <ClInclude Include="Scene\Camera.h" />
+    <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Utility\Pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application\Application.cpp" />
-    <ClCompile Include="Application\D3D11RenderApplication.cpp" />
+    <ClCompile Include="Application\ArkApplication.cpp" />
+    <ClCompile Include="Application\ArkConfigFile.cpp" />
+    <ClCompile Include="Application\ArkRenderApplication11.cpp" />
     <ClCompile Include="Application\Main.cpp" />
     <ClCompile Include="Application\RenderWindow.cpp" />
     <ClCompile Include="Application\Win32RenderWindow.cpp" />
@@ -126,7 +142,11 @@ copy Rendering\*.h ..\SDK\Include</Command>
     <ClCompile Include="Events\EWindow.cpp" />
     <ClCompile Include="Events\EWindowResize.cpp" />
     <ClCompile Include="Events\IEventListener.cpp" />
-    <ClCompile Include="Rendering\D3D11Renderer.cpp" />
+    <ClCompile Include="Logging\ArkFileSystem.cpp" />
+    <ClCompile Include="Logging\DxDebugHelper.cpp" />
+    <ClCompile Include="Logging\ArkLog.cpp" />
+    <ClCompile Include="Perspective\PerspectiveView.cpp" />
+    <ClCompile Include="Rendering\ArkRenderer11.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilView.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilViewConfig.cpp" />
     <ClCompile Include="Rendering\Dx11RenderTargetView.cpp" />
@@ -137,11 +157,19 @@ copy Rendering\*.h ..\SDK\Include</Command>
     <ClCompile Include="Rendering\Dx11SwapChainConfig.cpp" />
     <ClCompile Include="Rendering\Dx11Texture2D.cpp" />
     <ClCompile Include="Rendering\Dx11Texture2DConfig.cpp" />
+    <ClCompile Include="Rendering\Dx11ViewPort.cpp" />
     <ClCompile Include="Rendering\DxOutputMergerStage.cpp" />
     <ClCompile Include="Rendering\DxOutputMergerState.cpp" />
+    <ClCompile Include="Rendering\DxRasterizerStage.cpp" />
+    <ClCompile Include="Rendering\DxRasterizerState.cpp" />
     <ClCompile Include="Rendering\PipelineManager.cpp" />
     <ClCompile Include="Rendering\Dx11Resource.cpp" />
     <ClCompile Include="Rendering\Dx11ResourceProxy.cpp" />
+    <ClCompile Include="Rendering\RenderTask.cpp" />
+    <ClCompile Include="Rendering\TaskCore.cpp" />
+    <ClCompile Include="Scene\Actor.cpp" />
+    <ClCompile Include="Scene\Camera.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Utility\Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildThisFileDirectory)../../build/native/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

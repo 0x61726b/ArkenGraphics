@@ -25,7 +25,13 @@ App::~App()
 }
 bool App::ConfigureEngineComponents()
 {
-	if(!ConfigureRenderingEngineComponents(1920,1080,D3D_FEATURE_LEVEL_11_0)) {
+	int resX = 0;
+	int resY = 0;
+
+	resX = ArkConfigFile::Get().GetConfig().DesiredResolutionX;
+	resY = ArkConfigFile::Get().GetConfig().DesiredResolutionY;
+
+	if(!ConfigureRenderingEngineComponents(resX,resY,D3D_FEATURE_LEVEL_11_0)) {
 		return(false);
 	}
 
@@ -49,8 +55,8 @@ void App::Initialize()
 //--------------------------------------------------------------------------------
 void App::Update()
 {
-	float color[4] = { 1,0,0,0 };
-	m_pRenderer->pPipeline->ClearBuffers(color,1000.0f);
+	m_pScene->Update( 1/60 );
+	m_pScene->Render( m_pRenderer );
 
 	m_pRenderer->Present( m_pWindow->GetHandle(),m_pWindow->GetSwapChain() );
 }
@@ -61,7 +67,7 @@ void App::Shutdown()
 //--------------------------------------------------------------------------------
 bool App::HandleEvent(EventPtr e)
 {
-	return D3D11RenderApplication::HandleEvent( e );
+	return ArkRenderApplication11::HandleEvent( e );
 }
 //--------------------------------------------------------------------------------
 std::wstring App::GetName()

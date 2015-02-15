@@ -1,0 +1,280 @@
+<Externals>
+<cr access="none" depth="0" pod="true" kind="struct" name="DXGI_SAMPLE_DESC" id="e12bff9b09ae6113a2391c345f90b0fc_452901a4152b6048815b24ee8d5fcda9" file="7" linestart="105" lineend="109"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEXTURE2D_DESC" id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267" file="8" linestart="2731" lineend="2743">
+<fl name="BindFlags" id="937c62aeccd23cb28e89e33bdd7d6017_01e1ca71b5925d0714cd2c342dcf370b" file="8" linestart="2740" lineend="2740" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<c name="D3D11_TEXTURE2D_DESC" id="937c62aeccd23cb28e89e33bdd7d6017_64cf73871113cdcc189a8b3139b81932" file="8" linestart="2731" lineend="2731" implicit="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="D3D11_TEXTURE2D_DESC &amp;&amp;" isRef="true" isLiteral="true" access2="none">
+<rrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</rrf>
+</p>
+</c>
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_e715418cd2e36c556ced437a8b84b27d" file="8" linestart="2731" lineend="2731" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_TEXTURE2D_DESC &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_TEXTURE2D_DESC &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_BUFFER_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_f341ec5adaf7694a91f556293614590f" file="8" linestart="3288" lineend="3300"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_BUFFEREX_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_a1c51b0c72b25cf1ceaffcd4070560b8" file="8" linestart="3308" lineend="3313"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX1D_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_3c94b4b0f3a60861aae239669c481ea2" file="8" linestart="3315" lineend="3319"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX1D_ARRAY_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_37c69301e8ea9c6f31ef4432050b7622" file="8" linestart="3321" lineend="3327"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2D_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_7b688490dd87254bac4af45e4fcc5030" file="8" linestart="3329" lineend="3333"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2D_ARRAY_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_7d5e4514919c61d6c8bafb3fc833eeb0" file="8" linestart="3335" lineend="3341"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX3D_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_b8c300fb295b0525eb684104b1352ced" file="8" linestart="3343" lineend="3347"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEXCUBE_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_902b1f363eb175eba8f2e52ffa16ab3b" file="8" linestart="3349" lineend="3353"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEXCUBE_ARRAY_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_a5c81fd16f309c2b5f96ca084a0a86f1" file="8" linestart="3355" lineend="3361"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2DMS_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_ec33cdd9ba2d9d5482482647a4d9f380" file="8" linestart="3363" lineend="3366"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2DMS_ARRAY_SRV" id="937c62aeccd23cb28e89e33bdd7d6017_a43765ce68b60fdfb356b1db79bb5d72" file="8" linestart="3368" lineend="3372"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_SHADER_RESOURCE_VIEW_DESC" id="937c62aeccd23cb28e89e33bdd7d6017_1afbc53837f517337aa98a45a0aff5a6" file="8" linestart="3374" lineend="3392">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_267fe70b0870247cee6bdbb911897cda" file="8" linestart="3374" lineend="3374" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_SHADER_RESOURCE_VIEW_DESC &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_1afbc53837f517337aa98a45a0aff5a6"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_SHADER_RESOURCE_VIEW_DESC &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_1afbc53837f517337aa98a45a0aff5a6"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_BUFFER_RTV" id="937c62aeccd23cb28e89e33bdd7d6017_a96a5b9240450a84b998933f3f6b1f34" file="8" linestart="3742" lineend="3754"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX1D_RTV" id="937c62aeccd23cb28e89e33bdd7d6017_59002a2681aa18e67e312d26fd56a1ca" file="8" linestart="3756" lineend="3759"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX1D_ARRAY_RTV" id="937c62aeccd23cb28e89e33bdd7d6017_1ad13520558e9ac2ca1bcc75062fb6a4" file="8" linestart="3761" lineend="3766"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2D_RTV" id="937c62aeccd23cb28e89e33bdd7d6017_a91747f9245ada8f087fa48ea9583ff2" file="8" linestart="3768" lineend="3771"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2DMS_RTV" id="937c62aeccd23cb28e89e33bdd7d6017_1ca67a08b8bbf91ab83df0c2fab3b87e" file="8" linestart="3773" lineend="3776"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2D_ARRAY_RTV" id="937c62aeccd23cb28e89e33bdd7d6017_5e2ecd036b7f5f213de1c06dc6e8d31a" file="8" linestart="3778" lineend="3783"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2DMS_ARRAY_RTV" id="937c62aeccd23cb28e89e33bdd7d6017_29168c66dc2babf71ffb626e475ad09e" file="8" linestart="3785" lineend="3789"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX3D_RTV" id="937c62aeccd23cb28e89e33bdd7d6017_2d9bc69713be4fb749211c90b13f88a4" file="8" linestart="3791" lineend="3796"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_RENDER_TARGET_VIEW_DESC" id="937c62aeccd23cb28e89e33bdd7d6017_e82c273e6ca9eb9bc9ba1cf6a11dedac" file="8" linestart="3798" lineend="3813">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_41d3bbcfb36cb543c2580a4635a12804" file="8" linestart="3798" lineend="3798" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_RENDER_TARGET_VIEW_DESC &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_e82c273e6ca9eb9bc9ba1cf6a11dedac"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_RENDER_TARGET_VIEW_DESC &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_e82c273e6ca9eb9bc9ba1cf6a11dedac"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX1D_DSV" id="937c62aeccd23cb28e89e33bdd7d6017_3e01ebee80068b5634e9b401464f2f99" file="8" linestart="4264" lineend="4267"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX1D_ARRAY_DSV" id="937c62aeccd23cb28e89e33bdd7d6017_5fb6039f167a0463db6a862a4580ebb1" file="8" linestart="4269" lineend="4274"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2D_DSV" id="937c62aeccd23cb28e89e33bdd7d6017_5b566b1abf0e36400f81c07b4be0c988" file="8" linestart="4276" lineend="4279"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2D_ARRAY_DSV" id="937c62aeccd23cb28e89e33bdd7d6017_0e722cdb2668df6e3c1a75d65da1e137" file="8" linestart="4281" lineend="4286"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2DMS_DSV" id="937c62aeccd23cb28e89e33bdd7d6017_f3bd11655757885de48c174b1e45b981" file="8" linestart="4288" lineend="4291"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEX2DMS_ARRAY_DSV" id="937c62aeccd23cb28e89e33bdd7d6017_dfceb9f57c363a1b4862c2d31edc296d" file="8" linestart="4293" lineend="4297"/>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_DEPTH_STENCIL_VIEW_DESC" id="937c62aeccd23cb28e89e33bdd7d6017_09be61409d86f5039d9701318bdd0dc1" file="8" linestart="4306" lineend="4320">
+<m name="operator=" id="937c62aeccd23cb28e89e33bdd7d6017_b3f513087ad76da5fbdcd70983191d3b" file="8" linestart="4306" lineend="4306" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="D3D11_DEPTH_STENCIL_VIEW_DESC &amp;">
+<lrf>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_09be61409d86f5039d9701318bdd0dc1"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const D3D11_DEPTH_STENCIL_VIEW_DESC &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_09be61409d86f5039d9701318bdd0dc1"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr namespace="Microsoft.WRL" access="none" kind="class" name="ComPtr" id="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff" file="9" linestart="168" lineend="168" previous="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff"/>
+<cr namespace="Arkeng" access="none" depth="1" kind="class" name="D3D11Renderer" id="695c4e605f1bcf3b02de8492dc8b3c3b_de162f9aec055a3643a17afc906cd168" file="10" linestart="36" lineend="62" previous="1716d59b533aea32110145dcbd4dfaae_de162f9aec055a3643a17afc906cd168">
+<base access="public">
+<rt>
+<cr id="4a89be1941797dc9e69ce7c4321a42d0_84d26f714d1a61eeede3815ded52a0fe"/>
+</rt>
+</base>
+</cr>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="Dx11Texture2DConfig" id="975318529b26a88f429292f70a1a44f6_04fddde2a89bb777f43b02c6e3e00182" file="3" linestart="16" lineend="43" previous="1716d59b533aea32110145dcbd4dfaae_04fddde2a89bb777f43b02c6e3e00182">
+<c name="Dx11Texture2DConfig" id="975318529b26a88f429292f70a1a44f6_aa0de5e718a145bdd81ebb562a5c15d0" file="3" linestart="19" lineend="19" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<m name="GetTextureDesc" id="975318529b26a88f429292f70a1a44f6_530aea2f99acb9bb53cfa21e2a091dd7" file="3" linestart="37" lineend="37" access="public">
+<fpt cc="x86_thiscall" proto="D3D11_TEXTURE2D_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</fpt>
+</m>
+<fl name="m_State" id="975318529b26a88f429292f70a1a44f6_9905f47be936300a9b55c1ec4d753465" file="3" linestart="40" lineend="40" isLiteral="true" access="protected" proto="D3D11_TEXTURE2D_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<m name="operator=" id="975318529b26a88f429292f70a1a44f6_8d9edc01830a9d8d9f276b6b2edbffbe" file="3" linestart="16" lineend="16" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="Arkeng::Dx11Texture2DConfig &amp;">
+<lrf>
+<rt>
+<cr id="975318529b26a88f429292f70a1a44f6_04fddde2a89bb777f43b02c6e3e00182"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const Arkeng::Dx11Texture2DConfig &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="975318529b26a88f429292f70a1a44f6_04fddde2a89bb777f43b02c6e3e00182"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="Dx11DepthStencilViewConfig" id="a15711f36771f1bbec8dafa2f3cdedd8_6ade0b1bdbfedff1606703451bca874d" file="4" linestart="15" lineend="41" previous="1716d59b533aea32110145dcbd4dfaae_6ade0b1bdbfedff1606703451bca874d">
+<c name="Dx11DepthStencilViewConfig" id="a15711f36771f1bbec8dafa2f3cdedd8_b837f119e8cf512df7e927a0ee01d6e7" file="4" linestart="18" lineend="18" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<fl name="m_State" id="a15711f36771f1bbec8dafa2f3cdedd8_2b2d48b14128c228eb56ea70f5568dfc" file="4" linestart="37" lineend="37" isLiteral="true" access="protected" proto="D3D11_DEPTH_STENCIL_VIEW_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_09be61409d86f5039d9701318bdd0dc1"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<m name="operator=" id="a15711f36771f1bbec8dafa2f3cdedd8_aa13d4a52790b385c5d998c8d15adbb5" file="4" linestart="15" lineend="15" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="Arkeng::Dx11DepthStencilViewConfig &amp;">
+<lrf>
+<rt>
+<cr id="a15711f36771f1bbec8dafa2f3cdedd8_6ade0b1bdbfedff1606703451bca874d"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const Arkeng::Dx11DepthStencilViewConfig &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="a15711f36771f1bbec8dafa2f3cdedd8_6ade0b1bdbfedff1606703451bca874d"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="Dx11ShaderResourceViewConfig" id="652254a60314ee817fb8b4d6400cc53f_73fb1157268c0c62e97149a5eef13e24" file="5" linestart="16" lineend="45" previous="1716d59b533aea32110145dcbd4dfaae_73fb1157268c0c62e97149a5eef13e24">
+<c name="Dx11ShaderResourceViewConfig" id="652254a60314ee817fb8b4d6400cc53f_9f82d8b783ac8eee7c6360b32855e5d3" file="5" linestart="19" lineend="19" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<fl name="m_State" id="652254a60314ee817fb8b4d6400cc53f_63381224a53aa4ac43bab389b5a87d3b" file="5" linestart="42" lineend="42" isLiteral="true" access="protected" proto="D3D11_SHADER_RESOURCE_VIEW_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_1afbc53837f517337aa98a45a0aff5a6"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<m name="operator=" id="652254a60314ee817fb8b4d6400cc53f_a7191a4fe18f4e3b34e1a383467de526" file="5" linestart="16" lineend="16" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="Arkeng::Dx11ShaderResourceViewConfig &amp;">
+<lrf>
+<rt>
+<cr id="652254a60314ee817fb8b4d6400cc53f_73fb1157268c0c62e97149a5eef13e24"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const Arkeng::Dx11ShaderResourceViewConfig &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="652254a60314ee817fb8b4d6400cc53f_73fb1157268c0c62e97149a5eef13e24"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="Dx11RenderTargetViewConfig" id="25a6d65a4eb34d6a945002a1f67443cf_8c14708a3ca6fdff0c925608c506f458" file="6" linestart="16" lineend="42" previous="1716d59b533aea32110145dcbd4dfaae_8c14708a3ca6fdff0c925608c506f458">
+<c name="Dx11RenderTargetViewConfig" id="25a6d65a4eb34d6a945002a1f67443cf_4d7730c04babbb61c5d0c9738ebee8bd" file="6" linestart="19" lineend="19" access="public">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+</c>
+<fl name="m_State" id="25a6d65a4eb34d6a945002a1f67443cf_c44cd45e67990059bfc501b7a0a6d2c2" file="6" linestart="39" lineend="39" isLiteral="true" access="protected" proto="D3D11_RENDER_TARGET_VIEW_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_e82c273e6ca9eb9bc9ba1cf6a11dedac"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<m name="operator=" id="25a6d65a4eb34d6a945002a1f67443cf_9168e7b16cc810107fbb9e9c78f49565" file="6" linestart="16" lineend="16" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="Arkeng::Dx11RenderTargetViewConfig &amp;">
+<lrf>
+<rt>
+<cr id="25a6d65a4eb34d6a945002a1f67443cf_8c14708a3ca6fdff0c925608c506f458"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const Arkeng::Dx11RenderTargetViewConfig &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="25a6d65a4eb34d6a945002a1f67443cf_8c14708a3ca6fdff0c925608c506f458"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+</Externals>

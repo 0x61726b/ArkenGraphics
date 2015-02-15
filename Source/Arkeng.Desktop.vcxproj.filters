@@ -25,13 +25,52 @@
     <Filter Include="Rendering\Direct3D11">
       <UniqueIdentifier>{644af289-b6ce-4f57-ba9a-1b90c66ffff0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{b0fc9420-c089-47ab-9cdd-1f4301693590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Cameras">
+      <UniqueIdentifier>{70297c4b-2a2c-4472-96a1-f7a544540b85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline">
+      <UniqueIdentifier>{7426ee86-a098-4b0c-a901-ca008ed3b054}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Resource">
+      <UniqueIdentifier>{3e31828d-13a9-400b-a2fa-e1dcbc729682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Resource\Views">
+      <UniqueIdentifier>{bef15ebd-3188-4cd1-a5ff-56a19360075c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Resource\Configs">
+      <UniqueIdentifier>{61416ea2-9793-43c8-855f-948224133609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Resource\DXGI">
+      <UniqueIdentifier>{7a8e534f-80aa-4fcb-8289-a4ee95d84f54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Resource\Textures">
+      <UniqueIdentifier>{92e219a1-151a-4846-a7bf-f2e658fd2954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Task System">
+      <UniqueIdentifier>{1d75fd87-9089-45b7-a21a-ae8502d41300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Render Views">
+      <UniqueIdentifier>{3efabf6b-d377-4992-99b3-4327fcf6a20c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline\Output Merger Stage">
+      <UniqueIdentifier>{992e0c69-c2b6-4a1c-a9eb-c79850c10033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logging">
+      <UniqueIdentifier>{a79b566d-c22e-4fcf-99a8-307b6075b3d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline\Rasterizer Stage">
+      <UniqueIdentifier>{9947b0d6-b612-49b4-8e68-dc57ba080a51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Resource\Viewport">
+      <UniqueIdentifier>{f75a5081-fa10-43ad-8096-ada819ade937}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Pch.h">
       <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Application.h">
-      <Filter>Application</Filter>
     </ClInclude>
     <ClInclude Include="Application\IWndProc.h">
       <Filter>Application</Filter>
@@ -60,70 +99,109 @@
     <ClInclude Include="Application\Win32RenderWindow.h">
       <Filter>Application</Filter>
     </ClInclude>
-    <ClInclude Include="Application\D3D11RenderApplication.h">
-      <Filter>Application</Filter>
-    </ClInclude>
     <ClInclude Include="Events\EWindowResize.h">
       <Filter>Events\WindowsMessages\Window</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\IRenderer.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Rendering\D3D11Renderer.h">
-      <Filter>Rendering\Direct3D11</Filter>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Actor.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Camera.h">
+      <Filter>Scene\Cameras</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\PipelineManager.h">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11Texture2D.h">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11SwapChain.h">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11Resource.h">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11Texture2DConfig.h">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11RenderTargetView.h">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11RenderTargetViewConfig.h">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11ShaderResourceView.h">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11ShaderResourceViewConfig.h">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11DepthStencilView.h">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11DepthStencilViewConfig.h">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11SwapChainConfig.h">
-      <Filter>Rendering\Direct3D11</Filter>
+      <Filter>Rendering\Direct3D11\Pipeline</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\Dx11ResourceProxy.h">
-      <Filter>Rendering\Direct3D11</Filter>
+      <Filter>Rendering\Direct3D11\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11Resource.h">
+      <Filter>Rendering\Direct3D11\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11Texture2DConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11DepthStencilViewConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11RenderTargetViewConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11ShaderResourceViewConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11SwapChainConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11ShaderResourceView.h">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11DepthStencilView.h">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11RenderTargetView.h">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11SwapChain.h">
+      <Filter>Rendering\Direct3D11\Resource\DXGI</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11Texture2D.h">
+      <Filter>Rendering\Direct3D11\Resource\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\TaskCore.h">
+      <Filter>Rendering\Direct3D11\Task System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\RenderTask.h">
+      <Filter>Rendering\Direct3D11\Task System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\PerspectiveView.h">
+      <Filter>Rendering\Direct3D11\Render Views</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\DxOutputMergerStage.h">
-      <Filter>Rendering\Direct3D11</Filter>
+      <Filter>Rendering\Direct3D11\Pipeline\Output Merger Stage</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\DxOutputMergerState.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Output Merger Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\DxDebugHelper.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\DxRasterizerStage.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Rasterizer Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\DxRasterizerState.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Rasterizer Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11ViewPort.h">
+      <Filter>Rendering\Direct3D11\Resource\Viewport</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\ArkFileSystem.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\ArkApplication.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\ArkRenderApplication11.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\ArkLog.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkRenderer11.h">
       <Filter>Rendering\Direct3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\ArkConfigFile.h">
+      <Filter>Application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
       <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Application.cpp">
-      <Filter>Application</Filter>
     </ClCompile>
     <ClCompile Include="Events\IEventListener.cpp">
       <Filter>Events</Filter>
@@ -149,59 +227,101 @@
     <ClCompile Include="Application\Win32RenderWindow.cpp">
       <Filter>Application</Filter>
     </ClCompile>
-    <ClCompile Include="Application\D3D11RenderApplication.cpp">
-      <Filter>Application</Filter>
-    </ClCompile>
     <ClCompile Include="Events\EWindowResize.cpp">
       <Filter>Events\WindowsMessages\Window</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\D3D11Renderer.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Actor.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Camera.cpp">
+      <Filter>Scene\Cameras</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\PipelineManager.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
+      <Filter>Rendering\Direct3D11\Pipeline</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\Dx11Resource.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Dx11Texture2D.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Dx11Texture2DConfig.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Dx11RenderTargetView.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Dx11RenderTargetViewConfig.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Dx11ShaderResourceView.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
+      <Filter>Rendering\Direct3D11\Resource</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\Dx11ResourceProxy.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Dx11ShaderResourceViewConfig.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Dx11DepthStencilView.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
+      <Filter>Rendering\Direct3D11\Resource</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\Dx11DepthStencilViewConfig.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\Dx11SwapChain.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
+    <ClCompile Include="Rendering\Dx11RenderTargetViewConfig.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11ShaderResourceViewConfig.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\Dx11SwapChainConfig.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11Texture2DConfig.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11ShaderResourceView.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11DepthStencilView.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11RenderTargetView.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11SwapChain.cpp">
+      <Filter>Rendering\Direct3D11\Resource\DXGI</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11Texture2D.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\RenderTask.cpp">
+      <Filter>Rendering\Direct3D11\Task System</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\TaskCore.cpp">
+      <Filter>Rendering\Direct3D11\Task System</Filter>
+    </ClCompile>
+    <ClCompile Include="Perspective\PerspectiveView.cpp">
+      <Filter>Rendering\Direct3D11\Render Views</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\DxOutputMergerStage.cpp">
-      <Filter>Rendering\Direct3D11</Filter>
+      <Filter>Rendering\Direct3D11\Pipeline\Output Merger Stage</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\DxOutputMergerState.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Output Merger Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\DxDebugHelper.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\DxRasterizerStage.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Rasterizer Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\DxRasterizerState.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Rasterizer Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11ViewPort.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Viewport</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\ArkFileSystem.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\ArkApplication.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\ArkRenderApplication11.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\ArkLog.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkRenderer11.cpp">
       <Filter>Rendering\Direct3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\ArkConfigFile.cpp">
+      <Filter>Application</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

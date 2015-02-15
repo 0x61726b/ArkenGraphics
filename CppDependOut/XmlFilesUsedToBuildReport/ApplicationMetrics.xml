@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ApplicationMetrics NAsm="2" NbSourceFiles="0" NbLinesOfCode="551" NbLinesOfComment="266" PercentageComment="32" NType="24" NClass="23" NAbstractClass="4" NInterface="0" NValueType="0" NExceptionType="0" NAttributeType="0" NDelegateType="0" NEnumType="1" NGenericMethodsDefinition="0" NGenericTypesDefinition="0" NILInstruction="8" NMethods="254" NFields="59" NNamespaces="3" NThirdPartyProjects="2" NThirdPartyNamespaces="6" NThirdPartyTypes="85" NThirdPartyMethods="123" NThirdPartyFields="127" PercentCodeCoverage="0" PercentPublicType="100" PercentPublicMethod="94.17" PercentClassWithAtLeastOnePublicField="23.33">
+  <PropertyOnInterface Occ="0" Avg="0" StdDev="0" MaxVal="-1" MaxName="" />
+  <MethodOnInterface Occ="0" Avg="0" StdDev="0" MaxVal="-1" MaxName="" />
+  <ArgOnMethodOnInterface Occ="0" Avg="0" StdDev="0" MaxVal="-1" MaxName="" />
+  <PublicPropertyOnClass Occ="27" Avg="0.04" StdDev="0.19" MaxVal="1" MaxName="__Globals" />
+  <PublicMethodOnClass Occ="27" Avg="8.96" StdDev="5.96" MaxVal="23" MaxName="Arkeng.RenderWindow" />
+  <ArgOnPublicMethodOnClass Occ="242" Avg="0.69" StdDev="0.86" MaxVal="6" MaxName="Arkeng.Dx11ResourceProxy.Dx11ResourceProxy(int,Arkeng::Dx11Texture2DConfig*,Arkeng::D3D11Renderer*,Arkeng::Dx11ShaderResourceViewConfig*,Arkeng::Dx11RenderTargetViewConfig*,Arkeng::Dx11DepthStencilViewConfig*)" />
+  <ILInstructionInNonAbstractMethods Occ="254" Avg="0.03" StdDev="0.22" MaxVal="2" MaxName="Arkeng.Application.MessageLoop()" />
+  <TypeWithTheMostILInstruction Occ="27" Avg="0.3" StdDev="0.85" MaxVal="4" MaxName="Arkeng.EventManager" />
+  <MethodCC Occ="254" Avg="0.26" StdDev="0.86" MaxVal="6" MaxName="Arkeng.Application.WindowProc(HWND,UINT,WPARAM,LPARAM)" />
+</ApplicationMetrics>

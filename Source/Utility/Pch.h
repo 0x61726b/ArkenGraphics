@@ -14,6 +14,7 @@
 //--------------------------------------------------------------------------------
 
 //Standart C++ Libraries
+#include <iostream>
 #include <fstream>
 #include <string>
 #include <map>
@@ -30,7 +31,7 @@
 #include <math.h>
 #include <memory>
 #include <assert.h>
-
+#include <ctime>
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>

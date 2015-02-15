@@ -1,0 +1,171 @@
+<Externals>
+<e access="none" name="DXGI_FORMAT" id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf" file="3" linestart="10" lineend="129" fixed="true">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="DXGI_FORMAT_R32G32B32A32_FLOAT" id="25adb24a197efe36b5ea439e0ef7fbfb_a7e4456661275bdd6ce9653ea4f61b84" file="3" linestart="14" lineend="14">
+<et>
+<e id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf"/>
+</et>
+</ec>
+<ec name="DXGI_FORMAT_R16G16B16A16_FLOAT" id="25adb24a197efe36b5ea439e0ef7fbfb_e36189ab1711798955fdcc05518127ff" file="3" linestart="22" lineend="22">
+<et>
+<e id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf"/>
+</et>
+</ec>
+<ec name="DXGI_FORMAT_D32_FLOAT" id="25adb24a197efe36b5ea439e0ef7fbfb_9406d521132615f70c1f8799e6f85d67" file="3" linestart="52" lineend="52">
+<et>
+<e id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf"/>
+</et>
+</ec>
+</e>
+<cr access="none" depth="0" pod="true" kind="struct" name="DXGI_SAMPLE_DESC" id="e12bff9b09ae6113a2391c345f90b0fc_452901a4152b6048815b24ee8d5fcda9" file="4" linestart="105" lineend="109">
+<fl name="Count" id="e12bff9b09ae6113a2391c345f90b0fc_9be639b6ef67f31728cbdb0b8c10a9df" file="4" linestart="107" lineend="107" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="Quality" id="e12bff9b09ae6113a2391c345f90b0fc_fa2db81f606584598eee140e802a311d" file="4" linestart="108" lineend="108" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<m name="operator=" id="e12bff9b09ae6113a2391c345f90b0fc_0d3c50a06188a9a689db0e2d89534249" file="4" linestart="105" lineend="105" implicit="true" operator="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="DXGI_SAMPLE_DESC &amp;">
+<lrf>
+<rt>
+<cr id="e12bff9b09ae6113a2391c345f90b0fc_452901a4152b6048815b24ee8d5fcda9"/>
+</rt>
+</lrf>
+</fpt>
+<p name="" proto="const DXGI_SAMPLE_DESC &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="e12bff9b09ae6113a2391c345f90b0fc_452901a4152b6048815b24ee8d5fcda9"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</m>
+</cr>
+<e access="none" name="D3D11_USAGE" id="937c62aeccd23cb28e89e33bdd7d6017_c63ab4507803b63a73795ef6d82a8404" file="5" linestart="1189" lineend="1195" fixed="true">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="D3D11_USAGE_DEFAULT" id="937c62aeccd23cb28e89e33bdd7d6017_2989675783e57c89009a5f29dd5a8fd4" file="5" linestart="1191" lineend="1191">
+<et>
+<e id="937c62aeccd23cb28e89e33bdd7d6017_c63ab4507803b63a73795ef6d82a8404"/>
+</et>
+</ec>
+</e>
+<e access="none" name="D3D11_BIND_FLAG" id="937c62aeccd23cb28e89e33bdd7d6017_0afbfec9eb3539d1e93970b55a653124" file="5" linestart="1198" lineend="1210" fixed="true">
+<promotion_type>
+<bt name="int"/>
+</promotion_type>
+<integer_type>
+<bt name="int"/>
+</integer_type>
+<ec name="D3D11_BIND_SHADER_RESOURCE" id="937c62aeccd23cb28e89e33bdd7d6017_c156e2b9bb7316d3a5f7f8f73c78b675" file="5" linestart="1203" lineend="1203">
+<et>
+<e id="937c62aeccd23cb28e89e33bdd7d6017_0afbfec9eb3539d1e93970b55a653124"/>
+</et>
+</ec>
+<ec name="D3D11_BIND_DEPTH_STENCIL" id="937c62aeccd23cb28e89e33bdd7d6017_431047a337b450a2c059fa30fc15a805" file="5" linestart="1206" lineend="1206">
+<et>
+<e id="937c62aeccd23cb28e89e33bdd7d6017_0afbfec9eb3539d1e93970b55a653124"/>
+</et>
+</ec>
+</e>
+<cr access="none" depth="0" pod="true" kind="struct" name="D3D11_TEXTURE2D_DESC" id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267" file="5" linestart="2731" lineend="2743">
+<fl name="Width" id="937c62aeccd23cb28e89e33bdd7d6017_997c139aedbd308b84f5eccdae7d0d5e" file="5" linestart="2733" lineend="2733" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="Height" id="937c62aeccd23cb28e89e33bdd7d6017_e20899bb53bfcf8a4cf0661d4cca61ce" file="5" linestart="2734" lineend="2734" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="MipLevels" id="937c62aeccd23cb28e89e33bdd7d6017_57c66c46df555abea69b3790189c5325" file="5" linestart="2735" lineend="2735" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="ArraySize" id="937c62aeccd23cb28e89e33bdd7d6017_0313d581e6aa05a871da5bd4fa673262" file="5" linestart="2736" lineend="2736" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="Format" id="937c62aeccd23cb28e89e33bdd7d6017_cb9eafc36a265c735f2e3f8c7609870f" file="5" linestart="2737" lineend="2737" isLiteral="true" access="public" proto="DXGI_FORMAT">
+<Tdef>
+<ety>
+<et>
+<e id="25adb24a197efe36b5ea439e0ef7fbfb_2b95cdcfd1414e62917c382901007ecf"/>
+</et>
+</ety>
+</Tdef>
+</fl>
+<fl name="SampleDesc" id="937c62aeccd23cb28e89e33bdd7d6017_ec961e28985eb83baaa92378f561ff9e" file="5" linestart="2738" lineend="2738" isLiteral="true" access="public" proto="DXGI_SAMPLE_DESC">
+<Tdef>
+<ety>
+<rt>
+<cr id="e12bff9b09ae6113a2391c345f90b0fc_452901a4152b6048815b24ee8d5fcda9"/>
+</rt>
+</ety>
+</Tdef>
+</fl>
+<fl name="Usage" id="937c62aeccd23cb28e89e33bdd7d6017_4f639e4d1ac3a16b6f26ffe26cd1b3f4" file="5" linestart="2739" lineend="2739" isLiteral="true" access="public" proto="D3D11_USAGE">
+<Tdef>
+<ety>
+<et>
+<e id="937c62aeccd23cb28e89e33bdd7d6017_c63ab4507803b63a73795ef6d82a8404"/>
+</et>
+</ety>
+</Tdef>
+</fl>
+<fl name="BindFlags" id="937c62aeccd23cb28e89e33bdd7d6017_01e1ca71b5925d0714cd2c342dcf370b" file="5" linestart="2740" lineend="2740" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="CPUAccessFlags" id="937c62aeccd23cb28e89e33bdd7d6017_b4725010801a68137952a300b3b3535d" file="5" linestart="2741" lineend="2741" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<fl name="MiscFlags" id="937c62aeccd23cb28e89e33bdd7d6017_58a843c920f0e35bd64e77878eaf0f12" file="5" linestart="2742" lineend="2742" isLiteral="true" access="public" proto="UINT">
+<Tdef>
+<bt name="unsigned int"/>
+</Tdef>
+</fl>
+<c name="D3D11_TEXTURE2D_DESC" id="937c62aeccd23cb28e89e33bdd7d6017_5e1920fdd15926a1093037671e966023" file="5" linestart="2731" lineend="2731" copyconst="true" implicit="true" access="public" inline="true" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="void">
+<bt name="void"/>
+</fpt>
+<p name="" proto="const D3D11_TEXTURE2D_DESC &amp;" isRef="true" isLiteral="true" access2="none">
+<lrf>
+<QualType const="true">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_df909dd95a47114482d2f8c000667267"/>
+</rt>
+</QualType>
+</lrf>
+</p>
+</c>
+</cr>
+<cr namespace="Arkeng" access="none" depth="1" kind="class" name="D3D11Renderer" id="695c4e605f1bcf3b02de8492dc8b3c3b_de162f9aec055a3643a17afc906cd168" file="6" linestart="36" lineend="62">
+<base access="public">
+<rt>
+<cr id="4a89be1941797dc9e69ce7c4321a42d0_84d26f714d1a61eeede3815ded52a0fe"/>
+</rt>
+</base>
+</cr>
+</Externals>

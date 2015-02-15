@@ -7,13 +7,13 @@
 //App.h
 //--------------------------------------------------------------------------------
 
-#include "D3D11RenderApplication.h"
+#include "ArkRenderApplication11.h"
 #include "Win32RenderWindow.h"
 #include "D3D11Renderer.h"
 
 using namespace Arkeng;
 
-class App : public D3D11RenderApplication
+class App : public ArkRenderApplication11
 {
 public:
 	App();

@@ -1,0 +1,53 @@
+<Externals>
+<cr access="none" depth="3" kind="interface" name="ID3D11ShaderResourceView" id="937c62aeccd23cb28e89e33bdd7d6017_d8273441c0a4005c9654fa2fe3774dc0" file="3" linestart="3616" lineend="3624" previous="937c62aeccd23cb28e89e33bdd7d6017_62db643ff13fb22b042dfccaab03c890">
+<base access="public">
+<rt>
+<cr id="937c62aeccd23cb28e89e33bdd7d6017_98672936f5e67440ec998a3571e4a301"/>
+</rt>
+</base>
+</cr>
+<tm namespace="Microsoft.WRL" access="none" depth="0" kind="class" name="ComPtr" id="2413c784050c7460db5d4cf92fa652c7_bde3d8f0bc8a97793b70db7a01d4b973" file="4" linestart="160" lineend="431">
+<template_parameters>
+<ttp name="T" id="2413c784050c7460db5d4cf92fa652c7_57595ac4320c2fc4737aae8ccb29be49" depth="" index="" proto="type-parameter-0-0"/>
+</template_parameters>
+<cr namespace="Microsoft.WRL" access="none" depth="0" kind="class" name="ComPtr" id="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff" file="4" linestart="161" lineend="431">
+<cr access="public" kind="class" name="ComPtr" id="2413c784050c7460db5d4cf92fa652c7_8828e95a45da70872a0e1fe9fd82241c" file="4" linestart="161" lineend="161"/>
+<m name="operator=" id="2413c784050c7460db5d4cf92fa652c7_d876dd221c27ddf8ce4f6fe8b4db5c7f" file="4" linestart="268" lineend="275" operator="true" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" proto="ComPtr&lt;T&gt; &amp;">
+<lrf>
+<InjectedClassName>
+<cr id="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff"/>
+</InjectedClassName>
+</lrf>
+<exception_specifiers nothrow="true"/>
+</fpt>
+<p name="other" proto="const ComPtr&lt;T&gt; &amp;" isRef="true" access2="none">
+<lrf>
+<QualType const="true">
+<InjectedClassName>
+<cr id="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff"/>
+</InjectedClassName>
+</QualType>
+</lrf>
+</p>
+</m>
+<m name="Get" id="2413c784050c7460db5d4cf92fa652c7_6cf3168fc3c7c49d833b653a39d01d7b" file="4" linestart="319" lineend="322" access="public" hasbody="true" isdef="true">
+<fpt cc="x86_thiscall" const="true" proto="T *">
+<pt>
+<ttp/>
+</pt>
+<exception_specifiers nothrow="true"/>
+</fpt>
+</m>
+</cr>
+</tm>
+<cr namespace="Microsoft.WRL" access="none" kind="class" name="ComPtr" id="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff" file="4" linestart="168" lineend="168" previous="2413c784050c7460db5d4cf92fa652c7_c763a247d6431692e7d9c054014adaff"/>
+<cr namespace="Arkeng" access="none" depth="1" kind="class" name="D3D11Renderer" id="695c4e605f1bcf3b02de8492dc8b3c3b_de162f9aec055a3643a17afc906cd168" file="5" linestart="36" lineend="62">
+<base access="public">
+<rt>
+<cr id="4a89be1941797dc9e69ce7c4321a42d0_84d26f714d1a61eeede3815ded52a0fe"/>
+</rt>
+</base>
+</cr>
+<cr namespace="Arkeng" access="none" depth="0" kind="class" name="PipelineManager" id="9a07cdc81ba2b2d30cb0fb04b3a87391_8db5976d560199a702adc5e3f9bb0b9b" file="6" linestart="16" lineend="30"/>
+</Externals>
