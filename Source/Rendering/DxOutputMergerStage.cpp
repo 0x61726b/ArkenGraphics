@@ -9,7 +9,7 @@
 #include "Pch.h"
 #include "DxOutputMergerStage.h"
 #include "Dx11RenderTargetView.h"
-
+#include "Dx11DepthStencilView.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -50,7 +50,9 @@ void DxOutputMergerStage::ApplyRenderTargets( ID3D11DeviceContext* pContext )
 			{
 			}
 		}
-
+		ID3D11DepthStencilView* dsv = 0;
+		/*Dx11DepthStencilView& DSV = pRenderer->GetDepthStencilViewByIndex( State.GetDepthTarget() );*/
+		/*dsv = DSV.m_pDepthStencilView.Get();*/
 		pContext->OMSetRenderTargets(rtvCount,&rtvs[0],NULL);
 	}
 }

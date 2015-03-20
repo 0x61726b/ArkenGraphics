@@ -27,7 +27,7 @@ namespace Arkeng
 		bool ArkCreateDirectory(const std::wstring& dir);
 
 		const std::wstring GetWorkingDirectory();
-
+		const std::wstring GetShadersDirectory();
 		
 	};
 };

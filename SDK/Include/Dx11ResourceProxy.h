@@ -18,6 +18,7 @@ namespace Arkeng
 	class Dx11RenderTargetViewConfig;
 	class Dx11DepthStencilViewConfig;
 	class ArkRenderer11;
+	class ArkBuffer11Config;
 
 	class Dx11ResourceProxy
 	{
@@ -25,6 +26,11 @@ namespace Arkeng
 		Dx11ResourceProxy();
 
 		Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig,ArkRenderer11* pRenderer,
+			Dx11ShaderResourceViewConfig* pSRVConfig = NULL,
+			Dx11RenderTargetViewConfig* pRTVConfig = NULL,
+			Dx11DepthStencilViewConfig* pDSVConfig = NULL);
+
+		Dx11ResourceProxy(int ResourceID,ArkBuffer11Config* pConfig,ArkRenderer11* pRenderer,
 			Dx11ShaderResourceViewConfig* pSRVConfig = NULL,
 			Dx11RenderTargetViewConfig* pRTVConfig = NULL,
 			Dx11DepthStencilViewConfig* pDSVConfig = NULL);
@@ -37,6 +43,7 @@ namespace Arkeng
 		int								m_iResourceRTV;
 		int								m_iResourceDSV;
 
+		ArkBuffer11Config*				m_pBufferConfig;
 		Dx11Texture2DConfig*	        m_pTexture2dConfig;
 		Dx11ShaderResourceViewConfig*   m_pSRVConfig;
 		Dx11RenderTargetViewConfig*     m_pRTVConfig;

@@ -24,7 +24,7 @@ namespace Arkeng
 
 		virtual void QueuePreTasks( ArkRenderer11* pRenderer ) = 0;
 
-		virtual void ExecuteTask( PipelineManager* pPipelineManager ) = 0;
+		virtual void ExecuteTask( PipelineManager* pPipelineManager,IParameterManager* pParamManager ) = 0;
 
 		virtual std::wstring GetName() = 0;
 	};

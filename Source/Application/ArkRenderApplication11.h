@@ -50,6 +50,8 @@ namespace Arkeng
 
 		UINT					m_iWidth;
 		UINT					m_iHeight;
+
+		
 	};
 
 };

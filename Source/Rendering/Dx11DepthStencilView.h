@@ -23,6 +23,7 @@ namespace Arkeng
 		DepthStencilViewComPtr			m_pDepthStencilView;
 
 		friend PipelineManager;
+		friend DxOutputMergerStage;
 		friend ArkRenderer11;
 	};
 };

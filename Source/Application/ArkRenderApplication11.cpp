@@ -84,9 +84,13 @@ bool ArkRenderApplication11::ConfigureRenderingSetup()
 	PerspectiveView* pPerspView = new PerspectiveView( *m_pRenderer,m_pBackBuffer );
 	m_pRenderView = pPerspView;
 
+	
+    const float nearClip = 1.0f;
+    const float farClip = 15.0f;
 
 	m_pCamera = new Camera();
 	m_pCamera->SetCameraView( m_pRenderView );
+	m_pCamera->SetProjectionParams(nearClip,farClip, static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight), static_cast<float>(3.14f) / 2.0f);
 
 	m_pScene->AddCamera( m_pCamera );
 	return true;

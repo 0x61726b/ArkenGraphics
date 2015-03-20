@@ -42,6 +42,8 @@
     <OutDir>..\SDK\Library\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>Bin\$(Platform)\$(Configuration)\</IntDir>
     <TargetExt>.lib</TargetExt>
+    <IncludePath>$(DXSDK_DIR);$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -98,9 +100,32 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClInclude Include="Events\EWindowResize.h" />
     <ClInclude Include="Events\IEvent.h" />
     <ClInclude Include="Events\IEventListener.h" />
+    <ClInclude Include="Logging\ArkFileLoader.h" />
     <ClInclude Include="Logging\ArkFileSystem.h" />
     <ClInclude Include="Logging\DxDebugHelper.h" />
     <ClInclude Include="Logging\ArkLog.h" />
+    <ClInclude Include="Rendering\ArkBuffer11.h" />
+    <ClInclude Include="Rendering\ArkBuffer11Config.h" />
+    <ClInclude Include="Rendering\ArkConstantBuffer11.h" />
+    <ClInclude Include="Rendering\ArkConstantBufferParameter11.h" />
+    <ClInclude Include="Rendering\ArkIndexBuffer11.h" />
+    <ClInclude Include="Rendering\ArkMatrixArrayParameter11.h" />
+    <ClInclude Include="Rendering\ArkMatrixParameter11.h" />
+    <ClInclude Include="Rendering\ArkParameterManager11.h" />
+    <ClInclude Include="Rendering\ArkPixelShader11.h" />
+    <ClInclude Include="Rendering\ArkPixelShaderStage11.h" />
+    <ClInclude Include="Rendering\ArkRenderEffect11.h" />
+    <ClInclude Include="Rendering\ArkRenderParameter11.h" />
+    <ClInclude Include="Rendering\ArkShader11.h" />
+    <ClInclude Include="Rendering\ArkShaderFactory11.h" />
+    <ClInclude Include="Rendering\ArkShaderReflection11.h" />
+    <ClInclude Include="Rendering\ArkShaderReflectionFactory11.h" />
+    <ClInclude Include="Rendering\ArkShaderStageState11.h" />
+    <ClInclude Include="Rendering\ArkVectorParameter11.h" />
+    <ClInclude Include="Rendering\ArkVertexBuffer11.h" />
+    <ClInclude Include="Rendering\ArkShaderStage11.h" />
+    <ClInclude Include="Rendering\ArkVertexShader11.h" />
+    <ClInclude Include="Rendering\ArkVertexShaderStage11.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilView.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilViewConfig.h" />
     <ClInclude Include="Rendering\Dx11RenderTargetView.h" />
@@ -111,10 +136,13 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClInclude Include="Rendering\Dx11SwapChainConfig.h" />
     <ClInclude Include="Rendering\Dx11Texture2DConfig.h" />
     <ClInclude Include="Rendering\Dx11ViewPort.h" />
+    <ClInclude Include="Rendering\DxIAStage.h" />
+    <ClInclude Include="Rendering\DxIAState.h" />
     <ClInclude Include="Rendering\DxOutputMergerStage.h" />
     <ClInclude Include="Rendering\DxOutputMergerState.h" />
     <ClInclude Include="Rendering\DxRasterizerStage.h" />
     <ClInclude Include="Rendering\DxRasterizerState.h" />
+    <ClInclude Include="Rendering\IParameterManager.h" />
     <ClInclude Include="Rendering\IRenderer.h" />
     <ClInclude Include="Rendering\ArkRenderer11.h" />
     <ClInclude Include="Rendering\PerspectiveView.h" />
@@ -142,11 +170,34 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClCompile Include="Events\EWindow.cpp" />
     <ClCompile Include="Events\EWindowResize.cpp" />
     <ClCompile Include="Events\IEventListener.cpp" />
+    <ClCompile Include="Logging\ArkFileLoader.cpp" />
     <ClCompile Include="Logging\ArkFileSystem.cpp" />
     <ClCompile Include="Logging\DxDebugHelper.cpp" />
     <ClCompile Include="Logging\ArkLog.cpp" />
     <ClCompile Include="Perspective\PerspectiveView.cpp" />
+    <ClCompile Include="Rendering\ArkBuffer11.cpp" />
+    <ClCompile Include="Rendering\ArkBuffer11Config.cpp" />
+    <ClCompile Include="Rendering\ArkConstantBuffer11.cpp" />
+    <ClCompile Include="Rendering\ArkConstantBufferParameter11.cpp" />
+    <ClCompile Include="Rendering\ArkIndexBuffer11.cpp" />
+    <ClCompile Include="Rendering\ArkMatrixArrayParameter.cpp" />
+    <ClCompile Include="Rendering\ArkMatrixParameter11.cpp" />
+    <ClCompile Include="Rendering\ArkParameterManager11.cpp" />
+    <ClCompile Include="Rendering\ArkPixelShader11.cpp" />
+    <ClCompile Include="Rendering\ArkPixelShaderStage11.cpp" />
+    <ClCompile Include="Rendering\ArkRenderEffect11.cpp" />
     <ClCompile Include="Rendering\ArkRenderer11.cpp" />
+    <ClCompile Include="Rendering\ArkRenderParameter11.cpp" />
+    <ClCompile Include="Rendering\ArkShader11.cpp" />
+    <ClCompile Include="Rendering\ArkShaderFactory11.cpp" />
+    <ClCompile Include="Rendering\ArkShaderReflection11.cpp" />
+    <ClCompile Include="Rendering\ArkShaderReflectionFactory11.cpp" />
+    <ClCompile Include="Rendering\ArkShaderStage11.cpp" />
+    <ClCompile Include="Rendering\ArkShaderStageState11.cpp" />
+    <ClCompile Include="Rendering\ArkVectorParameter11.cpp" />
+    <ClCompile Include="Rendering\ArkVertexBuffer11.cpp" />
+    <ClCompile Include="Rendering\ArkVertexShader11.cpp" />
+    <ClCompile Include="Rendering\ArkVertexShaderStage11.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilView.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilViewConfig.cpp" />
     <ClCompile Include="Rendering\Dx11RenderTargetView.cpp" />
@@ -158,6 +209,8 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClCompile Include="Rendering\Dx11Texture2D.cpp" />
     <ClCompile Include="Rendering\Dx11Texture2DConfig.cpp" />
     <ClCompile Include="Rendering\Dx11ViewPort.cpp" />
+    <ClCompile Include="Rendering\DxIAStage.cpp" />
+    <ClCompile Include="Rendering\DxIAState.cpp" />
     <ClCompile Include="Rendering\DxOutputMergerStage.cpp" />
     <ClCompile Include="Rendering\DxOutputMergerState.cpp" />
     <ClCompile Include="Rendering\DxRasterizerStage.cpp" />

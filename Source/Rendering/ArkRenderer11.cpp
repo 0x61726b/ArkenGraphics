@@ -12,6 +12,23 @@
 #include "DxDebugHelper.h"
 
 #include "ArkRenderer11.h"
+
+#include "ArkVertexBuffer11.h"
+#include "ArkIndexBuffer11.h"
+#include "ArkConstantBuffer11.h"
+
+#include "ArkRenderEffect11.h"
+#include "ArkBuffer11Config.h"
+
+#include "ArkShaderFactory11.h"
+#include "ArkShaderReflection11.h"
+#include "ArkShaderReflectionFactory11.h"
+
+#include "ArkVertexShader11.h"
+#include "ArkPixelShader11.h"
+
+#include "ArkParameterManager11.h"
+
 #include "Dx11Texture2D.h"
 #include "Dx11Resource.h"
 #include "Dx11SwapChain.h"
@@ -39,6 +56,7 @@ ArkRenderer11::ArkRenderer11()
 	m_spRenderer = this;
 	pPipeline = 0;
 
+	m_pParamMgr = 0;
 }
 //--------------------------------------------------------------------------------
 ArkRenderer11::~ArkRenderer11()
@@ -122,7 +140,7 @@ bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL Feat
 
 			ArkLog::Get(LogType::Renderer).Output(L"Renderer supported display modes:");
 
-			for(int i=0; i < numModes; ++i)
+			for(unsigned int i=0; i < numModes; ++i)
 			{
 				DXGI_MODE_DESC displayMode = displayModes[i];
 				std::wstring log = L"";
@@ -170,7 +188,8 @@ bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL Feat
 
 	m_pDeviceContext = pContext;
 
-
+	
+	m_pParamMgr = new ArkParameterManager11(0);
 	pPipeline = new PipelineManager();
 	pPipeline->SetDeviceContext(m_pDeviceContext,FeatureLevel);
 
@@ -383,16 +402,16 @@ void ArkRenderer11::ResizeViewport(int ID,UINT width,UINT height)
 	Dx11ViewPort& pViewport = m_vViewports[index];
 
 	std::wstring log = L"Resized viewport ";
-	log.append( std::to_wstring(width) );
+	log.append(std::to_wstring(width));
 	log.append(L"x");
-	log.append( std::to_wstring(height));
+	log.append(std::to_wstring(height));
 
-	
+
 	pViewport.m_ViewPort.Width = static_cast<float>(width);
 	pViewport.m_ViewPort.Height = static_cast<float>(height);
 
-	
-	
+
+
 	ArkLog::Get(LogType::Renderer).Output(log);
 }
 //--------------------------------------------------------------------------------
@@ -446,6 +465,14 @@ Dx11RenderTargetView& ArkRenderer11::GetRenderTargetViewByIndex(int rid)
 	return(m_vRenderTargetViews[rid]);
 }
 //--------------------------------------------------------------------------------
+Dx11DepthStencilView& ArkRenderer11::GetDepthStencilViewByIndex(int rid)
+{
+	assert( rid >= 0 );
+	assert( rid < m_vDepthStencilViews.size() );
+
+	return( m_vDepthStencilViews[rid] );
+}
+//--------------------------------------------------------------------------------
 Dx11Texture2D* ArkRenderer11::GetTexture2DByIndex(int rid)
 {
 	Dx11Texture2D* pResult = 0;
@@ -481,7 +508,7 @@ void ArkRenderer11::ProcessTaskQueue()
 		{
 			int k = i-j;
 			if(k >= 0)
-				m_vQueuedTasks[k]->ExecuteTask(pPipeline);
+				m_vQueuedTasks[k]->ExecuteTask(pPipeline,m_pParamMgr);
 		}
 	}
 	m_vQueuedTasks.clear();
@@ -504,3 +531,274 @@ const Dx11ViewPort& ArkRenderer11::GetViewPort(int ID)
 
 }
 //--------------------------------------------------------------------------------
+InputLayoutComPtr ArkRenderer11::GetInputLayout(int ID)
+{
+	return m_vInputLayouts[ID];
+}
+//--------------------------------------------------------------------------------
+int ArkRenderer11::CreateInputLayout(std::vector<D3D11_INPUT_ELEMENT_DESC>& elements,int ShaderID)
+{
+	// Create array of elements here for the API call.
+	D3D11_INPUT_ELEMENT_DESC* pElements = new D3D11_INPUT_ELEMENT_DESC[elements.size()];
+	for(unsigned int i = 0; i < elements.size(); i++)
+		pElements[i] = elements[i];
+
+	// Attempt to create the input layout from the input information.
+	ID3DBlob* pCompiledShader = m_vShaders[ShaderID]->m_pCompiledShader;
+	InputLayoutComPtr pLayout;
+
+	HRESULT hr = m_pDevice->CreateInputLayout(pElements,elements.size(),
+		pCompiledShader->GetBufferPointer(),pCompiledShader->GetBufferSize(),pLayout.GetAddressOf());
+
+	// Release the input elements array.
+	delete[] pElements;
+
+	// On failure, log the error and return an invalid index.
+	if(FAILED(hr))
+	{
+		ArkLog::Get(LogType::Renderer).Write(L"Failed to create input layout!");
+		return(-1);
+	}
+
+	m_vInputLayouts.push_back(pLayout);
+
+	// Return the index for referencing later on.
+	return(m_vInputLayouts.size() - 1);
+}
+//--------------------------------------------------------------------------------
+ResourcePtr ArkRenderer11::CreateVertexBuffer(ArkBuffer11Config* pConfig,D3D11_SUBRESOURCE_DATA* pData)
+{
+	BufferComPtr pBuffer;
+	HRESULT hr = m_pDevice->CreateBuffer(&pConfig->m_State,pData,pBuffer.GetAddressOf());
+
+	if(pBuffer)
+	{
+		ArkVertexBuffer11* pVertexBuffer = new ArkVertexBuffer11(pBuffer);
+		pVertexBuffer->SetDesiredDescription(pConfig->m_State);
+
+		// Return an index with the lower 16 bits of index, and the upper
+		// 16 bits to identify the resource type.
+
+		int ResourceID = StoreNewResource(pVertexBuffer);
+		ResourcePtr Proxy(new Dx11ResourceProxy(ResourceID,pConfig,this));
+
+		return(Proxy);
+	}
+
+	return(ResourcePtr(new Dx11ResourceProxy()));
+}
+//--------------------------------------------------------------------------------
+ResourcePtr ArkRenderer11::CreateIndexBuffer(ArkBuffer11Config* pConfig,D3D11_SUBRESOURCE_DATA* pData)
+{
+	// Create the buffer with the specified configuration.
+
+	BufferComPtr pBuffer;
+	HRESULT hr = m_pDevice->CreateBuffer( &pConfig->m_State, pData, pBuffer.GetAddressOf() );
+
+	if ( pBuffer )
+	{
+		ArkIndexBuffer11* pIndexBuffer = new ArkIndexBuffer11( pBuffer );
+		pIndexBuffer->SetDesiredDescription( pConfig->m_State );
+
+		// Return an index with the lower 16 bits of index, and the upper
+		// 16 bits to identify the resource type.
+
+		int ResourceID = StoreNewResource( pIndexBuffer );
+		ResourcePtr Proxy( new Dx11ResourceProxy( ResourceID, pConfig, this ) );
+
+		return( Proxy );
+	}
+
+	return( ResourcePtr( new Dx11ResourceProxy() ) );
+}
+//--------------------------------------------------------------------------------
+ResourcePtr ArkRenderer11::CreateConstantBuffer(ArkBuffer11Config* pConfig,D3D11_SUBRESOURCE_DATA* pData,bool bAutoUpdate)
+{
+
+	BufferComPtr pBuffer;
+	HRESULT hr = m_pDevice->CreateBuffer(&pConfig->m_State,pData,pBuffer.GetAddressOf());
+
+	if(pBuffer)
+	{
+		ArkConstantBuffer11* pConstantBuffer = new ArkConstantBuffer11(pBuffer);
+		pConstantBuffer->SetDesiredDescription(pConfig->m_State);
+		pConstantBuffer->SetAutoUpdate(bAutoUpdate);
+
+		// Return an index with the lower 16 bits of index, and the upper
+		// 16 bits to identify the resource type.
+		int ResourceID = StoreNewResource(pConstantBuffer);
+		ResourcePtr Proxy(new Dx11ResourceProxy(ResourceID,pConfig,this));
+
+		return(Proxy);
+	}
+
+	return(ResourcePtr(new Dx11ResourceProxy()));
+}
+//--------------------------------------------------------------------------------
+int ArkRenderer11::LoadShader(ShaderType type,std::wstring& filename,std::wstring& function,
+	std::wstring& model,bool enablelogging)
+{
+	return LoadShader(type,filename,function,model,NULL,enablelogging);
+}
+//--------------------------------------------------------------------------------
+int ArkRenderer11::LoadShader(ShaderType type,std::wstring& filename,std::wstring& function,
+	std::wstring& model,const D3D_SHADER_MACRO* pDefines,bool enablelogging)
+{
+	for(unsigned int i = 0; i < m_vShaders.size(); i++)
+	{
+		ArkShader11* pShader = m_vShaders[i];
+
+		if(pShader->FileName.compare(filename) == 0
+			&& pShader->Function.compare(function) == 0
+			&& pShader->ShaderModel.compare(model) == 0
+			&& pDefines == nullptr)
+		{
+			return(i);
+		}
+	}
+
+	HRESULT hr = S_OK;
+
+	ID3DBlob* pCompiledShader = NULL;
+
+	pCompiledShader = ArkShaderFactory11::GenerateShader(type,filename,function,model,pDefines,enablelogging);
+	/*pCompiledShader = ArkShaderFactory11::GeneratePrecompiledShader( filename, function, model );*/
+
+	if(pCompiledShader == nullptr) {
+		return(-1);
+	}
+
+	// Create the shader wrapper to house all of the information about its interface.
+
+	ArkShader11* pShaderWrapper = 0;
+
+	switch(type)
+	{
+	case VERTEX_SHADER:
+	{
+		ID3D11VertexShader* pShader = 0;
+
+		hr = m_pDevice->CreateVertexShader(
+			pCompiledShader->GetBufferPointer(),
+			pCompiledShader->GetBufferSize(),
+			0,&pShader);
+
+		pShaderWrapper = new ArkVertexShader11(pShader);
+		break;
+	}
+	case PIXEL_SHADER:
+	{
+		ID3D11PixelShader* pShader = 0;
+
+		hr = m_pDevice->CreatePixelShader(
+			pCompiledShader->GetBufferPointer(),
+			pCompiledShader->GetBufferSize(),
+			0,&pShader);
+
+		pShaderWrapper = new ArkPixelShader11(pShader);
+		break;
+	}
+	}
+
+	if(FAILED(hr))
+	{
+		ArkLog::Get(LogType::Renderer).Output(L"Failed to create shader!");
+		pCompiledShader->Release();
+		delete pShaderWrapper;
+		return(-1);
+	}
+
+
+	pShaderWrapper->FileName = filename;
+	pShaderWrapper->Function = function;
+	pShaderWrapper->ShaderModel = model;
+
+	m_vShaders.push_back(pShaderWrapper);
+
+	pShaderWrapper->m_pCompiledShader = pCompiledShader;
+
+	ArkShaderReflection11* pReflection = ArkShaderReflectionFactory11::GenerateReflection(*pShaderWrapper);
+
+
+	// Initialize the constant buffers of this shader, so that they aren't 
+	// lazy created later on...
+
+	pReflection->InitializeConstantBuffers(m_pParamMgr);
+
+	pShaderWrapper->SetReflection(pReflection);
+
+	//pReflection->PrintShaderDetails();
+
+
+	// Return the index for future referencing.
+
+	return(m_vShaders.size() - 1);
+
+}
+//--------------------------------------------------------------------------------
+ArkShader11* ArkRenderer11::GetShader(int ID)
+{
+	unsigned int index = static_cast<unsigned int>(ID);
+
+	if(index < m_vShaders.size())
+		return(m_vShaders[index]);
+	else
+		return(nullptr);
+}
+//--------------------------------------------------------------------------------
+ArkConstantBuffer11* ArkRenderer11::GetConstantBufferByIndex(int rid)
+{
+	ArkConstantBuffer11* pResult = 0;
+
+	Dx11Resource* pResource = GetResourceByIndex(rid);
+
+	if(pResource != NULL) {
+		if(pResource->GetType() != RT_CONSTANTBUFFER) {
+			ArkLog::Get(LogType::Renderer).Write(L"Trying to access a non-constant buffer resource!!!!");
+		}
+		else {
+			pResult = reinterpret_cast<ArkConstantBuffer11*>(pResource);
+		}
+	}
+
+	return(pResult);
+}
+//--------------------------------------------------------------------------------
+ArkVertexBuffer11* ArkRenderer11::GetVertexBufferByIndex(int index)
+{
+	ArkVertexBuffer11* pResult = 0;
+	Dx11Resource* pResource = GetResourceByIndex(index);
+
+	if(pResource != NULL)
+	{
+		if(pResource->GetType() != RT_VERTEXBUFFER)
+		{
+			ArkLog::Get(LogType::Renderer).Write(L"Trying to access a non-vertex buffer resource!!!!");
+		}
+		else
+		{
+			pResult = reinterpret_cast<ArkVertexBuffer11*>(pResource);
+		}
+	}
+	return pResult;
+}
+//--------------------------------------------------------------------------------
+ArkIndexBuffer11* ArkRenderer11::GetIndexBufferByIndex(int index)
+{
+	ArkIndexBuffer11* pResult = 0;
+	Dx11Resource* pResource = GetResourceByIndex(index);
+
+	if(pResource != NULL)
+	{
+		ResourceType r = pResource->GetType();
+		if(pResource->GetType() != RT_INDEXBUFFER)
+		{
+			ArkLog::Get(LogType::Renderer).Write(L"Trying to access a non-index buffer resource!!!!");
+		}
+		else
+		{
+			pResult = reinterpret_cast<ArkIndexBuffer11*>(pResource);
+		}
+	}
+	return pResult;
+}

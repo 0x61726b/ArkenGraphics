@@ -27,11 +27,15 @@ namespace Arkeng
 		int  GetRenderTargetView( int ID );
 		int			GetRenderTargetCount() const;
 
+	public:
+		void AddDepthTarget(int ID);
+		int GetDepthTarget();
 	private:
 		bool CheckIfRTVExists(int ID);
 	protected:
 		D3D_FEATURE_LEVEL				m_eFeatureLevel;
 		std::vector<int> m_vRenderTargetViews;
+		int				m_iDepthTarget;
 
 
 	};

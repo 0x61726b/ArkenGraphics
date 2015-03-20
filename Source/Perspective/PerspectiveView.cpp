@@ -17,6 +17,8 @@ using namespace Arkeng;
 //--------------------------------------------------------------------------------
 PerspectiveView::PerspectiveView(ArkRenderer11& Renderer,ResourcePtr RenderTarget)
 {
+	ViewMatrix = DirectX::XMMatrixIdentity();
+	ProjMatrix = DirectX::XMMatrixIdentity();
 	SetRenderTargets( RenderTarget );
 }
 //--------------------------------------------------------------------------------
@@ -74,7 +76,7 @@ void PerspectiveView::QueuePreTasks(ArkRenderer11* pRenderer)
 	}
 }
 //--------------------------------------------------------------------------------
-void PerspectiveView::ExecuteTask(PipelineManager* pPipelineManager)
+void PerspectiveView::ExecuteTask(PipelineManager* pPipelineManager,IParameterManager* pParamManager)
 {
 	pPipelineManager->ClearRenderTargets();
 
@@ -86,7 +88,10 @@ void PerspectiveView::ExecuteTask(PipelineManager* pPipelineManager)
 
 	pPipelineManager->ClearBuffers(vColor,1.0f);
 
+
 	ConfigureViewports( pPipelineManager );
+
+	SetRenderParams( pParamManager );
 
 	pPipelineManager->ApplyPipelineResources();
 }

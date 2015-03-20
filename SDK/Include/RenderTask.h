@@ -25,14 +25,25 @@ namespace Arkeng
 
 		virtual void SetScene( Scene* pScene );
 
+		virtual void SetRenderParams( IParameterManager* pParamManager );
+		virtual void SetUsageParams( IParameterManager* pParamManager );
+
 		void SetViewport(int viewport,unsigned int index=0);
 		void SetViewportCount(unsigned int count);
 		void ConfigureViewports( PipelineManager* pPipeline );
 
 		const Dx11ViewPort& GetViewport( unsigned int index );
 
+		virtual void SetViewMatrix( const DirectX::XMMATRIX& matrix );
+		virtual void SetProjMatrix( const DirectX::XMMATRIX& matrix );
+		const DirectX::XMMATRIX& GetViewMatrix( );
+		const DirectX::XMMATRIX& GetProjMatrix( );
+
 	protected:
 		Scene*			m_pScene;
+
+		DirectX::XMMATRIX ViewMatrix;
+		DirectX::XMMATRIX ProjMatrix;
 
 		
 		int				m_iViewports[ D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE ];

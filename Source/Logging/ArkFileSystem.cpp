@@ -48,3 +48,8 @@ const std::wstring ArkFileSystem::GetWorkingDirectory()
 	
 	return dir;
 }
+//--------------------------------------------------------------------------------
+const std::wstring ArkFileSystem::GetShadersDirectory()
+{
+	return GetWorkingDirectory() + L"\\Resources\\Shaders\\";
+}

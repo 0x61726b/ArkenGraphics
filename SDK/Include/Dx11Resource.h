@@ -29,6 +29,7 @@ namespace Arkeng
 
 		static unsigned short				s_usResourceUID;
 		unsigned short						m_usInnerID;
+		ResourceType						m_resourceType;
 	};
 };
 

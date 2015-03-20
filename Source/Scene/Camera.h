@@ -31,8 +31,32 @@ namespace Arkeng
 
 		void SetScene( Scene* pScene );
 
+		void ApplyProjectionParams();
+		void ApplyOrthographicParams();
+
+		void SetProjectionParams( float zn, float zf, float aspect, float fov );
+		void SetOrthographicParams( float zn, float zf, float width, float height );
+
+		void SetClipPlanes( float zn, float zf );
+		void SetAspectRatio( float aspect );
+		void SetFieldOfView( float fov );
+
+		float GetNearClipPlane();
+		float GetFarClipPlane();
+		float GetAspectRatio();
+		float GetFieldOfView();
+
+				float m_fNear;
+		float m_fFar;
+		float m_fAspect;
+		float m_fFov;
+
+		float m_fWidth;
+		float m_fHeight;
+
+		DirectX::XMMATRIX m_ProjMatrix;
 	protected:
-		RenderTask*			m_vCameraView;
+		RenderTask*			m_pCameraView;
 		Scene*				m_pScene;
 	};
 };

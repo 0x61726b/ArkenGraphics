@@ -47,7 +47,6 @@ void DxOutputMergerState::AddRenderTargetView(int ID)
 int DxOutputMergerState::GetRenderTargetView(int ID)
 {
 	return m_vRenderTargetViews[ID];
-
 }
 //--------------------------------------------------------------------------------
 bool DxOutputMergerState::CheckIfRTVExists(int ID)
@@ -60,5 +59,12 @@ bool DxOutputMergerState::CheckIfRTVExists(int ID)
 	return false;
 }
 //--------------------------------------------------------------------------------
-
-
+void DxOutputMergerState::AddDepthTarget(int ID)
+{
+	m_iDepthTarget = ID;
+}
+//--------------------------------------------------------------------------------
+int DxOutputMergerState::GetDepthTarget()
+{
+	return m_iDepthTarget;
+}

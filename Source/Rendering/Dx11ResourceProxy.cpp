@@ -9,6 +9,7 @@
 #include "Pch.h"
 #include "Dx11ResourceProxy.h"
 #include "Dx11Texture2DConfig.h"
+#include "ArkBuffer11Config.h"
 #include "Dx11DepthStencilViewConfig.h"
 #include "Dx11ShaderResourceViewConfig.h"
 #include "Dx11RenderTargetViewConfig.h"
@@ -22,18 +23,22 @@ Dx11ResourceProxy::Dx11ResourceProxy()
 
 	m_iResourceDSV = m_iResourceRTV = m_iResourceSRV = 0;
 
+	m_pBufferConfig = 0;
 	m_pTexture2dConfig = nullptr;
 	m_pSRVConfig = nullptr;
 	m_pRTVConfig = nullptr;
 	m_pDSVConfig = nullptr;
 }
+//--------------------------------------------------------------------------------
 Dx11ResourceProxy::~Dx11ResourceProxy()
 {
+	Safe_Delete(m_pBufferConfig);
 	Safe_Delete(m_pTexture2dConfig);
 	Safe_Delete(m_pSRVConfig);
 	Safe_Delete(m_pSRVConfig);
 	Safe_Delete(m_pDSVConfig);
 }
+//--------------------------------------------------------------------------------
 Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig,ArkRenderer11* pRenderer,Dx11ShaderResourceViewConfig* pSRVConfig,
 	Dx11RenderTargetViewConfig* pRTVConfig,
 	Dx11DepthStencilViewConfig* pDSVConfig)
@@ -44,7 +49,18 @@ Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig
 	m_pTexture2dConfig = new Dx11Texture2DConfig();
 	*m_pTexture2dConfig = *pConfig;
 }
+//--------------------------------------------------------------------------------
+Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,ArkBuffer11Config* pConfig,ArkRenderer11* pRenderer,Dx11ShaderResourceViewConfig* pSRVConfig,
+	Dx11RenderTargetViewConfig* pRTVConfig,
+	Dx11DepthStencilViewConfig* pDSVConfig)
+{
+	D3D11_BUFFER_DESC desc = pConfig->GetBufferDesc();
+	CommonConstructor(desc.BindFlags,ResourceID,pRenderer,pSRVConfig,pRTVConfig,pDSVConfig);
 
+	m_pBufferConfig = new ArkBuffer11Config();
+	*m_pBufferConfig = *pConfig;
+}
+//--------------------------------------------------------------------------------
 void Dx11ResourceProxy::CommonConstructor(UINT BindFlags,int ResourceID,ArkRenderer11* pRenderer,
 	Dx11ShaderResourceViewConfig* pSRVConfig,
 	Dx11RenderTargetViewConfig* pRTVConfig,
@@ -56,7 +72,7 @@ void Dx11ResourceProxy::CommonConstructor(UINT BindFlags,int ResourceID,ArkRende
 	m_iResourceDSV = 0;
 
 	m_pTexture2dConfig = nullptr;
-
+	m_pBufferConfig = nullptr;
 	m_pRTVConfig = nullptr;
 	m_pDSVConfig = nullptr;
 	m_pSRVConfig = nullptr;

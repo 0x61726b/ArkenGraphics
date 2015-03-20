@@ -21,7 +21,7 @@ namespace Arkeng
 		int DesiredResolutionX;
 		int DesiredResolutionY;
 
-		ArkConfig(int bn,int x,int y)
+		ArkConfig(float bn,int x,int y)
 		{
 			BuildNumber = bn;
 			DesiredResolutionX = x;

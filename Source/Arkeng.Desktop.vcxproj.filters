@@ -67,6 +67,33 @@
     <Filter Include="Rendering\Direct3D11\Resource\Viewport">
       <UniqueIdentifier>{f75a5081-fa10-43ad-8096-ada819ade937}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline\Input Assembler Stage">
+      <UniqueIdentifier>{9d38040f-0629-4aff-b821-1b62c84b8f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Parameter System">
+      <UniqueIdentifier>{bae14ca9-2618-42d8-811d-ebec79c5232d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Parameter System\Parameters">
+      <UniqueIdentifier>{2950af0e-aa4c-45c6-8ada-0a9c93020198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Resource\Buffers">
+      <UniqueIdentifier>{2d97ba11-4eaa-4367-a455-c80493ca4186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline\Shader Stage">
+      <UniqueIdentifier>{df13e430-6203-46e7-bd00-85e7dd5e437b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline\Shader Stage\Stages">
+      <UniqueIdentifier>{d897153d-3fe0-446c-bcf2-b6a519d69527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline\Shader Stage\Programs">
+      <UniqueIdentifier>{b35af99f-ce0e-4239-a663-e049f5b2067a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline\Shader Stage\Reflection">
+      <UniqueIdentifier>{95e6de18-20ff-4dc3-9378-d0c17c164666}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Material System">
+      <UniqueIdentifier>{ca4bbe84-2dd5-43ea-955f-5bf9bc2573c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Pch.h">
@@ -198,6 +225,84 @@
     <ClInclude Include="Application\ArkConfigFile.h">
       <Filter>Application</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\DxIAState.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Input Assembler Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\DxIAStage.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Input Assembler Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkRenderParameter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkVectorParameter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkMatrixParameter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkMatrixArrayParameter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\IParameterManager.h">
+      <Filter>Rendering\Direct3D11\Parameter System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkParameterManager11.h">
+      <Filter>Rendering\Direct3D11\Parameter System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkBuffer11.h">
+      <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkBuffer11Config.h">
+      <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkVertexBuffer11.h">
+      <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkConstantBuffer11.h">
+      <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\ArkFileLoader.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkConstantBufferParameter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkShaderStageState11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkVertexShaderStage11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkPixelShaderStage11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkShader11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkPixelShader11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkVertexShader11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkShaderStage11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkShaderFactory11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkShaderReflection11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkShaderReflectionFactory11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkRenderEffect11.h">
+      <Filter>Rendering\Direct3D11\Material System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkIndexBuffer11.h">
+      <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -322,6 +427,81 @@
     </ClCompile>
     <ClCompile Include="Application\ArkConfigFile.cpp">
       <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\DxIAState.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Input Assembler Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkRenderParameter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkVectorParameter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkMatrixParameter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkMatrixArrayParameter.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkParameterManager11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\DxIAStage.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Input Assembler Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkBuffer11.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkBuffer11Config.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkVertexBuffer11.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkConstantBuffer11.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\ArkFileLoader.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkConstantBufferParameter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkShaderStageState11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkVertexShaderStage11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkPixelShaderStage11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkPixelShader11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkShader11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkVertexShader11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkShaderStage11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkShaderFactory11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkShaderReflection11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkShaderReflectionFactory11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkRenderEffect11.cpp">
+      <Filter>Rendering\Direct3D11\Material System</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkIndexBuffer11.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

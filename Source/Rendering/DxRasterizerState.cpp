@@ -13,6 +13,7 @@ using namespace Arkeng;
 //--------------------------------------------------------------------------------
 DxRasterizerState::DxRasterizerState()
 {
+	m_iViewportCount = 0;
 }
 //--------------------------------------------------------------------------------
 DxRasterizerState::~DxRasterizerState()

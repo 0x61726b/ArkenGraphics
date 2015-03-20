@@ -22,7 +22,7 @@ namespace Arkeng
 		//TaskCore Interface
 		virtual void Update( float dt );
 		virtual void QueuePreTasks( ArkRenderer11* pRenderer );
-		virtual void ExecuteTask( PipelineManager* pPipelineManager );
+		virtual void ExecuteTask( PipelineManager* pPipelineManager,IParameterManager* pParamManager );
 		//~
 
 		//RenderTask Interface
