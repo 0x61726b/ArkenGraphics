@@ -57,7 +57,7 @@ ArkApplication* ArkApplication::Get()
 //--------------------------------------------------------------------------------
 void ArkApplication::RequestExit()
 {
-	_CrtDumpMemoryLeaks();
+	/*_CrtDumpMemoryLeaks();*/
 	PostQuitMessage(0);
 }
 //--------------------------------------------------------------------------------

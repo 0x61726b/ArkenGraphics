@@ -216,12 +216,12 @@ void App::Initialize()
 	}
 
 
-	DirectX::XMVECTOR Eye = DirectX::XMVectorSet(0.0f,1.0f,-5.0f,0.0f);
-	DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f,1.0f,0.0f,0.0f);
+	DirectX::XMVECTOR Eye = DirectX::XMVectorSet(0.0f,1.0f,5.0f,0.0f);
+	DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f,0.0f,0.0f,0.0f);
 	DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f,1.0f,0.0f,0.0f);
-	// not recommended, just to demonstrate interoperation with xnamath
+	
 	DirectX::XMMATRIX m_ViewMatrix = DirectX::XMMatrixLookAtLH(Eye,At,Up);
-	DirectX::XMMATRIX  m_ProjMatrix = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2,(FLOAT)m_pWindow->GetWidth() / (FLOAT)m_pWindow->GetHeight(),0.01f,100.0f);
+	DirectX::XMMATRIX  m_ProjMatrix = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2,(FLOAT)m_pWindow->GetWidth() / (FLOAT)m_pWindow->GetHeight(),0,1);
 
 	DirectX::XMMATRIX m_WorldMatrix = DirectX::XMMatrixIdentity();
 
@@ -239,7 +239,7 @@ void App::Update()
 	m_pScene->Update(1/60);
 	/*m_pScene->Render(m_pRenderer);*/
 
-	m_pRenderer->pPipeline->ClearBuffers( new float[4] { 0,0,1,0 },1.0f );
+	m_pRenderer->pPipeline->ClearBuffers( new float[4] { 0,0,0,0 },1.0f );
 
 	UINT stride = sizeof(Vertex);
 	m_pRenderer->pPipeline->Draw(m_Effect,m_pVertexBuffer,m_pIndexBuffer,m_VertexLayout,D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST,stride,36,m_pRenderer->m_pParamMgr);

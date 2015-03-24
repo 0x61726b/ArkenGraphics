@@ -105,10 +105,10 @@ namespace Arkeng
 		InputLayoutComPtr				GetInputLayout(int index);
 		int CreateInputLayout(std::vector<D3D11_INPUT_ELEMENT_DESC>& elements,int ShaderID);
 
-		ArkVertexBuffer11*				GetVertexBufferByIndex(int index);
-		ArkIndexBuffer11*				GetIndexBufferByIndex(int index);
+		std::shared_ptr<ArkVertexBuffer11>				GetVertexBufferByIndex(int index);
+		std::shared_ptr<ArkIndexBuffer11>				GetIndexBufferByIndex(int index);
 
-		ArkConstantBuffer11* GetConstantBufferByIndex( int ID );
+		std::shared_ptr<ArkConstantBuffer11> GetConstantBufferByIndex( int ID );
 
 
 		void ResizeSwapChain(int ID,UINT width,UINT height);
@@ -122,7 +122,7 @@ namespace Arkeng
 		const Dx11ViewPort&			GetViewPort(int index);
 
 
-		Dx11Texture2D*		GetTexture2DByIndex(int ID);
+		std::shared_ptr<Dx11Texture2D>		GetTexture2DByIndex(int ID);
 	protected:
 		static ArkRenderer11* m_spRenderer;
 
@@ -138,7 +138,7 @@ namespace Arkeng
 
 		std::vector<Dx11SwapChain*>				m_vSwapChains;
 
-		std::vector<Dx11Resource*>					m_vResources;
+		std::vector<std::shared_ptr<Dx11Resource>>					m_vResources;
 
 		std::vector<Dx11ViewPort>					m_vViewports;
 
@@ -160,10 +160,10 @@ namespace Arkeng
 		PipelineManager*								pPipeline;
 		IParameterManager*								m_pParamMgr;
 	public:
-		Dx11Resource*				GetResourceByIndex(int index);
+		std::shared_ptr<Dx11Resource>				GetResourceByIndex(int index);
 
 		int							GetUnusedResourceIndex();
-		int							StoreNewResource(Dx11Resource* pResource);
+		int							StoreNewResource(std::shared_ptr<Dx11Resource> pResource);
 
 		ResourcePtr					GetSwapChainResource(int ID);
 	};

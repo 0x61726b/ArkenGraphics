@@ -17,14 +17,14 @@
 using namespace Arkeng;
 using namespace DirectX;
 //--------------------------------------------------------------------------------
-std::map<std::wstring,ArkRenderParameter11*> ArkParameterManager11::m_Parameters;
+std::map<std::wstring,std::shared_ptr<ArkRenderParameter11>> ArkParameterManager11::m_Parameters;
 //--------------------------------------------------------------------------------
 ArkParameterManager11::ArkParameterManager11(unsigned int ID)
 {
 	m_ID = ID;
-	m_pWorldMatrix = GetMatrixParameterRef(std::wstring(L"WorldMatrix"));
-	m_pViewMatrix  = GetMatrixParameterRef(std::wstring(L"ViewMatrix"));
-	m_pProjMatrix  = GetMatrixParameterRef(std::wstring(L"ProjMatrix"));
+	m_pWorldMatrix = GetMatrixParameterRef(std::wstring(L"gWorld"));
+	m_pViewMatrix  = GetMatrixParameterRef(std::wstring(L"gView"));
+	m_pProjMatrix  = GetMatrixParameterRef(std::wstring(L"gProj"));
 
 	m_pWorldViewMatrix     = GetMatrixParameterRef(std::wstring(L"WorldViewMatrix"));
 	m_pWorldProjMatrix     = GetMatrixParameterRef(std::wstring(L"WorldProjMatrix"));
@@ -34,9 +34,9 @@ ArkParameterManager11::ArkParameterManager11(unsigned int ID)
 //--------------------------------------------------------------------------------
 ArkParameterManager11::~ArkParameterManager11()
 {
-	std::map< std::wstring,ArkRenderParameter11* >::iterator iter = m_Parameters.begin();
+	std::map< std::wstring,std::shared_ptr<ArkRenderParameter11> >::iterator iter = m_Parameters.begin();
 	while(iter != m_Parameters.end()) {
-		Safe_Delete(iter->second);
+		(iter->second).reset();
 		iter++;
 	}
 
@@ -45,14 +45,14 @@ ArkParameterManager11::~ArkParameterManager11()
 //--------------------------------------------------------------------------------
 void ArkParameterManager11::SetConstantBufferParameter(const std::wstring& name,ResourcePtr resource)
 {
-	ArkRenderParameter11* pParameter = m_Parameters[name];
+	std::shared_ptr<ArkRenderParameter11> pParameter = m_Parameters[name];
 
 	// Only create the new parameter if it hasn't already been registered
 	if(pParameter == 0)
 	{
-		pParameter = new ArkConstantBufferParameter11();
+		pParameter = std::make_shared<ArkConstantBufferParameter11>();
 		pParameter->SetName(name);
-		m_Parameters[name] = reinterpret_cast<ArkRenderParameter11*>(pParameter);
+		m_Parameters[name] = std::dynamic_pointer_cast<ArkRenderParameter11>(pParameter);
 
 		// Initialize the parameter with the current data in all slots
 		pParameter->InitializeParameterData(reinterpret_cast<void*>(&resource->m_iResource));
@@ -68,13 +68,13 @@ void ArkParameterManager11::SetConstantBufferParameter(const std::wstring& name,
 //--------------------------------------------------------------------------------
 void ArkParameterManager11::SetVectorParameter(const std::wstring& name,DirectX::XMVECTOR* pV)
 {
-	ArkRenderParameter11* pParameter = m_Parameters[name];
+	std::shared_ptr<ArkRenderParameter11> pParameter = m_Parameters[name];
 
 	if(pParameter == 0)
 	{
-		pParameter = new ArkVectorParameter11();
+		pParameter = std::make_shared<ArkVectorParameter11>();
 		pParameter->SetName(name);
-		m_Parameters[name] = reinterpret_cast<ArkRenderParameter11*>(pParameter);
+		m_Parameters[name] = std::dynamic_pointer_cast<ArkRenderParameter11>(pParameter);
 
 		pParameter->InitializeParameterData(reinterpret_cast<void*>(pV));
 	}
@@ -94,13 +94,13 @@ void ArkParameterManager11::SetVectorParameter(const std::wstring& name,DirectX:
 //--------------------------------------------------------------------------------
 void ArkParameterManager11::SetMatrixParameter(const std::wstring& name,DirectX::XMMATRIX* pM)
 {
-	ArkRenderParameter11* pParameter = m_Parameters[name];
+	std::shared_ptr<ArkRenderParameter11> pParameter = m_Parameters[name];
 
 	if(pParameter == 0)
 	{
-		pParameter = new ArkMatrixParameter11();
+		pParameter = std::make_shared<ArkMatrixParameter11>();
 		pParameter->SetName(name);
-		m_Parameters[name] = reinterpret_cast<ArkRenderParameter11*>(pParameter);
+		m_Parameters[name] = std::dynamic_pointer_cast<ArkRenderParameter11>(pParameter);
 
 		pParameter->InitializeParameterData(reinterpret_cast<void*>(pM));
 	}
@@ -119,13 +119,13 @@ void ArkParameterManager11::SetMatrixParameter(const std::wstring& name,DirectX:
 //--------------------------------------------------------------------------------
 void ArkParameterManager11::SetMatrixArrayParameter(const std::wstring& name,DirectX::XMFLOAT4X4* pmA)
 {
-	ArkRenderParameter11* pParameter = m_Parameters[name];
+	std::shared_ptr<ArkRenderParameter11> pParameter = m_Parameters[name];
 
 	if(pParameter == 0)
 	{
-		pParameter = new ArkMatrixArrayParameter11();
+		pParameter = std::make_shared<ArkMatrixArrayParameter11>();
 		pParameter->SetName(name);
-		m_Parameters[name] = reinterpret_cast<ArkRenderParameter11*>(pParameter);
+		m_Parameters[name] = std::dynamic_pointer_cast<ArkRenderParameter11>(pParameter);
 
 		pParameter->InitializeParameterData(reinterpret_cast<void*>(pmA));
 	}
@@ -142,7 +142,7 @@ void ArkParameterManager11::SetMatrixArrayParameter(const std::wstring& name,Dir
 	}
 }
 //--------------------------------------------------------------------------------
-void ArkParameterManager11::SetConstantBufferParameter(ArkRenderParameter11* pParameter,ResourcePtr resource)
+void ArkParameterManager11::SetConstantBufferParameter(std::shared_ptr<ArkRenderParameter11> pParameter,ResourcePtr resource)
 {
 	if(pParameter->GetParameterType() == CBUFFER)
 		pParameter->SetParameterData(reinterpret_cast<void*>(&resource->m_iResource),GetID());
@@ -150,7 +150,7 @@ void ArkParameterManager11::SetConstantBufferParameter(ArkRenderParameter11* pPa
 		ArkLog::Get(LogType::Renderer).Write(L"Constant buffer parameter name collision!");
 }
 //--------------------------------------------------------------------------------
-void ArkParameterManager11::SetVectorParameter(ArkRenderParameter11* pP,DirectX::XMVECTOR* pV)
+void ArkParameterManager11::SetVectorParameter(std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMVECTOR* pV)
 {
 	if(pP->GetParameterType() == ArkParamType::VECTOR)
 		pP->SetParameterData(reinterpret_cast<void*>(pV),GetID());
@@ -158,7 +158,7 @@ void ArkParameterManager11::SetVectorParameter(ArkRenderParameter11* pP,DirectX:
 		ArkLog::Get(LogType::Renderer).Output(L"VECTOR parameter name error!");
 }
 //--------------------------------------------------------------------------------
-void ArkParameterManager11::SetMatrixParameter(ArkRenderParameter11* pP,DirectX::XMMATRIX* pV)
+void ArkParameterManager11::SetMatrixParameter(std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMMATRIX* pV)
 {
 	if(pP->GetParameterType() == ArkParamType::MATRIX)
 		pP->SetParameterData(reinterpret_cast<void*>(pV),GetID());
@@ -167,7 +167,7 @@ void ArkParameterManager11::SetMatrixParameter(ArkRenderParameter11* pP,DirectX:
 }
 //--------------------------------------------------------------------------------
 
-void ArkParameterManager11::SetMatrixArrayParameter(ArkRenderParameter11* pP,DirectX::XMFLOAT4X4* pV)
+void ArkParameterManager11::SetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMFLOAT4X4* pV)
 {
 	if(pP->GetParameterType() == ArkParamType::MATRIX_ARRAY)
 		pP->SetParameterData(reinterpret_cast<void*>(pV),GetID());
@@ -180,40 +180,40 @@ DirectX::XMVECTOR ArkParameterManager11::GetVectorParameter(const std::wstring& 
 	XMVECTOR pV;
 	pV = XMVectorZero();
 
-	ArkRenderParameter11* pParam = GetParameterRef(name);
+	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
 
 	if(pParam != 0)
 	{
 		if(pParam->GetParameterType() == ArkParamType::VECTOR)
-			pV = reinterpret_cast<ArkVectorParameter11*>(pParam)->GetVector();
+			pV = std::dynamic_pointer_cast<ArkVectorParameter11>(pParam)->GetVector();
 	}
 	else
 	{
-		pParam = new ArkVectorParameter11();
+		pParam = std::make_shared<ArkVectorParameter11>();
 		pParam->SetName(name);
 		m_Parameters[name] = pParam;
 	}
 	return pV;
 }
 //--------------------------------------------------------------------------------
-ArkConstantBufferParameter11* ArkParameterManager11::GetConstantBufferParameterRef(const std::wstring& name)
+std::shared_ptr<ArkConstantBufferParameter11> ArkParameterManager11::GetConstantBufferParameterRef(const std::wstring& name)
 {
 	// Check for the existence of this parameter.  This search includes any
 	// parent parameter managers if the parameter doesn't exist in this one.
 
-	ArkRenderParameter11* pParam = GetParameterRef(name);
+	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
 
 	// If the parameter is not found, create a new default one.  This goes 
 	// into the bottom level manager.
 
 	if(pParam == 0)
 	{
-		pParam = new ArkConstantBufferParameter11();
+		pParam = std::make_shared<ArkConstantBufferParameter11>();
 		pParam->SetName(name);
 		m_Parameters[name] = pParam;
 	}
 
-	return(reinterpret_cast<ArkConstantBufferParameter11*>(pParam));
+	return(std::dynamic_pointer_cast<ArkConstantBufferParameter11>(pParam));
 }
 //--------------------------------------------------------------------------------
 int ArkParameterManager11::GetConstantBufferParameter(const std::wstring& name)
@@ -224,7 +224,7 @@ int ArkParameterManager11::GetConstantBufferParameter(const std::wstring& name)
 	// Check for the existence of this parameter.  This search includes any
 	// parent parameter managers if the parameter doesn't exist in this one.
 
-	ArkRenderParameter11* pParam = GetParameterRef(name);
+	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
 
 	// If the parameter is not found, create a new default one.  This goes 
 	// into the bottom level manager.
@@ -232,11 +232,11 @@ int ArkParameterManager11::GetConstantBufferParameter(const std::wstring& name)
 	if(pParam != 0)
 	{
 		if(pParam->GetParameterType() == CBUFFER)
-			result = reinterpret_cast<ArkConstantBufferParameter11*>(pParam)->GetIndex(1);
+			result = std::dynamic_pointer_cast<ArkConstantBufferParameter11>(pParam)->GetIndex(1);
 	}
 	else
 	{
-		pParam = new ArkConstantBufferParameter11();
+		pParam = std::make_shared<ArkConstantBufferParameter11>();
 		pParam->SetName(name);
 		m_Parameters[name] = pParam;
 	}
@@ -248,16 +248,16 @@ DirectX::XMMATRIX ArkParameterManager11::GetMatrixParameter(const std::wstring& 
 	XMMATRIX pM;
 	pM = XMMatrixIdentity();
 
-	ArkRenderParameter11* pParam = GetParameterRef(name);
+	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
 
 	if(pParam != 0)
 	{
 		if(pParam->GetParameterType() == ArkParamType::MATRIX)
-			pM = reinterpret_cast<ArkMatrixParameter11*>(pParam)->GetMatrix();
+			pM = std::dynamic_pointer_cast<ArkMatrixParameter11>(pParam)->GetMatrix();
 	}
 	else
 	{
-		pParam = new ArkVectorParameter11();
+		pParam = std::make_shared<ArkVectorParameter11>();
 		pParam->SetName(name);
 		m_Parameters[name] = pParam;
 	}
@@ -269,23 +269,23 @@ DirectX::XMFLOAT4X4 ArkParameterManager11::GetMatrixArrayParameter(const std::ws
 	XMFLOAT4X4 pmA;
 	XMStoreFloat4x4(&pmA,XMMatrixIdentity());
 
-	ArkRenderParameter11* pParam = GetParameterRef(name);
+	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
 
 	if(pParam != 0)
 	{
 		if(pParam->GetParameterType() == ArkParamType::MATRIX_ARRAY)
-			pmA = reinterpret_cast<ArkMatrixArrayParameter11*>(pParam)->GetMatrixArray();
+			pmA = std::dynamic_pointer_cast<ArkMatrixArrayParameter11>(pParam)->GetMatrixArray();
 	}
 	else
 	{
-		pParam = new ArkVectorParameter11();
+		pParam = std::make_shared<ArkVectorParameter11>();
 		pParam->SetName(name);
 		m_Parameters[name] = pParam;
 	}
 	return pmA;
 }
 //--------------------------------------------------------------------------------
-DirectX::XMVECTOR ArkParameterManager11::GetVectorParameter(ArkRenderParameter11* pP)
+DirectX::XMVECTOR ArkParameterManager11::GetVectorParameter(std::shared_ptr<ArkRenderParameter11> pP)
 {
 	assert(pP != 0);
 
@@ -294,33 +294,33 @@ DirectX::XMVECTOR ArkParameterManager11::GetVectorParameter(ArkRenderParameter11
 
 	if(pP->GetParameterType() == ArkParamType::VECTOR)
 	{
-		result = reinterpret_cast<ArkVectorParameter11*>(pP)->GetVector();
+		result = std::dynamic_pointer_cast<ArkVectorParameter11>(pP)->GetVector();
 	}
 	return result;
 }
 //--------------------------------------------------------------------------------
-DirectX::XMMATRIX ArkParameterManager11::GetMatrixParameter(ArkRenderParameter11* pP)
+DirectX::XMMATRIX ArkParameterManager11::GetMatrixParameter(std::shared_ptr<ArkRenderParameter11> pP)
 {
 	XMMATRIX pM;
 	pM = XMMatrixIdentity();
 
 	if(pP->GetParameterType() == ArkParamType::MATRIX)
 	{
-		pM = reinterpret_cast<ArkMatrixParameter11*>(pP)->GetMatrix();
+		pM = std::dynamic_pointer_cast<ArkMatrixParameter11>(pP)->GetMatrix( GetID() );
 	}
 	return pM;
 }
 //--------------------------------------------------------------------------------
-DirectX::XMFLOAT4X4 ArkParameterManager11::GetMatrixArrayParameter(ArkRenderParameter11* pP)
+DirectX::XMFLOAT4X4 ArkParameterManager11::GetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP)
 {
 	XMFLOAT4X4 pmA;
 	XMStoreFloat4x4(&pmA,XMMatrixIdentity());
 
 	if(pP->GetParameterType() == ArkParamType::MATRIX_ARRAY)
-		pmA = reinterpret_cast<ArkMatrixArrayParameter11*>(pP)->GetMatrixArray();
+		pmA = std::dynamic_pointer_cast<ArkMatrixArrayParameter11>(pP)->GetMatrixArray();
 	return pmA;
 }
-int ArkParameterManager11::GetConstantBufferParameter(ArkRenderParameter11* pParameter)
+int ArkParameterManager11::GetConstantBufferParameter(std::shared_ptr<ArkRenderParameter11> pParameter)
 {
 	assert(pParameter != 0);
 
@@ -330,54 +330,54 @@ int ArkParameterManager11::GetConstantBufferParameter(ArkRenderParameter11* pPar
 	// into the bottom level manager.
 
 	if(pParameter->GetParameterType() == CBUFFER)
-		result = reinterpret_cast<ArkConstantBufferParameter11*>(pParameter)->GetIndex(GetID());
+		result = std::dynamic_pointer_cast<ArkConstantBufferParameter11>(pParameter)->GetIndex(GetID());
 
 	return(result);
 }
 //--------------------------------------------------------------------------------
-ArkVectorParameter11* ArkParameterManager11::GetVectorParameterRef(const std::wstring& name)
+std::shared_ptr<ArkVectorParameter11> ArkParameterManager11::GetVectorParameterRef(const std::wstring& name)
 {
-	ArkRenderParameter11* pParam = GetParameterRef(name);
+	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
 
 	if(pParam == 0)
 	{
-		pParam = new ArkVectorParameter11();
+		pParam = std::make_shared<ArkVectorParameter11>();
 		pParam->SetName(name);
 		m_Parameters[name] = pParam;
 	}
 
-	return (reinterpret_cast<ArkVectorParameter11*>(pParam));
+	return (std::dynamic_pointer_cast<ArkVectorParameter11>(pParam));
 }
 //--------------------------------------------------------------------------------
-ArkMatrixParameter11* ArkParameterManager11::GetMatrixParameterRef(const std::wstring& name)
+std::shared_ptr<ArkMatrixParameter11> ArkParameterManager11::GetMatrixParameterRef(const std::wstring& name)
 {
-	ArkRenderParameter11* pParam = GetParameterRef(name);
+	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
 
 	if(pParam == 0)
 	{
-		pParam = new ArkMatrixParameter11();
+		pParam = std::make_shared<ArkMatrixParameter11>();
 		pParam->SetName(name);
 		m_Parameters[name] = pParam;
 	}
 
-	return (reinterpret_cast<ArkMatrixParameter11*>(pParam));
+	return (std::dynamic_pointer_cast<ArkMatrixParameter11>(pParam));
 }
 //--------------------------------------------------------------------------------
-ArkMatrixArrayParameter11* ArkParameterManager11::GetMatrixArrayParameterRef(const std::wstring& name)
+std::shared_ptr<ArkMatrixArrayParameter11> ArkParameterManager11::GetMatrixArrayParameterRef(const std::wstring& name)
 {
-	ArkRenderParameter11* pParam = GetParameterRef(name);
+	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
 
 	if(pParam == 0)
 	{
-		pParam = new ArkMatrixArrayParameter11();
+		pParam = std::make_shared<ArkMatrixArrayParameter11>();
 		pParam->SetName(name);
 		m_Parameters[name] = pParam;
 	}
 
-	return (reinterpret_cast<ArkMatrixArrayParameter11*>(pParam));
+	return (std::dynamic_pointer_cast<ArkMatrixArrayParameter11>(pParam));
 }
 //--------------------------------------------------------------------------------
-ArkRenderParameter11* ArkParameterManager11::GetParameterRef(const std::wstring& name)
+std::shared_ptr<ArkRenderParameter11> ArkParameterManager11::GetParameterRef(const std::wstring& name)
 {
 	return m_Parameters[name];
 }

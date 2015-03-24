@@ -107,7 +107,7 @@ ArkShaderReflection11* ArkShaderReflectionFactory11::GenerateReflection( ArkShad
 				BufferLayout.Types.push_back( type_desc );
 
 				// Get references to the parameters for binding to these variables.
-				ArkRenderParameter11* pParam = 0;
+				std::shared_ptr<ArkRenderParameter11> pParam = 0;
 				if ( type_desc.Class == D3D_SVC_VECTOR )
 				{
 					pParam = pParamMgr->GetVectorParameterRef( std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>().from_bytes( std::string( var_desc.Name ) ) );

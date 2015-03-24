@@ -77,7 +77,7 @@ void ArkShaderReflection11::InitializeConstantBuffers( IParameterManager* pParam
 						mapping.varclass = ConstantBuffers[i].Types[j].Class;
 						mapping.valueID = -1;
 
-						ArkConstantBuffer11* constBuffer = ArkRenderer11::Get()->GetConstantBufferByIndex( resource->m_iResource );
+						std::shared_ptr<ArkConstantBuffer11> constBuffer = ArkRenderer11::Get()->GetConstantBufferByIndex( resource->m_iResource );
 						constBuffer->AddMapping( mapping );
 					}
 				}
@@ -93,7 +93,7 @@ void ArkShaderReflection11::InitializeConstantBuffers( IParameterManager* pParam
 				// It is sufficient to check only one of the parameter's constant buffers, since
 				// all of the buffers for multiple threads should be identical (as created above).
 
-				ArkConstantBuffer11* pConstBuffer = ArkRenderer11::Get()->GetConstantBufferByIndex( index );
+				std::shared_ptr<ArkConstantBuffer11> pConstBuffer = ArkRenderer11::Get()->GetConstantBufferByIndex( index );
 
 				if ( pConstBuffer->GetAutoUpdate() ) {
 
@@ -175,7 +175,7 @@ void ArkShaderReflection11::UpdateParameters( PipelineManager* pPipeline, IParam
 
 			// Check if the resource is a constant buffer before accessing it!
 
-			ArkConstantBuffer11* pBuffer = ArkRenderer11::Get()->GetConstantBufferByIndex( index );
+			std::shared_ptr<ArkConstantBuffer11> pBuffer = ArkRenderer11::Get()->GetConstantBufferByIndex( index );
 
 			// Test the index to ensure that it is a constant buffer.  If the method above returns
 			// a non-null result, then this is a constant buffer.

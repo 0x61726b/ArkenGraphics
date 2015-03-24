@@ -13,12 +13,14 @@ using namespace Arkeng;
 //--------------------------------------------------------------------------------
 ArkMatrixParameter11::ArkMatrixParameter11()
 {
-	m_Matrix = DirectX::XMMatrixIdentity();
+	for ( int i = 0; i <= NUM_THREADS; i++ )
+		m_Matrix[i] = DirectX::XMMatrixIdentity();
 }
 //--------------------------------------------------------------------------------
 ArkMatrixParameter11::ArkMatrixParameter11(ArkMatrixParameter11& copy)
 {
-	m_Matrix = copy.m_Matrix;
+	for ( int i = 0; i <= NUM_THREADS; i++ )
+		m_Matrix[i] = copy.m_Matrix[i];
 }
 //--------------------------------------------------------------------------------
 ArkMatrixParameter11::~ArkMatrixParameter11()
@@ -27,9 +29,13 @@ ArkMatrixParameter11::~ArkMatrixParameter11()
 //--------------------------------------------------------------------------------
 void ArkMatrixParameter11::SetParameterData(void* pData,unsigned int thread)
 {
-	if(0 != memcpy(pData,&m_Matrix,sizeof(DirectX::XMMATRIX)))
+	assert( thread >= 0 );
+	assert( thread < NUM_THREADS+1 );
+
+	if ( 0 != memcmp( pData, &(m_Matrix[thread]), sizeof(DirectX::XMMATRIX) ) )
 	{
-		m_Matrix = *reinterpret_cast<DirectX::XMMATRIX*>(pData);
+		m_auiValueID[thread]++;
+		m_Matrix[thread] = *reinterpret_cast<DirectX::XMMATRIX*>(pData);
 	}
 }
 //--------------------------------------------------------------------------------
@@ -38,14 +44,9 @@ const ArkParamType ArkMatrixParameter11::GetParameterType()
 	return ArkParamType::MATRIX;
 }
 //--------------------------------------------------------------------------------
-DirectX::XMMATRIX ArkMatrixParameter11::GetMatrix()
+DirectX::XMMATRIX ArkMatrixParameter11::GetMatrix(unsigned int thread)
 {
-	return m_Matrix;
-}
-//--------------------------------------------------------------------------------
-void ArkMatrixParameter11::SetMatrix( DirectX::XMMATRIX& v )
-{
-	m_Matrix = v;
+	return m_Matrix[thread];
 }
 //--------------------------------------------------------------------------------
 void* ArkMatrixParameter11::operator new(size_t i)

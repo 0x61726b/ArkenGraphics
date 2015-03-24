@@ -111,7 +111,7 @@ void PipelineManager::ClearBuffers(float color[],float depth)
 	}
 }
 //--------------------------------------------------------------------------------
-void PipelineManager::BindConstantBufferParameter( ShaderType type,ArkRenderParameter11* pParam, UINT slot,IParameterManager* pParamManager )
+void PipelineManager::BindConstantBufferParameter( ShaderType type,std::shared_ptr<ArkRenderParameter11> pParam, UINT slot,IParameterManager* pParamManager )
 {
 	ArkRenderer11* pRenderer = ArkRenderer11::Get();
 
@@ -120,10 +120,10 @@ void PipelineManager::BindConstantBufferParameter( ShaderType type,ArkRenderPara
 	{
 		if( pParam->GetParameterType() == CBUFFER )
 		{
-			ArkConstantBufferParameter11* pBuffer = reinterpret_cast< ArkConstantBufferParameter11* >( pParam );
+			std::shared_ptr<ArkConstantBufferParameter11> pBuffer = std::dynamic_pointer_cast< ArkConstantBufferParameter11 >( pParam );
 			int ID = pBuffer->GetIndex(tID);
 
-			Dx11Resource* pResource = pRenderer->GetResourceByIndex( ID );
+			std::shared_ptr<Dx11Resource> pResource = pRenderer->GetResourceByIndex( ID );
 			if( pResource || ( ID == -1 ))
 			{
 				ID3D11Buffer* pBuffer = 0;
@@ -201,4 +201,54 @@ void PipelineManager::Draw( ArkRenderEffect11& effect, ResourcePtr vb, ResourceP
 	ApplyPipelineResources();
 
 	m_pContext->DrawIndexed( numIndices,0,0 );
+}
+//--------------------------------------------------------------------------------
+D3D11_MAPPED_SUBRESOURCE PipelineManager::MapResource( Dx11Resource* pArkResource, UINT subresource, D3D11_MAP actions, UINT flags )
+{
+	D3D11_MAPPED_SUBRESOURCE Data;
+	Data.pData = NULL;
+	Data.DepthPitch = Data.RowPitch = 0;
+
+	if ( nullptr == pArkResource ) {
+		ArkLog::Get(LogType::Renderer).Output( L"Trying to map a subresource that doesn't exist!!!" );
+		return( Data );
+	}
+	// TODO: Update this to use a ComPtr!
+	// Acquire the native resource pointer.
+	ID3D11Resource* pResource = 0;
+	pResource = pArkResource->GetResource();
+
+	if ( nullptr == pResource ) {
+		ArkLog::Get(LogType::Renderer).Output( L"Trying to map a subresource that has no native resource in it!!!" );
+		return( Data );
+	}
+
+	// Perform the mapping of the resource.
+	HRESULT hr = m_pContext->Map( pResource, subresource, actions, flags, &Data );
+	
+	if ( FAILED( hr ) ) {
+		ArkLog::Get(LogType::Renderer).Output( L"Failed to map resource!" );
+	}
+
+	return( Data );
+}
+//--------------------------------------------------------------------------------
+void PipelineManager::UnMapResource(Dx11Resource* pArkResource,UINT subresource)
+{
+	if ( NULL == pArkResource ) {
+		ArkLog::Get(LogType::Renderer).Output( L"Trying to unmap a subresource that doesn't exist!!!" );
+		return;
+	}
+
+	// Acquire the native resource pointer.
+	ID3D11Resource* pResource = 0;
+	pResource = pArkResource->GetResource();
+
+	if ( NULL == pResource ) {
+		ArkLog::Get(LogType::Renderer).Output( L"Trying to unmap a subresource that has no native resource in it!!!" );
+		return;
+	}
+
+	// Unmap the resource - there is no HRESULT returned, so trust that it works...
+	m_pContext->Unmap( pResource, subresource );
 }

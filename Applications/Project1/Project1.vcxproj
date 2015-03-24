@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1065746F-3F04-4D45-AAD2-E4CFD6B7C254}</ProjectGuid>
     <RootNamespace>Project1</RootNamespace>
+    <ProjectName>Arkengine.CubeDemo</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

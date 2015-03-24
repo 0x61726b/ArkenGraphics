@@ -1,0 +1,9 @@
+[2015-03-23.21-17-24] 	 [Base] -> 	Log file opened.
+[2015-03-23.21-17-24] 	 [Base] -> 	Log Started.
+[2015-03-23.21-17-24] 	 [Base] -> 	Arkengine Build 0.100000
+[2015-03-23.21-17-24] 	 [Renderer] ->	Attempting to create a Win32 window W = 1280 H = 720
+[2015-03-23.21-17-24] 	 [Renderer] ->	Success!
+[2015-03-23.21-17-24] 	 [Renderer] ->	Initializing Direct3D 11!
+[2015-03-23.21-17-24] 	 [Renderer] ->	Enumerating D3D11 video adapters
+[2015-03-23.21-17-24] 	 [Renderer] ->	Adapter 0 AMD Radeon R9 200 Series
+[2015-03-23.21-17-24] 	 [Renderer] ->	Adapter 1 Microsoft Basic Render Driver

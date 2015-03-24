@@ -1,0 +1,12 @@
+[2015-03-23.15-39-53] 	 [Base] -> 	Log file opened.
+[2015-03-23.15-39-53] 	 [Base] -> 	Log Started.
+[2015-03-23.15-39-53] 	 [Base] -> 	Arkengine Build 0.100000
+[2015-03-23.15-39-53] 	 [Renderer] ->	Attempting to create a Win32 window W = 1280 H = 720
+[2015-03-23.15-39-53] 	 [Renderer] ->	Success!
+[2015-03-23.15-39-53] 	 [Renderer] ->	Initializing Direct3D 11!
+[2015-03-23.15-39-53] 	 [Renderer] ->	Enumerating D3D11 video adapters
+[2015-03-23.15-39-53] 	 [Renderer] ->	Adapter 0 Capture Adapter
+[2015-03-23.15-39-53] 	 [Renderer] ->	Adapter 1 Microsoft Basic Render Driver
+[2015-03-23.15-39-53] 	 [Renderer] ->	Renderer supported display modes:
+[2015-03-23.15-40-30] 	 [Renderer] ->	Shutting down the renderer!
+[2015-03-23.15-40-30] 	 [Base] -> 	Log file closed

@@ -1,0 +1,83 @@
+[2015-03-13.23-11-36] 	 [Base] -> 	Log file opened.
+[2015-03-13.23-11-36] 	 [Base] -> 	Log Started.
+[2015-03-13.23-11-36] 	 [Base] -> 	Arkengine Build 0.100000
+[2015-03-13.23-11-36] 	 [Renderer] ->	Test
+[2015-03-13.23-11-36] 	 [Renderer] ->	Initializing Direct3D 11!
+[2015-03-13.23-11-36] 	 [Renderer] ->	Enumerating D3D11 video adapters
+[2015-03-13.23-11-36] 	 [Renderer] ->	Adapter 0 AMD Radeon R9 200 Series
+[2015-03-13.23-11-36] 	 [Renderer] ->	Adapter 1 Microsoft Basic Render Driver
+[2015-03-13.23-11-36] 	 [Renderer] ->	Renderer supported display modes:
+[2015-03-13.23-11-36] 	 [Renderer] ->	Attempting to create a Win32 window W = 1280 H = 720
+[2015-03-13.23-11-36] 	 [Renderer] ->	Success!
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1280x719
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1279x718
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1278x717
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1277x717
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1276x716
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1275x716
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1275x715
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1274x715
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1272x715
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1272x714
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1270x713
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1268x712
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1267x711
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1266x711
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1264x709
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1262x708
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1261x708
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1258x706
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1257x706
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1255x704
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1253x703
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1250x703
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1249x701
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1247x700
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1244x699
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1241x697
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1239x696
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1237x695
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1234x694
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1231x692
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1229x691
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1226x690
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1224x689
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1221x687
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1218x686
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1215x685
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1213x684
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1211x683
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1208x681
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1206x681
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1202x679
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1200x678
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1197x677
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1195x676
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1193x675
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1190x674
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1188x673
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1186x672
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1184x672
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1182x671
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1179x670
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1178x669
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1176x669
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1174x668
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1172x667
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1171x667
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1170x666
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1168x665
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1167x665
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1165x664
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1164x664
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1164x663
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1162x663
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1161x663
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1160x662
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1159x662
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1158x662
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1158x661
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1157x661
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1156x660
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1155x660
+[2015-03-13.23-11-44] 	 [Renderer] ->	Resized viewport 1154x660

@@ -203,17 +203,23 @@ bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL Feat
 //--------------------------------------------------------------------------------
 void ArkRenderer11::Shutdown()
 {
+	Safe_Delete(m_pParamMgr);	
 	Safe_Delete(pPipeline);
 
+	
 	m_vShaderResourceViews.clear();
 	m_vDepthStencilViews.clear();
 	m_vRenderTargetViews.clear();
+	m_vInputLayouts.clear();
 	m_vViewports.clear();
 
 	ArkLog::Get(LogType::Renderer).Output(L"Shutting down the renderer!");
 
-	for(auto pResource : m_vResources)
-		delete pResource;
+	for ( auto pShader : m_vShaders )
+		delete pShader;
+
+	//for(auto pResource : m_vResources)
+	//	delete pResource;
 
 	if(m_pDebugDevice != nullptr)
 	{
@@ -227,6 +233,8 @@ void ArkRenderer11::Shutdown()
 		}
 		delete pSwapChain;
 	}
+	
+
 	m_pDeviceContext = nullptr;
 	m_pDevice = nullptr;
 }
@@ -277,7 +285,7 @@ int ArkRenderer11::CreateSwapChain(Dx11SwapChainConfig* pConfig)
 		return -1;
 	}
 
-	int ResourceID = StoreNewResource(new Dx11Texture2D(pSwapChainBuffer));
+	int ResourceID = StoreNewResource(std::make_shared<Dx11Texture2D>(pSwapChainBuffer));
 
 	Dx11Texture2DConfig Texture2DConfig;
 	pSwapChainBuffer->GetDesc(&Texture2DConfig.m_State);
@@ -308,7 +316,7 @@ int ArkRenderer11::GetUnusedResourceIndex()
 	return(index);
 }
 //--------------------------------------------------------------------------------
-int ArkRenderer11::StoreNewResource(Dx11Resource* pResource)
+int ArkRenderer11::StoreNewResource(std::shared_ptr<Dx11Resource> pResource)
 {
 	int index = GetUnusedResourceIndex();
 
@@ -327,9 +335,9 @@ int ArkRenderer11::StoreNewResource(Dx11Resource* pResource)
 	return(index);
 }
 //--------------------------------------------------------------------------------
-Dx11Resource* ArkRenderer11::GetResourceByIndex(int ID)
+std::shared_ptr<Dx11Resource> ArkRenderer11::GetResourceByIndex(int ID)
 {
-	Dx11Resource* pResource = 0;
+	std::shared_ptr<Dx11Resource> pResource = 0;
 
 	unsigned int index = ID & 0xffff;
 	int innerID = (ID & 0xffff0000) >> 16;
@@ -367,7 +375,7 @@ void ArkRenderer11::ResizeSwapChain(int ID,UINT width,UINT height)
 
 	Dx11SwapChain* pSwapChain = m_vSwapChains[index];
 
-	Dx11Texture2D* pBackBuffer = GetTexture2DByIndex(pSwapChain->m_Resource->m_iResource);
+	std::shared_ptr<Dx11Texture2D> pBackBuffer = GetTexture2DByIndex(pSwapChain->m_Resource->m_iResource);
 	pBackBuffer->m_pTexture.Reset();
 
 	Dx11RenderTargetView& RTV = m_vRenderTargetViews[pSwapChain->m_Resource->m_iResourceRTV];
@@ -425,7 +433,7 @@ ResourcePtr ArkRenderer11::CreateTexture2D(Dx11Texture2DConfig* pConfig,D3D11_SU
 
 	if(pTexture)
 	{
-		Dx11Texture2D* pTex = new Dx11Texture2D(pTexture);
+		std::shared_ptr<Dx11Texture2D> pTex = std::make_shared<Dx11Texture2D>(pTexture);
 		pTex->SetDesiredDescription(pConfig->GetTextureDesc());
 		int ResourceID = StoreNewResource(pTex);
 		ResourcePtr Proxy(new Dx11ResourceProxy(ResourceID,pConfig,this,pSRVConfig,pRTVConfig,pDSVConfig));
@@ -438,7 +446,7 @@ ResourcePtr ArkRenderer11::CreateTexture2D(Dx11Texture2DConfig* pConfig,D3D11_SU
 int ArkRenderer11::CreateRenderTargetView(int ResourceID,D3D11_RENDER_TARGET_VIEW_DESC* pDesc)
 {
 	ID3D11Resource* pRawResource = 0;
-	Dx11Resource* pResource = GetResourceByIndex(ResourceID);
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex(ResourceID);
 
 	if(pResource) {
 		pRawResource = pResource->GetResource();
@@ -473,17 +481,17 @@ Dx11DepthStencilView& ArkRenderer11::GetDepthStencilViewByIndex(int rid)
 	return( m_vDepthStencilViews[rid] );
 }
 //--------------------------------------------------------------------------------
-Dx11Texture2D* ArkRenderer11::GetTexture2DByIndex(int rid)
+std::shared_ptr<Dx11Texture2D> ArkRenderer11::GetTexture2DByIndex(int rid)
 {
-	Dx11Texture2D* pResult = 0;
+	std::shared_ptr<Dx11Texture2D> pResult = 0;
 
-	Dx11Resource* pResource = GetResourceByIndex(rid);
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex(rid);
 
 	if(pResource != NULL)
 	{
 		if(pResource->GetType() == RT_TEXTURE2D)
 		{
-			pResult = reinterpret_cast<Dx11Texture2D*> (pResource);
+			pResult = std::dynamic_pointer_cast<Dx11Texture2D> (pResource);
 		}
 		else
 		{
@@ -573,7 +581,7 @@ ResourcePtr ArkRenderer11::CreateVertexBuffer(ArkBuffer11Config* pConfig,D3D11_S
 
 	if(pBuffer)
 	{
-		ArkVertexBuffer11* pVertexBuffer = new ArkVertexBuffer11(pBuffer);
+		std::shared_ptr<ArkVertexBuffer11> pVertexBuffer = std::make_shared<ArkVertexBuffer11>(pBuffer);
 		pVertexBuffer->SetDesiredDescription(pConfig->m_State);
 
 		// Return an index with the lower 16 bits of index, and the upper
@@ -597,7 +605,7 @@ ResourcePtr ArkRenderer11::CreateIndexBuffer(ArkBuffer11Config* pConfig,D3D11_SU
 
 	if ( pBuffer )
 	{
-		ArkIndexBuffer11* pIndexBuffer = new ArkIndexBuffer11( pBuffer );
+		std::shared_ptr<ArkIndexBuffer11> pIndexBuffer = std::make_shared<ArkIndexBuffer11>( pBuffer );
 		pIndexBuffer->SetDesiredDescription( pConfig->m_State );
 
 		// Return an index with the lower 16 bits of index, and the upper
@@ -620,7 +628,7 @@ ResourcePtr ArkRenderer11::CreateConstantBuffer(ArkBuffer11Config* pConfig,D3D11
 
 	if(pBuffer)
 	{
-		ArkConstantBuffer11* pConstantBuffer = new ArkConstantBuffer11(pBuffer);
+		std::shared_ptr<ArkConstantBuffer11> pConstantBuffer = std::make_shared<ArkConstantBuffer11>(pBuffer);
 		pConstantBuffer->SetDesiredDescription(pConfig->m_State);
 		pConstantBuffer->SetAutoUpdate(bAutoUpdate);
 
@@ -746,28 +754,28 @@ ArkShader11* ArkRenderer11::GetShader(int ID)
 		return(nullptr);
 }
 //--------------------------------------------------------------------------------
-ArkConstantBuffer11* ArkRenderer11::GetConstantBufferByIndex(int rid)
+std::shared_ptr<ArkConstantBuffer11> ArkRenderer11::GetConstantBufferByIndex(int rid)
 {
-	ArkConstantBuffer11* pResult = 0;
+	std::shared_ptr<ArkConstantBuffer11> pResult = 0;
 
-	Dx11Resource* pResource = GetResourceByIndex(rid);
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex(rid);
 
 	if(pResource != NULL) {
 		if(pResource->GetType() != RT_CONSTANTBUFFER) {
 			ArkLog::Get(LogType::Renderer).Write(L"Trying to access a non-constant buffer resource!!!!");
 		}
 		else {
-			pResult = reinterpret_cast<ArkConstantBuffer11*>(pResource);
+			pResult = std::dynamic_pointer_cast<ArkConstantBuffer11>(pResource);
 		}
 	}
 
 	return(pResult);
 }
 //--------------------------------------------------------------------------------
-ArkVertexBuffer11* ArkRenderer11::GetVertexBufferByIndex(int index)
+std::shared_ptr<ArkVertexBuffer11> ArkRenderer11::GetVertexBufferByIndex(int index)
 {
-	ArkVertexBuffer11* pResult = 0;
-	Dx11Resource* pResource = GetResourceByIndex(index);
+	std::shared_ptr<ArkVertexBuffer11> pResult = 0;
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex(index);
 
 	if(pResource != NULL)
 	{
@@ -777,27 +785,27 @@ ArkVertexBuffer11* ArkRenderer11::GetVertexBufferByIndex(int index)
 		}
 		else
 		{
-			pResult = reinterpret_cast<ArkVertexBuffer11*>(pResource);
+			pResult = std::dynamic_pointer_cast<ArkVertexBuffer11>(pResource);
 		}
 	}
 	return pResult;
 }
 //--------------------------------------------------------------------------------
-ArkIndexBuffer11* ArkRenderer11::GetIndexBufferByIndex(int index)
+std::shared_ptr<ArkIndexBuffer11> ArkRenderer11::GetIndexBufferByIndex(int index)
 {
-	ArkIndexBuffer11* pResult = 0;
-	Dx11Resource* pResource = GetResourceByIndex(index);
+	std::shared_ptr<ArkIndexBuffer11> pResult = 0;
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex(index);
 
 	if(pResource != NULL)
 	{
 		ResourceType r = pResource->GetType();
 		if(pResource->GetType() != RT_INDEXBUFFER)
 		{
-			ArkLog::Get(LogType::Renderer).Write(L"Trying to access a non-index buffer resource!!!!");
+			ArkLog::Get(LogType::Renderer).Output(L"Trying to access a non-index buffer resource!!!!");
 		}
 		else
 		{
-			pResult = reinterpret_cast<ArkIndexBuffer11*>(pResource);
+			pResult = std::dynamic_pointer_cast<ArkIndexBuffer11>(pResource);
 		}
 	}
 	return pResult;

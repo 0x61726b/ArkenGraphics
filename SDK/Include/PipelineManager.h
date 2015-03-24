@@ -28,7 +28,7 @@ namespace Arkeng
 
 		void SetDeviceContext(DeviceContextComPtr Context,D3D_FEATURE_LEVEL FeatureLevel);
 
-		void BindConstantBufferParameter( ShaderType type,ArkRenderParameter11* pParam, UINT slot,IParameterManager* pParamManager );
+		void BindConstantBufferParameter( ShaderType type,std::shared_ptr<ArkRenderParameter11> pParam, UINT slot,IParameterManager* pParamManager );
 
 		void BindShader( ShaderType type,int ID, IParameterManager* pParamManager );
 
@@ -49,6 +49,9 @@ namespace Arkeng
 		void Draw( ArkRenderEffect11& effect, ResourcePtr vb, ResourcePtr ib,
 					int inputLayout, D3D11_PRIMITIVE_TOPOLOGY primType,
 					UINT vertexStride, UINT numIndices, IParameterManager* pParamManager);
+
+		D3D11_MAPPED_SUBRESOURCE MapResource( Dx11Resource* pArkResource, UINT subresource, D3D11_MAP actions, UINT flags );
+		void UnMapResource(Dx11Resource* pArkResource,UINT subresource);
 
 		D3D_FEATURE_LEVEL						m_FeatureLevel;
 

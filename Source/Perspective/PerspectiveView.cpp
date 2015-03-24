@@ -33,12 +33,12 @@ void PerspectiveView::SetRenderTargets(ResourcePtr RenderTarget)
 
 	if(m_pRenderTarget != nullptr)
 	{
-		Dx11Resource* pResource = ArkRenderer11::Get()->GetResourceByIndex(m_pRenderTarget->m_iResource);
+		std::shared_ptr<Dx11Resource> pResource = ArkRenderer11::Get()->GetResourceByIndex(m_pRenderTarget->m_iResource);
 
 
 		if(pResource->GetType() == RT_TEXTURE2D)
 		{
-			Dx11Texture2D* pTexture = (Dx11Texture2D*)pResource;
+			std::shared_ptr<Dx11Texture2D> pTexture = std::dynamic_pointer_cast<Dx11Texture2D>(pResource);
 			D3D11_TEXTURE2D_DESC desc = pTexture->GetActualDescription();
 
 			if(m_pDepthTarget == NULL)

@@ -81,7 +81,7 @@ void ArkRenderEffect11::UpdateConstantBufferList()
 				for(unsigned int i = 0; i < pReflection->ConstantBuffers.size(); i++)
 				{
 
-					ArkRenderParameter11* pParameter = pReflection->ConstantBuffers[i].pParamRef;
+					std::shared_ptr<ArkRenderParameter11> pParameter = pReflection->ConstantBuffers[i].pParamRef;
 
 					// If it isn't already included, then add it to the list.
 
@@ -110,7 +110,7 @@ void ArkRenderEffect11::ConfigurePipeline(PipelineManager* pPipeline,IParameterM
 {
 
 	for(auto pParameter : m_uniqueConstBuffers) {
-		ArkConstantBuffer11* cbuffer = ArkRenderer11::Get()->GetConstantBufferByIndex(pParamManager->GetConstantBufferParameter(pParameter));
+		std::shared_ptr<ArkConstantBuffer11> cbuffer = ArkRenderer11::Get()->GetConstantBufferByIndex(pParamManager->GetConstantBufferParameter(pParameter));
 		cbuffer->EvaluateMappings(pPipeline,pParamManager);
 	}
 

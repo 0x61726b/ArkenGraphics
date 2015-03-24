@@ -13,6 +13,9 @@ using namespace Arkeng;
 //--------------------------------------------------------------------------------
 ArkRenderParameter11::ArkRenderParameter11()
 {
+	for ( int i = 0; i < NUM_THREADS+1; i++ ) {
+		m_auiValueID[i] = 0;
+	}
 }
 //--------------------------------------------------------------------------------
 ArkRenderParameter11::ArkRenderParameter11(ArkRenderParameter11& copy)
@@ -38,4 +41,12 @@ void ArkRenderParameter11::InitializeParameterData(void* pData)
 {
 	for ( int i = 0; i <= NUM_THREADS; i++ )
 		SetParameterData( pData, i );
+}
+//--------------------------------------------------------------------------------
+unsigned int ArkRenderParameter11::GetValueID(unsigned int threadID)
+{
+	assert( threadID >= 0 );
+	assert( threadID < NUM_THREADS+1 );
+
+	return( m_auiValueID[threadID] );
 }

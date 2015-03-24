@@ -53,7 +53,7 @@ void DxIAStage::ApplyState(ID3D11DeviceContext* pContext)
 	{
 		int index = VertexBuffers[i];
 
-		ArkVertexBuffer11* pBuffer = pRenderer->GetVertexBufferByIndex(index);
+		std::shared_ptr<ArkVertexBuffer11> pBuffer = pRenderer->GetVertexBufferByIndex(index);
 
 		if(pBuffer) {
 			Buffers[i] = static_cast<ID3D11Buffer*>(pBuffer->GetResource());
@@ -77,7 +77,7 @@ void DxIAStage::ApplyState(ID3D11DeviceContext* pContext)
 
 	int index = CurrentState.GetIndexBuffer();
 
-	ArkIndexBuffer11* pBuffer = pRenderer->GetIndexBufferByIndex(index);
+	std::shared_ptr<ArkIndexBuffer11> pBuffer = pRenderer->GetIndexBufferByIndex(index);
 
 	if(pBuffer) {
 		ID3D11Buffer* pIndexBuffer = reinterpret_cast<ID3D11Buffer*>(pBuffer->GetResource());
