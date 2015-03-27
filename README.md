@@ -1,4 +1,6 @@
-# ArkenGraphics
+# Arkengine
+Modern Renderer developed with C++ and Direct3D 
+===============
 This is a hobby project of achieving a modern renderer coded in C++ D3D 11.I am planning it to extend to D3D 12 when it comes out.
 <h2> Changelog </h2>
 <div>
