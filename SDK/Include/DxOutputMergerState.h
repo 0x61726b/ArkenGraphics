@@ -10,6 +10,8 @@
 #define __DxOutputMergerState_h__
 //--------------------------------------------------------------------------------
 #include "Pch.h"
+#include "TStateMonitor.h"
+#include "TStateArrayMonitor.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -20,22 +22,24 @@ namespace Arkeng
 		virtual ~DxOutputMergerState();
 
 		void ClearState();
+		void ResetUpdate();
+		void SetPreviosState( DxOutputMergerState* pPrev );
+
+		int GetRenderTargetCount() const;
 
 		void SetFeatureLevel( D3D_FEATURE_LEVEL FeatureLevel );
 
-		void AddRenderTargetView( int ID );
-		int  GetRenderTargetView( int ID );
-		int			GetRenderTargetCount() const;
+		TStateMonitor<int>												BlendState;
+		TStateMonitor<int>												DepthStencilState;
+		TStateMonitor<unsigned int>										StencilRef;
 
-	public:
-		void AddDepthTarget(int ID);
-		int GetDepthTarget();
-	private:
-		bool CheckIfRTVExists(int ID);
+		TStateMonitor<int>											   DepthTarget;
+		TStateArrayMonitor<int,D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT> RenderTargetViews;
+
 	protected:
 		D3D_FEATURE_LEVEL				m_eFeatureLevel;
-		std::vector<int> m_vRenderTargetViews;
-		int				m_iDepthTarget;
+
+		DxOutputMergerState*			m_pPrevState;
 
 
 	};

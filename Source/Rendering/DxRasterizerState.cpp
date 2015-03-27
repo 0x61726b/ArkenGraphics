@@ -11,9 +11,16 @@
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
-DxRasterizerState::DxRasterizerState()
+DxRasterizerState::DxRasterizerState() :
+	RasterizerState(-1),
+	ViewPortCount( 0 ),
+	ViewPorts( -1 ),
+	ScissorRectCount( 0 ),
+	ScissorRects( D3D11_RECT() ),
+	m_FeatureLevel( D3D_FEATURE_LEVEL_9_1 ),
+	m_pPrevState( nullptr )
 {
-	m_iViewportCount = 0;
+	ClearState();
 }
 //--------------------------------------------------------------------------------
 DxRasterizerState::~DxRasterizerState()
@@ -25,24 +32,31 @@ void DxRasterizerState::SetFeatureLevel( D3D_FEATURE_LEVEL FeatureLevel )
 	m_FeatureLevel = FeatureLevel;
 }
 //--------------------------------------------------------------------------------
-void DxRasterizerState::Clear()
+void DxRasterizerState::ClearState()
 {
-	m_vViewports.clear();
+	RasterizerState.InitializeState();
+	ViewPortCount.InitializeState();
+	ViewPorts.InitializeStates();
+	ScissorRects.InitializeStates();
+	ScissorRectCount.InitializeState();
 }
 //--------------------------------------------------------------------------------
-void DxRasterizerState::AddViewport( int viewport )
+void DxRasterizerState::SetPreviousState( DxRasterizerState* pPrev )
 {
-	m_vViewports.push_back(viewport);
-}
-//--------------------------------------------------------------------------------
-void DxRasterizerState::SetViewportCount(unsigned int count)
-{
-	assert( count < D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE );
+	m_pPrevState = pPrev;
 
-	m_iViewportCount = count;
+	RasterizerState.SetSister( &pPrev->RasterizerState );
+	ViewPortCount.SetSister( &pPrev->ViewPortCount );
+	ViewPorts.SetSister( &pPrev->ViewPorts );
+	ScissorRects.SetSister( &pPrev->ScissorRects );
+	ScissorRectCount.SetSister( &pPrev->ScissorRectCount );
 }
 //--------------------------------------------------------------------------------
-int DxRasterizerState::GetViewportCount()
+void DxRasterizerState::ResetUpdateFlags()
 {
-	return m_iViewportCount;
+	RasterizerState.ResetTracking();
+	ViewPortCount.ResetTracking();
+	ViewPorts.ResetTracking();
+	ScissorRectCount.ResetTracking();
+	ScissorRects.ResetTracking();		
 }

@@ -21,12 +21,15 @@ namespace Arkeng
 		virtual ~DxIAStage();
 
 		void SetFeatureLevel( D3D_FEATURE_LEVEL FeatureLevel );
-		void ClearState();
-		void ApplyState( ID3D11DeviceContext* pContext );
+		void ClearCurrentState();
+		void ClearPreviousState();
 
-		const DxIAState& GetState() const;
+		void ApplyCurrentState( ID3D11DeviceContext* pContext );
+
+		const DxIAState& GetCurrentState() const;
 
 		DxIAState				CurrentState;
+		DxIAState				PreviousState;
 	protected:
 		D3D_FEATURE_LEVEL		FeatureLevel;
 		

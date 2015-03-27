@@ -30,22 +30,21 @@ ShaderType ArkPixelShaderStage11::GetType()
 void ArkPixelShaderStage11::BindShaderProgram( ID3D11DeviceContext* pContext )
 {
 	ArkRenderer11* pRenderer = ArkRenderer11::Get();
-	ArkShader11* pShader = pRenderer->GetShader( State.ShaderProgram );
+	ArkShader11SPtr pShader = pRenderer->GetShader( CurrentState.ShaderProgram.GetState() );
 
 	ID3D11PixelShader* pS = 0;
 
 	if( pShader )
 	{
-		pS = reinterpret_cast< ArkPixelShader11* >( pShader )->m_pPixelShader;
+		pS = std::dynamic_pointer_cast< ArkPixelShader11 >( pShader )->m_pPixelShader;
 	}
 	pContext->PSSetShader( pS,0,0 );
 }
 //--------------------------------------------------------------------------------
-void ArkPixelShaderStage11::BindConstantBuffers( ID3D11DeviceContext* pContext )
+void ArkPixelShaderStage11::BindConstantBuffers( ID3D11DeviceContext* pContext,int count )
 {
-	if( State.ConstantBuffers.size() > 0)
-		pContext->PSSetConstantBuffers(0,
-		State.ConstantBuffers.size(),
-		&State.ConstantBuffers[0]
-		);
+	pContext->PSSetConstantBuffers(
+		CurrentState.ConstantBuffers.GetStartSlot(),
+		CurrentState.ConstantBuffers.GetRange(),
+		CurrentState.ConstantBuffers.GetFirstSlotLocation() );
 }

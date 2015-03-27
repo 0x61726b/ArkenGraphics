@@ -11,6 +11,8 @@
 //--------------------------------------------------------------------------------
 #include "Pch.h"
 #include "Dx11ResourceProxy.h"
+#include "TStateMonitor.h"
+#include "TStateArrayMonitor.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -24,14 +26,17 @@ namespace Arkeng
 
 
 		void ClearState();
+		void SetPreviousState( ArkShaderStageState11* pPrev );
+		void ResetUpdate();
 
-
-	public:
-		int								ShaderProgram;
-		std::vector<ID3D11Buffer*>		ConstantBuffers;
+		TStateMonitor<int>													ShaderProgram;
+		TStateArrayMonitor<ID3D11Buffer*,
+			D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT>				ConstantBuffers;
 
 	protected:
 		D3D_FEATURE_LEVEL			m_FeatureLevel;
+
+		ArkShaderStageState11*		m_pPrevState;
 	};
 };
 

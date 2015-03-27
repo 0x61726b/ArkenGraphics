@@ -4,10 +4,10 @@
 //
 //Copyright (c) Alperen Gezer.All rights reserved.
 //
-//RendererDX11.h
+//ArkRenderer11.h
 //--------------------------------------------------------------------------------
-#ifndef __RendererDX11_h__
-#define __RendererDX11_h__
+#ifndef __ArkRenderer11_h__
+#define __ArkRenderer11_h__
 //--------------------------------------------------------------------------------
 #include "Pch.h"
 #include "IRenderer.h"
@@ -35,6 +35,9 @@ namespace Arkeng
 	class Dx11ShaderResourceView;
 	class Dx11RenderTargetView;
 	class Dx11DepthStencilView;
+	class Dx11RasterizerStateConfig;
+	class Dx11DepthStencilStateConfig;
+	class Dx11BlendStateConfig;
 
 	class ArkRenderEffect11;
 
@@ -51,6 +54,11 @@ namespace Arkeng
 	typedef Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>	ShaderResourceViewComPtr;
 	typedef Microsoft::WRL::ComPtr<ID3D11DepthStencilView>      DepthStencilViewComPtr;
 	typedef Microsoft::WRL::ComPtr<ID3D11InputLayout>			InputLayoutComPtr;
+	typedef Microsoft::WRL::ComPtr<ID3D11RasterizerState>		RasterizerStateComPtr;
+	typedef Microsoft::WRL::ComPtr<ID3D11DepthStencilState>		DepthStencilStateComPtr;
+	typedef Microsoft::WRL::ComPtr<ID3D11BlendState>			BlendStateComPtr;
+
+	typedef std::shared_ptr<ArkShader11>						ArkShader11SPtr;
 
 	class TaskCore;
 
@@ -79,6 +87,8 @@ namespace Arkeng
 
 		virtual void Present(HWND hWnd = 0,int swapchain = -1);
 
+		UINT GetMSQualityLevels( DXGI_FORMAT, UINT  );
+
 		int CreateSwapChain(Dx11SwapChainConfig* Config);
 
 		ResourcePtr CreateVertexBuffer(ArkBuffer11Config* pConfig,D3D11_SUBRESOURCE_DATA* pData);
@@ -90,6 +100,10 @@ namespace Arkeng
 			Dx11RenderTargetViewConfig* pRTVConfig = NULL,
 			Dx11DepthStencilViewConfig* pDSVConfig= NULL);
 
+		int CreateDepthStencilView( int ResourceID,D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc );
+
+		
+
 		int CreateRenderTargetView(int ResourceID,D3D11_RENDER_TARGET_VIEW_DESC* pDesc);
 		Dx11RenderTargetView& GetRenderTargetViewByIndex(int rid);
 		Dx11DepthStencilView& GetDepthStencilViewByIndex(int rid);
@@ -99,7 +113,7 @@ namespace Arkeng
 		int LoadShader(ShaderType type,std::wstring& filename,std::wstring& function,
 			std::wstring& model,const D3D_SHADER_MACRO* pDefines,bool enablelogging = true);
 
-		ArkShader11* GetShader( int ID );
+		ArkShader11SPtr GetShader(int ID);
 
 
 		InputLayoutComPtr				GetInputLayout(int index);
@@ -108,7 +122,16 @@ namespace Arkeng
 		std::shared_ptr<ArkVertexBuffer11>				GetVertexBufferByIndex(int index);
 		std::shared_ptr<ArkIndexBuffer11>				GetIndexBufferByIndex(int index);
 
-		std::shared_ptr<ArkConstantBuffer11> GetConstantBufferByIndex( int ID );
+		std::shared_ptr<ArkConstantBuffer11> GetConstantBufferByIndex(int ID);
+
+		RasterizerStateComPtr		GetRasterizerState(int index);
+		int							CreateRasterizerState( Dx11RasterizerStateConfig* Config );
+
+		int							CreateBlendState( Dx11BlendStateConfig* Config );
+		BlendStateComPtr			GetBlendState( int index );
+
+		DepthStencilStateComPtr		GetDepthState( int index );
+		int CreateDepthStencilState( Dx11DepthStencilStateConfig* pConfig );
 
 
 		void ResizeSwapChain(int ID,UINT width,UINT height);
@@ -123,6 +146,9 @@ namespace Arkeng
 
 
 		std::shared_ptr<Dx11Texture2D>		GetTexture2DByIndex(int ID);
+
+
+		Microsoft::WRL::ComPtr<ID3D11Debug>			GetDebugDevice();
 	protected:
 		static ArkRenderer11* m_spRenderer;
 
@@ -132,7 +158,7 @@ namespace Arkeng
 
 		Microsoft::WRL::ComPtr<ID3D11Debug>				m_pDebugDevice;
 
-		
+
 
 		D3D_DRIVER_TYPE							m_driverType;
 
@@ -141,14 +167,17 @@ namespace Arkeng
 		std::vector<std::shared_ptr<Dx11Resource>>					m_vResources;
 
 		std::vector<Dx11ViewPort>					m_vViewports;
+		std::vector<RasterizerStateComPtr>			m_vRasterizerStates;
 
 		std::vector<InputLayoutComPtr>				m_vInputLayouts;
 
 		std::vector<Dx11ShaderResourceView>			m_vShaderResourceViews;
 		std::vector<Dx11RenderTargetView>			m_vRenderTargetViews;
 		std::vector<Dx11DepthStencilView>			m_vDepthStencilViews;
+		std::vector<DepthStencilStateComPtr>		m_vDepthStencilStates;
+		std::vector<BlendStateComPtr>				m_vBlendStates;
 
-		std::vector<ArkShader11*>					m_vShaders;
+		std::vector<ArkShader11SPtr>					m_vShaders;
 
 
 		std::vector< TaskCore* >						m_vQueuedTasks;
@@ -166,6 +195,9 @@ namespace Arkeng
 		int							StoreNewResource(std::shared_ptr<Dx11Resource> pResource);
 
 		ResourcePtr					GetSwapChainResource(int ID);
+
+	private:
+			bool								m_bVsyncEnabled;
 	};
 
 };

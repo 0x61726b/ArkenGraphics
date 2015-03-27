@@ -6,7 +6,7 @@
 //
 //App.cpp
 //--------------------------------------------------------------------------------
-#include "App.h"
+#include "CubeWithLighting.h"
 #include "Dx11RenderTargetView.h"
 #include "EventManager.h"
 #include "EKeyDown.h"
@@ -15,7 +15,9 @@
 #include "IParameterManager.h"
 #include "Dx11SwapChainConfig.h"
 #include "Dx11Texture2DConfig.h"
-
+#include "Dx11DepthStencilStateConfig.h"
+#include "Dx11RasterizerStateConfig.h"
+#include "Dx11BlendStateConfig.h"
 
 #include "EventManager.h"
 #include "EKeyDown.h"
@@ -78,6 +80,13 @@ bool App::ConfigureEngineComponents()
 	Config.SetWidth(m_pWindow->GetWidth());
 	Config.SetHeight(m_pWindow->GetHeight());
 	Config.SetOutputWindow(m_pWindow->GetHandle());
+	Config.SetRefreshRateDenominator(1);
+	Config.SetRefreshRateNumerator(60);
+	DXGI_SAMPLE_DESC SampleDesc;
+	UINT msQuality = m_pRenderer->GetMSQualityLevels( DXGI_FORMAT_R8G8B8A8_UNORM,8 );
+	SampleDesc.Count = 8;
+	SampleDesc.Quality = 16;
+	
 	m_iSwapChain = m_pRenderer->CreateSwapChain(&Config);
 	m_pWindow->SetSwapChain(m_iSwapChain);
 
@@ -92,12 +101,28 @@ bool App::ConfigureEngineComponents()
 	DepthConfig.SetDepthBuffer(resX,resY);
 	m_DepthTarget = m_pRenderer->CreateTexture2D(&DepthConfig,0);
 
+	
+	Dx11DepthStencilStateConfig dsConfig;
+	int iDs = m_pRenderer->CreateDepthStencilState( &dsConfig );
+
+	Dx11RasterizerStateConfig rsConfig;
+	/*rsConfig.CullMode = D3D11_CULL_BACK;*/
+	int iRs = m_pRenderer->CreateRasterizerState( &rsConfig );
+
+	Dx11BlendStateConfig bConfig;
+	int iBs = m_pRenderer->CreateBlendState( &bConfig );
+
+	m_Effect.m_iBlendState = iBs;
+	m_Effect.m_iDepthStencilState = iDs;
+	m_Effect.m_iRasterizerState = iRs;
+	m_Effect.m_uStencilRef = iDs;
+
 	// Bind the swap chain render target and the depth buffer for use in 
 	// rendering.  
 
 	m_pRenderer->pPipeline->ClearRenderTargets();
-	m_pRenderer->pPipeline->OutputMergerStage.State.AddRenderTargetView(m_RenderTarget->m_iResourceRTV);
-	m_pRenderer->pPipeline->OutputMergerStage.State.AddDepthTarget(m_DepthTarget->m_iResourceDSV);
+	m_pRenderer->pPipeline->OutputMergerStage.CurrentState.RenderTargetViews.SetState(0,m_RenderTarget->m_iResourceRTV);
+	m_pRenderer->pPipeline->OutputMergerStage.CurrentState.DepthTarget.SetState(m_DepthTarget->m_iResourceDSV);
 	m_pRenderer->pPipeline->ApplyRenderTargets();
 
 	m_Effect.SetVertexShader(m_pRenderer->LoadShader(VERTEX_SHADER,
@@ -130,8 +155,8 @@ bool App::ConfigureEngineComponents()
 	viewport.TopLeftY = 0;
 
 	int ViewPort = m_pRenderer->CreateViewport(viewport);
-	m_pRenderer->pPipeline->RasterizerStage.State.SetViewportCount(1);
-	m_pRenderer->pPipeline->RasterizerStage.State.AddViewport(ViewPort);
+	m_pRenderer->pPipeline->RasterizerStage.CurrentState.ViewPortCount.SetState(1);
+	m_pRenderer->pPipeline->RasterizerStage.CurrentState.ViewPorts.SetState(0,ViewPort);
 
 
 	return true;
@@ -139,12 +164,17 @@ bool App::ConfigureEngineComponents()
 //--------------------------------------------------------------------------------
 void App::ShutdownEngineComponents()
 {
+	Microsoft::WRL::ComPtr<ID3D11Debug> d = m_pRenderer->GetDebugDevice();
 	if(m_pRenderer)
 	{
 		m_pRenderer->Shutdown();
 		delete m_pRenderer;
 	}
-
+	if(d != nullptr)
+	{
+		d->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
+		d = nullptr;
+	}
 	if(m_pWindow)
 	{
 		m_pWindow->Shutdown();
@@ -216,14 +246,15 @@ void App::Initialize()
 	}
 
 
-	DirectX::XMVECTOR Eye = DirectX::XMVectorSet(0.0f,1.0f,5.0f,0.0f);
+	DirectX::XMVECTOR Eye = DirectX::XMVectorSet(0.0f,1.0f,-5.0f,0.0f);
 	DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f,0.0f,0.0f,0.0f);
 	DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f,1.0f,0.0f,0.0f);
 	
 	DirectX::XMMATRIX m_ViewMatrix = DirectX::XMMatrixLookAtLH(Eye,At,Up);
-	DirectX::XMMATRIX  m_ProjMatrix = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2,(FLOAT)m_pWindow->GetWidth() / (FLOAT)m_pWindow->GetHeight(),0,1);
+	DirectX::XMMATRIX  m_ProjMatrix = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2,(FLOAT)m_pWindow->GetWidth() / (FLOAT)m_pWindow->GetHeight(),0.01f,100.0f);
 
 	DirectX::XMMATRIX m_WorldMatrix = DirectX::XMMatrixIdentity();
+	
 
 	m_pRenderer->m_pParamMgr->SetWorldMatrix(&m_WorldMatrix);
 	m_pRenderer->m_pParamMgr->SetViewMatrix(&m_ViewMatrix);
@@ -240,6 +271,18 @@ void App::Update()
 	/*m_pScene->Render(m_pRenderer);*/
 
 	m_pRenderer->pPipeline->ClearBuffers( new float[4] { 0,0,0,0 },1.0f );
+
+	static DWORD dwTimeStart = 0;
+	static float t = 0.0f;
+	DWORD dwTimeCur = GetTickCount();
+	if( dwTimeStart == 0 )
+		dwTimeStart = dwTimeCur;
+	t = ( dwTimeCur - dwTimeStart ) / 1000.0f;
+
+	DirectX::XMMATRIX mRotation = DirectX::XMMatrixRotationY( t );
+	m_WorldMatrix = mRotation;
+
+	m_pRenderer->m_pParamMgr->SetWorldMatrix(&m_WorldMatrix);
 
 	UINT stride = sizeof(Vertex);
 	m_pRenderer->pPipeline->Draw(m_Effect,m_pVertexBuffer,m_pIndexBuffer,m_VertexLayout,D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST,stride,36,m_pRenderer->m_pParamMgr);

@@ -22,6 +22,7 @@
 
 #include "Dx11Resource.h"
 #include "Dx11RenderTargetView.h"
+#include "Dx11DepthStencilView.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -42,6 +43,9 @@ void PipelineManager::SetDeviceContext( DeviceContextComPtr Context,D3D_FEATURE_
 	m_pContext = Context;
 	m_FeatureLevel = FeatureLevel;
 
+	ShaderStages[VERTEX_SHADER]->SetFeatureLevel( FeatureLevel );
+	ShaderStages[PIXEL_SHADER]->SetFeatureLevel( FeatureLevel );
+
 	OutputMergerStage.SetFeatureLevel( FeatureLevel );
 	RasterizerStage.SetFeatureLevel( FeatureLevel );
 	InputAssemblerStage.SetFeatureLevel( FeatureLevel );
@@ -54,53 +58,62 @@ void PipelineManager::ApplyRenderTargets()
 //--------------------------------------------------------------------------------
 void PipelineManager::ClearRenderTargets()
 {
-	OutputMergerStage.ClearState();
+	OutputMergerStage.ClearCurrentState();
 }
 //--------------------------------------------------------------------------------
 void PipelineManager::ClearPipelineState()
 {
-	VertexShaderStage.ClearState();
-	PixelShaderStage.ClearState();
+	VertexShaderStage.ClearCurrentState();
+	PixelShaderStage.ClearCurrentState();
 
-	OutputMergerStage.ClearState();
-	RasterizerStage.ClearState();
-	InputAssemblerStage.ClearState();
+	OutputMergerStage.ClearCurrentState();
+	OutputMergerStage.ClearPreviousState();
+
+	RasterizerStage.ClearCurrentState();
+	RasterizerStage.ClearPreviousState();
+
+	InputAssemblerStage.ClearCurrentState();
+	InputAssemblerStage.ClearPreviousState();
 
 	m_pContext->ClearState();
 }
 //--------------------------------------------------------------------------------
 void PipelineManager::ApplyPipelineResources()
 {
-	VertexShaderStage.ApplyState( m_pContext.Get () );
-	PixelShaderStage.ApplyState( m_pContext.Get() );
+	VertexShaderStage.ApplyCurrentState( m_pContext.Get () );
+	PixelShaderStage.ApplyCurrentState( m_pContext.Get() );
 
-	RasterizerStage.ApplyState( m_pContext.Get() );
+	RasterizerStage.ApplyCurrentState( m_pContext.Get() );
+	OutputMergerStage.ApplyDepthStencilStatesAndBlendStates( m_pContext.Get() );
 }
 //--------------------------------------------------------------------------------
 void PipelineManager::ClearPipelineResources()
 {
-	VertexShaderStage.ClearState();
-	PixelShaderStage.ClearState();
+	VertexShaderStage.ClearCurrentState();
+	PixelShaderStage.ClearCurrentState();
 }
 //--------------------------------------------------------------------------------
 void PipelineManager::ApplyInputResources()
 {
-	InputAssemblerStage.ApplyState( m_pContext.Get() );
+	InputAssemblerStage.ApplyCurrentState( m_pContext.Get() );
 }
 //--------------------------------------------------------------------------------
 void PipelineManager::ClearInputResources()
 {
-	InputAssemblerStage.ClearState();
+	InputAssemblerStage.ClearCurrentState();
 }
 //--------------------------------------------------------------------------------
-void PipelineManager::ClearBuffers(float color[],float depth)
+void PipelineManager::ClearBuffers(float color[],float depth,UINT stencil)
 {
 	ID3D11RenderTargetView* pRenderTargetViews[D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT] = { NULL };
+	ID3D11DepthStencilView* pDepthStencilView = 0;
+
+
 	UINT viewCount = OutputMergerStage.GetCurrentState().GetRenderTargetCount();
 
 	for( UINT i = 0; i < viewCount; ++i )
 	{
-		int rtv = OutputMergerStage.State.GetRenderTargetView(i);
+		int rtv = OutputMergerStage.CurrentState.RenderTargetViews.GetState(i);
 		Dx11RenderTargetView& rtView = ArkRenderer11::Get()->GetRenderTargetViewByIndex(rtv);
 		pRenderTargetViews[i] = rtView.m_pRenderTargetView.Get();
 
@@ -108,6 +121,16 @@ void PipelineManager::ClearBuffers(float color[],float depth)
 		{
 			m_pContext->ClearRenderTargetView(pRenderTargetViews[i],color);
 		}
+	}
+
+	if( OutputMergerStage.CurrentState.DepthTarget.GetState() != -1 )
+	{
+		int dsv = OutputMergerStage.CurrentState.DepthTarget.GetState();
+		Dx11DepthStencilView DSV = ArkRenderer11::Get()->GetDepthStencilViewByIndex(dsv);
+		pDepthStencilView = DSV.m_pDepthStencilView.Get();
+
+		if( pDepthStencilView != nullptr )
+			m_pContext->ClearDepthStencilView( pDepthStencilView,D3D11_CLEAR_DEPTH,depth,stencil);
 	}
 }
 //--------------------------------------------------------------------------------
@@ -132,7 +155,7 @@ void PipelineManager::BindConstantBufferParameter( ShaderType type,std::shared_p
 				{
 					pBuffer = (ID3D11Buffer*)pResource->GetResource();
 				}
-				ShaderStages[type]->State.ConstantBuffers.push_back(pBuffer);
+				ShaderStages[type]->CurrentState.ConstantBuffers.SetState(slot,pBuffer);
 			}
 			else
 			{
@@ -153,9 +176,9 @@ void PipelineManager::BindConstantBufferParameter( ShaderType type,std::shared_p
 void PipelineManager::BindShader( ShaderType type,int ID,IParameterManager* pParamManager )
 {
 	ArkRenderer11* pRenderer = ArkRenderer11::Get();
-	ArkShader11* pShader11 = pRenderer->GetShader( ID );
+	ArkShader11SPtr pShader11 = pRenderer->GetShader( ID );
 
-	ShaderStages[type]->State.ShaderProgram = ID;
+	ShaderStages[type]->CurrentState.ShaderProgram.SetState(ID);
 	if( pShader11 )
 	{
 		if( pShader11->GetType() == type )
@@ -173,28 +196,28 @@ void PipelineManager::Draw( ArkRenderEffect11& effect, ResourcePtr vb, ResourceP
 					int inputLayout, D3D11_PRIMITIVE_TOPOLOGY primType,
 					UINT vertexStride, UINT numIndices, IParameterManager* pParamManager)
 {
-	InputAssemblerStage.ClearState();
+	InputAssemblerStage.ClearCurrentState();
 
-	InputAssemblerStage.CurrentState.SetPrimitiveTopology( primType );
+	InputAssemblerStage.CurrentState.PrimitiveTopology.SetState( primType );
 
 	if( vb != NULL )
 	{
-		InputAssemblerStage.CurrentState.AddVertexBuffer( vb->m_iResource );
-		InputAssemblerStage.CurrentState.AddVertexBufferStride( vertexStride );
-		InputAssemblerStage.CurrentState.AddVertexBufferOffsets(0);
+		InputAssemblerStage.CurrentState.VertexBuffers.SetState(0, vb->m_iResource );
+		InputAssemblerStage.CurrentState.VertexBufferStrides.SetState(0, vertexStride );
+		InputAssemblerStage.CurrentState.VertexBufferOffsets.SetState(0,0);
 	}
 	if( ib != NULL )
 	{
-		InputAssemblerStage.CurrentState.SetIndexBuffer( ib->m_iResource );
-		InputAssemblerStage.CurrentState.SetIndexBufferFormat( DXGI_FORMAT_R32_UINT );
+		InputAssemblerStage.CurrentState.IndexBuffer.SetState( ib->m_iResource );
+		InputAssemblerStage.CurrentState.IndexBufferFormat.SetState( DXGI_FORMAT_R32_UINT );
 	}
 
 	if( vb != NULL )
 	{
-		InputAssemblerStage.CurrentState.SetInputLayout( inputLayout );
+		InputAssemblerStage.CurrentState.InputLayout.SetState( inputLayout );
 	}
 
-	InputAssemblerStage.ApplyState( m_pContext.Get() );
+	InputAssemblerStage.ApplyCurrentState( m_pContext.Get() );
 
 	ClearPipelineResources();
 	effect.ConfigurePipeline(this,pParamManager);

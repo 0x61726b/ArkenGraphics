@@ -22,16 +22,18 @@ namespace Arkeng
 
 		void SetFeatureLevel(D3D_FEATURE_LEVEL level);
 
-		void ClearState();
-		void ApplyState(ID3D11DeviceContext* pContext);
+		void ClearCurrentState();
+		void ClearPreviousState();
+		void ApplyCurrentState(ID3D11DeviceContext* pContext);
 
 		virtual ShaderType GetType() = 0;
 
 		virtual void BindShaderProgram(ID3D11DeviceContext*) = 0;
-		virtual void BindConstantBuffers(ID3D11DeviceContext* pContext) = 0;
+		virtual void BindConstantBuffers(ID3D11DeviceContext* pContext,int count) = 0;
 
 
-		ArkShaderStageState11 State;
+		ArkShaderStageState11 CurrentState;
+		ArkShaderStageState11 PreviousState;
 	protected:
 
 		D3D_FEATURE_LEVEL			m_FeatureLevel;

@@ -30,21 +30,21 @@ ShaderType ArkVertexShaderStage11::GetType()
 void ArkVertexShaderStage11::BindShaderProgram( ID3D11DeviceContext* pContext )
 {
 	ArkRenderer11* pRenderer = ArkRenderer11::Get();
-	ArkShader11* pShader = pRenderer->GetShader( State.ShaderProgram );
+	ArkShader11SPtr pShader = pRenderer->GetShader( CurrentState.ShaderProgram.GetState() );
 
 	ID3D11VertexShader* pS = 0;
 
 	if( pShader )
 	{
-		pS = reinterpret_cast< ArkVertexShader11* >( pShader )->m_pVertexShader;
+		pS = std::dynamic_pointer_cast< ArkVertexShader11 >( pShader )->m_pVertexShader;
 	}
 	pContext->VSSetShader( pS,0,0 );
 }
 //--------------------------------------------------------------------------------
-void ArkVertexShaderStage11::BindConstantBuffers( ID3D11DeviceContext* pContext )
+void ArkVertexShaderStage11::BindConstantBuffers( ID3D11DeviceContext* pContext,int count )
 {
-	pContext->VSSetConstantBuffers(0,
-		State.ConstantBuffers.size(),
-		&State.ConstantBuffers[0]
-		);
+	pContext->VSSetConstantBuffers( 
+		CurrentState.ConstantBuffers.GetStartSlot(),
+		CurrentState.ConstantBuffers.GetRange(),
+		CurrentState.ConstantBuffers.GetFirstSlotLocation() );
 }

@@ -46,7 +46,7 @@ namespace Arkeng
 		void UpdateConstantBufferList( );
 
 		int					m_aiIndices[2];
-		ArkShader11*			m_apShaders[2];
+		ArkShader11*		m_apShaders[2];
 
 		std::vector< std::shared_ptr<ArkRenderParameter11> > m_uniqueConstBuffers;
 	};

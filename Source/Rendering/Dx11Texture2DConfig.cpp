@@ -30,6 +30,7 @@ void Dx11Texture2DConfig::SetDefaults()
     m_State.MipLevels = 1;
     m_State.ArraySize = 1;
     m_State.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	
 	m_State.SampleDesc.Count = 1;
 	m_State.SampleDesc.Quality = 0;
     m_State.Usage = D3D11_USAGE_DEFAULT;

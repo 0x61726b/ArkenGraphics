@@ -23,19 +23,20 @@ namespace Arkeng
 		DxRasterizerStage();
 		virtual ~DxRasterizerStage();
 
-		void ClearState();
-		
+		void ClearCurrentState();
+		void ClearPreviousState();
+		void ApplyCurrentState( ID3D11DeviceContext* pContext );
+
+
 		void SetFeatureLevel( D3D_FEATURE_LEVEL FeatureLevel );
-
 		const DxRasterizerState& GetCurrentState() const;
-
-		void ApplyState( ID3D11DeviceContext* pContext );
-
 	public:
-		DxRasterizerState		State;
+		DxRasterizerState		CurrentState;
 
 	protected:
 		D3D_FEATURE_LEVEL m_FeatureLevel;
+
+		DxRasterizerState		PreviousState;
 
 		friend PipelineManager;
 

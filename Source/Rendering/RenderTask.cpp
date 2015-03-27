@@ -47,11 +47,11 @@ void RenderTask::ConfigureViewports(PipelineManager* pPipeline)
 {
 
 
-	pPipeline->RasterizerStage.State.SetViewportCount(m_uiViewportCount);
+	pPipeline->RasterizerStage.CurrentState.ViewPortCount.SetState(m_uiViewportCount);
 
 	for(int i=0; i < m_uiViewportCount;++i)
 	{
-		pPipeline->RasterizerStage.State.AddViewport(m_iViewports[i]);
+		pPipeline->RasterizerStage.CurrentState.ViewPorts.SetState(0,m_iViewports[i]);
 	}
 }
 //--------------------------------------------------------------------------------

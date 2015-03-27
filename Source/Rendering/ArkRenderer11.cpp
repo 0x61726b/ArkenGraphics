@@ -20,6 +20,7 @@
 #include "ArkRenderEffect11.h"
 #include "ArkBuffer11Config.h"
 
+
 #include "ArkShaderFactory11.h"
 #include "ArkShaderReflection11.h"
 #include "ArkShaderReflectionFactory11.h"
@@ -39,6 +40,13 @@
 #include "Dx11Texture2DConfig.h"
 #include "Dx11SwapChainConfig.h"
 #include "Dx11ViewPort.h"
+#include "Dx11RasterizerStateConfig.h"
+#include "Dx11DepthStencilViewConfig.h"
+#include "Dx11DepthStencilStateConfig.h"
+#include "Dx11BlendStateConfig.h"
+
+
+
 #include "PipelineManager.h"
 #include "TaskCore.h"
 
@@ -57,6 +65,8 @@ ArkRenderer11::ArkRenderer11()
 	pPipeline = 0;
 
 	m_pParamMgr = 0;
+
+	m_bVsyncEnabled = true;
 }
 //--------------------------------------------------------------------------------
 ArkRenderer11::~ArkRenderer11()
@@ -80,8 +90,8 @@ bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL Feat
 
 	ArkLog::Get(LogType::Renderer).Output(L"Enumerating D3D11 video adapters");
 
-	std::vector<IDXGIAdapter1*> vAdapters;
-	IDXGIAdapter1* pAdapter;
+	std::vector<ComPtr<IDXGIAdapter1>> vAdapters;
+	ComPtr<IDXGIAdapter1> pAdapter;
 
 	for(int i=0; pFactory->EnumAdapters1(i,&pAdapter) != DXGI_ERROR_NOT_FOUND; ++i)
 	{
@@ -114,7 +124,7 @@ bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL Feat
 		for(auto pAdapter : vAdapters)
 		{
 			HR_CHECK(hr = D3D11CreateDevice(
-				pAdapter,
+				pAdapter.Get(),
 				D3D_DRIVER_TYPE_UNKNOWN,
 				nullptr,
 				CreateDeviceFlags,
@@ -126,7 +136,7 @@ bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL Feat
 				pContext.GetAddressOf()));
 
 			//
-			IDXGIOutput* pOutput = NULL;
+			ComPtr<IDXGIOutput> pOutput = NULL;
 			hr = pAdapter->EnumOutputs(0,&pOutput);
 
 			UINT numModes = 0;
@@ -164,7 +174,7 @@ bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL Feat
 				}
 			}
 			//
-
+			delete displayModes;
 			if(hr == S_OK)
 				break;
 		}
@@ -188,25 +198,67 @@ bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL Feat
 
 	m_pDeviceContext = pContext;
 
-	
+
+
+	for(UINT sampleCount = 0; sampleCount < D3D11_MAX_MULTISAMPLE_SAMPLE_COUNT; sampleCount++)
+	{
+		UINT maxQualityLevel;
+		hr = m_pDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM,sampleCount,&maxQualityLevel);
+
+		if(maxQualityLevel > 0)
+			maxQualityLevel--;
+
+		if(!FAILED(hr))
+		{
+			if(maxQualityLevel > 0)
+			{
+				std::wstring output = L"MSAA " + std::to_wstring(sampleCount) ;
+				output.append(L"x supported with " + std::to_wstring(maxQualityLevel));
+				output.append(L" quality levels.");
+				ArkLog::Get(LogType::Renderer).Output(output);
+			}
+		}
+	}
+
+
 	m_pParamMgr = new ArkParameterManager11(0);
 	pPipeline = new PipelineManager();
 	pPipeline->SetDeviceContext(m_pDeviceContext,FeatureLevel);
 
 
+	Dx11RasterizerStateConfig RasterizerState;
+	pPipeline->RasterizerStage.CurrentState.RasterizerState.SetState(CreateRasterizerState(&RasterizerState));
+
+	Dx11DepthStencilStateConfig DepthStencilState;
+	pPipeline->OutputMergerStage.CurrentState.DepthStencilState.SetState(CreateDepthStencilState(&DepthStencilState));
+
+	Dx11BlendStateConfig BlendState;
+	pPipeline->OutputMergerStage.CurrentState.BlendState.SetState(CreateBlendState(&BlendState));
+
+	m_vShaderResourceViews.emplace_back(ShaderResourceViewComPtr());
 	m_vRenderTargetViews.emplace_back(RenderTargetViewComPtr());
+	m_vDepthStencilViews.emplace_back(DepthStencilViewComPtr());
 
 	hr = m_pDevice.CopyTo(m_pDebugDevice.GetAddressOf());
+
+	D3D11_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS Options;
+    m_pDevice->CheckFeatureSupport(D3D11_FEATURE_D3D10_X_HARDWARE_OPTIONS, &Options, sizeof(Options));
+	if ( Options.ComputeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x )
+		ArkLog::Get(LogType::Renderer).Write( L"Device supports compute shaders plus raw and structured buffers via shader 4.x" );
 
 	return true;
 }
 //--------------------------------------------------------------------------------
+Microsoft::WRL::ComPtr<ID3D11Debug> ArkRenderer11::GetDebugDevice()
+{
+	return m_pDebugDevice;
+}
 void ArkRenderer11::Shutdown()
 {
-	Safe_Delete(m_pParamMgr);	
+	Safe_Delete(m_pParamMgr);
 	Safe_Delete(pPipeline);
 
-	
+
 	m_vShaderResourceViews.clear();
 	m_vDepthStencilViews.clear();
 	m_vRenderTargetViews.clear();
@@ -215,17 +267,13 @@ void ArkRenderer11::Shutdown()
 
 	ArkLog::Get(LogType::Renderer).Output(L"Shutting down the renderer!");
 
-	for ( auto pShader : m_vShaders )
-		delete pShader;
+	//for ( auto pShader : m_vShaders )
+	//	delete pShader;
 
-	//for(auto pResource : m_vResources)
-	//	delete pResource;
+	for(auto pResource : m_vResources)
+		pResource = nullptr;
 
-	if(m_pDebugDevice != nullptr)
-	{
-		m_pDebugDevice->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
-		m_pDebugDevice = nullptr;
-	}
+
 
 	for(auto pSwapChain : m_vSwapChains) {
 		if(pSwapChain != nullptr) {
@@ -233,7 +281,7 @@ void ArkRenderer11::Shutdown()
 		}
 		delete pSwapChain;
 	}
-	
+
 
 	m_pDeviceContext = nullptr;
 	m_pDevice = nullptr;
@@ -247,10 +295,22 @@ void ArkRenderer11::Present(HWND hwnd,int swapchain)
 	{
 		Dx11SwapChain* pSwapChain = m_vSwapChains[index];
 		HRESULT hr;
-		hr = pSwapChain->m_pSwapChain->Present(0,0) ;
+		if(m_bVsyncEnabled)
+			hr = pSwapChain->m_pSwapChain->Present(1,0) ;
+		else
+			hr = pSwapChain->m_pSwapChain->Present(0,0) ;
 	}
 	//TODO: Log check.
 
+}
+//--------------------------------------------------------------------------------
+UINT ArkRenderer11::GetMSQualityLevels(DXGI_FORMAT format,UINT count)
+{
+	UINT msCount;
+	HRESULT hr = m_pDevice->CheckMultisampleQualityLevels(format,count,&msCount);
+	if(!FAILED(hr))
+		return msCount;
+	return 0;
 }
 //--------------------------------------------------------------------------------
 int ArkRenderer11::CreateSwapChain(Dx11SwapChainConfig* pConfig)
@@ -267,6 +327,7 @@ int ArkRenderer11::CreateSwapChain(Dx11SwapChainConfig* pConfig)
 
 	ComPtr<IDXGISwapChain> pSwapChain;
 	hr = pFactory->CreateSwapChain(m_pDevice.Get(),&pConfig->m_State,pSwapChain.GetAddressOf());
+
 
 	if(FAILED(hr))
 	{
@@ -465,6 +526,81 @@ int ArkRenderer11::CreateRenderTargetView(int ResourceID,D3D11_RENDER_TARGET_VIE
 	return(-1);
 }
 //--------------------------------------------------------------------------------
+int ArkRenderer11::CreateDepthStencilView(int ResourceID,D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc)
+{
+	ComPtr<ID3D11Resource> pRawResource = 0;
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex(ResourceID);
+
+	if(pResource) {
+		pRawResource = pResource->GetResource();
+
+		if(pRawResource) {
+
+			DepthStencilViewComPtr pView;
+			HRESULT hr = m_pDevice->CreateDepthStencilView(pRawResource.Get(),pDesc,pView.GetAddressOf());
+
+			if(pView) {
+				m_vDepthStencilViews.push_back(pView);
+				return(m_vDepthStencilViews.size() - 1);
+			}
+		}
+	}
+
+	return(-1);
+}
+//--------------------------------------------------------------------------------
+int ArkRenderer11::CreateDepthStencilState(Dx11DepthStencilStateConfig* pConfig)
+{
+	DepthStencilStateComPtr pState;
+
+	HRESULT hr = m_pDevice->CreateDepthStencilState(dynamic_cast<D3D11_DEPTH_STENCIL_DESC*>(pConfig),pState.GetAddressOf());
+
+	if(FAILED(hr))
+	{
+		ArkLog::Get(LogType::Renderer).Output(L"Failed to create depth stencil state!");
+		return(-1);
+	}
+
+	m_vDepthStencilStates.push_back(pState);
+
+	return(m_vDepthStencilStates.size() - 1);
+}
+//--------------------------------------------------------------------------------
+int ArkRenderer11::CreateRasterizerState(Dx11RasterizerStateConfig* pConfig)
+{
+	RasterizerStateComPtr pState;
+
+	HRESULT hr = m_pDevice->CreateRasterizerState(dynamic_cast<D3D11_RASTERIZER_DESC*>(pConfig),pState.GetAddressOf());
+
+	if(FAILED(hr))
+	{
+		ArkLog::Get(LogType::Renderer).Output(L"Failed to create rasterizer state!");
+		return(-1);
+	}
+
+	m_vRasterizerStates.push_back(pState);
+
+	return(m_vRasterizerStates.size() - 1);
+}
+//--------------------------------------------------------------------------------
+int ArkRenderer11::CreateBlendState(Dx11BlendStateConfig* pConfig)
+{
+	BlendStateComPtr pState;
+
+	HRESULT hr = m_pDevice->CreateBlendState(dynamic_cast<D3D11_BLEND_DESC*>(pConfig),pState.GetAddressOf());
+
+	if(FAILED(hr))
+	{
+		ArkLog::Get(LogType::Renderer).Output(L"Failed to create blend state!");
+		return(-1);
+	}
+
+	m_vBlendStates.push_back(pState);
+
+	return(m_vBlendStates.size() - 1);
+}
+
+//--------------------------------------------------------------------------------
 Dx11RenderTargetView& ArkRenderer11::GetRenderTargetViewByIndex(int rid)
 {
 	assert(rid >= 0);
@@ -475,10 +611,10 @@ Dx11RenderTargetView& ArkRenderer11::GetRenderTargetViewByIndex(int rid)
 //--------------------------------------------------------------------------------
 Dx11DepthStencilView& ArkRenderer11::GetDepthStencilViewByIndex(int rid)
 {
-	assert( rid >= 0 );
-	assert( rid < m_vDepthStencilViews.size() );
+	assert(rid >= 0);
+	assert(rid < m_vDepthStencilViews.size());
 
-	return( m_vDepthStencilViews[rid] );
+	return(m_vDepthStencilViews[rid]);
 }
 //--------------------------------------------------------------------------------
 std::shared_ptr<Dx11Texture2D> ArkRenderer11::GetTexture2DByIndex(int rid)
@@ -537,6 +673,30 @@ const Dx11ViewPort& ArkRenderer11::GetViewPort(int ID)
 
 	return m_vViewports[index];
 
+}
+//--------------------------------------------------------------------------------
+RasterizerStateComPtr ArkRenderer11::GetRasterizerState(int index)
+{
+	if(index >= 0)
+		return(m_vRasterizerStates[index]);
+	else
+		return(m_vRasterizerStates[0]);
+}
+//--------------------------------------------------------------------------------
+BlendStateComPtr ArkRenderer11::GetBlendState(int index)
+{
+	if(index >= 0)
+		return(m_vBlendStates[index]);
+	else
+		return(m_vBlendStates[0]);
+}
+//--------------------------------------------------------------------------------
+DepthStencilStateComPtr ArkRenderer11::GetDepthState(int index)
+{
+	if(index >= 0)
+		return(m_vDepthStencilStates[index]);
+	else
+		return(m_vDepthStencilStates[0]);
 }
 //--------------------------------------------------------------------------------
 InputLayoutComPtr ArkRenderer11::GetInputLayout(int ID)
@@ -601,23 +761,23 @@ ResourcePtr ArkRenderer11::CreateIndexBuffer(ArkBuffer11Config* pConfig,D3D11_SU
 	// Create the buffer with the specified configuration.
 
 	BufferComPtr pBuffer;
-	HRESULT hr = m_pDevice->CreateBuffer( &pConfig->m_State, pData, pBuffer.GetAddressOf() );
+	HRESULT hr = m_pDevice->CreateBuffer(&pConfig->m_State,pData,pBuffer.GetAddressOf());
 
-	if ( pBuffer )
+	if(pBuffer)
 	{
-		std::shared_ptr<ArkIndexBuffer11> pIndexBuffer = std::make_shared<ArkIndexBuffer11>( pBuffer );
-		pIndexBuffer->SetDesiredDescription( pConfig->m_State );
+		std::shared_ptr<ArkIndexBuffer11> pIndexBuffer = std::make_shared<ArkIndexBuffer11>(pBuffer);
+		pIndexBuffer->SetDesiredDescription(pConfig->m_State);
 
 		// Return an index with the lower 16 bits of index, and the upper
 		// 16 bits to identify the resource type.
 
-		int ResourceID = StoreNewResource( pIndexBuffer );
-		ResourcePtr Proxy( new Dx11ResourceProxy( ResourceID, pConfig, this ) );
+		int ResourceID = StoreNewResource(pIndexBuffer);
+		ResourcePtr Proxy(new Dx11ResourceProxy(ResourceID,pConfig,this));
 
-		return( Proxy );
+		return(Proxy);
 	}
 
-	return( ResourcePtr( new Dx11ResourceProxy() ) );
+	return(ResourcePtr(new Dx11ResourceProxy()));
 }
 //--------------------------------------------------------------------------------
 ResourcePtr ArkRenderer11::CreateConstantBuffer(ArkBuffer11Config* pConfig,D3D11_SUBRESOURCE_DATA* pData,bool bAutoUpdate)
@@ -654,7 +814,7 @@ int ArkRenderer11::LoadShader(ShaderType type,std::wstring& filename,std::wstrin
 {
 	for(unsigned int i = 0; i < m_vShaders.size(); i++)
 	{
-		ArkShader11* pShader = m_vShaders[i];
+		ArkShader11SPtr pShader = m_vShaders[i];
 
 		if(pShader->FileName.compare(filename) == 0
 			&& pShader->Function.compare(function) == 0
@@ -678,7 +838,7 @@ int ArkRenderer11::LoadShader(ShaderType type,std::wstring& filename,std::wstrin
 
 	// Create the shader wrapper to house all of the information about its interface.
 
-	ArkShader11* pShaderWrapper = 0;
+	ArkShader11SPtr pShaderWrapper = 0;
 
 	switch(type)
 	{
@@ -691,7 +851,7 @@ int ArkRenderer11::LoadShader(ShaderType type,std::wstring& filename,std::wstrin
 			pCompiledShader->GetBufferSize(),
 			0,&pShader);
 
-		pShaderWrapper = new ArkVertexShader11(pShader);
+		pShaderWrapper = std::make_shared<ArkVertexShader11>(pShader);
 		break;
 	}
 	case PIXEL_SHADER:
@@ -703,7 +863,7 @@ int ArkRenderer11::LoadShader(ShaderType type,std::wstring& filename,std::wstrin
 			pCompiledShader->GetBufferSize(),
 			0,&pShader);
 
-		pShaderWrapper = new ArkPixelShader11(pShader);
+		pShaderWrapper = std::make_shared<ArkPixelShader11>(pShader);
 		break;
 	}
 	}
@@ -712,7 +872,6 @@ int ArkRenderer11::LoadShader(ShaderType type,std::wstring& filename,std::wstrin
 	{
 		ArkLog::Get(LogType::Renderer).Output(L"Failed to create shader!");
 		pCompiledShader->Release();
-		delete pShaderWrapper;
 		return(-1);
 	}
 
@@ -744,7 +903,7 @@ int ArkRenderer11::LoadShader(ShaderType type,std::wstring& filename,std::wstrin
 
 }
 //--------------------------------------------------------------------------------
-ArkShader11* ArkRenderer11::GetShader(int ID)
+ArkShader11SPtr ArkRenderer11::GetShader(int ID)
 {
 	unsigned int index = static_cast<unsigned int>(ID);
 

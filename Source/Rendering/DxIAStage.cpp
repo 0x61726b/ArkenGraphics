@@ -17,6 +17,7 @@ using namespace Arkeng;
 //--------------------------------------------------------------------------------
 DxIAStage::DxIAStage()
 {
+	CurrentState.SetPreviousState(&PreviousState);
 }
 //--------------------------------------------------------------------------------
 DxIAStage::~DxIAStage()
@@ -26,66 +27,89 @@ DxIAStage::~DxIAStage()
 void DxIAStage::SetFeatureLevel(D3D_FEATURE_LEVEL feature)
 {
 	FeatureLevel = feature;
+
 	CurrentState.SetFeatureLevel(feature);
+	PreviousState.SetFeatureLevel(feature);
 }
 //--------------------------------------------------------------------------------
-void DxIAStage::ClearState()
+void DxIAStage::ClearCurrentState()
 {
-	CurrentState.Clear();
+	CurrentState.ClearState();
 }
 //--------------------------------------------------------------------------------
-void DxIAStage::ApplyState(ID3D11DeviceContext* pContext)
+void DxIAStage::ClearPreviousState()
+{
+	PreviousState.ClearState();
+}
+//--------------------------------------------------------------------------------
+void DxIAStage::ApplyCurrentState(ID3D11DeviceContext* pContext)
 {
 	ArkRenderer11* pRenderer = ArkRenderer11::Get();
 
-	InputLayoutComPtr pLayout = pRenderer->GetInputLayout(CurrentState.GetInputLayout());
-
-	if(pLayout)
+	if(CurrentState.InputLayout.IsUpdateNeeded())
 	{
-		pContext->IASetInputLayout(pLayout.Get());
+		InputLayoutComPtr pLayout = pRenderer->GetInputLayout(CurrentState.InputLayout.GetState());
+
+		if(pLayout)
+		{
+			pContext->IASetInputLayout(pLayout.Get());
+		}
 	}
-	pContext->IASetPrimitiveTopology(CurrentState.GetPrimitiveTopology());
 
-	ID3D11Buffer* Buffers[D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT] ={NULL};
+	if(CurrentState.PrimitiveTopology.IsUpdateNeeded())
+		pContext->IASetPrimitiveTopology(CurrentState.PrimitiveTopology.GetState());
 
-	std::vector<int> VertexBuffers = CurrentState.GetVertexBuffers();
-	for(unsigned int i = 0; i < CurrentState.GetAvailableSlotCount(); i++)
+	if(CurrentState.VertexBuffers.IsUpdateNeeded() || CurrentState.VertexBufferOffsets.IsUpdateNeeded() || CurrentState.VertexBufferStrides.IsUpdateNeeded())
 	{
-		int index = VertexBuffers[i];
 
-		std::shared_ptr<ArkVertexBuffer11> pBuffer = pRenderer->GetVertexBufferByIndex(index);
+		ID3D11Buffer* Buffers[D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT] ={NULL};
+
+		for(unsigned int i = 0; i < CurrentState.GetAvailableSlotCount(); i++)
+		{
+			int index = CurrentState.VertexBuffers.GetState(i);
+
+			std::shared_ptr<ArkVertexBuffer11> pBuffer = pRenderer->GetVertexBufferByIndex(index);
+
+			if(pBuffer) {
+				Buffers[i] = static_cast<ID3D11Buffer*>(pBuffer->GetResource());
+			}
+			else {
+				Buffers[i] = 0;
+			}
+		}
+
+		UINT startSlot = min(CurrentState.VertexBuffers.GetStartSlot(),
+			min(CurrentState.VertexBufferOffsets.GetStartSlot(),
+			CurrentState.VertexBufferStrides.GetStartSlot()));
+
+		UINT endSlot = max(CurrentState.VertexBuffers.GetEndSlot(),
+			max(CurrentState.VertexBufferOffsets.GetEndSlot(),
+			CurrentState.VertexBufferStrides.GetEndSlot()));
+
+		pContext->IASetVertexBuffers(
+			startSlot,
+			endSlot-startSlot+1,
+			&Buffers[startSlot],
+			CurrentState.VertexBufferStrides.GetSlotLocation(startSlot),
+			CurrentState.VertexBufferOffsets.GetSlotLocation(startSlot)
+			);
+	}
+
+	if(CurrentState.IndexBuffer.IsUpdateNeeded())
+	{
+		int index = CurrentState.IndexBuffer.GetState();
+
+		std::shared_ptr<ArkIndexBuffer11> pBuffer = pRenderer->GetIndexBufferByIndex(index);
 
 		if(pBuffer) {
-			Buffers[i] = static_cast<ID3D11Buffer*>(pBuffer->GetResource());
+			ID3D11Buffer* pIndexBuffer = reinterpret_cast<ID3D11Buffer*>(pBuffer->GetResource());
+			pContext->IASetIndexBuffer(pIndexBuffer,CurrentState.IndexBufferFormat.GetState(),0);
 		}
 		else {
-			Buffers[i] = 0;
+			pContext->IASetIndexBuffer(0,CurrentState.IndexBufferFormat.GetState(),0);
 		}
 	}
-
-	UINT startSlot = 0;
-	std::vector<unsigned int> strides = CurrentState.GetStrides();
-	std::vector<unsigned int> offsets = CurrentState.GetOffsets();
-
-	pContext->IASetVertexBuffers(
-		startSlot,
-		CurrentState.GetVertexBuffers().size(),
-		Buffers,
-		&strides[0],
-		&offsets[0]
-		);
-
-	int index = CurrentState.GetIndexBuffer();
-
-	std::shared_ptr<ArkIndexBuffer11> pBuffer = pRenderer->GetIndexBufferByIndex(index);
-
-	if(pBuffer) {
-		ID3D11Buffer* pIndexBuffer = reinterpret_cast<ID3D11Buffer*>(pBuffer->GetResource());
-		pContext->IASetIndexBuffer(pIndexBuffer,CurrentState.GetIndexBufferFormat(),0);
-	}
-	else {
-		pContext->IASetIndexBuffer(0,CurrentState.GetIndexBufferFormat(),0);
-	}
-
+	CurrentState.ResetUpdate();
+	PreviousState = CurrentState;
 }
 //--------------------------------------------------------------------------------

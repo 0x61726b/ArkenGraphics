@@ -94,6 +94,9 @@
     <Filter Include="Rendering\Direct3D11\Material System">
       <UniqueIdentifier>{ca4bbe84-2dd5-43ea-955f-5bf9bc2573c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline\Common">
+      <UniqueIdentifier>{0b0fcc06-3889-4b15-b482-98eaa066c23c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Pch.h">
@@ -303,6 +306,21 @@
     <ClInclude Include="Rendering\ArkIndexBuffer11.h">
       <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\TStateMonitor.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\TStateArrayMonitor.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11RasterizerStateConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11DepthStencilStateConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11BlendStateConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -503,5 +521,22 @@
     <ClCompile Include="Rendering\ArkIndexBuffer11.cpp">
       <Filter>Rendering\Direct3D11\Resource\Buffers</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\Dx11RasterizerStateConfig.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11DepthStencilStateConfig.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11BlendStateConfig.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Rendering\TStateMonitor.inl">
+      <Filter>Rendering\Direct3D11\Pipeline\Common</Filter>
+    </None>
+    <None Include="Rendering\TStateArrayMonitor.inl">
+      <Filter>Rendering\Direct3D11\Pipeline\Common</Filter>
+    </None>
   </ItemGroup>
 </Project>

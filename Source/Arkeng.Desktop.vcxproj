@@ -68,6 +68,7 @@
 copy Application\*.h ..\SDK\Include
 copy Events\*.h ..\SDK\Include
 copy Rendering\*.h ..\SDK\Include
+copy Rendering\*.inl ..\SDK\Include
 copy Scene\*.h ..\SDK\Include
 copy Logging\*.h ..\SDK\Include</Command>
     </PostBuildEvent>
@@ -126,8 +127,11 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkShaderStage11.h" />
     <ClInclude Include="Rendering\ArkVertexShader11.h" />
     <ClInclude Include="Rendering\ArkVertexShaderStage11.h" />
+    <ClInclude Include="Rendering\Dx11BlendStateConfig.h" />
+    <ClInclude Include="Rendering\Dx11DepthStencilStateConfig.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilView.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilViewConfig.h" />
+    <ClInclude Include="Rendering\Dx11RasterizerStateConfig.h" />
     <ClInclude Include="Rendering\Dx11RenderTargetView.h" />
     <ClInclude Include="Rendering\Dx11RenderTargetViewConfig.h" />
     <ClInclude Include="Rendering\Dx11ResourceProxy.h" />
@@ -152,6 +156,8 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClInclude Include="Rendering\Dx11Texture2D.h" />
     <ClInclude Include="Rendering\RenderTask.h" />
     <ClInclude Include="Rendering\TaskCore.h" />
+    <ClInclude Include="Rendering\TStateArrayMonitor.h" />
+    <ClInclude Include="Rendering\TStateMonitor.h" />
     <ClInclude Include="Scene\Actor.h" />
     <ClInclude Include="Scene\Camera.h" />
     <ClInclude Include="Scene\Scene.h" />
@@ -198,8 +204,11 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkVertexBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkVertexShader11.cpp" />
     <ClCompile Include="Rendering\ArkVertexShaderStage11.cpp" />
+    <ClCompile Include="Rendering\Dx11BlendStateConfig.cpp" />
+    <ClCompile Include="Rendering\Dx11DepthStencilStateConfig.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilView.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilViewConfig.cpp" />
+    <ClCompile Include="Rendering\Dx11RasterizerStateConfig.cpp" />
     <ClCompile Include="Rendering\Dx11RenderTargetView.cpp" />
     <ClCompile Include="Rendering\Dx11RenderTargetViewConfig.cpp" />
     <ClCompile Include="Rendering\Dx11ShaderResourceView.cpp" />
@@ -227,6 +236,10 @@ copy Logging\*.h ..\SDK\Include</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildThisFileDirectory)../../build/native/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Rendering\TStateArrayMonitor.inl" />
+    <None Include="Rendering\TStateMonitor.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

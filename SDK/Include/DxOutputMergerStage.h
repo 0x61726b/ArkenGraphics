@@ -23,15 +23,20 @@ namespace Arkeng
 		DxOutputMergerStage();
 		virtual ~DxOutputMergerStage();
 
-		void ClearState();
+		void ClearCurrentState();
+		void ClearPreviousState();
+
+		void ApplyCurrentState( ID3D11DeviceContext* pContext );
 
 		void ApplyRenderTargets( ID3D11DeviceContext* Context );
+		void ApplyDepthStencilStatesAndBlendStates( ID3D11DeviceContext* pContext );
 		
 		void SetFeatureLevel( D3D_FEATURE_LEVEL Fl );
 
 		const DxOutputMergerState& GetCurrentState() const;
 
-		DxOutputMergerState			State;
+		DxOutputMergerState			CurrentState;
+		DxOutputMergerState			PreviousState;
 
 	protected:
 		D3D_FEATURE_LEVEL			m_eFeatureLevel;

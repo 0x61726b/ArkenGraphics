@@ -96,9 +96,14 @@ void Dx11ResourceProxy::CommonConstructor(UINT BindFlags,int ResourceID,ArkRende
 
 
 	//Add suitable methods to the renderer to create default views
-	if ( ( BindFlags & D3D11_BIND_RENDER_TARGET ) == D3D11_BIND_RENDER_TARGET )
-    {
-        D3D11_RENDER_TARGET_VIEW_DESC* pDesc = pRTVConfig ? &pRTVConfig->GetRTVDesc() : nullptr;
-        m_iResourceRTV = pRenderer->CreateRenderTargetView( m_iResource, pDesc );
-    }
+	if((BindFlags & D3D11_BIND_RENDER_TARGET) == D3D11_BIND_RENDER_TARGET)
+	{
+		D3D11_RENDER_TARGET_VIEW_DESC* pDesc = pRTVConfig ? &pRTVConfig->GetRTVDesc() : nullptr;
+		m_iResourceRTV = pRenderer->CreateRenderTargetView(m_iResource,pDesc);
+	}
+	if((BindFlags & D3D11_BIND_DEPTH_STENCIL) == D3D11_BIND_DEPTH_STENCIL)
+	{
+		D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc = pDSVConfig ? &pDSVConfig->GetDSVDesc() : nullptr;
+		m_iResourceDSV = pRenderer->CreateDepthStencilView(m_iResource,pDesc);
+	}
 }

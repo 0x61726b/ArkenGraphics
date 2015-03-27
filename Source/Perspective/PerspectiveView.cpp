@@ -80,13 +80,13 @@ void PerspectiveView::ExecuteTask(PipelineManager* pPipelineManager,IParameterMa
 {
 	pPipelineManager->ClearRenderTargets();
 
-	pPipelineManager->OutputMergerStage.State.AddRenderTargetView(m_pRenderTarget->m_iResourceRTV);
+	pPipelineManager->OutputMergerStage.CurrentState.RenderTargetViews.SetState(0,m_pRenderTarget->m_iResourceRTV);
 
 	pPipelineManager->ApplyRenderTargets();
 
 	float vColor[4] ={0,0,0,0};
 
-	pPipelineManager->ClearBuffers(vColor,1.0f);
+	/*pPipelineManager->ClearBuffers(vColor,1.0f);*/
 
 
 	ConfigureViewports( pPipelineManager );

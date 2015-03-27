@@ -22,6 +22,11 @@ ArkRenderEffect11::ArkRenderEffect11()
 		m_apShaders[i] = nullptr;
 	}
 	m_uniqueConstBuffers.resize(0);
+
+	m_iBlendState = -1;
+	m_iDepthStencilState = -1;
+	m_iRasterizerState = -1;
+	m_uStencilRef = 0;
 }
 //--------------------------------------------------------------------------------
 ArkRenderEffect11::~ArkRenderEffect11()
@@ -31,7 +36,7 @@ ArkRenderEffect11::~ArkRenderEffect11()
 void ArkRenderEffect11::SetPixelShader(int index)
 {
 	m_aiIndices[1] = index;
-	m_apShaders[1] = ArkRenderer11::Get()->GetShader(index);
+	m_apShaders[1] = ArkRenderer11::Get()->GetShader(index).get();
 
 	if(m_apShaders[1] != nullptr) {
 		if(m_apShaders[1]->GetType() != PIXEL_SHADER) {
@@ -45,7 +50,7 @@ void ArkRenderEffect11::SetPixelShader(int index)
 void ArkRenderEffect11::SetVertexShader(int index)
 {
 	m_aiIndices[0] = index;
-	m_apShaders[0] = ArkRenderer11::Get()->GetShader(index);
+	m_apShaders[0] = ArkRenderer11::Get()->GetShader(index).get();
 
 	if(m_apShaders[0] != nullptr) {
 		if(m_apShaders[0]->GetType() != 0) {
@@ -71,7 +76,8 @@ void ArkRenderEffect11::UpdateConstantBufferList()
 
 		ArkShader11* pShader = m_apShaders[stage];
 
-		if(nullptr != pShader) {
+		if(nullptr != pShader)
+		{
 
 			ArkShaderReflection11* pReflection = pShader->GetReflection();
 
@@ -96,7 +102,8 @@ void ArkRenderEffect11::UpdateConstantBufferList()
 					if(!bAlreadyThere) {
 						m_uniqueConstBuffers.push_back(pParameter);
 					}
-					else {
+					else
+					{
 						ArkLog::Get(LogType::Renderer).Write(L"Skipped adding a duplicate constant buffer...");
 					}
 
@@ -108,6 +115,27 @@ void ArkRenderEffect11::UpdateConstantBufferList()
 //--------------------------------------------------------------------------------
 void ArkRenderEffect11::ConfigurePipeline(PipelineManager* pPipeline,IParameterManager* pParamManager)
 {
+	if(m_iBlendState != -1) {
+		pPipeline->OutputMergerStage.CurrentState.BlendState.SetState(m_iBlendState);
+	}
+	else {
+		pPipeline->OutputMergerStage.CurrentState.BlendState.SetState(0);
+	}
+
+	if(m_iDepthStencilState != -1) {
+		pPipeline->OutputMergerStage.CurrentState.DepthStencilState.SetState(m_iDepthStencilState);
+		pPipeline->OutputMergerStage.CurrentState.StencilRef.SetState(m_uStencilRef);
+	}
+	else {
+		pPipeline->OutputMergerStage.CurrentState.DepthStencilState.SetState(0);
+	}
+
+	if(m_iRasterizerState != -1) {
+		pPipeline->RasterizerStage.CurrentState.RasterizerState.SetState(m_iRasterizerState);
+	}
+	else {
+		pPipeline->RasterizerStage.CurrentState.RasterizerState.SetState(0);
+	}
 
 	for(auto pParameter : m_uniqueConstBuffers) {
 		std::shared_ptr<ArkConstantBuffer11> cbuffer = ArkRenderer11::Get()->GetConstantBufferByIndex(pParamManager->GetConstantBufferParameter(pParameter));

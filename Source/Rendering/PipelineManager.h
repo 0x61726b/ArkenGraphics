@@ -43,7 +43,7 @@ namespace Arkeng
 
 		void ClearPipelineState();
 
-		void ClearBuffers( float color[],float depth );
+		void ClearBuffers( float color[],float depth,UINT stencil = 0 );
 
 
 		void Draw( ArkRenderEffect11& effect, ResourcePtr vb, ResourcePtr ib,
