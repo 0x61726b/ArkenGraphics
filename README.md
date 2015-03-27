@@ -8,7 +8,7 @@ _**Build Alpha 0.012**_
 - Pipeline State Monitoring added for fixed and common shader stages.
 - DSV,DS State,Blend State and Rasterizer state added.
 - Cube demo is available to test
-![Cube Demo](/http://i.imgur.com/SJIkoRT.png)
+![Cube Demo](/Resources/Images/2015-03-27 - 23.40.23 ~ capture.png)
 
 _**Build Alpha 0.011**_
 -  Parameter System Introduced
