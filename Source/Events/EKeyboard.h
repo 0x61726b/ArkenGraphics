@@ -6,6 +6,9 @@
 //
 //EKeyboard.h
 //--------------------------------------------------------------------------------
+#ifndef __EKeyboard_h__
+#define __EKeyboard_h__
+
 #include "EWindow.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
@@ -27,3 +30,4 @@ namespace Arkeng
 
 	typedef std::shared_ptr<EKeyboard> EKeyboardPtr;
 };
+#endif

@@ -11,27 +11,70 @@
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
-ArkMatrixArrayParameter11::ArkMatrixArrayParameter11()
+ArkMatrixArrayParameter11::ArkMatrixArrayParameter11(int count)
 {
-	DirectX::XMMATRIX i = DirectX::XMMatrixIdentity();
-	DirectX::XMStoreFloat4x4(&m_Matrix,i);
+	if ( count < 1 )
+		count = 1;
+
+	m_iMatrixCount = count; 
+
+	for ( int i = 0; i <= NUM_THREADS; i++ )
+		m_pMatrices[i] = new DirectX::XMMATRIX[count];
+	
 }
 //--------------------------------------------------------------------------------
 ArkMatrixArrayParameter11::ArkMatrixArrayParameter11(ArkMatrixArrayParameter11& copy)
 {
-	m_Matrix = copy.m_Matrix;
+	if ( this->m_iMatrixCount != copy.m_iMatrixCount )
+	{
+		for ( int i = 0; i <= NUM_THREADS; i++ )
+		{
+			delete [] m_pMatrices[i];
+			m_pMatrices[i] = new DirectX::XMMATRIX[copy.m_iMatrixCount];
+		}
+		m_iMatrixCount = copy.m_iMatrixCount;
+	}
+
+	for ( int i = 0; i <= NUM_THREADS; i++ )
+		memcpy( m_pMatrices[i], copy.m_pMatrices[i], m_iMatrixCount * sizeof( DirectX::XMMATRIX) );
 }
 //--------------------------------------------------------------------------------
+ArkMatrixArrayParameter11& ArkMatrixArrayParameter11::operator=( ArkMatrixArrayParameter11& parameter )
+{
+	if ( this->m_iMatrixCount != parameter.m_iMatrixCount )
+	{
+		for ( int i = 0; i <= NUM_THREADS; i++ )
+		{
+			delete [] m_pMatrices[i];
+			m_pMatrices[i] = new DirectX::XMMATRIX[parameter.m_iMatrixCount];
+		}
+		m_iMatrixCount = parameter.m_iMatrixCount;
+	}
+
+	for ( int i = 0; i <= NUM_THREADS; i++ )
+		memcpy( m_pMatrices[i], parameter.m_pMatrices[i], m_iMatrixCount * sizeof( DirectX::XMMATRIX) );
+
+   return *this;  // Assignment operator returns left side.
+}
 ArkMatrixArrayParameter11::~ArkMatrixArrayParameter11()
 {
+	for ( int i = 0; i <= NUM_THREADS; i++ )
+		delete [] m_pMatrices[i];
 }
 //--------------------------------------------------------------------------------
 void ArkMatrixArrayParameter11::SetParameterData(void* pData,unsigned int thread)
 {
-	if(0 != memcpy(pData,&m_Matrix,sizeof(DirectX::XMFLOAT4X4)))
-	{
-		m_Matrix = *reinterpret_cast<DirectX::XMFLOAT4X4*>(pData);
+	assert( thread >= 0 );
+	assert( thread < NUM_THREADS+1 );
+
+	// TODO: This isn't very safe - the caller could supply less than the correct 
+	//       amount of matrices...  I need a better way to set this parameter data.
+
+	if ( 0 != memcmp( pData, &(m_pMatrices[thread]), m_iMatrixCount * sizeof( DirectX::XMMATRIX ) ) ) {
+		m_auiValueID[thread]++;
+		memcpy( m_pMatrices[thread], pData, m_iMatrixCount * sizeof( DirectX::XMMATRIX ) );
 	}
+	
 }
 //--------------------------------------------------------------------------------
 const ArkParamType ArkMatrixArrayParameter11::GetParameterType()
@@ -39,13 +82,18 @@ const ArkParamType ArkMatrixArrayParameter11::GetParameterType()
 	return ArkParamType::MATRIX_ARRAY;
 }
 //--------------------------------------------------------------------------------
-DirectX::XMFLOAT4X4 ArkMatrixArrayParameter11::GetMatrixArray()
+DirectX::XMMATRIX* ArkMatrixArrayParameter11::GetMatrices(unsigned int threadID)
 {
-	return m_Matrix;
+	assert( threadID >= 0 );
+	assert( threadID < NUM_THREADS+1 );
+
+	return( m_pMatrices[threadID] );
 }
 //--------------------------------------------------------------------------------
-void ArkMatrixArrayParameter11::SetMatrixArray( DirectX::XMFLOAT4X4& v )
+int ArkMatrixArrayParameter11::GetMatrixCount()
 {
-	m_Matrix = v;
+	return m_iMatrixCount;
 }
+//--------------------------------------------------------------------------------
+
 

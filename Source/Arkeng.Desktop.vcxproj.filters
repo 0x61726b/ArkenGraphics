@@ -97,6 +97,21 @@
     <Filter Include="Rendering\Direct3D11\Pipeline\Common">
       <UniqueIdentifier>{0b0fcc06-3889-4b15-b482-98eaa066c23c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events\WindowsMessages\Rendering">
+      <UniqueIdentifier>{1b56ad92-62f5-49d7-922b-5339b40df2ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\WindowsMessages\Mouse">
+      <UniqueIdentifier>{6d9ad540-ae43-4f78-866f-37e8bb66b0d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Objects">
+      <UniqueIdentifier>{dd4e7263-62e7-4dab-8d23-798fe21beb47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Parameter System\Parameter Writer">
+      <UniqueIdentifier>{3b2f3d7c-4421-402f-b9fc-45e102840f4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{a285f4ee-93dd-4da0-85c7-602823f3ee1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Pch.h">
@@ -321,6 +336,90 @@
     <ClInclude Include="Rendering\Dx11BlendStateConfig.h">
       <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
     </ClInclude>
+    <ClInclude Include="Utility\ArkTimer.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ArkFirstPersonCamera.h">
+      <Filter>Scene\Cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EKeyUp.h">
+      <Filter>Events\WindowsMessages\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EFrameStart.h">
+      <Filter>Events\WindowsMessages\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EMouseRButtonDown.h">
+      <Filter>Events\WindowsMessages\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EMouseMsg.h">
+      <Filter>Events\WindowsMessages\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EMouseRButtonUp.h">
+      <Filter>Events\WindowsMessages\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EMouseMove.h">
+      <Filter>Events\WindowsMessages\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EMouseLeave.h">
+      <Filter>Events\WindowsMessages\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ArkSpatialController.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\IController.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ArkNode3D.h">
+      <Filter>Scene\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ArkTransform3D.h">
+      <Filter>Scene\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ArkPickRecord.h">
+      <Filter>Scene\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ArkEntity3D.h">
+      <Filter>Scene\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkParameterWriter.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkConstantBufferParameterWriter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkVectorParameterWriter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkMatrixParameterWriter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkMatrixArrayParameterWriter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkParameterContainer.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkSceneGraph.h">
+      <Filter>Scene\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkShape3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\ArkRay3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\ArkSphere3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\ArkPlane.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\ArkFrustum.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\ArkCompositeShape.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -530,6 +629,84 @@
     <ClCompile Include="Rendering\Dx11BlendStateConfig.cpp">
       <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
     </ClCompile>
+    <ClCompile Include="Utility\ArkTimer.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ArkFirstPersonCamera.cpp">
+      <Filter>Scene\Cameras</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EKeyUp.cpp">
+      <Filter>Events\WindowsMessages\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EFrameStart.cpp">
+      <Filter>Events\WindowsMessages\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EMouseMsg.cpp">
+      <Filter>Events\WindowsMessages\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EMouseRButtonDown.cpp">
+      <Filter>Events\WindowsMessages\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EMouseRButtonUp.cpp">
+      <Filter>Events\WindowsMessages\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EMouseMove.cpp">
+      <Filter>Events\WindowsMessages\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EMouseLeave.cpp">
+      <Filter>Events\WindowsMessages\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ArkTransform3D.cpp">
+      <Filter>Scene\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ArkPickRecord.cpp">
+      <Filter>Scene\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ArkNode3D.cpp">
+      <Filter>Scene\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ArkEntity3D.cpp">
+      <Filter>Scene\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkParameterWriter.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkConstantBufferParameterWriter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkVectorParameterWriter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkMatrixParameterWriter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkMatrixArrayParameterWriter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkParameterContainer.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkShape3D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\ArkRay3.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\ArkSphere3.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\ArkPlane.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\ArkFrustum.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\ArkSceneGraph.cpp">
+      <Filter>Scene\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\ArkCompositeShape.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Rendering\TStateMonitor.inl">
@@ -537,6 +714,12 @@
     </None>
     <None Include="Rendering\TStateArrayMonitor.inl">
       <Filter>Rendering\Direct3D11\Pipeline\Common</Filter>
+    </None>
+    <None Include="Scene\IController.inl">
+      <Filter>Scene</Filter>
+    </None>
+    <None Include="Scene\ArkSpatialController.inl">
+      <Filter>Scene</Filter>
     </None>
   </ItemGroup>
 </Project>

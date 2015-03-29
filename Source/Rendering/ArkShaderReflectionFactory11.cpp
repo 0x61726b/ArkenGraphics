@@ -123,7 +123,7 @@ ArkShaderReflection11* ArkShaderReflectionFactory11::GenerateReflection( ArkShad
 					}
 					else
 					{
-						pParam = pParamMgr->GetMatrixArrayParameterRef( std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>().from_bytes( std::string( var_desc.Name ) ) );
+						pParam = pParamMgr->GetMatrixArrayParameterRef( std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>().from_bytes( std::string( var_desc.Name ) ),count );
 					}
 				}
 

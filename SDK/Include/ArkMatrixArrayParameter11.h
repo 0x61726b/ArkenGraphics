@@ -17,19 +17,33 @@ namespace Arkeng
 	class ArkMatrixArrayParameter11 : public ArkRenderParameter11
 	{
 	public:
-		ArkMatrixArrayParameter11();
+		ArkMatrixArrayParameter11(int count);
 		ArkMatrixArrayParameter11(ArkMatrixArrayParameter11& copy);
+		ArkMatrixArrayParameter11& operator=(ArkMatrixArrayParameter11& parameter);
 		virtual ~ArkMatrixArrayParameter11();
 
 		virtual void SetParameterData(void* pData,unsigned int thread = 0);
 
 		virtual const ArkParamType GetParameterType();
-		
-		DirectX::XMFLOAT4X4 GetMatrixArray();
-		void SetMatrixArray( DirectX::XMFLOAT4X4& v );
+
+		int GetMatrixCount();
+
+
+		DirectX::XMMATRIX* GetMatrices(unsigned int threadID = 0);
+
+		void* operator new(size_t i)
+		{
+			return _mm_malloc(i,16);
+		}
+
+		void operator delete(void* p)
+		{
+			_mm_free(p);
+		}
 
 	protected:
-		DirectX::XMFLOAT4X4 m_Matrix;
+		int						m_iMatrixCount;
+		DirectX::XMMATRIX*		m_pMatrices[NUM_THREADS+1];
 	};
 };
 //--------------------------------------------------------------------------------

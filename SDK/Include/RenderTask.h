@@ -13,7 +13,20 @@
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
+	class ArkEntity3D;
 	class Scene;
+
+	enum VIEWTYPE
+	{
+		VT_INVALID,
+		VT_PERSPECTIVE,
+		VT_LINEAR_DEPTH_NORMAL,
+		VT_DUAL_PARABOLOID_ENVMAP,
+		VT_GBUFFER,
+		VT_LIGHTS,
+        VT_FINALPASS,
+		VT_NUM_VIEW_TYPES
+	};    
 
 	class RenderTask : public TaskCore
 	{
@@ -41,7 +54,7 @@ namespace Arkeng
 
 	protected:
 		Scene*			m_pScene;
-
+		ArkEntity3D*	m_pEntity;
 		DirectX::XMMATRIX ViewMatrix;
 		DirectX::XMMATRIX ProjMatrix;
 

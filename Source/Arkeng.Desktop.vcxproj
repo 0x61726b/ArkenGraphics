@@ -51,7 +51,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>Logging;Scene;Rendering;Application;Events;Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Logging;Scene;Rendering;Application;Events;Utility;Math;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -94,8 +94,15 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClInclude Include="Application\IWndProc.h" />
     <ClInclude Include="Application\RenderWindow.h" />
     <ClInclude Include="Application\Win32RenderWindow.h" />
+    <ClInclude Include="Events\EFrameStart.h" />
     <ClInclude Include="Events\EKeyboard.h" />
     <ClInclude Include="Events\EKeyDown.h" />
+    <ClInclude Include="Events\EKeyUp.h" />
+    <ClInclude Include="Events\EMouseLeave.h" />
+    <ClInclude Include="Events\EMouseMove.h" />
+    <ClInclude Include="Events\EMouseMsg.h" />
+    <ClInclude Include="Events\EMouseRButtonDown.h" />
+    <ClInclude Include="Events\EMouseRButtonUp.h" />
     <ClInclude Include="Events\EventManager.h" />
     <ClInclude Include="Events\EWindow.h" />
     <ClInclude Include="Events\EWindowResize.h" />
@@ -105,24 +112,36 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClInclude Include="Logging\ArkFileSystem.h" />
     <ClInclude Include="Logging\DxDebugHelper.h" />
     <ClInclude Include="Logging\ArkLog.h" />
+    <ClInclude Include="Math\ArkCompositeShape.h" />
+    <ClInclude Include="Math\ArkFrustum.h" />
+    <ClInclude Include="Math\ArkPlane.h" />
+    <ClInclude Include="Math\ArkRay3.h" />
+    <ClInclude Include="Math\ArkSphere3.h" />
     <ClInclude Include="Rendering\ArkBuffer11.h" />
     <ClInclude Include="Rendering\ArkBuffer11Config.h" />
     <ClInclude Include="Rendering\ArkConstantBuffer11.h" />
     <ClInclude Include="Rendering\ArkConstantBufferParameter11.h" />
+    <ClInclude Include="Rendering\ArkConstantBufferParameterWriter11.h" />
     <ClInclude Include="Rendering\ArkIndexBuffer11.h" />
     <ClInclude Include="Rendering\ArkMatrixArrayParameter11.h" />
+    <ClInclude Include="Rendering\ArkMatrixArrayParameterWriter11.h" />
     <ClInclude Include="Rendering\ArkMatrixParameter11.h" />
+    <ClInclude Include="Rendering\ArkMatrixParameterWriter11.h" />
+    <ClInclude Include="Rendering\ArkParameterContainer.h" />
     <ClInclude Include="Rendering\ArkParameterManager11.h" />
+    <ClInclude Include="Rendering\ArkParameterWriter.h" />
     <ClInclude Include="Rendering\ArkPixelShader11.h" />
     <ClInclude Include="Rendering\ArkPixelShaderStage11.h" />
     <ClInclude Include="Rendering\ArkRenderEffect11.h" />
     <ClInclude Include="Rendering\ArkRenderParameter11.h" />
+    <ClInclude Include="Rendering\ArkSceneGraph.h" />
     <ClInclude Include="Rendering\ArkShader11.h" />
     <ClInclude Include="Rendering\ArkShaderFactory11.h" />
     <ClInclude Include="Rendering\ArkShaderReflection11.h" />
     <ClInclude Include="Rendering\ArkShaderReflectionFactory11.h" />
     <ClInclude Include="Rendering\ArkShaderStageState11.h" />
     <ClInclude Include="Rendering\ArkVectorParameter11.h" />
+    <ClInclude Include="Rendering\ArkVectorParameterWriter11.h" />
     <ClInclude Include="Rendering\ArkVertexBuffer11.h" />
     <ClInclude Include="Rendering\ArkShaderStage11.h" />
     <ClInclude Include="Rendering\ArkVertexShader11.h" />
@@ -155,12 +174,21 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClInclude Include="Rendering\Dx11SwapChain.h" />
     <ClInclude Include="Rendering\Dx11Texture2D.h" />
     <ClInclude Include="Rendering\RenderTask.h" />
+    <ClInclude Include="Rendering\ArkShape3D.h" />
     <ClInclude Include="Rendering\TaskCore.h" />
     <ClInclude Include="Rendering\TStateArrayMonitor.h" />
     <ClInclude Include="Rendering\TStateMonitor.h" />
     <ClInclude Include="Scene\Actor.h" />
+    <ClInclude Include="Scene\ArkEntity3D.h" />
+    <ClInclude Include="Scene\ArkFirstPersonCamera.h" />
+    <ClInclude Include="Scene\ArkNode3D.h" />
+    <ClInclude Include="Scene\ArkPickRecord.h" />
+    <ClInclude Include="Scene\ArkSpatialController.h" />
+    <ClInclude Include="Scene\ArkTransform3D.h" />
     <ClInclude Include="Scene\Camera.h" />
+    <ClInclude Include="Scene\IController.h" />
     <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Utility\ArkTimer.h" />
     <ClInclude Include="Utility\Pch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -170,8 +198,15 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClCompile Include="Application\Main.cpp" />
     <ClCompile Include="Application\RenderWindow.cpp" />
     <ClCompile Include="Application\Win32RenderWindow.cpp" />
+    <ClCompile Include="Events\EFrameStart.cpp" />
     <ClCompile Include="Events\EKeyboard.cpp" />
     <ClCompile Include="Events\EKeyDown.cpp" />
+    <ClCompile Include="Events\EKeyUp.cpp" />
+    <ClCompile Include="Events\EMouseLeave.cpp" />
+    <ClCompile Include="Events\EMouseMove.cpp" />
+    <ClCompile Include="Events\EMouseMsg.cpp" />
+    <ClCompile Include="Events\EMouseRButtonDown.cpp" />
+    <ClCompile Include="Events\EMouseRButtonUp.cpp" />
     <ClCompile Include="Events\EventManager.cpp" />
     <ClCompile Include="Events\EWindow.cpp" />
     <ClCompile Include="Events\EWindowResize.cpp" />
@@ -180,15 +215,26 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClCompile Include="Logging\ArkFileSystem.cpp" />
     <ClCompile Include="Logging\DxDebugHelper.cpp" />
     <ClCompile Include="Logging\ArkLog.cpp" />
+    <ClCompile Include="Math\ArkCompositeShape.cpp" />
+    <ClCompile Include="Math\ArkFrustum.cpp" />
+    <ClCompile Include="Math\ArkPlane.cpp" />
+    <ClCompile Include="Math\ArkRay3.cpp" />
+    <ClCompile Include="Math\ArkSceneGraph.cpp" />
+    <ClCompile Include="Math\ArkSphere3.cpp" />
     <ClCompile Include="Perspective\PerspectiveView.cpp" />
     <ClCompile Include="Rendering\ArkBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkBuffer11Config.cpp" />
     <ClCompile Include="Rendering\ArkConstantBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkConstantBufferParameter11.cpp" />
+    <ClCompile Include="Rendering\ArkConstantBufferParameterWriter11.cpp" />
     <ClCompile Include="Rendering\ArkIndexBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkMatrixArrayParameter.cpp" />
+    <ClCompile Include="Rendering\ArkMatrixArrayParameterWriter11.cpp" />
     <ClCompile Include="Rendering\ArkMatrixParameter11.cpp" />
+    <ClCompile Include="Rendering\ArkMatrixParameterWriter11.cpp" />
+    <ClCompile Include="Rendering\ArkParameterContainer.cpp" />
     <ClCompile Include="Rendering\ArkParameterManager11.cpp" />
+    <ClCompile Include="Rendering\ArkParameterWriter.cpp" />
     <ClCompile Include="Rendering\ArkPixelShader11.cpp" />
     <ClCompile Include="Rendering\ArkPixelShaderStage11.cpp" />
     <ClCompile Include="Rendering\ArkRenderEffect11.cpp" />
@@ -200,7 +246,9 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkShaderReflectionFactory11.cpp" />
     <ClCompile Include="Rendering\ArkShaderStage11.cpp" />
     <ClCompile Include="Rendering\ArkShaderStageState11.cpp" />
+    <ClCompile Include="Rendering\ArkShape3D.cpp" />
     <ClCompile Include="Rendering\ArkVectorParameter11.cpp" />
+    <ClCompile Include="Rendering\ArkVectorParameterWriter11.cpp" />
     <ClCompile Include="Rendering\ArkVertexBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkVertexShader11.cpp" />
     <ClCompile Include="Rendering\ArkVertexShaderStage11.cpp" />
@@ -230,8 +278,14 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClCompile Include="Rendering\RenderTask.cpp" />
     <ClCompile Include="Rendering\TaskCore.cpp" />
     <ClCompile Include="Scene\Actor.cpp" />
+    <ClCompile Include="Scene\ArkEntity3D.cpp" />
+    <ClCompile Include="Scene\ArkFirstPersonCamera.cpp" />
+    <ClCompile Include="Scene\ArkNode3D.cpp" />
+    <ClCompile Include="Scene\ArkPickRecord.cpp" />
+    <ClCompile Include="Scene\ArkTransform3D.cpp" />
     <ClCompile Include="Scene\Camera.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Utility\ArkTimer.cpp" />
     <ClCompile Include="Utility\Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildThisFileDirectory)../../build/native/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -240,6 +294,8 @@ copy Logging\*.h ..\SDK\Include</Command>
   <ItemGroup>
     <None Include="Rendering\TStateArrayMonitor.inl" />
     <None Include="Rendering\TStateMonitor.inl" />
+    <None Include="Scene\ArkSpatialController.inl" />
+    <None Include="Scene\IController.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

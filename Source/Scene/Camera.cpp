@@ -21,8 +21,11 @@ Camera::Camera()
 	m_fFov( static_cast<float>( 3.14f ) / 4.0f ),
 	m_fWidth( 1280.0f ),
 	m_fHeight( 800.0f ),
-	m_ProjMatrix( DirectX::XMMatrixIdentity() )
+	m_ProjMatrix( DirectX::XMMatrixIdentity() ),
+	m_pSpatialController( nullptr )
 {
+	m_pSpatialController = new ArkSpatialController<ArkNode3D>();
+	GetNode()->Controllers.Attach( m_pSpatialController );
 }
 //--------------------------------------------------------------------------------
 Camera::~Camera()
@@ -38,10 +41,37 @@ void Camera::RenderFrame( ArkRenderer11* pRenderer )
 		{
 			m_pCameraView->SetScene( m_pScene );
 		}
+
+		//
+
+		//// Set the view position in the parameter system, for use by any of the
+		//// views being used in this frame.
+
+		//Vector3f p = GetNode()->Transform.Position() + GetBody()->Transform.Position();
+		//m_pViewPositionWriter->SetValue( Vector4f( p.x, p.y, p.z, 1.0f ) );
+
+		//Parameters.InitRenderParams();
+
+		//// Use the pre-draw method to queue any needed render views in the scene.
+		//// This is followed by rendering all of the views to generate the current
+		//// frame.
+
 		m_pCameraView->QueuePreTasks( pRenderer );
 		pRenderer->ProcessTaskQueue();
 
 	}
+}
+//--------------------------------------------------------------------------------
+bool Camera::HandleEvent( EventPtr pEvent )
+{
+	eEvent e = pEvent->GetEventType();
+
+	return false;
+}
+//--------------------------------------------------------------------------------
+std::wstring Camera::GetName()
+{
+	return L"Camera";
 }
 //--------------------------------------------------------------------------------
 void Camera::SetCameraView( RenderTask* pView )
@@ -133,5 +163,10 @@ float Camera::GetAspectRatio()
 float Camera::GetFieldOfView()
 {
 	return( m_fFov );
+}
+//--------------------------------------------------------------------------------
+ArkSpatialController<ArkNode3D>& Camera::Spatial()
+{
+	return( *m_pSpatialController );
 }
 //--------------------------------------------------------------------------------

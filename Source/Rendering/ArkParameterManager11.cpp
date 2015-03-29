@@ -117,13 +117,13 @@ void ArkParameterManager11::SetMatrixParameter(const std::wstring& name,DirectX:
 	}
 }
 //--------------------------------------------------------------------------------
-void ArkParameterManager11::SetMatrixArrayParameter(const std::wstring& name,DirectX::XMFLOAT4X4* pmA)
+void ArkParameterManager11::SetMatrixArrayParameter(const std::wstring& name,int count,DirectX::XMMATRIX* pmA)
 {
 	std::shared_ptr<ArkRenderParameter11> pParameter = m_Parameters[name];
 
 	if(pParameter == 0)
 	{
-		pParameter = std::make_shared<ArkMatrixArrayParameter11>();
+		pParameter = std::make_shared<ArkMatrixArrayParameter11>(count);
 		pParameter->SetName(name);
 		m_Parameters[name] = std::dynamic_pointer_cast<ArkRenderParameter11>(pParameter);
 
@@ -167,7 +167,7 @@ void ArkParameterManager11::SetMatrixParameter(std::shared_ptr<ArkRenderParamete
 }
 //--------------------------------------------------------------------------------
 
-void ArkParameterManager11::SetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMFLOAT4X4* pV)
+void ArkParameterManager11::SetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP,int count,DirectX::XMMATRIX* pV)
 {
 	if(pP->GetParameterType() == ArkParamType::MATRIX_ARRAY)
 		pP->SetParameterData(reinterpret_cast<void*>(pV),GetID());
@@ -257,28 +257,30 @@ DirectX::XMMATRIX ArkParameterManager11::GetMatrixParameter(const std::wstring& 
 	}
 	else
 	{
-		pParam = std::make_shared<ArkVectorParameter11>();
+		pParam = std::make_shared<ArkMatrixParameter11>();
 		pParam->SetName(name);
 		m_Parameters[name] = pParam;
 	}
 	return pM;
 }
 //--------------------------------------------------------------------------------
-DirectX::XMFLOAT4X4 ArkParameterManager11::GetMatrixArrayParameter(const std::wstring& name)
+DirectX::XMMATRIX ArkParameterManager11::GetMatrixArrayParameter(const std::wstring& name,int count)
 {
-	XMFLOAT4X4 pmA;
-	XMStoreFloat4x4(&pmA,XMMatrixIdentity());
+	XMMATRIX pmA = XMMatrixIdentity();
 
 	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
+
+	XMMATRIX* pResult = 0;
 
 	if(pParam != 0)
 	{
 		if(pParam->GetParameterType() == ArkParamType::MATRIX_ARRAY)
-			pmA = std::dynamic_pointer_cast<ArkMatrixArrayParameter11>(pParam)->GetMatrixArray();
+			if ( std::dynamic_pointer_cast<ArkMatrixArrayParameter11>( pParam )->GetMatrixCount() == count )
+				pResult = std::dynamic_pointer_cast<ArkMatrixArrayParameter11>( pParam )->GetMatrices( GetID() );
 	}
 	else
 	{
-		pParam = std::make_shared<ArkVectorParameter11>();
+		pParam = std::make_shared<ArkMatrixArrayParameter11>(count);
 		pParam->SetName(name);
 		m_Parameters[name] = pParam;
 	}
@@ -311,14 +313,19 @@ DirectX::XMMATRIX ArkParameterManager11::GetMatrixParameter(std::shared_ptr<ArkR
 	return pM;
 }
 //--------------------------------------------------------------------------------
-DirectX::XMFLOAT4X4 ArkParameterManager11::GetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP)
+DirectX::XMMATRIX* ArkParameterManager11::GetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP)
 {
-	XMFLOAT4X4 pmA;
-	XMStoreFloat4x4(&pmA,XMMatrixIdentity());
+	assert( pP != 0 );
 
-	if(pP->GetParameterType() == ArkParamType::MATRIX_ARRAY)
-		pmA = std::dynamic_pointer_cast<ArkMatrixArrayParameter11>(pP)->GetMatrixArray();
-	return pmA;
+	XMMATRIX* pResult = 0;
+
+	// If the parameter is not found, create a new default one.  This goes 
+	// into the bottom level manager.
+
+	if ( pP->GetParameterType() == MATRIX_ARRAY ) 
+		pResult = std::dynamic_pointer_cast<ArkMatrixArrayParameter11>( pP )->GetMatrices( GetID() );
+
+	return( pResult );
 }
 int ArkParameterManager11::GetConstantBufferParameter(std::shared_ptr<ArkRenderParameter11> pParameter)
 {
@@ -363,13 +370,13 @@ std::shared_ptr<ArkMatrixParameter11> ArkParameterManager11::GetMatrixParameterR
 	return (std::dynamic_pointer_cast<ArkMatrixParameter11>(pParam));
 }
 //--------------------------------------------------------------------------------
-std::shared_ptr<ArkMatrixArrayParameter11> ArkParameterManager11::GetMatrixArrayParameterRef(const std::wstring& name)
+std::shared_ptr<ArkMatrixArrayParameter11> ArkParameterManager11::GetMatrixArrayParameterRef(const std::wstring& name,int count)
 {
 	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
 
 	if(pParam == 0)
 	{
-		pParam = std::make_shared<ArkMatrixArrayParameter11>();
+		pParam = std::make_shared<ArkMatrixArrayParameter11>(count);
 		pParam->SetName(name);
 		m_Parameters[name] = pParam;
 	}
