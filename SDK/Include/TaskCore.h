@@ -26,6 +26,9 @@ namespace Arkeng
 
 		virtual void ExecuteTask( PipelineManager* pPipelineManager,IParameterManager* pParamManager ) = 0;
 
+		virtual void SetRenderParams( IParameterManager* pParamManager ) = 0;
+		virtual void SetUsageParams( IParameterManager* pParamManager ) = 0;
+
 		virtual std::wstring GetName() = 0;
 	};
 };

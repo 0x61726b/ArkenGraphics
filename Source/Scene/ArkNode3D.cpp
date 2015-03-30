@@ -9,7 +9,7 @@
 #include "Pch.h"
 #include "ArkNode3D.h"
 #include "ArkEntity3D.h"
-//#include "SceneGraph.h"
+#include "ArkSceneGraph.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -158,20 +158,20 @@ ArkNode3D* ArkNode3D::GetParent()
 //--------------------------------------------------------------------------------
 std::wstring ArkNode3D::toString( )
 {
-	//std::wstringstream objString;
+	std::wstringstream objString;
 
-	//for ( int i = 0; i < GraphDepth( this ); i++ )
-	//	objString << L"  ";
+	for ( int i = 0; i < GraphDepth( this ); i++ )
+		objString << L"  ";
 
-	//objString << L"Node3D ID: " << this << L", Name:" << GetName() << L"\n";
+	objString << L"Node3D ID: " << this << L", Name:" << GetName() << L"\n";
 
-	//for ( auto pChild : m_Leafs )
-	//{
-	//	if ( pChild )
-	//		objString << pChild->toString();
-	//}
+	for ( auto pChild : m_Leafs )
+	{
+		if ( pChild )
+			objString << pChild->toString();
+	}
 
-	//return( objString.str() );
+	return( objString.str() );
 	return L"";
 }
 //--------------------------------------------------------------------------------

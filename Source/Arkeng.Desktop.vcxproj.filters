@@ -10,15 +10,6 @@
     <Filter Include="Events">
       <UniqueIdentifier>{52c4ab78-39dc-4309-8fcd-da53e9d465d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Events\WindowsMessages">
-      <UniqueIdentifier>{71ce8e3c-9ab4-48b7-9d31-58bcf6acb66c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Events\WindowsMessages\Keyboard">
-      <UniqueIdentifier>{99b7e75f-8ad7-4495-9b00-49d520b67cf7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Events\WindowsMessages\Window">
-      <UniqueIdentifier>{6ddfd9ed-76a4-4262-850c-660ec3cb62ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rendering">
       <UniqueIdentifier>{e4627d94-386b-4088-be51-d042a1e19688}</UniqueIdentifier>
     </Filter>
@@ -97,12 +88,6 @@
     <Filter Include="Rendering\Direct3D11\Pipeline\Common">
       <UniqueIdentifier>{0b0fcc06-3889-4b15-b482-98eaa066c23c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Events\WindowsMessages\Rendering">
-      <UniqueIdentifier>{1b56ad92-62f5-49d7-922b-5339b40df2ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Events\WindowsMessages\Mouse">
-      <UniqueIdentifier>{6d9ad540-ae43-4f78-866f-37e8bb66b0d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene\Objects">
       <UniqueIdentifier>{dd4e7263-62e7-4dab-8d23-798fe21beb47}</UniqueIdentifier>
     </Filter>
@@ -111,6 +96,21 @@
     </Filter>
     <Filter Include="Math">
       <UniqueIdentifier>{a285f4ee-93dd-4da0-85c7-602823f3ee1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Windows Messages">
+      <UniqueIdentifier>{71ce8e3c-9ab4-48b7-9d31-58bcf6acb66c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Windows Messages\Keyboard">
+      <UniqueIdentifier>{99b7e75f-8ad7-4495-9b00-49d520b67cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Windows Messages\Window">
+      <UniqueIdentifier>{6ddfd9ed-76a4-4262-850c-660ec3cb62ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Windows Messages\Rendering">
+      <UniqueIdentifier>{1b56ad92-62f5-49d7-922b-5339b40df2ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Windows Messages\Mouse">
+      <UniqueIdentifier>{6d9ad540-ae43-4f78-866f-37e8bb66b0d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -130,13 +130,13 @@
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="Events\EKeyDown.h">
-      <Filter>Events\WindowsMessages\Keyboard</Filter>
+      <Filter>Events\Windows Messages\Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="Events\EWindow.h">
-      <Filter>Events\WindowsMessages</Filter>
+      <Filter>Events\Windows Messages</Filter>
     </ClInclude>
     <ClInclude Include="Events\EKeyboard.h">
-      <Filter>Events\WindowsMessages\Keyboard</Filter>
+      <Filter>Events\Windows Messages\Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="Application\RenderWindow.h">
       <Filter>Application</Filter>
@@ -145,7 +145,7 @@
       <Filter>Application</Filter>
     </ClInclude>
     <ClInclude Include="Events\EWindowResize.h">
-      <Filter>Events\WindowsMessages\Window</Filter>
+      <Filter>Events\Windows Messages\Window</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\IRenderer.h">
       <Filter>Rendering</Filter>
@@ -343,25 +343,25 @@
       <Filter>Scene\Cameras</Filter>
     </ClInclude>
     <ClInclude Include="Events\EKeyUp.h">
-      <Filter>Events\WindowsMessages\Keyboard</Filter>
+      <Filter>Events\Windows Messages\Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="Events\EFrameStart.h">
-      <Filter>Events\WindowsMessages\Rendering</Filter>
+      <Filter>Events\Windows Messages\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Events\EMouseRButtonDown.h">
-      <Filter>Events\WindowsMessages\Mouse</Filter>
+      <Filter>Events\Windows Messages\Mouse</Filter>
     </ClInclude>
     <ClInclude Include="Events\EMouseMsg.h">
-      <Filter>Events\WindowsMessages\Mouse</Filter>
+      <Filter>Events\Windows Messages\Mouse</Filter>
     </ClInclude>
     <ClInclude Include="Events\EMouseRButtonUp.h">
-      <Filter>Events\WindowsMessages\Mouse</Filter>
+      <Filter>Events\Windows Messages\Mouse</Filter>
     </ClInclude>
     <ClInclude Include="Events\EMouseMove.h">
-      <Filter>Events\WindowsMessages\Mouse</Filter>
+      <Filter>Events\Windows Messages\Mouse</Filter>
     </ClInclude>
     <ClInclude Include="Events\EMouseLeave.h">
-      <Filter>Events\WindowsMessages\Mouse</Filter>
+      <Filter>Events\Windows Messages\Mouse</Filter>
     </ClInclude>
     <ClInclude Include="Scene\ArkSpatialController.h">
       <Filter>Scene</Filter>
@@ -420,6 +420,15 @@
     <ClInclude Include="Math\ArkCompositeShape.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\ArkMaterial11.h">
+      <Filter>Rendering\Direct3D11\Material System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkRenderable.h">
+      <Filter>Rendering\Direct3D11\Material System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\PipelineExecutor11.h">
+      <Filter>Rendering\Direct3D11\Pipeline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -432,13 +441,13 @@
       <Filter>Events</Filter>
     </ClCompile>
     <ClCompile Include="Events\EWindow.cpp">
-      <Filter>Events\WindowsMessages</Filter>
+      <Filter>Events\Windows Messages</Filter>
     </ClCompile>
     <ClCompile Include="Events\EKeyboard.cpp">
-      <Filter>Events\WindowsMessages\Keyboard</Filter>
+      <Filter>Events\Windows Messages\Keyboard</Filter>
     </ClCompile>
     <ClCompile Include="Events\EKeyDown.cpp">
-      <Filter>Events\WindowsMessages\Keyboard</Filter>
+      <Filter>Events\Windows Messages\Keyboard</Filter>
     </ClCompile>
     <ClCompile Include="Application\Main.cpp">
       <Filter>Application</Filter>
@@ -450,7 +459,7 @@
       <Filter>Application</Filter>
     </ClCompile>
     <ClCompile Include="Events\EWindowResize.cpp">
-      <Filter>Events\WindowsMessages\Window</Filter>
+      <Filter>Events\Windows Messages\Window</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Scene.cpp">
       <Filter>Scene</Filter>
@@ -636,25 +645,25 @@
       <Filter>Scene\Cameras</Filter>
     </ClCompile>
     <ClCompile Include="Events\EKeyUp.cpp">
-      <Filter>Events\WindowsMessages\Keyboard</Filter>
+      <Filter>Events\Windows Messages\Keyboard</Filter>
     </ClCompile>
     <ClCompile Include="Events\EFrameStart.cpp">
-      <Filter>Events\WindowsMessages\Rendering</Filter>
+      <Filter>Events\Windows Messages\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Events\EMouseMsg.cpp">
-      <Filter>Events\WindowsMessages\Mouse</Filter>
+      <Filter>Events\Windows Messages\Mouse</Filter>
     </ClCompile>
     <ClCompile Include="Events\EMouseRButtonDown.cpp">
-      <Filter>Events\WindowsMessages\Mouse</Filter>
+      <Filter>Events\Windows Messages\Mouse</Filter>
     </ClCompile>
     <ClCompile Include="Events\EMouseRButtonUp.cpp">
-      <Filter>Events\WindowsMessages\Mouse</Filter>
+      <Filter>Events\Windows Messages\Mouse</Filter>
     </ClCompile>
     <ClCompile Include="Events\EMouseMove.cpp">
-      <Filter>Events\WindowsMessages\Mouse</Filter>
+      <Filter>Events\Windows Messages\Mouse</Filter>
     </ClCompile>
     <ClCompile Include="Events\EMouseLeave.cpp">
-      <Filter>Events\WindowsMessages\Mouse</Filter>
+      <Filter>Events\Windows Messages\Mouse</Filter>
     </ClCompile>
     <ClCompile Include="Scene\ArkTransform3D.cpp">
       <Filter>Scene\Objects</Filter>
@@ -706,6 +715,15 @@
     </ClCompile>
     <ClCompile Include="Math\ArkCompositeShape.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkMaterial11.cpp">
+      <Filter>Rendering\Direct3D11\Material System</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\PipelineExecutor11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkRenderable.cpp">
+      <Filter>Rendering\Direct3D11\Material System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

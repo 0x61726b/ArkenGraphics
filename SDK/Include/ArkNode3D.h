@@ -15,7 +15,7 @@
 #include "ArkTransform3D.h"
 #include "ArkPickRecord.h"
 #include "IController.h"
-//#include "ParameterContainer.h"
+#include "ArkParameterContainer.h"
 #include "RenderTask.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng

@@ -15,10 +15,10 @@
 #include "ArkFrustum.h"
 #include "ArkRenderer11.h"
 #include "ArkPickRecord.h"
-//#include "MaterialDX11.h"
+#include "ArkMaterial11.h"
 #include "IController.h"
 #include "ArkCompositeShape.h"
-//#include "Renderable.h"
+#include "ArkRenderable.h"
 #include "ArkParameterContainer.h"
 #include "RenderTask.h"
 
@@ -78,7 +78,7 @@ namespace Arkeng
 	public:
 		ArkTransform3D					Transform;
 		ControllerPack<ArkEntity3D>		Controllers;
-		//Renderable					Visual;
+		ArkRenderable					Visual;
 		ArkParameterContainer			Parameters;
 
 		ArkSphere3 m_ModelBoundingSphere;

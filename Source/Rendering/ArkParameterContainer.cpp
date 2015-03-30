@@ -262,3 +262,22 @@ std::shared_ptr<ArkMatrixParameterWriter11> ArkParameterContainer::SetMatrixPara
 
 	return( pMatrixWriter );
 }
+//--------------------------------------------------------------------------------
+std::shared_ptr<ArkVectorParameterWriter11> ArkParameterContainer::SetVectorParameter( const std::wstring& name, const DirectX::XMVECTOR& value )
+{
+	// Check if the parameter already exists in this container
+	std::shared_ptr<ArkVectorParameterWriter11> pMatrixWriter = GetVectorParameterWriter( name );
+
+	// If not, then create one...
+	if ( nullptr == pMatrixWriter ) {
+		pMatrixWriter = std::make_shared<ArkVectorParameterWriter11>();
+		pMatrixWriter->SetRenderParameterRef( ArkRenderer11::Get()->m_pParamMgr->GetVectorParameterRef( name ) );
+		AddRenderParameter( pMatrixWriter );
+	}
+
+	// ... and set the value.
+	pMatrixWriter->SetValue( value );
+
+	return( pMatrixWriter );
+}
+

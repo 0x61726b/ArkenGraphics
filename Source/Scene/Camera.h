@@ -13,6 +13,7 @@
 #include "RenderTask.h"
 #include "IEventListener.h"
 #include "ArkSpatialController.h"
+#include "ArkParameterContainer.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -26,12 +27,13 @@ namespace Arkeng
 
 
 		void SetCameraView(RenderTask*);
+		void SetScene(Scene* pScene);
 
 		RenderTask*		GetCameraView();
 
 		void RenderFrame(ArkRenderer11* Renderer);
 
-		void SetScene(Scene* pScene);
+		
 
 		void ApplyProjectionParams();
 		void ApplyOrthographicParams();
@@ -62,11 +64,13 @@ namespace Arkeng
 		ArkSpatialController<ArkNode3D>& Spatial(); 
 
 		DirectX::XMMATRIX m_ProjMatrix;
+
+		ArkParameterContainer Parameters;
 	protected:
 		RenderTask*			m_pCameraView;
 		Scene*				m_pScene;
-
-		ArkSpatialController<ArkNode3D>*	m_pSpatialController;
+		std::shared_ptr<ArkVectorParameterWriter11>			m_pViewPositionWriter;
+		ArkSpatialController<ArkNode3D>*					m_pSpatialController;
 
 	};
 };

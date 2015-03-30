@@ -45,8 +45,9 @@ namespace Arkeng
 
 		Camera*					m_pCamera;
 
-		ResourcePtr						m_pBackBuffer;
-		ResourcePtr							m_testBackBuffer;
+		ResourcePtr				m_pBackBuffer;
+
+		EventManager			CameraEventHub;
 
 		UINT					m_iWidth;
 		UINT					m_iHeight;

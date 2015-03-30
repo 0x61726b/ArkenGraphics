@@ -52,6 +52,9 @@ namespace Arkeng
 		const DirectX::XMMATRIX& GetViewMatrix( );
 		const DirectX::XMMATRIX& GetProjMatrix( );
 
+		virtual void SetEntity( ArkEntity3D* pEntity );
+
+
 	protected:
 		Scene*			m_pScene;
 		ArkEntity3D*	m_pEntity;

@@ -28,8 +28,8 @@ ArkEntity3D::ArkEntity3D() :
 	//m_bPickable( true ),
 	m_pUserData( nullptr ),
 	Shape(),
-	Controllers( this )/*,*/
-	/*Visual()*/
+	Controllers( this ),
+	Visual()
 {
 	ArkSphere3* pBoundingSphere = new ArkSphere3();
 	pBoundingSphere->Center = XMVectorZero();
@@ -89,10 +89,10 @@ void ArkEntity3D::Update( float time )
 	UpdateLocal( time );
 	UpdateWorld( );
 
-	//// Give the material a chance to update itself
-	//if ( Visual.Material != nullptr ) {
-	//	Visual.Material->Update( time );
-	//}
+	// Give the material a chance to update itself
+	if ( Visual.Material != nullptr ) {
+		Visual.Material->Update( time );
+	}
 }
 //--------------------------------------------------------------------------------
 void ArkEntity3D::UpdateLocal( float fTime )
@@ -128,44 +128,44 @@ void ArkEntity3D::UpdateWorld( )
 //--------------------------------------------------------------------------------
 void ArkEntity3D::PreRender( ArkRenderer11* pRenderer, VIEWTYPE view )
 {
-	// Perform the pre-render function only if the material has been set
-	//if ( Visual.Material != NULL )
-	//	Visual.Material->PreRender( pRenderer, view );
+	 
+	if ( Visual.Material != NULL )
+		Visual.Material->PreRender( pRenderer, view );
 }
 //--------------------------------------------------------------------------------
 void ArkEntity3D::Render( PipelineManager* pPipelineManager, IParameterManager* pParamManager, VIEWTYPE view )
 {
-//	// Test if the entity contains any geometry, and it has a material
-//	if ( ( Visual.Executor != NULL ) && ( Visual.Material != NULL ) )
-//	{
-//		// Only render if the material indicates that you should
-//		if ( Visual.Material->Params[view].bRender )
-//		{
-//			// Set the material render parameters.  This is done before the entity
-//			// render parameters so that unique values can be set by the individual
-//			// entities, and still allow the material to set parameters for any
-//			// entities that don't specialize the parameters.
-//			Visual.Material->SetRenderParams( pParamManager, view );
-//
-//			// Set the entity render parameters
-//			this->SetRenderParams( pParamManager );
-//
-//			// Configure the pipeline with the render effect supplied by the material.
-//
-//			// This clear pipeline resources call has been removed, and is 
-//			// expected to be implemented in the Task that controls the pipeline
-//			// output configuration (i.e. ViewPerspective and his friends).
-//			// pPipelineManager->ClearPipelineResources();
-//
-//			Visual.Material->Params[view].pEffect->ConfigurePipeline( pPipelineManager, pParamManager );
-//			pPipelineManager->ApplyPipelineResources();
-//
-//			// Let the geometry execute its drawing operation.  This includes 
-//			// configuring the input to the pipeline, plus calling an appropriate
-//			// draw call.
-//			Visual.Executor->Execute( pPipelineManager, pParamManager );
-//		}
-//	}
+	// Test if the entity contains any geometry, and it has a material
+	if ( ( Visual.Executor != NULL ) && ( Visual.Material != NULL ) )
+	{
+		// Only render if the material indicates that you should
+		if ( Visual.Material->Params[view].bRender )
+		{
+			// Set the material render parameters.  This is done before the entity
+			// render parameters so that unique values can be set by the individual
+			// entities, and still allow the material to set parameters for any
+			// entities that don't specialize the parameters.
+			Visual.Material->SetRenderParams( pParamManager, view );
+
+			// Set the entity render parameters
+			this->SetRenderParams( pParamManager );
+
+			// Configure the pipeline with the render effect supplied by the material.
+
+			// This clear pipeline resources call has been removed, and is 
+			// expected to be implemented in the Task that controls the pipeline
+			// output configuration (i.e. ViewPerspective and his friends).
+			// pPipelineManager->ClearPipelineResources();
+
+			Visual.Material->Params[view].pEffect->ConfigurePipeline( pPipelineManager, pParamManager );
+			pPipelineManager->ApplyPipelineResources();
+
+			// Let the geometry execute its drawing operation.  This includes 
+			// configuring the input to the pipeline, plus calling an appropriate
+			// draw call.
+			Visual.Executor->Execute( pPipelineManager, pParamManager );
+		}
+	}
 }
 //--------------------------------------------------------------------------------
 void ArkEntity3D::SetRenderParams( IParameterManager* pParamManager )

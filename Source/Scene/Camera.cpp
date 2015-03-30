@@ -26,6 +26,8 @@ Camera::Camera()
 {
 	m_pSpatialController = new ArkSpatialController<ArkNode3D>();
 	GetNode()->Controllers.Attach( m_pSpatialController );
+
+	m_pViewPositionWriter = Parameters.SetVectorParameter( L"ViewPosition", XMVectorSet( 0.0f, 0.0f, 0.0f, 0.0f ) );
 }
 //--------------------------------------------------------------------------------
 Camera::~Camera()
@@ -47,10 +49,12 @@ void Camera::RenderFrame( ArkRenderer11* pRenderer )
 		//// Set the view position in the parameter system, for use by any of the
 		//// views being used in this frame.
 
-		//Vector3f p = GetNode()->Transform.Position() + GetBody()->Transform.Position();
-		//m_pViewPositionWriter->SetValue( Vector4f( p.x, p.y, p.z, 1.0f ) );
+		XMVECTOR p = GetNode()->Transform.Position() + GetBody()->Transform.Position();
+		XMFLOAT3 pp;
 
-		//Parameters.InitRenderParams();
+		m_pViewPositionWriter->SetValue( p );
+
+		Parameters.InitRenderParams();
 
 		//// Use the pre-draw method to queue any needed render views in the scene.
 		//// This is followed by rendering all of the views to generate the current
@@ -77,6 +81,7 @@ std::wstring Camera::GetName()
 void Camera::SetCameraView( RenderTask* pView )
 {
 	m_pCameraView = pView;
+	m_pCameraView->SetEntity( m_pBody );
 }
 //--------------------------------------------------------------------------------
 RenderTask* Camera::GetCameraView()

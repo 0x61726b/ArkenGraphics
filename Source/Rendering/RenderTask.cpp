@@ -13,9 +13,12 @@
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
 RenderTask::RenderTask()
-	:m_uiViewportCount(0),
+	:	m_uiViewportCount(0),
 		ViewMatrix(),
-	ProjMatrix()
+		ProjMatrix(),
+		m_pEntity( nullptr ),
+		m_pScene( nullptr ),
+		m_iViewports()
 {
 }
 //--------------------------------------------------------------------------------

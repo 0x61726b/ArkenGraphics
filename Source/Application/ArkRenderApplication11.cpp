@@ -10,10 +10,23 @@
 #include "ArkRenderApplication11.h"
 #include "Dx11SwapChainConfig.h"
 #include "Dx11Texture2DConfig.h"
+
 #include "EventManager.h"
 #include "EKeyDown.h"
+#include "EKeyUp.h"
+#include "EMouseRButtonDown.h"
+#include "EMouseRButtonUp.h"
+#include "EMouseMove.h"
+#include "EMouseLeave.h"
+#include "EFrameStart.h"
+
 #include "PipelineManager.h"
+#include "ArkFirstPersonCamera.h"
+#include "IParameterManager.h"
 #include "PerspectiveView.h"
+
+
+
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -23,8 +36,16 @@ ArkRenderApplication11::ArkRenderApplication11()
 	m_iWidth = 800;
 	m_iHeight = 600;
 
-	RequestEvent(WINDOW_RESIZE);
-	RequestEvent(SYSTEM_KEYBOARD_KEYDOWN);
+	m_pCamera = 0;
+	m_pRenderView = 0;
+	m_pRenderer = 0;
+
+	RequestEvent( WINDOW_RESIZE );
+	RequestEvent( RENDER_FRAME_START );
+    RequestEvent( SYSTEM_RBUTTON_DOWN );
+    RequestEvent( SYSTEM_RBUTTON_UP );
+    RequestEvent( SYSTEM_MOUSE_MOVE );
+    RequestEvent( SYSTEM_MOUSE_LEAVE );
 }
 //--------------------------------------------------------------------------------
 ArkRenderApplication11::~ArkRenderApplication11()
@@ -84,7 +105,11 @@ bool ArkRenderApplication11::ConfigureRenderingSetup()
 	PerspectiveView* pPerspView = new PerspectiveView( *m_pRenderer,m_pBackBuffer );
 	m_pRenderView = pPerspView;
 
-	m_pCamera = new Camera();
+	m_pCamera = new ArkFirstPersonCamera();
+	m_pCamera->SetEventManager( &CameraEventHub );
+	XMVECTOR rot = XMVectorSet(0,0,0,0);
+	m_pCamera->GetNode()->Transform.Rotation() = XMMatrixRotationRollPitchYawFromVector(rot);
+	m_pCamera->GetNode()->Transform.Position() = XMVectorSet( 0.0f, 10.0f, -20.0f,0.0f );
 	m_pCamera->SetCameraView( m_pRenderView );
 	m_pCamera->SetProjectionParams(0.1f,1000.0f, static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight), static_cast<float>(3.14f) / 2.0f);
 
@@ -119,9 +144,9 @@ bool ArkRenderApplication11::HandleEvent(EventPtr pEvent)
 		return(true);
 
 	}
-	if(e == SYSTEM_KEYBOARD_KEYDOWN)
+	if(e == SYSTEM_KEYBOARD_KEYUP)
 	{
-		EKeyDownPtr pKeyDown = std::static_pointer_cast<EKeyDown>(pEvent);
+		EKeyUpPtr pKeyDown = std::static_pointer_cast<EKeyUp>(pEvent);
 		unsigned int key = pKeyDown->GetCharacterCode();
 
 
@@ -140,7 +165,10 @@ void ArkRenderApplication11::HandleWindowResize(HWND handle,UINT width,UINT heig
 		m_pWindow->ResizeWindow(width,height);
 		m_pRenderer->ResizeSwapChain(m_pWindow->GetSwapChain(),width,height);
 	}
-
+	// Update the projection matrix of our camera
+	if ( m_pCamera != 0 ) {
+		m_pCamera->SetAspectRatio( static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight) );
+	}
 	if( m_pRenderView != 0 )
 	{
 		m_pRenderView->Resize( width,height );
