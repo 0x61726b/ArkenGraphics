@@ -9,8 +9,9 @@
 #ifndef __Scene_h__
 #define __Scene_h__
 //--------------------------------------------------------------------------------
-#include "Actor.h"
+#include "ArkNode3D.h"
 #include "Camera.h"
+#include "ArkParameterContainer.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -21,7 +22,7 @@ namespace Arkeng
 		virtual ~Scene();
 
 		virtual void Update( float dt );
-		virtual void PreRender( ArkRenderer11* Renderer );
+		virtual void PreRender( ArkRenderer11* Renderer,VIEWTYPE type );
 		virtual void Render( ArkRenderer11* Renderer );
 
 		void AddActor( Actor* actor );
@@ -30,8 +31,11 @@ namespace Arkeng
 		void AddCamera( Camera* pCamera );
 		Camera* GetCamera();
 
+		ArkNode3D* GetRoot();
 
+		ArkParameterContainer Parameters;
 	protected:
+		ArkNode3D* m_pRoot;
 		std::vector< Actor* >		m_vActors;
 		std::vector< Camera*>		m_vCameras;
 	};

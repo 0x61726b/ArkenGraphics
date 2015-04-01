@@ -12,7 +12,7 @@
 #include "PCH.h"
 #include "ArkEntity3D.h"
 #include "ArkLog.h"
-//#include "GeometryDX11.h"
+#include "ArkGeometry11.h"
 //#include "IntrRay3fSphere3f.h"
 #include "ArkRenderParameter11.h"
 #include "IParameterManager.h"
@@ -170,9 +170,8 @@ void ArkEntity3D::Render( PipelineManager* pPipelineManager, IParameterManager* 
 //--------------------------------------------------------------------------------
 void ArkEntity3D::SetRenderParams( IParameterManager* pParamManager )
 {
-	XMMATRIX m =Transform.WorldMatrix();
 	// Set the world matrix
-	pParamManager->SetWorldMatrix( &m );
+	pParamManager->SetWorldMatrix( &Transform.WorldMatrix() );
 	
 	// Scroll through each parameter and set it in the renderer
 	Parameters.SetRenderParams( pParamManager );

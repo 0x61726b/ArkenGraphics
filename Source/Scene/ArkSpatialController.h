@@ -28,8 +28,8 @@ namespace Arkeng
 		void SetRotation( const XMVECTOR& xyz );
 		void SetTranslation( const XMVECTOR& translation );
 
-		DirectX::XMVECTOR GetRotation();
-		DirectX::XMVECTOR GetTranslation();
+		DirectX::XMVECTOR& GetRotation();
+		DirectX::XMVECTOR& GetTranslation();
 
 		void RotateBy( const DirectX::XMVECTOR& xyz );
 		void RotateXBy( const float x );

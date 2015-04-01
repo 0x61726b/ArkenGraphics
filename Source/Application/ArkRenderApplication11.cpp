@@ -111,7 +111,7 @@ bool ArkRenderApplication11::ConfigureRenderingSetup()
 	m_pCamera->GetNode()->Transform.Rotation() = XMMatrixRotationRollPitchYawFromVector(rot);
 	m_pCamera->GetNode()->Transform.Position() = XMVectorSet( 0.0f, 10.0f, -20.0f,0.0f );
 	m_pCamera->SetCameraView( m_pRenderView );
-	m_pCamera->SetProjectionParams(0.1f,1000.0f, static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight), static_cast<float>(3.14f) / 2.0f);
+	m_pCamera->SetProjectionParams(0.1f,1000.0f, static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight), DirectX::XM_PIDIV2);
 
 	m_pScene->AddCamera( m_pCamera );
 	return true;
@@ -151,6 +151,9 @@ bool ArkRenderApplication11::HandleEvent(EventPtr pEvent)
 
 
 	}
+
+	if( CameraEventHub.ProcessEvent( pEvent ))
+		return true;
 	return ArkApplication::HandleEvent(pEvent);
 }
 void ArkRenderApplication11::HandleWindowResize(HWND handle,UINT width,UINT height)

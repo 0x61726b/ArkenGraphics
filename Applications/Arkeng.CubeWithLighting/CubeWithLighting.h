@@ -6,7 +6,6 @@
 //
 //App.h
 //--------------------------------------------------------------------------------
-
 #include "ArkRenderApplication11.h"
 #include "Win32RenderWindow.h"
 #include "ArkRenderer11.h"

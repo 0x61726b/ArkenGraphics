@@ -23,29 +23,38 @@ m_bLoop(true)
 	SetEventManager(&EvtManager);
 
 	RequestEvent(SYSTEM_KEYBOARD_KEYDOWN);
+	RequestEvent(SYSTEM_KEYBOARD_KEYUP);
 
 	m_cConfig = new ArkConfigFile();
 	m_cConfig->Open();
-	
-	
+
+	m_pTimer = new ArkTimer();
+	m_pTimer->Update();
+
 	m_pScene = new Scene();
 
 	ArkLog* l = new ArkLog(LogType::Base);
 	l->Open();
 	l->Output(L"Log Started.");
-	
+
 	float buildNumber = m_cConfig->GetConfig().BuildNumber;
 	std::wstring b = std::to_wstring(buildNumber);
 
-	l->Output(L"Arkengine Build " + b );
+	l->Output(L"Arkengine Build " + b);
 }
 //--------------------------------------------------------------------------------
-ArkApplication::~ArkApplication() 
+ArkApplication::~ArkApplication()
 {
-	if( m_pScene != NULL )
+	if(m_pScene != NULL)
 	{
 		delete m_pScene;
 	}
+
+	if(m_pTimer != NULL)
+	{
+		delete m_pTimer;
+	}
+
 	ArkLog::Get(LogType::Base).Close();
 	delete m_cConfig;
 }
@@ -65,9 +74,9 @@ bool ArkApplication::HandleEvent(EventPtr pEvent)
 {
 	eEvent e = pEvent->GetEventType();
 
-	if(e==SYSTEM_KEYBOARD_KEYDOWN)
+	if(e==SYSTEM_KEYBOARD_KEYUP)
 	{
-		EKeyDownPtr pKeyDown = std::static_pointer_cast<EKeyDown>(pEvent);
+		EKeyUpPtr pKeyDown = std::static_pointer_cast<EKeyUp>(pEvent);
 
 		unsigned int key = pKeyDown->GetCharacterCode();
 
@@ -112,43 +121,68 @@ LRESULT ArkApplication::WindowProc(HWND hwnd,UINT msg,WPARAM wparam,LPARAM lpara
 	switch(msg)
 	{
 
-		case WM_CREATE:
-		{
-			// Automatically return 0 to allow the window to proceed in the
-			// creation process.
+	case WM_CREATE:
+	{
+		// Automatically return 0 to allow the window to proceed in the
+		// creation process.
 
-			return(0);
-		} break;
+		return(0);
+	} break;
 
-		case WM_PAINT:
-		{
-			// This message is handled by the default handler to avoid a 
-			// repeated sending of the message.  This results in the ability
-			// to process all pending messages at once without getting stuck
-			// in an eternal loop.
-		} break;
+	case WM_PAINT:
+	{
+		// This message is handled by the default handler to avoid a 
+		// repeated sending of the message.  This results in the ability
+		// to process all pending messages at once without getting stuck
+		// in an eternal loop.
+	} break;
 
-		case WM_CLOSE:
-		{
-			// This message is sent when a window or an application should
-			// terminate.
-		} break;
-		case WM_SIZE:
-		{
-			EWindowResizePtr pEvent = EWindowResizePtr( new EWindowResize(hwnd,wparam,lparam) );
-			EvtManager.ProcessEvent(pEvent);
-		} break;
-		case WM_DESTROY:
-		{
-			// This message is sent when a window has been destroyed.
-			PostQuitMessage(0);
-			return(0);
-		} break;
-		case WM_KEYDOWN:
-		{
-			EKeyDownPtr pEvent = EKeyDownPtr(new EKeyDown(hwnd,wparam,lparam));
-			EvtManager.ProcessEvent(pEvent);
-		} break;
+	case WM_CLOSE:
+	{
+		// This message is sent when a window or an application should
+		// terminate.
+	} break;
+	case WM_SIZE:
+	{
+		EWindowResizePtr pEvent = EWindowResizePtr(new EWindowResize(hwnd,wparam,lparam));
+		EvtManager.ProcessEvent(pEvent);
+	} break;
+	case WM_DESTROY:
+	{
+		// This message is sent when a window has been destroyed.
+		PostQuitMessage(0);
+		return(0);
+	} break;
+	case WM_KEYDOWN:
+	{
+		EKeyDownPtr pEvent = EKeyDownPtr(new EKeyDown(hwnd,wparam,lparam));
+		EvtManager.ProcessEvent(pEvent);
+	} break;
+	case WM_KEYUP:
+	{
+		EKeyUpPtr pEvent = EKeyUpPtr(new EKeyUp(hwnd,wparam,lparam));
+		EvtManager.ProcessEvent(pEvent);
+	} break;
+	case WM_MOUSEMOVE:
+	{
+		EMouseMovePtr pEvent = EMouseMovePtr(new EMouseMove(hwnd,wparam,lparam));
+		EvtManager.ProcessEvent(pEvent);
+	} break;
+	case WM_MOUSELEAVE:
+	{
+		EMouseLeavePtr pEvent = EMouseLeavePtr(new EMouseLeave(hwnd,wparam,lparam));
+		EvtManager.ProcessEvent(pEvent);
+	}break;
+	case WM_RBUTTONDOWN:
+	{
+		EMouseRButtonDownPtr pEvent = EMouseRButtonDownPtr(new EMouseRButtonDown(hwnd,wparam,lparam));
+		EvtManager.ProcessEvent(pEvent);
+	}break;
+	case WM_RBUTTONUP:
+	{
+		EMouseRButtonUpPtr pEvent = EMouseRButtonUpPtr(new EMouseRButtonUp(hwnd,wparam,lparam));
+		EvtManager.ProcessEvent(pEvent);
+	}break;
 	}
 	return(DefWindowProc(hwnd,msg,wparam,lparam));
 }

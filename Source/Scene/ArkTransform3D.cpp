@@ -11,26 +11,23 @@
 #include "ArkTransform3D.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
+using namespace DirectX;
 //--------------------------------------------------------------------------------
 ArkTransform3D::ArkTransform3D()
 {
 	m_vTranslation = XMVectorZero();
-	m_mRotation = XMMatrixIdentity();
+	XMMATRIX i = XMMatrixIdentity();
+	m_mRotation = i;
 	m_vScale = XMVectorSet(1.0f,1.0f,1.0f,0.0f);
 
-	m_mWorld = XMMatrixIdentity();
-	m_mLocal = XMMatrixIdentity();
+	m_mWorld = i;
+	m_mLocal = i;
+	
 }
 //--------------------------------------------------------------------------------
 ArkTransform3D::~ArkTransform3D()
 {
-	XMMATRIX m = Rotation();
-	XMVECTOR m_vRotation = XMVectorSet(0,0,0,0);
-
-	XMVECTOR newRot = XMVector4Transform(m_vRotation,m);
-
-
-	XMMATRIX newRot2 = XMMatrixRotationRollPitchYawFromVector(newRot);
+	
 }
 //--------------------------------------------------------------------------------
 XMVECTOR& ArkTransform3D::Position()
@@ -54,14 +51,19 @@ void ArkTransform3D::UpdateLocal()
 	XMMATRIX identity = XMMatrixIdentity();
 	m_mLocal = identity;
 
-	XMMATRIX mlocal = XMMatrixScalingFromVector(m_vScale)*m_mRotation*XMMatrixTranslationFromVector(m_vTranslation);;
+	XMMATRIX scale = XMMatrixScalingFromVector(m_vScale);
 
-	m_mLocal = mlocal;
+	XMMATRIX translate = XMMatrixTranslationFromVector(m_vTranslation);
+
+	XMMATRIX result = scale*m_mRotation*translate;
+	
+	m_mLocal = result;
 }
 //--------------------------------------------------------------------------------
 void ArkTransform3D::UpdateWorld(const XMMATRIX& parent)
 {
-	m_mWorld = m_mLocal*parent;
+	XMMATRIX w = m_mLocal;
+	m_mWorld = w*parent;
 }
 //--------------------------------------------------------------------------------
 void ArkTransform3D::UpdateWorld()
@@ -110,7 +112,7 @@ XMMATRIX ArkTransform3D::GetView() const
 	XMStoreFloat3(&zBasis,inverseView.r[2]);
 
 	XMFLOAT4X4 tmp;
-	XMStoreFloat4x4(&tmp,m_mWorld);
+	XMStoreFloat4x4( &tmp,m_mWorld );
 	float j = tmp.m[0][0]; // or float j = tmp._11
 
 	XMFLOAT3 up;
@@ -123,20 +125,23 @@ XMMATRIX ArkTransform3D::GetView() const
 	At = translation + inverseView.r[2];
 	Up = XMVectorSet(up.x,up.y,up.z,0.0f);
 
-	return(XMMatrixLookAtLH(Eye,At,Up));
+	
+	return( XMMatrixLookAtLH(Eye,At,Up) );
 }
 //--------------------------------------------------------------------------------
 XMVECTOR ArkTransform3D::LocalToWorldSpace(const XMVECTOR& input)
 {
-	XMVECTOR result = XMVector4Transform(input,m_mWorld);
+	XMMATRIX m = m_mWorld;
+	XMVECTOR result = XMVector4Transform(input,m);
 
 	return(result);
 }
 //--------------------------------------------------------------------------------
 XMVECTOR ArkTransform3D::WorldToLocalSpace(const XMVECTOR& input)
 {
+	XMMATRIX m = m_mWorld;
 	XMVECTOR det;
-	XMMATRIX inverseView = XMMatrixInverse(&det,m_mWorld);
+	XMMATRIX inverseView = XMMatrixInverse(&det,m);
 
 	XMVECTOR result = XMVector4Transform(input,inverseView);
 

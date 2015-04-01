@@ -21,9 +21,9 @@ namespace Arkeng
 {
 	struct MaterialParams
 	{
-		bool						bRender;
-		ArkRenderEffect11*			pEffect;
-		std::vector<TaskCore*>		Tasks;
+		bool										bRender;
+		std::shared_ptr<ArkRenderEffect11>			pEffect;
+		std::vector<TaskCore*>						Tasks;
 	};
 
 	class ArkMaterial11

@@ -5,9 +5,17 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -21,7 +29,20 @@
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
@@ -34,11 +55,24 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\SDK\Library\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\$(Platform)\$(Configuration)\</IntDir>
+    <TargetExt>.lib</TargetExt>
+    <IncludePath>$(DXSDK_DIR);$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\SDK\Library\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>Bin\$(Platform)\$(Configuration)\</IntDir>
     <TargetExt>.lib</TargetExt>
@@ -70,10 +104,58 @@ copy Events\*.h ..\SDK\Include
 copy Rendering\*.h ..\SDK\Include
 copy Rendering\*.inl ..\SDK\Include
 copy Scene\*.h ..\SDK\Include
-copy Logging\*.h ..\SDK\Include</Command>
+copy Logging\*.h ..\SDK\Include
+copy Math\*.h ..\SDK\Include
+copy Scene\*.inl ..\SDK\Include
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>
+      </SDLCheck>
+      <AdditionalIncludeDirectories>Logging;Scene;Rendering;Application;Events;Utility;Math;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <PostBuildEvent>
+      <Command>copy Utility\*.h ..\SDK\Include
+copy Application\*.h ..\SDK\Include
+copy Events\*.h ..\SDK\Include
+copy Rendering\*.h ..\SDK\Include
+copy Rendering\*.inl ..\SDK\Include
+copy Scene\*.h ..\SDK\Include
+copy Logging\*.h ..\SDK\Include
+copy Math\*.h ..\SDK\Include
+copy Scene\*.inl ..\SDK\Include
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
@@ -122,12 +204,17 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkConstantBuffer11.h" />
     <ClInclude Include="Rendering\ArkConstantBufferParameter11.h" />
     <ClInclude Include="Rendering\ArkConstantBufferParameterWriter11.h" />
+    <ClInclude Include="Rendering\ArkDrawExecutor11.h" />
+    <ClInclude Include="Rendering\ArkDrawIndexedExecutor11.h" />
+    <ClInclude Include="Rendering\ArkGeometry11.h" />
+    <ClInclude Include="Rendering\ArkGeometryGenerator11.h" />
     <ClInclude Include="Rendering\ArkIndexBuffer11.h" />
     <ClInclude Include="Rendering\ArkMaterial11.h" />
     <ClInclude Include="Rendering\ArkMatrixArrayParameter11.h" />
     <ClInclude Include="Rendering\ArkMatrixArrayParameterWriter11.h" />
     <ClInclude Include="Rendering\ArkMatrixParameter11.h" />
     <ClInclude Include="Rendering\ArkMatrixParameterWriter11.h" />
+    <ClInclude Include="Rendering\ArkMultiExecutor11.h" />
     <ClInclude Include="Rendering\ArkParameterContainer.h" />
     <ClInclude Include="Rendering\ArkParameterManager11.h" />
     <ClInclude Include="Rendering\ArkParameterWriter.h" />
@@ -148,6 +235,7 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkShaderStage11.h" />
     <ClInclude Include="Rendering\ArkVertexShader11.h" />
     <ClInclude Include="Rendering\ArkVertexShaderStage11.h" />
+    <ClInclude Include="Rendering\BasicVertex11.h" />
     <ClInclude Include="Rendering\Dx11BlendStateConfig.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilStateConfig.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilView.h" />
@@ -170,17 +258,22 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClInclude Include="Rendering\IParameterManager.h" />
     <ClInclude Include="Rendering\IRenderer.h" />
     <ClInclude Include="Rendering\ArkRenderer11.h" />
+    <ClInclude Include="Rendering\LineIndices.h" />
     <ClInclude Include="Rendering\PerspectiveView.h" />
     <ClInclude Include="Rendering\PipelineExecutor11.h" />
     <ClInclude Include="Rendering\PipelineManager.h" />
     <ClInclude Include="Rendering\Dx11Resource.h" />
     <ClInclude Include="Rendering\Dx11SwapChain.h" />
     <ClInclude Include="Rendering\Dx11Texture2D.h" />
+    <ClInclude Include="Rendering\PointIndices.h" />
     <ClInclude Include="Rendering\RenderTask.h" />
     <ClInclude Include="Rendering\ArkShape3D.h" />
     <ClInclude Include="Rendering\TaskCore.h" />
+    <ClInclude Include="Rendering\TGrowableBuffer11.h" />
+    <ClInclude Include="Rendering\TriangleIndices.h" />
     <ClInclude Include="Rendering\TStateArrayMonitor.h" />
     <ClInclude Include="Rendering\TStateMonitor.h" />
+    <ClInclude Include="Rendering\VertexElement11.h" />
     <ClInclude Include="Scene\Actor.h" />
     <ClInclude Include="Scene\ArkEntity3D.h" />
     <ClInclude Include="Scene\ArkFirstPersonCamera.h" />
@@ -230,11 +323,14 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkConstantBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkConstantBufferParameter11.cpp" />
     <ClCompile Include="Rendering\ArkConstantBufferParameterWriter11.cpp" />
+    <ClCompile Include="Rendering\ArkGeometry11.cpp" />
+    <ClCompile Include="Rendering\ArkGeometryGenerator11.cpp" />
     <ClCompile Include="Rendering\ArkIndexBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkMatrixArrayParameter.cpp" />
     <ClCompile Include="Rendering\ArkMatrixArrayParameterWriter11.cpp" />
     <ClCompile Include="Rendering\ArkMatrixParameter11.cpp" />
     <ClCompile Include="Rendering\ArkMatrixParameterWriter11.cpp" />
+    <ClCompile Include="Rendering\ArkMultiExecutor11..cpp" />
     <ClCompile Include="Rendering\ArkParameterContainer.cpp" />
     <ClCompile Include="Rendering\ArkParameterManager11.cpp" />
     <ClCompile Include="Rendering\ArkParameterWriter.cpp" />
@@ -256,6 +352,7 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkVertexBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkVertexShader11.cpp" />
     <ClCompile Include="Rendering\ArkVertexShaderStage11.cpp" />
+    <ClCompile Include="Rendering\BasicVertex11.cpp" />
     <ClCompile Include="Rendering\Dx11BlendStateConfig.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilStateConfig.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilView.cpp" />
@@ -276,13 +373,17 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClCompile Include="Rendering\DxOutputMergerState.cpp" />
     <ClCompile Include="Rendering\DxRasterizerStage.cpp" />
     <ClCompile Include="Rendering\DxRasterizerState.cpp" />
+    <ClCompile Include="Rendering\LineIndices.cpp" />
     <ClCompile Include="Rendering\PipelineExecutor11.cpp" />
     <ClCompile Include="Rendering\PipelineManager.cpp" />
     <ClCompile Include="Rendering\Dx11Resource.cpp" />
     <ClCompile Include="Rendering\Dx11ResourceProxy.cpp" />
+    <ClCompile Include="Rendering\PointIndices.cpp" />
     <ClCompile Include="Rendering\RenderTask.cpp" />
     <ClCompile Include="Rendering\ArkMaterial11.cpp" />
     <ClCompile Include="Rendering\TaskCore.cpp" />
+    <ClCompile Include="Rendering\TriangleIndices.cpp" />
+    <ClCompile Include="Rendering\VertexElement11.cpp" />
     <ClCompile Include="Scene\Actor.cpp" />
     <ClCompile Include="Scene\ArkEntity3D.cpp" />
     <ClCompile Include="Scene\ArkFirstPersonCamera.cpp" />
@@ -294,10 +395,15 @@ copy Logging\*.h ..\SDK\Include</Command>
     <ClCompile Include="Utility\ArkTimer.cpp" />
     <ClCompile Include="Utility\Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildThisFileDirectory)../../build/native/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildThisFileDirectory)../../build/native/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Rendering\ArkDrawExecutor11.inl" />
+    <None Include="Rendering\ArkDrawIndexedExecutor11.inl" />
+    <None Include="Rendering\TGrowableBuffer11.inl" />
     <None Include="Rendering\TStateArrayMonitor.inl" />
     <None Include="Rendering\TStateMonitor.inl" />
     <None Include="Scene\ArkSpatialController.inl" />

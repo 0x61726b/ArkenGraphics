@@ -50,7 +50,7 @@ void Arkeng::BuildPickRecord( ArkNode3D* node, const ArkRay3& ray, std::vector<A
 		if ( entity->Shape.GetNumberOfShapes() > 0 )
 		{
 			XMVECTOR det;
-			XMMATRIX InvWorld = XMMatrixInverse(&det,entity->Transform.WorldMatrix());
+			XMMATRIX InvWorld = XMMatrixInverse(&det,( entity->Transform.WorldMatrix() ));
 
 			XMFLOAT3 or;
 			XMStoreFloat3( &or,ray.Origin );

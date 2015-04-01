@@ -112,6 +112,12 @@
     <Filter Include="Events\Windows Messages\Mouse">
       <UniqueIdentifier>{6d9ad540-ae43-4f78-866f-37e8bb66b0d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline\Executors">
+      <UniqueIdentifier>{b39b392b-13e9-431f-bd9a-9ba1bc8281db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline\Executors\Vertex Layouts">
+      <UniqueIdentifier>{016ea208-9497-4a88-b656-ec15f8e5881c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Pch.h">
@@ -427,7 +433,40 @@
       <Filter>Rendering\Direct3D11\Material System</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\PipelineExecutor11.h">
-      <Filter>Rendering\Direct3D11\Pipeline</Filter>
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\BasicVertex11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors\Vertex Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkDrawExecutor11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\TGrowableBuffer11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkDrawIndexedExecutor11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkMultiExecutor11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkGeometry11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\VertexElement11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkGeometryGenerator11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\TriangleIndices.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\LineIndices.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\PointIndices.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -719,11 +758,35 @@
     <ClCompile Include="Rendering\ArkMaterial11.cpp">
       <Filter>Rendering\Direct3D11\Material System</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\PipelineExecutor11.cpp">
-      <Filter>Rendering\Direct3D11\Pipeline</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\ArkRenderable.cpp">
       <Filter>Rendering\Direct3D11\Material System</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\PipelineExecutor11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\BasicVertex11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors\Vertex Layouts</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkMultiExecutor11..cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkGeometry11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\VertexElement11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkGeometryGenerator11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\TriangleIndices.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\LineIndices.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\PointIndices.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -738,6 +801,15 @@
     </None>
     <None Include="Scene\ArkSpatialController.inl">
       <Filter>Scene</Filter>
+    </None>
+    <None Include="Rendering\TGrowableBuffer11.inl">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </None>
+    <None Include="Rendering\ArkDrawExecutor11.inl">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </None>
+    <None Include="Rendering\ArkDrawIndexedExecutor11.inl">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
     </None>
   </ItemGroup>
 </Project>

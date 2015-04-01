@@ -31,6 +31,11 @@ void RenderTask::SetScene(Scene* pScene)
 	m_pScene = pScene;
 }
 //--------------------------------------------------------------------------------
+void RenderTask::SetEntity( ArkEntity3D* pEntity )
+{
+	m_pEntity = pEntity;
+}
+//--------------------------------------------------------------------------------
 void RenderTask::SetViewport(int viewport,unsigned int index)
 {
 	assert(index < D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE);
@@ -48,8 +53,6 @@ void RenderTask::SetViewportCount(unsigned int count)
 //--------------------------------------------------------------------------------
 void RenderTask::ConfigureViewports(PipelineManager* pPipeline)
 {
-
-
 	pPipeline->RasterizerStage.CurrentState.ViewPortCount.SetState(m_uiViewportCount);
 
 	for(int i=0; i < m_uiViewportCount;++i)

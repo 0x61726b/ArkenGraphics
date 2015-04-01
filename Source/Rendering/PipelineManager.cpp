@@ -192,6 +192,11 @@ void PipelineManager::BindShader( ShaderType type,int ID,IParameterManager* pPar
 	}
 }
 //--------------------------------------------------------------------------------
+void PipelineManager::DrawIndexed( UINT IndexCount, UINT StartIndex, int VertexOffset )
+{
+	m_pContext->DrawIndexed( IndexCount,StartIndex,VertexOffset );
+}
+//--------------------------------------------------------------------------------
 void PipelineManager::Draw( ArkRenderEffect11& effect, ResourcePtr vb, ResourcePtr ib,
 					int inputLayout, D3D11_PRIMITIVE_TOPOLOGY primType,
 					UINT vertexStride, UINT numIndices, IParameterManager* pParamManager)

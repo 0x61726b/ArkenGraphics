@@ -9,13 +9,13 @@ cbuffer Transforms
 //-----------------------------------------------------------------------------
 struct VS_INPUT
 {
-	float4 position : SV_Position;
+	float4 position : POSITION;
 	float4 color : COLOR;
 };
 
 struct VS_OUTPUT
 {
-	float4 position : SV_Position;
+	float4 position : SV_POSITION;
 	float4 color : COLOR;
 };
 
@@ -29,7 +29,6 @@ VS_OUTPUT VSMain( in VS_INPUT v )
 	o.position = mul(o.position,gProj);
 
 	o.color = v.color;
-
 	return o;
 }
 

@@ -50,6 +50,8 @@ namespace Arkeng
 					int inputLayout, D3D11_PRIMITIVE_TOPOLOGY primType,
 					UINT vertexStride, UINT numIndices, IParameterManager* pParamManager);
 
+		void DrawIndexed( UINT indexCount, UINT start,int offset );
+
 		D3D11_MAPPED_SUBRESOURCE MapResource( Dx11Resource* pArkResource, UINT subresource, D3D11_MAP actions, UINT flags );
 		void UnMapResource(Dx11Resource* pArkResource,UINT subresource);
 

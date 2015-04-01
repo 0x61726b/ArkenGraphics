@@ -13,6 +13,9 @@
 //--------------------------------------------------------------------------------
 #include "Pch.h"
 #include "ArkLog.h"
+
+#include "ArkTimer.h"
+
 #include "ArkConfigFile.h"
 #include "DxDebugHelper.h"
 #include "EventManager.h"
@@ -20,7 +23,13 @@
 #include "IWndProc.h"
 
 #include "EKeyDown.h"
+#include "EKeyUp.h"
 #include "EWindowResize.h"
+#include "EMouseMove.h"
+#include "EMouseLeave.h"
+#include "EMouseRButtonDown.h"
+#include "EMouseRButtonUp.h"
+
 
 #include "Scene.h"
 //--------------------------------------------------------------------------------
@@ -53,6 +62,8 @@ namespace Arkeng
 
 		void RequestExit();
 		EventManager EvtManager;
+
+		ArkTimer* m_pTimer;
 
 		bool m_bLoop;
 	protected:

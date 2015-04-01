@@ -32,8 +32,6 @@ ArkMaterial11::~ArkMaterial11()
 {
 	// Delete the effects that have been added to this material
 
-	for ( int i = 0; i < VT_NUM_VIEW_TYPES; i++ )
-		Safe_Delete( Params[i].pEffect );
 }
 //--------------------------------------------------------------------------------
 void ArkMaterial11::Update( float time )

@@ -68,32 +68,38 @@ void PerspectiveView::Update(float dt)
 //--------------------------------------------------------------------------------
 void PerspectiveView::QueuePreTasks(ArkRenderer11* pRenderer)
 {
+	if ( m_pEntity != NULL )
+	{
+		XMMATRIX view = ( m_pEntity->Transform.GetView());
+		SetViewMatrix( view );
+	}
+
 	pRenderer->QueueTask(this);
 
 	if( m_pScene )
 	{
-		m_pScene->PreRender( pRenderer );
+		m_pScene->PreRender( pRenderer,VT_PERSPECTIVE);
 	}
 }
 //--------------------------------------------------------------------------------
 void PerspectiveView::ExecuteTask(PipelineManager* pPipelineManager,IParameterManager* pParamManager)
 {
 	pPipelineManager->ClearRenderTargets();
-
 	pPipelineManager->OutputMergerStage.CurrentState.RenderTargetViews.SetState(0,m_pRenderTarget->m_iResourceRTV);
-
+	pPipelineManager->OutputMergerStage.CurrentState.DepthTarget.SetState( m_pDepthTarget->m_iResourceDSV );
 	pPipelineManager->ApplyRenderTargets();
 
 	float vColor[4] ={0,0,0,0};
 
-	/*pPipelineManager->ClearBuffers(vColor,1.0f);*/
-
+	pPipelineManager->ClearBuffers(vColor,1.0f);
 
 	ConfigureViewports( pPipelineManager );
 
 	SetRenderParams( pParamManager );
 
 	pPipelineManager->ApplyPipelineResources();
+
+	m_pScene->GetRoot()->Render( pPipelineManager, pParamManager, VT_PERSPECTIVE );
 }
 //--------------------------------------------------------------------------------
 void PerspectiveView::Resize(UINT width,UINT height)
