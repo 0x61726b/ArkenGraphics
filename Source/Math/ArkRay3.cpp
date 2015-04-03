@@ -4,7 +4,7 @@
 //
 //Copyright (c) Alperen Gezer.All rights reserved.
 //
-//ArkRay3.h
+//ArkRay3.cpp
 //--------------------------------------------------------------------------------
 #include "Pch.h"
 #include "ArkRay3.h"

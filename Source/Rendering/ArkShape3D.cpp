@@ -1,11 +1,10 @@
 //--------------------------------------------------------------------------------
-// This file is a portion of the Hieroglyph 3 Rendering Engine.  It is distributed
-// under the MIT License, available in the root of this distribution and 
-// at the following URL:
+//This is a file from Arkengine
 //
-// http://www.opensource.org/licenses/mit-license.php
 //
-// Copyright (c) Jason Zink 
+//Copyright (c) Alperen Gezer.All rights reserved.
+//
+//ArkShape3D.cpp
 //--------------------------------------------------------------------------------
 #include "Pch.h"
 #include "ArkShape3D.h"
