@@ -1,13 +1,24 @@
-# Arken Graphics
-A Modern Renderer developed with C++ and Direct3D 
+#Arkengine
+<center>A Modern Renderer developed with C++ and Direct3D</center> 
 ------------
 This is a hobby project of achieving a modern renderer coded in C++ D3D 11.I am planning it to extend to D3D 12 when it comes out.
 Changelog 
 
+_**Build Alpha 0.012a**_
+- Complete rework of how engine handles matrices.
+- Added ArkTimer
+- Actor, Node and Entity system for scene-graph
+- Rework of base camera system and First Person Camera.
+- Introduced Parameter Writer,current only write Constant Buffer,Vector and Matrix param.
+- Basic 3D shapes for scene-graph calculations (Sphere,Ray,Plane,Frustum)
+- Geometry generator for said shapes.
+- More mouse and keyboard events
+- Pipeline executor system introduced
+
 _**Build Alpha 0.012**_
 - Pipeline State Monitoring added for fixed and common shader stages.
 - DSV,DS State,Blend State and Rasterizer state added.
-- Cube demo is available to test
+- Cube demo is available to test <br>
 ![Cube Demo](/Resources/Images/2015-03-27 - 23.40.23 ~ capture.png)
 
 _**Build Alpha 0.011**_
