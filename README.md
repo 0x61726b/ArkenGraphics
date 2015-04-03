@@ -1,5 +1,5 @@
-# Arken Graphics
-A Modern Renderer developed with C++ and Direct3D 
+<center> ##Arken Graphics</center>
+<center>A Modern Renderer developed with C++ and Direct3D</center> 
 ------------
 This is a hobby project of achieving a modern renderer coded in C++ D3D 11.I am planning it to extend to D3D 12 when it comes out.
 Changelog 
