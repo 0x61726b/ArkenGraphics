@@ -22,6 +22,8 @@ std::map<std::wstring,std::shared_ptr<ArkRenderParameter11>> ArkParameterManager
 ArkParameterManager11::ArkParameterManager11(unsigned int ID)
 {
 	m_ID = ID;
+	m_pParent = 0;
+
 	m_pWorldMatrix = GetMatrixParameterRef(std::wstring(L"gWorld"));
 	m_pViewMatrix  = GetMatrixParameterRef(std::wstring(L"gView"));
 	m_pProjMatrix  = GetMatrixParameterRef(std::wstring(L"gProj"));
@@ -41,6 +43,16 @@ ArkParameterManager11::~ArkParameterManager11()
 	}
 
 	m_Parameters.clear();
+}
+//--------------------------------------------------------------------------------
+void ArkParameterManager11::AttachParent( IParameterManager* pParent )
+{
+	m_pParent = pParent;
+}
+//--------------------------------------------------------------------------------
+void ArkParameterManager11::DetachParent()
+{
+	m_pParent = 0;
 }
 //--------------------------------------------------------------------------------
 void ArkParameterManager11::SetConstantBufferParameter(const std::wstring& name,ResourcePtr resource)
@@ -386,7 +398,15 @@ std::shared_ptr<ArkMatrixArrayParameter11> ArkParameterManager11::GetMatrixArray
 //--------------------------------------------------------------------------------
 std::shared_ptr<ArkRenderParameter11> ArkParameterManager11::GetParameterRef(const std::wstring& name)
 {
-	return m_Parameters[name];
+		// First check this parameter manager
+	std::shared_ptr<ArkRenderParameter11> pParam = m_Parameters[name];
+
+	// Then check the parent manager
+	if ( ( pParam == 0 ) && ( m_pParent ) )
+		pParam = m_pParent->GetParameterRef( name );
+
+	// Return the parameter
+	return( pParam );
 }
 //--------------------------------------------------------------------------------
 void ArkParameterManager11::SetWorldMatrix(DirectX::XMMATRIX* w)

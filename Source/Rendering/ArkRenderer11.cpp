@@ -45,6 +45,8 @@
 #include "Dx11DepthStencilStateConfig.h"
 #include "Dx11BlendStateConfig.h"
 
+#include "ArkCommandList11.h"
+#include "Process.h"
 
 
 #include "PipelineManager.h"
@@ -61,10 +63,19 @@ ArkRenderer11* ArkRenderer11::m_spRenderer = 0;
 //--------------------------------------------------------------------------------
 ArkRenderer11::ArkRenderer11()
 {
-	m_spRenderer = this;
-	pPipeline = 0;
+
+	if(m_spRenderer == 0)
+		m_spRenderer = this;
+
+	m_driverType = D3D_DRIVER_TYPE_NULL;
 
 	m_pParamMgr = 0;
+	pPipeline = 0;
+
+	MultiThreadingConfig.SetConfiguration(true);
+	MultiThreadingConfig.ApplyConfiguration();
+
+	m_FeatureLevel = D3D_FEATURE_LEVEL_9_1;
 
 	m_bVsyncEnabled = true;
 }
@@ -242,10 +253,46 @@ bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL Feat
 	hr = m_pDevice.CopyTo(m_pDebugDevice.GetAddressOf());
 
 	D3D11_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS Options;
-    m_pDevice->CheckFeatureSupport(D3D11_FEATURE_D3D10_X_HARDWARE_OPTIONS, &Options, sizeof(Options));
-	if ( Options.ComputeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x )
-		ArkLog::Get(LogType::Renderer).Write( L"Device supports compute shaders plus raw and structured buffers via shader 4.x" );
+	m_pDevice->CheckFeatureSupport(D3D11_FEATURE_D3D10_X_HARDWARE_OPTIONS,&Options,sizeof(Options));
+	if(Options.ComputeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x)
+		ArkLog::Get(LogType::Renderer).Write(L"Device supports compute shaders plus raw and structured buffers via shader 4.x");
 
+
+	D3D11_FEATURE_DATA_THREADING ThreadingOptions;
+	m_pDevice->CheckFeatureSupport(D3D11_FEATURE_THREADING,&ThreadingOptions,sizeof(ThreadingOptions));
+
+
+	for(int i=0; i < NUM_THREADS; ++i)
+	{
+		g_aPayload[i].id = i;
+
+		DeviceContextComPtr pDeferred;
+		m_pDevice->CreateDeferredContext(0,pDeferred.GetAddressOf());
+
+		g_aPayload[i].pPipeline = new PipelineManager();
+		g_aPayload[i].pPipeline->SetDeviceContext(pDeferred,m_FeatureLevel);
+		g_aPayload[i].pPipeline->RasterizerStage.CurrentState.RasterizerState.SetState(0);
+		g_aPayload[i].pPipeline->OutputMergerStage.CurrentState.DepthStencilState.SetState(0);
+		g_aPayload[i].pPipeline->OutputMergerStage.CurrentState.BlendState.SetState(0);
+
+		g_aPayload[i].pList = new ArkCommandList11();
+
+		g_aPayload[i].pParamManager = new ArkParameterManager11(i+1);
+		g_aPayload[i].pParamManager->AttachParent(m_pParamMgr);
+
+		g_aPayload[i].bComplete = true;
+		g_aPayload[i].pTask = nullptr;
+
+		g_aThreadHandles[i] = 0;
+		g_aThreadHandles[i] = (HANDLE)_beginthreadex(0,0xfffff,_TaskThreadProc,&g_aPayload[i],CREATE_SUSPENDED,0);
+
+		g_aBeginEventHandle[i] = CreateEvent(0,FALSE,FALSE,0);
+		g_aEndEventHandle[i] = CreateEvent(0,FALSE,FALSE,0);
+
+		// Start the thread up now that it has a synch object to use.
+		ResumeThread(g_aThreadHandles[i]);
+
+	}
 	return true;
 }
 //--------------------------------------------------------------------------------
@@ -255,6 +302,20 @@ Microsoft::WRL::ComPtr<ID3D11Debug> ArkRenderer11::GetDebugDevice()
 }
 void ArkRenderer11::Shutdown()
 {
+	for(int i = 0; i < NUM_THREADS; i++)
+	{
+		g_aPayload[i].bComplete = true;
+		g_aPayload[i].pTask = nullptr;
+
+		Safe_Delete(g_aPayload[i].pParamManager);
+		Safe_Delete(g_aPayload[i].pPipeline);
+		Safe_Delete(g_aPayload[i].pList);
+
+		CloseHandle(g_aThreadHandles[i]);
+		CloseHandle(g_aBeginEventHandle[i]);
+		CloseHandle(g_aEndEventHandle[i]);
+	}
+
 	Safe_Delete(m_pParamMgr);
 	Safe_Delete(pPipeline);
 
@@ -644,20 +705,94 @@ void ArkRenderer11::QueueTask(TaskCore* pTask)
 //--------------------------------------------------------------------------------
 void ArkRenderer11::ProcessTaskQueue()
 {
-	int size = m_vQueuedTasks.size();
+	MultiThreadingConfig.ApplyConfiguration();
 
-	for(int i=size-1; i >= 0; i-= 1)
+	if(MultiThreadingConfig.GetConfiguration() == false)
 	{
-		for(int j=0; j < 1; ++j)
+		// Single-threaded processing of the render view queue
+
+		for(int i = m_vQueuedTasks.size()-1; i >= 0; i-=NUM_THREADS)
 		{
-			int k = i-j;
-			if(k >= 0)
-				m_vQueuedTasks[k]->ExecuteTask(pPipeline,m_pParamMgr);
+			for(int j = 0; j < NUM_THREADS; j++)
+			{
+				if((i-j) >= 0)
+				{
+					//
+					pPipeline->BeginEvent(std::wstring(L"View Draw: ") + m_vQueuedTasks[i-j]->GetName());
+					m_vQueuedTasks[i-j]->ExecuteTask(pPipeline,g_aPayload[j].pParamManager);
+					pPipeline->EndEvent();
+					//PIXEndEvent();
+				}
+			}
 		}
+
+		m_vQueuedTasks.clear();
 	}
-	m_vQueuedTasks.clear();
+	else
+	{
+		// Multi-threaded processing of the render view queue
+
+		for(int i = m_vQueuedTasks.size()-1; i >= 0; i-=NUM_THREADS)
+		{
+			DWORD count = 0;
+
+			for(int j = 0; j < NUM_THREADS; j++)
+			{
+				if((i-j) >= 0)
+				{
+					count++;
+					g_aPayload[j].pTask = m_vQueuedTasks[i-j];
+					SetEvent(g_aBeginEventHandle[j]);
+				}
+			}
+
+			WaitForMultipleObjects(count,g_aEndEventHandle,true,INFINITE);
+
+			for(int j = 0; count > 0; count--)
+			{
+				pPipeline->ExecuteCommandList(g_aPayload[j].pList);
+				g_aPayload[j].pList->ReleaseList();
+				j++;
+			}
+
+		}
+
+		m_vQueuedTasks.clear();
+	}
 }
 //--------------------------------------------------------------------------------
+HANDLE						g_aThreadHandles[NUM_THREADS];
+Arkeng::ThreadPayLoad		g_aPayload[NUM_THREADS];
+HANDLE						g_aBeginEventHandle[NUM_THREADS];
+HANDLE						g_aEndEventHandle[NUM_THREADS];
+
+
+unsigned int WINAPI _TaskThreadProc(void* lpParameter)
+{
+	ThreadPayLoad* pPayload = (ThreadPayLoad*)lpParameter;
+
+	int id = pPayload->id;
+
+
+	for(; ;)
+	{
+		// Wait for the main thread to signal that there is a payload available.
+		WaitForSingleObject(g_aBeginEventHandle[id],INFINITE);
+
+		pPayload->pPipeline->m_pContext->ClearState();
+
+		// Execute the render view with the provided pipeline and parameter managers.
+		pPayload->pTask->ExecuteTask(pPayload->pPipeline,pPayload->pParamManager);
+
+		// Generate the command list.
+		pPayload->pPipeline->GenerateCommandList(pPayload->pList);
+
+		// Signal to the main thread that the view has been collected into a command list.
+		SetEvent(g_aEndEventHandle[id]);
+	}
+
+	return(0);
+}
 int ArkRenderer11::CreateViewport(D3D11_VIEWPORT viewport)
 {
 	m_vViewports.push_back(viewport);

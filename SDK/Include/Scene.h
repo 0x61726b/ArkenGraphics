@@ -12,6 +12,7 @@
 #include "ArkNode3D.h"
 #include "Camera.h"
 #include "ArkParameterContainer.h"
+#include "ArkLight.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -31,6 +32,10 @@ namespace Arkeng
 		void AddCamera( Camera* pCamera );
 		Camera* GetCamera();
 
+		void AddLight( ArkLight* pLight );
+		ArkLight* GetLight( unsigned int index );
+		unsigned int GetLightCount();
+
 		ArkNode3D* GetRoot();
 
 		ArkParameterContainer Parameters;
@@ -38,6 +43,8 @@ namespace Arkeng
 		ArkNode3D* m_pRoot;
 		std::vector< Actor* >		m_vActors;
 		std::vector< Camera*>		m_vCameras;
+		std::vector< ArkLight* >    m_vLights;
+
 	};
 };
 

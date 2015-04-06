@@ -138,7 +138,7 @@ copy Scene\*.h ..\SDK\Include
 copy Logging\*.h ..\SDK\Include
 copy Math\*.h ..\SDK\Include
 copy Scene\*.inl ..\SDK\Include
-</Command>
+copy Utility\*.inl ..\SDK\Include</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -201,6 +201,7 @@ copy Scene\*.inl ..\SDK\Include
     <ClInclude Include="Math\ArkSphere3.h" />
     <ClInclude Include="Rendering\ArkBuffer11.h" />
     <ClInclude Include="Rendering\ArkBuffer11Config.h" />
+    <ClInclude Include="Rendering\ArkCommandList11.h" />
     <ClInclude Include="Rendering\ArkConstantBuffer11.h" />
     <ClInclude Include="Rendering\ArkConstantBufferParameter11.h" />
     <ClInclude Include="Rendering\ArkConstantBufferParameterWriter11.h" />
@@ -209,6 +210,7 @@ copy Scene\*.inl ..\SDK\Include
     <ClInclude Include="Rendering\ArkGeometry11.h" />
     <ClInclude Include="Rendering\ArkGeometryGenerator11.h" />
     <ClInclude Include="Rendering\ArkIndexBuffer11.h" />
+    <ClInclude Include="Rendering\ArkLight.h" />
     <ClInclude Include="Rendering\ArkMaterial11.h" />
     <ClInclude Include="Rendering\ArkMatrixArrayParameter11.h" />
     <ClInclude Include="Rendering\ArkMatrixArrayParameterWriter11.h" />
@@ -286,6 +288,7 @@ copy Scene\*.inl ..\SDK\Include
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Utility\ArkTimer.h" />
     <ClInclude Include="Utility\Pch.h" />
+    <ClInclude Include="Utility\TConfiguration.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\ArkApplication.cpp" />
@@ -320,12 +323,14 @@ copy Scene\*.inl ..\SDK\Include
     <ClCompile Include="Perspective\PerspectiveView.cpp" />
     <ClCompile Include="Rendering\ArkBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkBuffer11Config.cpp" />
+    <ClCompile Include="Rendering\ArkCommandList11.cpp" />
     <ClCompile Include="Rendering\ArkConstantBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkConstantBufferParameter11.cpp" />
     <ClCompile Include="Rendering\ArkConstantBufferParameterWriter11.cpp" />
     <ClCompile Include="Rendering\ArkGeometry11.cpp" />
     <ClCompile Include="Rendering\ArkGeometryGenerator11.cpp" />
     <ClCompile Include="Rendering\ArkIndexBuffer11.cpp" />
+    <ClCompile Include="Rendering\ArkLight.cpp" />
     <ClCompile Include="Rendering\ArkMatrixArrayParameter.cpp" />
     <ClCompile Include="Rendering\ArkMatrixArrayParameterWriter11.cpp" />
     <ClCompile Include="Rendering\ArkMatrixParameter11.cpp" />
@@ -408,6 +413,18 @@ copy Scene\*.inl ..\SDK\Include
     <None Include="Rendering\TStateMonitor.inl" />
     <None Include="Scene\ArkSpatialController.inl" />
     <None Include="Scene\IController.inl" />
+    <None Include="Utility\TConfiguration.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Resources\Shaders\PhongShading.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\RotatingCube.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\SimpleApp.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

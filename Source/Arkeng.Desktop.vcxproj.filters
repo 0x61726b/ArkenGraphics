@@ -118,6 +118,15 @@
     <Filter Include="Rendering\Direct3D11\Pipeline\Executors\Vertex Layouts">
       <UniqueIdentifier>{016ea208-9497-4a88-b656-ec15f8e5881c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\Lights">
+      <UniqueIdentifier>{43a4e9bc-cc3b-4380-9214-324172d66b03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{0656f8fd-073e-4a1e-8ff3-0a108ff3bd5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Command List">
+      <UniqueIdentifier>{511ed5aa-9888-473d-b549-ad2eb48c475f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Pch.h">
@@ -468,6 +477,15 @@
     <ClInclude Include="Rendering\PointIndices.h">
       <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\ArkLight.h">
+      <Filter>Scene\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkCommandList11.h">
+      <Filter>Rendering\Direct3D11\Command List</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\TConfiguration.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -788,6 +806,12 @@
     <ClCompile Include="Rendering\PointIndices.cpp">
       <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\ArkLight.cpp">
+      <Filter>Scene\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkCommandList11.cpp">
+      <Filter>Rendering\Direct3D11\Command List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Rendering\TStateMonitor.inl">
@@ -811,5 +835,19 @@
     <None Include="Rendering\ArkDrawIndexedExecutor11.inl">
       <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
     </None>
+    <None Include="Utility\TConfiguration.inl">
+      <Filter>Utility</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Resources\Shaders\PhongShading.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\RotatingCube.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\SimpleApp.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

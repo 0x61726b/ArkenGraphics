@@ -25,7 +25,7 @@ namespace Arkeng
                                     unsigned int VRes, float Radius );
         static void GenerateCone( GeometryPtr pGeometry, unsigned int URes, 
                                     unsigned int VRes, float Radius, float Height );
-
+		static void GenerateCube( GeometryPtr pGeometry, int w,int h,int d );
 
 	private:
 		ArkGeometryGenerator11();

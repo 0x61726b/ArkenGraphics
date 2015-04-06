@@ -23,6 +23,12 @@
 #include "Dx11Resource.h"
 #include "Dx11RenderTargetView.h"
 #include "Dx11DepthStencilView.h"
+
+#include "ArkCommandList11.h"
+
+#include <d3d9.h>
+#pragma comment( lib, "d3d9.lib" )
+
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -42,6 +48,9 @@ void PipelineManager::SetDeviceContext( DeviceContextComPtr Context,D3D_FEATURE_
 {
 	m_pContext = Context;
 	m_FeatureLevel = FeatureLevel;
+
+	m_pAnnotation = nullptr;
+	HRESULT hr = m_pContext.CopyTo( m_pAnnotation.GetAddressOf() );
 
 	ShaderStages[VERTEX_SHADER]->SetFeatureLevel( FeatureLevel );
 	ShaderStages[PIXEL_SHADER]->SetFeatureLevel( FeatureLevel );
@@ -76,6 +85,12 @@ void PipelineManager::ClearPipelineState()
 	InputAssemblerStage.ClearPreviousState();
 
 	m_pContext->ClearState();
+
+	if ( m_pContext->GetType() == D3D11_DEVICE_CONTEXT_DEFERRED ) {
+		ID3D11CommandList* pList;
+		m_pContext->FinishCommandList( true, &pList );
+		pList->Release();
+	}
 }
 //--------------------------------------------------------------------------------
 void PipelineManager::ApplyPipelineResources()
@@ -279,4 +294,114 @@ void PipelineManager::UnMapResource(Dx11Resource* pArkResource,UINT subresource)
 
 	// Unmap the resource - there is no HRESULT returned, so trust that it works...
 	m_pContext->Unmap( pResource, subresource );
+}
+//--------------------------------------------------------------------------------
+void PipelineManager::GenerateCommandList( ArkCommandList11* plist )
+{
+	if ( m_pContext->GetType() == D3D11_DEVICE_CONTEXT_DEFERRED )
+	{
+		m_pContext->FinishCommandList( false, &plist->m_pList );
+
+		// Reset the cached context state to default, since we do that for all
+		// command lists.
+
+		InputAssemblerStage.ClearPreviousState();
+		InputAssemblerStage.ClearCurrentState();
+
+		VertexShaderStage.ClearPreviousState();
+		VertexShaderStage.ClearCurrentState();
+
+		/*HullShaderStage.ClearCurrentState();
+		HullShaderStage.ClearCurrentState();
+
+		DomainShaderStage.ClearCurrentState();
+		DomainShaderStage.ClearDesiredState();
+
+		GeometryShaderStage.ClearCurrentState();
+		GeometryShaderStage.ClearDesiredState();
+
+		StreamOutputStage.ClearCurrentState();
+		StreamOutputStage.ClearDesiredState();*/
+
+		RasterizerStage.ClearPreviousState( );
+		RasterizerStage.ClearCurrentState( );
+
+		PixelShaderStage.ClearPreviousState();
+		PixelShaderStage.ClearCurrentState();
+
+		OutputMergerStage.ClearPreviousState();
+		OutputMergerStage.ClearCurrentState();
+
+		//ComputeShaderStage.ClearCurrentState();
+		//ComputeShaderStage.ClearDesiredState();
+
+	}
+}
+//--------------------------------------------------------------------------------
+void PipelineManager::ExecuteCommandList( ArkCommandList11* pList )
+{
+	if ( pList->ListAvailable() )
+		m_pContext->ExecuteCommandList( pList->m_pList, false );
+
+	InputAssemblerStage.ClearPreviousState();
+	InputAssemblerStage.ClearCurrentState();
+
+	VertexShaderStage.ClearPreviousState();
+	VertexShaderStage.ClearCurrentState();
+
+	/*HullShaderStage.ClearCurrentState();
+	HullShaderStage.ClearDesiredState();
+
+	DomainShaderStage.ClearCurrentState();
+	DomainShaderStage.ClearDesiredState();
+
+	GeometryShaderStage.ClearCurrentState();
+	GeometryShaderStage.ClearDesiredState();
+
+	StreamOutputStage.ClearCurrentState();
+	StreamOutputStage.ClearDesiredState();*/
+
+	RasterizerStage.ClearPreviousState( );
+	RasterizerStage.ClearCurrentState( );
+
+	PixelShaderStage.ClearPreviousState();
+	PixelShaderStage.ClearCurrentState();
+
+	OutputMergerStage.ClearPreviousState();
+	OutputMergerStage.ClearCurrentState();
+
+	//ComputeShaderStage.ClearCurrentState();
+	//ComputeShaderStage.ClearDesiredState();
+}
+//--------------------------------------------------------------------------------
+void PipelineManager::BeginEvent( std::wstring& name )
+{
+	if ( m_pAnnotation )
+	{
+		m_pAnnotation->BeginEvent( name.c_str() );
+	} 
+	else 
+	{
+		D3DPERF_BeginEvent( 0xFFFFFFFF, name.c_str() );
+	}
+}
+//--------------------------------------------------------------------------------
+void PipelineManager::EndEvent()
+{
+	if ( m_pAnnotation ) 
+	{
+		m_pAnnotation->EndEvent();
+	} 
+	else 
+	{
+		D3DPERF_EndEvent();
+	}
+}
+//--------------------------------------------------------------------------------
+void PipelineManager::SetMarker(std::wstring& name)
+{
+	if ( m_pAnnotation )
+	{
+		m_pAnnotation->SetMarker( name.c_str() );
+	}
 }

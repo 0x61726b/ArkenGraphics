@@ -53,6 +53,9 @@ namespace Arkeng
 
 		static std::map<std::wstring,std::shared_ptr<ArkRenderParameter11>> m_Parameters;
 
+		void AttachParent( IParameterManager* pParent );
+		void DetachParent();
+
 		unsigned int GetID();
 	protected:
 		std::shared_ptr<ArkMatrixParameter11>	m_pWorldMatrix;
@@ -65,6 +68,7 @@ namespace Arkeng
 
 
 		unsigned int m_ID;
+		IParameterManager*						m_pParent;
 
 	};
 };

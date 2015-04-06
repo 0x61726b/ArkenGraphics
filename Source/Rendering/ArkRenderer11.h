@@ -11,6 +11,7 @@
 //--------------------------------------------------------------------------------
 #include "Pch.h"
 #include "IRenderer.h"
+#include "TConfiguration.h"
 #include "DX11ResourceProxy.h"
 
 #include "ArkShader11.h"
@@ -46,6 +47,9 @@ namespace Arkeng
 	class PipelineManager;
 	class IParameterManager;
 
+	class ArkCommandList11;
+	class ArkGeometry11;
+
 
 	typedef Microsoft::WRL::ComPtr<ID3D11Buffer>				BufferComPtr;
 	typedef Microsoft::WRL::ComPtr<ID3D11DeviceContext>			DeviceContextComPtr;
@@ -59,6 +63,8 @@ namespace Arkeng
 	typedef Microsoft::WRL::ComPtr<ID3D11BlendState>			BlendStateComPtr;
 
 	typedef std::shared_ptr<ArkShader11>						ArkShader11SPtr;
+
+	typedef Microsoft::WRL::ComPtr<ID3D11Query>				    QueryComPtr;
 
 	class TaskCore;
 
@@ -74,6 +80,18 @@ namespace Arkeng
 		RT_TEXTURE2D = 0x080000,
 		RT_TEXTURE3D = 0x090000
 	};
+
+	struct ThreadPayLoad
+	{
+		int id;
+		bool bComplete;
+		PipelineManager* pPipeline;
+		IParameterManager* pParamManager;
+		TaskCore* pTask;
+		ArkCommandList11* pList;
+	};
+
+
 	class ArkRenderer11 : public IRenderer
 	{
 	public:
@@ -149,6 +167,8 @@ namespace Arkeng
 
 
 		Microsoft::WRL::ComPtr<ID3D11Debug>			GetDebugDevice();
+
+		TConfiguration<bool>						MultiThreadingConfig;
 	protected:
 		static ArkRenderer11* m_spRenderer;
 
@@ -201,6 +221,13 @@ namespace Arkeng
 	};
 
 };
+unsigned int WINAPI _TaskThreadProc( void* lpParameter );
+
+// Multithreading support objects
+extern HANDLE						g_aThreadHandles[NUM_THREADS];
+extern Arkeng::ThreadPayLoad		g_aPayload[NUM_THREADS];
+extern HANDLE						g_aBeginEventHandle[NUM_THREADS];
+extern HANDLE						g_aEndEventHandle[NUM_THREADS];
 
 //--------------------------------------------------------------------------------
 #endif

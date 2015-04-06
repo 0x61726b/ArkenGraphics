@@ -1,9 +1,0 @@
-[2015-02-14.14-27-55] 	 [Base] -> 	Log file opened.
-[2015-02-14.14-27-55] 	 [Base] -> 	Log Started.
-[2015-02-14.14-27-58] 	 [Base] -> 	Arkengine Build 0.100000
-[2015-02-14.14-27-58] 	 [Renderer] ->	Test
-[2015-02-14.14-27-58] 	 [Renderer] ->	Initializing Direct3D 11!
-[2015-02-14.14-27-58] 	 [Renderer] ->	Enumerating D3D11 video adapters
-[2015-02-14.14-27-58] 	 [Renderer] ->	Attempting to create a Win32 window W = 1280 H = 720
-[2015-02-14.14-27-58] 	 [Renderer] ->	Success!
-[2015-02-14.14-28-02] 	 [Base] -> 	Log file closed

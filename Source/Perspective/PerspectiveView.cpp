@@ -97,7 +97,12 @@ void PerspectiveView::ExecuteTask(PipelineManager* pPipelineManager,IParameterMa
 
 	SetRenderParams( pParamManager );
 
-	pPipelineManager->ApplyPipelineResources();
+	if( m_pScene->GetLightCount() > 0 )
+	{
+		m_pScene->GetLight(0)->Parameters.SetRenderParams( pParamManager );
+	}
+
+	pPipelineManager->ClearPipelineResources();
 
 	m_pScene->GetRoot()->Render( pPipelineManager, pParamManager, VT_PERSPECTIVE );
 }

@@ -6,7 +6,7 @@
 //
 //ArkSpatialController.inl
 //--------------------------------------------------------------------------------
-
+#include "ArkLog.h"
 
 //--------------------------------------------------------------------------------
 template <typename T>
@@ -36,16 +36,90 @@ void ArkSpatialController<T>::Update(float fTime)
 
 	if(m_pEntity)
 	{
-		XMMATRIX r = m_pEntity->Transform.Rotation() ;
-		XMVECTOR newRot = XMVector3Transform(m_vRotation,r);
+
 		XMFLOAT3 rot3;
-		XMStoreFloat3( &rot3,m_vRotation );
-		
-		float pidiv = DirectX::XM_PI / 180;
-		XMMATRIX rotX = DirectX::XMMatrixRotationX(rot3.x);
-		XMMATRIX rotY = DirectX::XMMatrixRotationY(rot3.y);
-		
-		m_pEntity->Transform.Rotation() = DirectX::XMMatrixMultiply(rotX,rotY);
+		XMStoreFloat3(&rot3,m_vRotation);
+
+		XMFLOAT3X3 mRot1;
+		XMFLOAT3X3 mRot2;
+
+		/*mRot1.RotationZ(Rot.z);*/
+		float fSin = sinf(rot3.z);
+		float fCos = cosf(rot3.z);
+
+		mRot1.m[0][0] = fCos;
+		mRot1.m[0][1] = fSin;
+		mRot1.m[0][2] = 0.0f;
+
+		mRot1.m[1][0] = -fSin;
+		mRot1.m[1][1] = fCos;
+		mRot1.m[1][2] = 0.0f;
+
+		mRot1.m[2][0] = 0.0f;
+		mRot1.m[2][1] = 0.0f;
+		mRot1.m[2][2] = 1.0f;
+
+		/*mRot2.RotationX(Rot.x);*/
+		fSin = sinf(rot3.x);
+		fCos = cosf(rot3.x);
+
+		mRot2.m[0][0] = 1.0f;
+		mRot2.m[0][1] = 0.0f;
+		mRot2.m[0][2] = 0.0f;
+
+		mRot2.m[1][0] = 0.0f;
+		mRot2.m[1][1] = fCos;
+		mRot2.m[1][2] = fSin;
+
+		mRot2.m[2][0] = 0.0f;
+		mRot2.m[2][1] = -fSin;
+		mRot2.m[2][2] = fCos;
+
+
+		XMMATRIX rot1;
+		XMMATRIX rot2;
+
+		rot1 = DirectX::XMLoadFloat3x3(&mRot1);
+		rot2 = DirectX::XMLoadFloat3x3(&mRot2);
+
+		rot1 = rot1*rot2;
+
+		XMStoreFloat3x3( &mRot1,rot1 );
+
+		/*mRot2.RotationY(Rot.y);*/
+		fSin = sinf(rot3.y);
+		fCos = cosf(rot3.y);
+
+		mRot2.m[0][0] = fCos;
+		mRot2.m[0][1] = 0.0f;
+		mRot2.m[0][2] = -fSin;
+
+		mRot2.m[1][0] = 0.0f;
+		mRot2.m[1][1] = 1.0f;
+		mRot2.m[1][2] = 0.0f;
+
+		mRot2.m[2][0] = fSin;
+		mRot2.m[2][1] = 0.0f;
+		mRot2.m[2][2] = fCos;
+
+		rot1 = DirectX::XMLoadFloat3x3(&mRot1);
+		rot2 = DirectX::XMLoadFloat3x3(&mRot2);
+
+		rot1 = rot1*rot2;
+
+
+
+		std::wstring rotationw = L"";
+		rotationw.append(std::to_wstring(rot3.x) + L" ");
+		rotationw.append(std::to_wstring(rot3.y)+ L" ");
+		rotationw.append(std::to_wstring(rot3.z));
+
+		/*ArkLog::Get(LogType::Renderer).Output(rotationw);*/
+
+		/*rot1 = DirectX::XMMatrixTranspose( rot1 );*/
+
+
+		m_pEntity->Transform.Rotation() = DirectX::XMMatrixRotationY( 45 * (3.14f / 180) );
 
 		m_pEntity->Transform.Position() = m_vTranslation;
 	}
@@ -129,7 +203,7 @@ void ArkSpatialController<T>::MoveForward(const float distance)
 {
 	if(m_pEntity)
 	{
-		XMMATRIX m = ( m_pEntity->Transform.Rotation() );
+		XMMATRIX m = (m_pEntity->Transform.Rotation());
 		XMVECTOR row = m.r[2];
 		m_vTranslation += row * distance;
 	}

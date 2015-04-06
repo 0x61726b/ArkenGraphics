@@ -56,6 +56,9 @@ namespace Arkeng
 		virtual void SetViewMatrix( DirectX::XMMATRIX* v ) = 0;	
 		virtual void SetProjectionMatrix( DirectX::XMMATRIX* p ) = 0;
 
+		virtual void AttachParent( IParameterManager* pParent ) = 0;
+		virtual void DetachParent( ) = 0;
+
 	};
 };
 #endif

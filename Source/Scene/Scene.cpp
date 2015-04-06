@@ -85,7 +85,27 @@ void Scene::AddCamera( Camera* pCamera )
 	AddActor(pCamera);
 }
 //--------------------------------------------------------------------------------
+void Scene::AddLight( ArkLight* pLight )
+{
+	m_vLights.push_back( pLight );
+	
+	AddActor( pLight );
+}
+//--------------------------------------------------------------------------------
+ArkLight* Scene::GetLight( unsigned int index )
+{
+	assert( index < m_vLights.size() );
+
+	return( m_vLights[index] );
+}
+//--------------------------------------------------------------------------------
+unsigned int Scene::GetLightCount( )
+{
+	return( m_vLights.size() );
+}
+//--------------------------------------------------------------------------------
 ArkNode3D* Scene:: GetRoot()
 {
 	return m_pRoot;
 }
+//--------------------------------------------------------------------------------

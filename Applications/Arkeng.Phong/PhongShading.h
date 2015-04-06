@@ -17,10 +17,10 @@
 
 using namespace Arkeng;
 
-class RenderAppSimple : public ArkRenderApplication11
+class PhongShading : public ArkRenderApplication11
 {
 public:
-	RenderAppSimple();
+	PhongShading();
 	virtual void Initialize();
 	virtual void Update();
 	virtual void Shutdown();
@@ -35,6 +35,7 @@ public:
 
 protected:
 	Actor* m_pActor;
+	Actor*		m_pPlane;
 	MaterialPtr m_pMaterial;
 	ArkRenderEffect11	m_Effect;
 

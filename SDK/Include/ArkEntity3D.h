@@ -81,7 +81,7 @@ namespace Arkeng
 		ArkRenderable					Visual;
 		ArkParameterContainer			Parameters;
 
-		ArkSphere3 m_ModelBoundingSphere;
+		/*ArkSphere3 m_ModelBoundingSphere;*/
 
 		// The composite shape consists of multiple shapes to represent the entity.
 		// It is currently used for ray picking, but will eventually be added to visibility

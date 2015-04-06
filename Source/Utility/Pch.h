@@ -53,7 +53,7 @@
 #define Safe_Delete( x ) {if(x){delete (x);(x)=NULL;}}
 #define HR_CHECK( x ) { if( FAILED(x) ) return false;}
 
-#define NUM_THREADS 1
+#define NUM_THREADS 4
 
 
 //--------------------------------------------------------------------------------

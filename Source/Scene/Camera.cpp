@@ -64,57 +64,6 @@ void Camera::RenderFrame(ArkRenderer11* pRenderer)
 		m_pCameraView->QueuePreTasks(pRenderer);
 		pRenderer->ProcessTaskQueue();
 
-		//XMFLOAT4X4 mm;
-		//XMStoreFloat4x4(&mm,m_ProjMatrix);
-
-		//std::wstring m11 = std::to_wstring(mm._11);
-		//std::wstring m12 = std::to_wstring(mm._12);
-		//std::wstring m13 = std::to_wstring(mm._13);
-		//std::wstring m14 = std::to_wstring(mm._14);
-
-		//std::wstring m21 = std::to_wstring(mm._21);
-		//std::wstring m22 = std::to_wstring(mm._22);
-		//std::wstring m23 = std::to_wstring(mm._23);
-		//std::wstring m24 = std::to_wstring(mm._24);
-
-		//std::wstring m31 = std::to_wstring(mm._31);
-		//std::wstring m32 = std::to_wstring(mm._32);
-		//std::wstring m33 = std::to_wstring(mm._33);
-		//std::wstring m34 = std::to_wstring(mm._34);
-
-		//std::wstring m41 = std::to_wstring(mm._41);
-		//std::wstring m42 = std::to_wstring(mm._42);
-		//std::wstring m43 = std::to_wstring(mm._43);
-		//std::wstring m44 = std::to_wstring(mm._44);
-
-
-		//std::wstring projString = L"\n";
-		//projString.append(m11 + L" ");
-		//projString.append(m12 + L" ");
-		//projString.append(m13 + L" ");
-		//projString.append(m14 + L" ");
-		//projString.append(L"\n");
-
-		//projString.append(m21 + L" ");
-		//projString.append(m22 + L" ");
-		//projString.append(m23 + L" ");
-		//projString.append(m24 + L" ");
-		//projString.append(L"\n");
-
-		//projString.append(m31 + L" ");
-		//projString.append(m32 + L" ");
-		//projString.append(m33 + L" ");
-		//projString.append(m34 + L" ");
-		//projString.append(L"\n");
-
-		//projString.append(m41 + L" ");
-		//projString.append(m42 + L" ");
-		//projString.append(m43 + L" ");
-		//projString.append(m44 + L" ");
-		//projString.append(L"\n");
-
-
-		//ArkLog::Get(LogType::Renderer).Output(projString);
 
 	}
 }

@@ -93,6 +93,7 @@ void ArkConstantBuffer11::EvaluateMappings(PipelineManager* pPipeline,IParameter
 						DirectX::XMVECTOR vector = pParamManager->GetVectorParameter( pParam );
 						DirectX::XMVECTOR* pBuf = (DirectX::XMVECTOR*)((char*)resource.pData + offset);
 						*pBuf = vector;
+						int x = 0;
 					}
 					else if ( ( m_Mappings[j].varclass == D3D_SVC_MATRIX_ROWS ) ||
 						( m_Mappings[j].varclass == D3D_SVC_MATRIX_COLUMNS ) )

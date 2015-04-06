@@ -89,6 +89,15 @@ void ArkGeometryGenerator11::GenerateTexturedPlane( GeometryPtr pGeometry, int S
 	pPositions->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 	pPositions->m_uiInstanceDataStepRate = 0;
 
+	VertexElement11* pNormals = new VertexElement11( 3, SizeX * SizeY );
+	pNormals->m_SemanticName = "NORMAL";
+	pNormals->m_uiSemanticIndex = 0;
+	pNormals->m_Format = DXGI_FORMAT_R32G32B32_FLOAT;
+	pNormals->m_uiInputSlot = 0;
+	pNormals->m_uiAlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+	pNormals->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	pNormals->m_uiInstanceDataStepRate = 0;
+
 	VertexElement11* pTexCoords = new VertexElement11( 2, SizeX * SizeY );
 	pTexCoords->m_SemanticName = "TEXCOORDS";
 	pTexCoords->m_uiSemanticIndex = 0;
@@ -100,6 +109,7 @@ void ArkGeometryGenerator11::GenerateTexturedPlane( GeometryPtr pGeometry, int S
 
 	XMFLOAT3* pPos = pPositions->Get3f( 0 );
 	XMFLOAT2* pTex = pTexCoords->Get2f( 0 );
+	XMFLOAT3* pNorms = pNormals->Get3f(0);
 
 	// Set the locations and texture coordinates first.
 	for ( int y = 0; y < SizeY; y++ )
@@ -108,6 +118,7 @@ void ArkGeometryGenerator11::GenerateTexturedPlane( GeometryPtr pGeometry, int S
 		{
 			pPos[y*SizeX+x] = XMFLOAT3( (float)x, 0.0f, (float)y );		// Upper left
 			pTex[y*SizeX+x] = XMFLOAT2( (float)x, (float)y );
+			pNorms[y*SizeX+x] = XMFLOAT3(0,1,0);
 		}
 	}
 
@@ -134,7 +145,9 @@ void ArkGeometryGenerator11::GenerateTexturedPlane( GeometryPtr pGeometry, int S
 
 	// Add the vertex elements to the geometry object.
 	pGeometry->AddElement( pPositions );
+	pGeometry->AddElement( pNormals );
 	pGeometry->AddElement( pTexCoords );
+	
 }
 //--------------------------------------------------------------------------------
 void ArkGeometryGenerator11::GenerateAxisGeometry( GeometryPtr pGeometry )
@@ -316,8 +329,29 @@ void ArkGeometryGenerator11::GenerateSphere( GeometryPtr pGeometry, unsigned int
     pPositions->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
     pPositions->m_uiInstanceDataStepRate = 0;
 
-    // Calculate all of the vertex positions
+	VertexElement11* pNormals = new VertexElement11( 3, NumVerts );
+    pNormals->m_SemanticName = "NORMAL";
+    pNormals->m_uiSemanticIndex = 0;
+    pNormals->m_Format = DXGI_FORMAT_R32G32B32_FLOAT;
+    pNormals->m_uiInputSlot = 0;
+    pNormals->m_uiAlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+    pNormals->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+    pNormals->m_uiInstanceDataStepRate = 0;
+
+	VertexElement11* pTexCoords = new VertexElement11( 2, NumVerts);
+	pTexCoords->m_SemanticName = "TEXCOORDS";
+	pTexCoords->m_uiSemanticIndex = 0;
+	pTexCoords->m_Format = DXGI_FORMAT_R32G32_FLOAT;
+	pTexCoords->m_uiInputSlot = 0;
+	pTexCoords->m_uiAlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+	pTexCoords->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	pTexCoords->m_uiInstanceDataStepRate = 0;
+
     XMFLOAT3* pVerts = pPositions->Get3f( 0 );
+	XMFLOAT3* pNorms = pNormals->Get3f(0);
+	XMFLOAT2* pTex3 = pTexCoords->Get2f(0);
+    // Calculate all of the vertex positions
+
     int currVert = 0;
 
     // First vertex will be at the top pole
@@ -334,7 +368,11 @@ void ArkGeometryGenerator11::GenerateSphere( GeometryPtr pGeometry, unsigned int
             float x = sinf( vAngle ) * cosf( uAngle ) * Radius;
             float y = cosf( vAngle ) * Radius;
             float z = -sinf( vAngle ) * sinf( uAngle ) * Radius;
-            pVerts[currVert++] = XMFLOAT3( x, y, z );
+            pVerts[currVert] = XMFLOAT3( x, y, z );
+
+			XMVECTOR normal = XMLoadFloat3( &XMFLOAT3(x,y,z ) );
+			normal = XMVector3Normalize(normal);
+			XMStoreFloat3( &pNorms[currVert++],normal );
         }
     }
 
@@ -343,6 +381,8 @@ void ArkGeometryGenerator11::GenerateSphere( GeometryPtr pGeometry, unsigned int
     _ASSERT( currVert == NumVerts );
 
     pGeometry->AddElement( pPositions );
+	pGeometry->AddElement( pNormals );
+	pGeometry->AddElement( pTexCoords );
 
     // Now we'll add the triangles
     TriangleIndices face;
@@ -509,4 +549,184 @@ void ArkGeometryGenerator11::GenerateCone( GeometryPtr pGeometry, unsigned int U
         pGeometry->AddFace( face );
     }
 }
+//--------------------------------------------------------------------------------
+void ArkGeometryGenerator11::GenerateCube(GeometryPtr pGeometry,int width,int height,int depth)
+{
+	int NumVertices = 24;
+
+	VertexElement11* pPositions = new VertexElement11( 3, NumVertices );
+    pPositions->m_SemanticName = "POSITION";
+    pPositions->m_uiSemanticIndex = 0;
+    pPositions->m_Format = DXGI_FORMAT_R32G32B32_FLOAT;
+    pPositions->m_uiInputSlot = 0;
+    pPositions->m_uiAlignedByteOffset = 0;
+    pPositions->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+    pPositions->m_uiInstanceDataStepRate = 0;
+
+	VertexElement11* pNormals = new VertexElement11( 3, NumVertices );
+    pNormals->m_SemanticName = "NORMAL";
+    pNormals->m_uiSemanticIndex = 0;
+    pNormals->m_Format = DXGI_FORMAT_R32G32B32_FLOAT;
+    pNormals->m_uiInputSlot = 0;
+    pNormals->m_uiAlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+    pNormals->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+    pNormals->m_uiInstanceDataStepRate = 0;
+
+	VertexElement11* pTexCoords = new VertexElement11( 2, NumVertices);
+	pTexCoords->m_SemanticName = "TEXCOORDS";
+	pTexCoords->m_uiSemanticIndex = 0;
+	pTexCoords->m_Format = DXGI_FORMAT_R32G32_FLOAT;
+	pTexCoords->m_uiInputSlot = 0;
+	pTexCoords->m_uiAlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+	pTexCoords->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	pTexCoords->m_uiInstanceDataStepRate = 0;
+
+	XMFLOAT3* pVerts = pPositions->Get3f(0);
+	XMFLOAT3* pNorms = pNormals->Get3f(0);
+	XMFLOAT2* pTex3 = pTexCoords->Get2f(0);
+
+	float w2 = 0.5f*width;
+	float h2 = 0.5f*height;
+	float d2 = 0.5f*depth;
+
+	
+
+	// Fill in the front face vertex data.
+	pVerts[0] = XMFLOAT3(-w2, -h2, -d2);
+	pVerts[1] = XMFLOAT3(-w2, +h2, -d2);
+	pVerts[2] = XMFLOAT3(+w2, +h2, -d2);
+	pVerts[3] = XMFLOAT3(+w2, -h2, -d2);
+
+	// Fill in the back face vertex data.
+	pVerts[4] = XMFLOAT3(-w2, -h2, +d2);
+	pVerts[5] = XMFLOAT3(+w2, -h2, +d2);
+	pVerts[6] = XMFLOAT3(+w2, +h2, +d2);
+	pVerts[7] = XMFLOAT3(-w2, +h2, +d2);
+
+	// Fill in the top face vertex data.
+	pVerts[8]  = XMFLOAT3(-w2, +h2, -d2);
+	pVerts[9]  = XMFLOAT3(-w2, +h2, +d2);
+	pVerts[10] = XMFLOAT3(+w2, +h2, +d2);
+	pVerts[11] = XMFLOAT3(+w2, +h2, -d2);
+
+	// Fill in the bottom face vertex data.
+	pVerts[12] = XMFLOAT3(-w2, -h2, -d2);
+	pVerts[13] = XMFLOAT3(+w2, -h2, -d2);
+	pVerts[14] = XMFLOAT3(+w2, -h2, +d2);
+	pVerts[15] = XMFLOAT3(-w2, -h2, +d2);
+
+	// Fill in the left face vertex data.
+	pVerts[16] = XMFLOAT3(-w2, -h2, +d2);
+	pVerts[17] = XMFLOAT3(-w2, +h2, +d2);
+	pVerts[18] = XMFLOAT3(-w2, +h2, -d2);
+	pVerts[19] = XMFLOAT3(-w2, -h2, -d2);
+
+	// Fill in the right face vertex data.
+	pVerts[20] = XMFLOAT3(+w2, -h2, -d2);
+	pVerts[21] = XMFLOAT3(+w2, +h2, -d2);
+	pVerts[22] = XMFLOAT3(+w2, +h2, +d2);
+	pVerts[23] = XMFLOAT3(+w2, -h2, +d2);
+	pGeometry->AddElement( pPositions );
+
+	XMFLOAT3 inward = XMFLOAT3(0,0,-1);
+	XMFLOAT3 upward = XMFLOAT3(0,0,1);
+
+	XMFLOAT3 up = XMFLOAT3(0,1,0);
+	XMFLOAT3 down = XMFLOAT3(0,-1,0);
+
+	XMFLOAT3 left = XMFLOAT3(-1,0,0);
+	XMFLOAT3 right = XMFLOAT3(1,0,0);
+
+	pNorms[0] = inward;
+	pNorms[1] = inward;
+	pNorms[2] = inward;
+	pNorms[3] = inward;
+
+	// Fill in the back face vertex data.
+	pNorms[4] = upward;
+	pNorms[5] = upward;
+	pNorms[6] = upward;
+	pNorms[7] = upward;
+
+	// Fill in the top face vertex data.
+	pNorms[8]  = up;
+	pNorms[9]  = up;
+	pNorms[10] = up;
+	pNorms[11] = up;
+
+	// Fill in the bottom face vertex data.
+	pNorms[12] = down;
+	pNorms[13] = down;
+	pNorms[14] = down;
+	pNorms[15] = down;
+
+	// Fill in the left face vertex data.
+	pNorms[16] = left;
+	pNorms[17] = left;
+	pNorms[18] = left;
+	pNorms[19] = left;
+
+	// Fill in the right face vertex data.
+	pNorms[20] = right;
+	pNorms[21] = right;
+	pNorms[22] = right;
+	pNorms[23] = right;
+
+	pGeometry->AddElement(pNormals);
+	pGeometry->AddElement( pTexCoords );
+
+
+	pGeometry->AddIndex(0);
+	pGeometry->AddIndex(1);
+	pGeometry->AddIndex(2);
+
+	pGeometry->AddIndex(0);
+	pGeometry->AddIndex(2);
+	pGeometry->AddIndex(3);
+
+	pGeometry->AddIndex(4);
+	pGeometry->AddIndex(5);
+	pGeometry->AddIndex(6);
+
+	pGeometry->AddIndex(4);
+	pGeometry->AddIndex(6);
+	pGeometry->AddIndex(7);
+
+	pGeometry->AddIndex(8);
+	pGeometry->AddIndex(9);
+	pGeometry->AddIndex(10);
+
+	pGeometry->AddIndex(8);
+	pGeometry->AddIndex(10);
+	pGeometry->AddIndex(11);
+
+	pGeometry->AddIndex(12);
+	pGeometry->AddIndex(13);
+	pGeometry->AddIndex(14);
+
+	pGeometry->AddIndex(12);
+	pGeometry->AddIndex(14);
+	pGeometry->AddIndex(15);
+
+	pGeometry->AddIndex(16);
+	pGeometry->AddIndex(17);
+	pGeometry->AddIndex(18);
+
+
+	pGeometry->AddIndex(16);
+	pGeometry->AddIndex(18);
+	pGeometry->AddIndex(19);
+
+	pGeometry->AddIndex(20);
+	pGeometry->AddIndex(21);
+	pGeometry->AddIndex(22);
+
+	pGeometry->AddIndex(20);
+	pGeometry->AddIndex(22);
+	pGeometry->AddIndex(23);
+	
+	
+	
+}
+
 //--------------------------------------------------------------------------------

@@ -18,7 +18,7 @@ ArkTransform3D::ArkTransform3D()
 	m_vTranslation = XMVectorZero();
 	XMMATRIX i = XMMatrixIdentity();
 	m_mRotation = i;
-	m_vScale = XMVectorSet(1.0f,1.0f,1.0f,0.0f);
+	m_vScale = XMVectorSet(1.0f,1.0f,1.0f,1.0f);
 
 	m_mWorld = i;
 	m_mLocal = i;
@@ -55,9 +55,10 @@ void ArkTransform3D::UpdateLocal()
 
 	XMMATRIX translate = XMMatrixTranslationFromVector(m_vTranslation);
 
-	XMMATRIX result = scale*m_mRotation*translate;
 	
-	m_mLocal = result;
+	XMMATRIX mRot = m_mRotation;
+	m_mLocal = translate*mRot;
+	
 }
 //--------------------------------------------------------------------------------
 void ArkTransform3D::UpdateWorld(const XMMATRIX& parent)

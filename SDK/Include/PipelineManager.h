@@ -20,6 +20,9 @@
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
+	class ArkCommandList11;
+	typedef Microsoft::WRL::ComPtr<ID3DUserDefinedAnnotation> UserDefinedAnnotationComPtr;
+
 	class PipelineManager
 	{
 	public:
@@ -55,7 +58,15 @@ namespace Arkeng
 		D3D11_MAPPED_SUBRESOURCE MapResource( Dx11Resource* pArkResource, UINT subresource, D3D11_MAP actions, UINT flags );
 		void UnMapResource(Dx11Resource* pArkResource,UINT subresource);
 
+		void GenerateCommandList( ArkCommandList11* pList );
+		void ExecuteCommandList( ArkCommandList11* pList );
+
+		void BeginEvent( std::wstring& name );
+		void EndEvent();
+		void SetMarker( std::wstring& name );
+
 		D3D_FEATURE_LEVEL						m_FeatureLevel;
+		UserDefinedAnnotationComPtr				m_pAnnotation;
 
 		DeviceContextComPtr			            m_pContext;
 

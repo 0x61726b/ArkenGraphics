@@ -125,8 +125,6 @@ bool ArkFirstPersonCamera::HandleEvent( EventPtr pEvent )
         {
             m_iMouseDeltaX = mouseX - m_iLastMouseX;
             m_iMouseDeltaY = mouseY - m_iLastMouseY;
-
-			ArkLog::Get( LogType::Renderer ).Output(L"Dragging");
         }
 
         m_iLastMouseX = mouseX;
@@ -140,15 +138,11 @@ bool ArkFirstPersonCamera::HandleEvent( EventPtr pEvent )
     {
         m_iLastMouseX = InvalidMousePos;
         m_iLastMouseY = InvalidMousePos;
-
-		ArkLog::Get( LogType::Renderer ).Output(L"Mouse R Leave");
     }
     else if ( e == SYSTEM_RBUTTON_DOWN )
     {        
         m_iLastMouseX = InvalidMousePos;
         m_iLastMouseY = InvalidMousePos;
-
-		ArkLog::Get( LogType::Renderer ).Output(L"Mouse R Down");
 
 		return true;
     }
@@ -156,8 +150,6 @@ bool ArkFirstPersonCamera::HandleEvent( EventPtr pEvent )
     {
         m_iLastMouseX = InvalidMousePos;
         m_iLastMouseY = InvalidMousePos; 
-
-		ArkLog::Get( LogType::Renderer ).Output(L"Mouse R Up");
 
 		return true;
     }
@@ -205,24 +197,21 @@ void ArkFirstPersonCamera::Update()
     // Rotate the camera with the mouse
     m_fRotationX += m_iMouseDeltaY * CamRotSpeed;
     m_fRotationY += m_iMouseDeltaX * CamRotSpeed;
+
+
+
     m_iMouseDeltaX = 0;
     m_iMouseDeltaY = 0;
 
-	// TODO: Move these rotation clamping actions into the spatial controller
-
-    // Clamp the rotation values
-    if ( m_fRotationX < -PiOver2 )
+	 if ( m_fRotationX < -PiOver2 )
         m_fRotationX = -PiOver2;
     else if ( m_fRotationX > PiOver2 )
         m_fRotationX = PiOver2;
     
     m_fRotationY = WrapAngle( m_fRotationY );
 
-	ArkLog::Get(LogType::Renderer).Output(std::to_wstring(m_fRotationX));
-	ArkLog::Get(LogType::Renderer).Output(std::to_wstring(m_fRotationY));
-
     // Make a rotation matrix from the X/Y rotation
-	Spatial().RotateBy( XMVectorSet( m_fRotationX, m_fRotationY, 0.0f,0.0f ) );
+	Spatial().RotateBy( DirectX::XMVectorSet( 0, m_fRotationY, 0.0f,0.0f ) );
 	m_fRotationX = 0.0f;
 	m_fRotationY = 0.0f;
 }

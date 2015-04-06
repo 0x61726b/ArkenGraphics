@@ -6,7 +6,7 @@
 //
 //RenderAppSimple.h
 //--------------------------------------------------------------------------------
-#include "RenderAppSimple.h"
+#include "PhongShading.h"
 #include "ArkLog.h"
 #include "EventManager.h"
 #include "EFrameStart.h"
@@ -24,19 +24,13 @@
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
-struct Vertex
-{
-	DirectX::XMFLOAT3 Pos;
-	DirectX::XMFLOAT4 Color;
-};
+PhongShading AppInstance;
 //--------------------------------------------------------------------------------
-RenderAppSimple AppInstance;
-//--------------------------------------------------------------------------------
-RenderAppSimple::RenderAppSimple()
+PhongShading::PhongShading()
 {
 }
 //--------------------------------------------------------------------------------
-bool RenderAppSimple::ConfigureEngineComponents()
+bool PhongShading::ConfigureEngineComponents()
 {
 
 	int resX = 0;
@@ -56,7 +50,7 @@ bool RenderAppSimple::ConfigureEngineComponents()
 	return(true);
 }
 ////--------------------------------------------------------------------------------
-bool RenderAppSimple::ConfigureRenderingSetup()
+bool PhongShading::ConfigureRenderingSetup()
 {
 	PerspectiveView* pPerspView = new PerspectiveView(*m_pRenderer,m_pBackBuffer);
 	m_pRenderView = pPerspView;
@@ -64,8 +58,9 @@ bool RenderAppSimple::ConfigureRenderingSetup()
 	m_pCamera = new ArkFirstPersonCamera();
 	m_pCamera->SetEventManager(&CameraEventHub);
 
-	
-	m_pCamera->Spatial().SetTranslation(XMVectorSet(0.0f,10.0f,0.0f,0.0f));
+
+	m_pCamera->Spatial().SetTranslation(XMVectorSet(0.0f,20.0f,-100,0.0f));
+	/*m_pCamera->Spatial().SetRotation((XMVectorSet(0,45*XM_PI/180,0,0)));*/
 	m_pCamera->SetCameraView(m_pRenderView);
 	m_pCamera->SetProjectionParams(0.1f,1000.0f,static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight),DirectX::XM_PIDIV2);
 
@@ -74,71 +69,89 @@ bool RenderAppSimple::ConfigureRenderingSetup()
 	return true;
 }
 //--------------------------------------------------------------------------------
-void RenderAppSimple::ShutdownEngineComponents()
+void PhongShading::ShutdownEngineComponents()
 {
 	ShutdownRenderingSetup();
 	ShutdownRenderingEngineComponents();
 }
 //--------------------------------------------------------------------------------
-void RenderAppSimple::Initialize()
+void PhongShading::Initialize()
 {
-	GeometryPtr pGeometry = GeometryPtr(new ArkGeometry11());
-	ArkGeometryGenerator11::GenerateCube(pGeometry,10,10,10);
-	pGeometry->LoadToBuffers();
-	pGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	m_pMaterial = MaterialPtr(new ArkMaterial11());
+	//Create material used for the spheres
 
 	m_Effect.SetVertexShader(m_pRenderer->LoadShader(VERTEX_SHADER,
-		std::wstring(L"SimpleApp.hlsl"),
+		std::wstring(L"PhongShading.hlsl"),
 		std::wstring(L"VSMain"),
 		std::wstring(L"vs_4_0")
 		));
 	m_Effect.SetPixelShader(m_pRenderer->LoadShader(PIXEL_SHADER,
-		std::wstring(L"SimpleApp.hlsl"),
+		std::wstring(L"PhongShading.hlsl"),
 		std::wstring(L"PSMain"),
 		std::wstring(L"ps_4_0")
 		));
 
+	m_pMaterial = MaterialPtr(new ArkMaterial11());
+
 	m_pMaterial->Params[VT_PERSPECTIVE].bRender = true;
 	m_pMaterial->Params[VT_PERSPECTIVE].pEffect = std::make_shared<ArkRenderEffect11>(m_Effect);
 
-	m_pActor = new Actor();
-	m_pActor->GetBody()->Visual.SetGeometry(pGeometry);
-	m_pActor->GetBody()->Visual.SetMaterial(m_pMaterial);
+	//Create geometry object and actor
 
-	m_pActor->GetNode()->Transform.Position() = XMVectorSet(0.0f,0.0f,50.0f,0.0f);
-	m_pActor->GetNode()->SetName(L"Sphere");
-	m_pScene->AddActor(m_pActor);
+	GeometryPtr pGeometry = GeometryPtr(new ArkGeometry11());
+	ArkGeometryGenerator11::GenerateSphere(pGeometry,50,50,5);
+	pGeometry->LoadToBuffers();
+	pGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	int sphereCount = 5;
+
+	for(int i=0; i < sphereCount; ++i)
+	{
+		for(int j=0; j < sphereCount; j++)
+		{
+			m_pActor = new Actor();
+			m_pActor->GetBody()->Visual.SetGeometry(pGeometry);
+			m_pActor->GetBody()->Visual.SetMaterial(m_pMaterial);
+
+			m_pActor->GetNode()->Transform.Position() = XMVectorSet(10 + 10*i,5,j*10,0.0f);
+			m_pActor->GetNode()->SetName(L"Sphere");
+			m_pScene->AddActor(m_pActor);
+		}
+	}
 
 
-	DirectX::XMVECTOR LightParams = DirectX::XMVectorSet( 1.0f, 1.0f, 1.0f, 1.0f );
-	m_pLightColor = m_pRenderer->m_pParamMgr->GetVectorParameterRef( std::wstring( L"LightColor" ) );
+	GeometryPtr planeGeo = GeometryPtr(new ArkGeometry11());
+	ArkGeometryGenerator11::GenerateTexturedPlane(planeGeo,500,500);
+
+	planeGeo->LoadToBuffers();
+	planeGeo->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	m_pPlane = new Actor();
+	m_pPlane->GetBody()->Visual.SetGeometry(planeGeo);
+	m_pPlane->GetBody()->Visual.SetMaterial(m_pMaterial);
+	m_pPlane->GetNode()->Transform.Position() = XMVectorSet(0.0f,0.0f,0.0f,0.0f);
+	m_pScene->AddActor(m_pPlane);
+
+
+	DirectX::XMVECTOR LightParams = DirectX::XMVectorSet(1.0f,1.0f,1.0f,1.0f);
+	m_pLightColor = m_pRenderer->m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightColor"));
 	m_pLightColor->SetVector(LightParams);
 
-	DirectX::XMVECTOR LightPos = DirectX::XMVectorSet( 10.0f,20.0f,-20.0f,0.0f );
-	m_pLightPositionWriter = m_pRenderer->m_pParamMgr->GetVectorParameterRef( std::wstring(L"LightPositionWS"));
-	m_pLightPositionWriter->InitializeParameterData( &LightPos );
-	
+	DirectX::XMVECTOR LightPos = DirectX::XMVectorSet(10.0f,20.0f,-20.0f,0.0f);
+	m_pLightPositionWriter = m_pRenderer->m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightPositionWS"));
+	m_pLightPositionWriter->InitializeParameterData(&LightPos);
+
 
 
 	DirectX::XMVECTOR test = m_pLightColor->GetVector();
-	
 
-	
+
+
 
 }
 //--------------------------------------------------------------------------------
-void RenderAppSimple::Update()
+void PhongShading::Update()
 {
 	m_pTimer->Update();
 	EvtManager.ProcessEvent(EFrameStartPtr(new EFrameStart(m_pTimer->Elapsed())));
-
-	DirectX::XMMATRIX mRotation = DirectX::XMMatrixRotationY(m_pTimer->Elapsed());
-
-	XMMATRIX rot = m_pActor->GetNode()->Transform.Rotation();
-	m_pActor->GetNode()->Transform.Rotation()= rot*mRotation;
-
 
 	m_pScene->Update(m_pTimer->Elapsed());
 	m_pScene->Render(m_pRenderer);
@@ -146,25 +159,25 @@ void RenderAppSimple::Update()
 	m_pRenderer->Present(m_pWindow->GetHandle(),m_pWindow->GetSwapChain());
 }
 //--------------------------------------------------------------------------------
-void RenderAppSimple::Shutdown()
+void PhongShading::Shutdown()
 {
 }
 //--------------------------------------------------------------------------------
-bool RenderAppSimple::HandleEvent(EventPtr pEvent)
+bool PhongShading::HandleEvent(EventPtr pEvent)
 {
 	eEvent e = pEvent->GetEventType();
 
-	if( e == SYSTEM_KEYBOARD_KEYDOWN )
+	if(e == SYSTEM_KEYBOARD_KEYDOWN)
 	{
-		EKeyDownPtr pKeyDown = std::static_pointer_cast<EKeyDown>( pEvent );
+		EKeyDownPtr pKeyDown = std::static_pointer_cast<EKeyDown>(pEvent);
 		unsigned int key = pKeyDown->GetCharacterCode();
 
-		
+
 	}
 	return ArkRenderApplication11::HandleEvent(pEvent);
 }
 //--------------------------------------------------------------------------------
-std::wstring RenderAppSimple::GetName()
+std::wstring PhongShading::GetName()
 {
 	return L"RenderAppSimple";
 }
