@@ -57,7 +57,7 @@ void ArkTransform3D::UpdateLocal()
 
 	
 	XMMATRIX mRot = m_mRotation;
-	m_mLocal = mRot*translate;
+	m_mLocal = scale*mRot*translate;
 	
 }
 //--------------------------------------------------------------------------------
@@ -108,12 +108,8 @@ XMMATRIX ArkTransform3D::GetView() const
 
 	XMFLOAT4X4 tmp;
 	XMStoreFloat4x4( &tmp,m_mWorld );
-	float j = tmp.m[0][0]; // or float j = tmp._11
 
 	XMFLOAT3 zBasis = XMFLOAT3(tmp._31,tmp._32,tmp._33 );
-	
-
-
 
 	XMFLOAT3 up = XMFLOAT3(tmp._21,tmp._22,tmp._23);
 

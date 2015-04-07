@@ -45,7 +45,7 @@ ArkParameterManager11::~ArkParameterManager11()
 	m_Parameters.clear();
 }
 //--------------------------------------------------------------------------------
-void ArkParameterManager11::AttachParent( IParameterManager* pParent )
+void ArkParameterManager11::AttachParent(IParameterManager* pParent)
 {
 	m_pParent = pParent;
 }
@@ -154,6 +154,29 @@ void ArkParameterManager11::SetMatrixArrayParameter(const std::wstring& name,int
 	}
 }
 //--------------------------------------------------------------------------------
+void ArkParameterManager11::SetShaderResourceParameter(const std::wstring& name,ResourcePtr resource)
+{
+	std::shared_ptr<ArkRenderParameter11> pParameter = m_Parameters[name];
+
+	// Only create the new parameter if it hasn't already been registered
+	if(pParameter == 0)
+	{
+		pParameter = std::make_shared<ArkShaderResourceParameter11>();
+		pParameter->SetName(name);
+		m_Parameters[name] = std::dynamic_pointer_cast<ArkRenderParameter11>(pParameter);
+
+		// Initialize the parameter with the current data in all slots
+		pParameter->InitializeParameterData(reinterpret_cast<void*>(&resource->m_iResourceSRV));
+	}
+	else
+	{
+		if(pParameter->GetParameterType() == SHADER_RESOURCE)
+			pParameter->SetParameterData(reinterpret_cast<void*>(&resource->m_iResourceSRV),GetID());
+		else
+			ArkLog::Get(LogType::Renderer).Output(L"Shader resource view parameter name collision!");
+	}
+}
+//--------------------------------------------------------------------------------
 void ArkParameterManager11::SetConstantBufferParameter(std::shared_ptr<ArkRenderParameter11> pParameter,ResourcePtr resource)
 {
 	if(pParameter->GetParameterType() == CBUFFER)
@@ -185,6 +208,14 @@ void ArkParameterManager11::SetMatrixArrayParameter(std::shared_ptr<ArkRenderPar
 		pP->SetParameterData(reinterpret_cast<void*>(pV),GetID());
 	else
 		ArkLog::Get(LogType::Renderer).Output(L"MATRIX_ARRAY parameter name error!");
+}
+//--------------------------------------------------------------------------------
+void ArkParameterManager11::SetShaderResourceParameter(std::shared_ptr<ArkRenderParameter11> pParameter,ResourcePtr resource)
+{
+	if(pParameter->GetParameterType() == SHADER_RESOURCE)
+		pParameter->SetParameterData(reinterpret_cast<void*>(&resource->m_iResourceSRV),GetID());
+	else
+		ArkLog::Get(LogType::Renderer).Output(L"Shader resource view parameter name collision!");
 }
 //--------------------------------------------------------------------------------
 DirectX::XMVECTOR ArkParameterManager11::GetVectorParameter(const std::wstring& name)
@@ -287,8 +318,8 @@ DirectX::XMMATRIX ArkParameterManager11::GetMatrixArrayParameter(const std::wstr
 	if(pParam != 0)
 	{
 		if(pParam->GetParameterType() == ArkParamType::MATRIX_ARRAY)
-			if ( std::dynamic_pointer_cast<ArkMatrixArrayParameter11>( pParam )->GetMatrixCount() == count )
-				pResult = std::dynamic_pointer_cast<ArkMatrixArrayParameter11>( pParam )->GetMatrices( GetID() );
+			if(std::dynamic_pointer_cast<ArkMatrixArrayParameter11>(pParam)->GetMatrixCount() == count)
+				pResult = std::dynamic_pointer_cast<ArkMatrixArrayParameter11>(pParam)->GetMatrices(GetID());
 	}
 	else
 	{
@@ -297,6 +328,23 @@ DirectX::XMMATRIX ArkParameterManager11::GetMatrixArrayParameter(const std::wstr
 		m_Parameters[name] = pParam;
 	}
 	return pmA;
+}
+//--------------------------------------------------------------------------------
+std::shared_ptr<ArkShaderResourceParameter11> ArkParameterManager11::GetShaderResourceParameterRef(const std::wstring& name)
+{
+	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
+
+	// If the parameter is not found, create a new default one.  This goes 
+	// into the bottom level manager.
+
+	if(pParam == 0)
+	{
+		pParam = std::make_shared<ArkShaderResourceParameter11>();
+		pParam->SetName(name);
+		m_Parameters[name] = pParam;
+	}
+
+	return(std::dynamic_pointer_cast<ArkShaderResourceParameter11>(pParam));
 }
 //--------------------------------------------------------------------------------
 DirectX::XMVECTOR ArkParameterManager11::GetVectorParameter(std::shared_ptr<ArkRenderParameter11> pP)
@@ -320,24 +368,24 @@ DirectX::XMMATRIX ArkParameterManager11::GetMatrixParameter(std::shared_ptr<ArkR
 
 	if(pP->GetParameterType() == ArkParamType::MATRIX)
 	{
-		pM = std::dynamic_pointer_cast<ArkMatrixParameter11>(pP)->GetMatrix( GetID() );
+		pM = std::dynamic_pointer_cast<ArkMatrixParameter11>(pP)->GetMatrix(GetID());
 	}
 	return pM;
 }
 //--------------------------------------------------------------------------------
 DirectX::XMMATRIX* ArkParameterManager11::GetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP)
 {
-	assert( pP != 0 );
+	assert(pP != 0);
 
 	XMMATRIX* pResult = 0;
 
 	// If the parameter is not found, create a new default one.  This goes 
 	// into the bottom level manager.
 
-	if ( pP->GetParameterType() == MATRIX_ARRAY ) 
-		pResult = std::dynamic_pointer_cast<ArkMatrixArrayParameter11>( pP )->GetMatrices( GetID() );
+	if(pP->GetParameterType() == MATRIX_ARRAY)
+		pResult = std::dynamic_pointer_cast<ArkMatrixArrayParameter11>(pP)->GetMatrices(GetID());
 
-	return( pResult );
+	return(pResult);
 }
 int ArkParameterManager11::GetConstantBufferParameter(std::shared_ptr<ArkRenderParameter11> pParameter)
 {
@@ -350,6 +398,21 @@ int ArkParameterManager11::GetConstantBufferParameter(std::shared_ptr<ArkRenderP
 
 	if(pParameter->GetParameterType() == CBUFFER)
 		result = std::dynamic_pointer_cast<ArkConstantBufferParameter11>(pParameter)->GetIndex(GetID());
+
+	return(result);
+}
+//--------------------------------------------------------------------------------
+int ArkParameterManager11::GetShaderResourceParameter(std::shared_ptr<ArkRenderParameter11> pParameter)
+{
+	assert(pParameter != 0);
+
+	int result = -1;
+
+	// If the parameter is not found, create a new default one.  This goes 
+	// into the bottom level manager.
+
+	if(pParameter->GetParameterType() == SHADER_RESOURCE)
+		result = std::dynamic_pointer_cast<ArkShaderResourceParameter11>(pParameter)->GetIndex(GetID());
 
 	return(result);
 }
@@ -398,15 +461,43 @@ std::shared_ptr<ArkMatrixArrayParameter11> ArkParameterManager11::GetMatrixArray
 //--------------------------------------------------------------------------------
 std::shared_ptr<ArkRenderParameter11> ArkParameterManager11::GetParameterRef(const std::wstring& name)
 {
-		// First check this parameter manager
+	// First check this parameter manager
 	std::shared_ptr<ArkRenderParameter11> pParam = m_Parameters[name];
 
 	// Then check the parent manager
-	if ( ( pParam == 0 ) && ( m_pParent ) )
-		pParam = m_pParent->GetParameterRef( name );
+	if((pParam == 0) && (m_pParent))
+		pParam = m_pParent->GetParameterRef(name);
 
 	// Return the parameter
-	return( pParam );
+	return(pParam);
+}
+//--------------------------------------------------------------------------------
+int ArkParameterManager11::GetShaderResourceParameter(const std::wstring& name)
+{
+	int result;
+	result = -1;
+
+	// Check for the existence of this parameter.  This search includes any
+	// parent parameter managers if the parameter doesn't exist in this one.
+
+	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
+
+	// If the parameter is not found, create a new default one.  This goes 
+	// into the bottom level manager.
+
+	if(pParam != 0)
+	{
+		if(pParam->GetParameterType() == SHADER_RESOURCE)
+			result = std::dynamic_pointer_cast<ArkShaderResourceParameter11>(pParam)->GetIndex(GetID());
+	}
+	else
+	{
+		pParam = std::make_shared<ArkShaderResourceParameter11>();
+		pParam->SetName(name);
+		m_Parameters[name] = pParam;
+	}
+
+	return(result);
 }
 //--------------------------------------------------------------------------------
 void ArkParameterManager11::SetWorldMatrix(DirectX::XMMATRIX* w)

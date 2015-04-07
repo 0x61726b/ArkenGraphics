@@ -18,7 +18,7 @@ namespace Arkeng
 		VECTOR,
 		MATRIX,
 		MATRIX_ARRAY,
-		SRV,
+		SHADER_RESOURCE,
 		UOA,
 		CBUFFER,
 		SAMPLER,

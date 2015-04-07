@@ -230,6 +230,8 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkShaderFactory11.h" />
     <ClInclude Include="Rendering\ArkShaderReflection11.h" />
     <ClInclude Include="Rendering\ArkShaderReflectionFactory11.h" />
+    <ClInclude Include="Rendering\ArkShaderResourceParameter11.h" />
+    <ClInclude Include="Rendering\ArkShaderResourceParameterWriter11.h" />
     <ClInclude Include="Rendering\ArkShaderStageState11.h" />
     <ClInclude Include="Rendering\ArkVectorParameter11.h" />
     <ClInclude Include="Rendering\ArkVectorParameterWriter11.h" />
@@ -346,9 +348,11 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkRenderer11.cpp" />
     <ClCompile Include="Rendering\ArkRenderParameter11.cpp" />
     <ClCompile Include="Rendering\ArkShader11.cpp" />
+    <ClCompile Include="Rendering\ArkShadeResourceParameter11.cpp" />
     <ClCompile Include="Rendering\ArkShaderFactory11.cpp" />
     <ClCompile Include="Rendering\ArkShaderReflection11.cpp" />
     <ClCompile Include="Rendering\ArkShaderReflectionFactory11.cpp" />
+    <ClCompile Include="Rendering\ArkShaderResourceParameterWriter11.cpp" />
     <ClCompile Include="Rendering\ArkShaderStage11.cpp" />
     <ClCompile Include="Rendering\ArkShaderStageState11.cpp" />
     <ClCompile Include="Rendering\ArkShape3D.cpp" />

@@ -59,10 +59,9 @@ bool PhongShading::ConfigureRenderingSetup()
 	m_pCamera->SetEventManager(&CameraEventHub);
 
 
-	m_pCamera->Spatial().SetTranslation(XMVectorSet(0.0f,20.0f,-100,0.0f));
-	/*m_pCamera->Spatial().SetRotation((XMVectorSet(0,45*XM_PI/180,0,0)));*/
+	m_pCamera->Spatial().SetTranslation(XMVectorSet(0.0f,20.0f,-25,0.0f));
 	m_pCamera->SetCameraView(m_pRenderView);
-	m_pCamera->SetProjectionParams(0.1f,1000.0f,static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight),DirectX::XM_PIDIV2);
+	m_pCamera->SetProjectionParams(0.1f,100.0f,static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight),DirectX::XM_PIDIV4);
 
 	m_pScene->AddCamera(m_pCamera);
 
@@ -98,10 +97,10 @@ void PhongShading::Initialize()
 	//Create geometry object and actor
 
 	GeometryPtr pGeometry = GeometryPtr(new ArkGeometry11());
-	ArkGeometryGenerator11::GenerateSphere(pGeometry,50,50,5);
+	ArkGeometryGenerator11::GenerateSphere(pGeometry,50,50,3);
 	pGeometry->LoadToBuffers();
 	pGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	int sphereCount = 5;
+	int sphereCount = 10;
 
 	for(int i=0; i < sphereCount; ++i)
 	{
@@ -111,7 +110,7 @@ void PhongShading::Initialize()
 			m_pActor->GetBody()->Visual.SetGeometry(pGeometry);
 			m_pActor->GetBody()->Visual.SetMaterial(m_pMaterial);
 
-			m_pActor->GetNode()->Transform.Position() = XMVectorSet(10 + 10*i,5,j*10,0.0f);
+			m_pActor->GetNode()->Transform.Position() = XMVectorSet(1 + 10*i + rand() % 10,1.6f,10*j + rand() % 10,0.0f );
 			m_pActor->GetNode()->SetName(L"Sphere");
 			m_pScene->AddActor(m_pActor);
 		}
@@ -119,7 +118,7 @@ void PhongShading::Initialize()
 
 
 	GeometryPtr planeGeo = GeometryPtr(new ArkGeometry11());
-	ArkGeometryGenerator11::GenerateTexturedPlane(planeGeo,500,500);
+	ArkGeometryGenerator11::GenerateTexturedPlane(planeGeo,100,100);
 
 	planeGeo->LoadToBuffers();
 	planeGeo->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -138,13 +137,6 @@ void PhongShading::Initialize()
 	DirectX::XMVECTOR LightPos = DirectX::XMVectorSet(10.0f,20.0f,-20.0f,0.0f);
 	m_pLightPositionWriter = m_pRenderer->m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightPositionWS"));
 	m_pLightPositionWriter->InitializeParameterData(&LightPos);
-
-
-
-	DirectX::XMVECTOR test = m_pLightColor->GetVector();
-
-
-
 
 }
 //--------------------------------------------------------------------------------

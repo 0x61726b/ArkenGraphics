@@ -355,8 +355,8 @@ void ArkGeometryGenerator11::GenerateSphere( GeometryPtr pGeometry, unsigned int
     int currVert = 0;
 
     // First vertex will be at the top pole
-    pVerts[currVert++] = XMFLOAT3( 0.0f, Radius, 0.0f );
-
+    pVerts[currVert] = XMFLOAT3( 0.0f, Radius, 0.0f );
+	pNorms[currVert++] = XMFLOAT3( 0.0f,1.0f,0.0f );
     // Add in the vertical rings of vertices
     for ( unsigned int v = 1; v <= NumVertexRings; ++v )
     {

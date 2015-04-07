@@ -23,22 +23,27 @@ namespace Arkeng
 		void SetMatrixParameter(const std::wstring& name,DirectX::XMMATRIX* pM);
 		void SetMatrixArrayParameter(const std::wstring& name,int count,DirectX::XMMATRIX* pmA);
 		void SetConstantBufferParameter( const std::wstring& name,ResourcePtr resource );
-
+		void SetShaderResourceParameter( const std::wstring& name, ResourcePtr resource );
 
 		virtual void SetVectorParameter( std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMVECTOR* pV);
 		virtual void SetMatrixParameter(std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMMATRIX* pM) ;
 		virtual void SetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP,int count,DirectX::XMMATRIX* pV);
 		virtual void SetConstantBufferParameter( std::shared_ptr<ArkRenderParameter11> pParameter, ResourcePtr resource );
+		virtual void SetShaderResourceParameter( std::shared_ptr<ArkRenderParameter11> pParameter, ResourcePtr resource );
+
 
 		virtual DirectX::XMVECTOR GetVectorParameter(const std::wstring& name);
 		virtual DirectX::XMMATRIX GetMatrixParameter(const std::wstring& name);
 		virtual DirectX::XMMATRIX GetMatrixArrayParameter(const std::wstring& name,int count);
 		virtual std::shared_ptr<ArkConstantBufferParameter11> GetConstantBufferParameterRef( const std::wstring& name );
+		virtual std::shared_ptr<ArkShaderResourceParameter11> GetShaderResourceParameterRef( const std::wstring& name );
+
 
 		virtual DirectX::XMVECTOR GetVectorParameter(std::shared_ptr<ArkRenderParameter11> pP);
 		virtual DirectX::XMMATRIX GetMatrixParameter(std::shared_ptr<ArkRenderParameter11> pP);
 		virtual DirectX::XMMATRIX* GetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP) ;
 		virtual int GetConstantBufferParameter( std::shared_ptr<ArkRenderParameter11> pParameter ) ;
+		virtual int GetShaderResourceParameter( std::shared_ptr<ArkRenderParameter11> pParameter );
 
 
 		virtual std::shared_ptr<ArkRenderParameter11> GetParameterRef(const std::wstring& name) ;
@@ -46,6 +51,7 @@ namespace Arkeng
 		virtual std::shared_ptr<ArkMatrixParameter11> GetMatrixParameterRef(const std::wstring& name)  ;
 		virtual std::shared_ptr<ArkMatrixArrayParameter11> GetMatrixArrayParameterRef(const std::wstring& name,int count) ;
 		virtual int GetConstantBufferParameter( const std::wstring& name );
+		virtual int GetShaderResourceParameter( const std::wstring& name );
 
 		virtual void SetWorldMatrix(DirectX::XMMATRIX* w);
 		virtual void SetViewMatrix(DirectX::XMMATRIX* v);

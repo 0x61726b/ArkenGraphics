@@ -486,6 +486,12 @@
     <ClInclude Include="Utility\TConfiguration.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\ArkShaderResourceParameter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkShaderResourceParameterWriter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -811,6 +817,12 @@
     </ClCompile>
     <ClCompile Include="Rendering\ArkCommandList11.cpp">
       <Filter>Rendering\Direct3D11\Command List</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkShadeResourceParameter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkShaderResourceParameterWriter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
