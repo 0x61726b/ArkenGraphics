@@ -211,7 +211,7 @@ void ArkFirstPersonCamera::Update()
     m_fRotationY = WrapAngle( m_fRotationY );
 
     // Make a rotation matrix from the X/Y rotation
-	Spatial().RotateBy( DirectX::XMVectorSet( 0, m_fRotationY, 0.0f,0.0f ) );
+	Spatial().RotateBy( DirectX::XMVectorSet( m_fRotationX, m_fRotationY, 0.0f,0.0f ) );
 	m_fRotationX = 0.0f;
 	m_fRotationY = 0.0f;
 }

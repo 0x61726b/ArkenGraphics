@@ -5,7 +5,7 @@
 //
 //Copyright (c) Alperen Gezer.All rights reserved.
 //
-//X.h
+//ArkTransform3D.cpp
 //--------------------------------------------------------------------------------
 #include "Pch.h"
 #include "ArkTransform3D.h"
@@ -57,7 +57,7 @@ void ArkTransform3D::UpdateLocal()
 
 	
 	XMMATRIX mRot = m_mRotation;
-	m_mLocal = translate*mRot;
+	m_mLocal = mRot*translate;
 	
 }
 //--------------------------------------------------------------------------------
@@ -106,24 +106,19 @@ XMMATRIX ArkTransform3D::GetView() const
 	XMVECTOR rotation;
 	XMMatrixDecompose(&scale,&rotation,&translation,m);
 
-	XMVECTOR det;
-	XMMATRIX inverseView = XMMatrixInverse(&det,m);
-
-	XMFLOAT3 zBasis;
-	XMStoreFloat3(&zBasis,inverseView.r[2]);
-
 	XMFLOAT4X4 tmp;
 	XMStoreFloat4x4( &tmp,m_mWorld );
 	float j = tmp.m[0][0]; // or float j = tmp._11
 
-	XMFLOAT3 up;
-	up.x = tmp.m[1][2];
-	up.y = tmp.m[2][2];
-	up.z = tmp.m[3][3];
+	XMFLOAT3 zBasis = XMFLOAT3(tmp._31,tmp._32,tmp._33 );
+	
 
+
+
+	XMFLOAT3 up = XMFLOAT3(tmp._21,tmp._22,tmp._23);
 
 	Eye = translation;
-	At = translation + inverseView.r[2];
+	At = translation + XMVectorSet(zBasis.x,zBasis.y,zBasis.z,1.0f );
 	Up = XMVectorSet(up.x,up.y,up.z,0.0f);
 
 	

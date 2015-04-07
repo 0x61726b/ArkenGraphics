@@ -12,6 +12,7 @@
 #include "IController.h"
 #include "ArkEntity3D.h"
 #include "ArkLog.h"
+using namespace DirectX;
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -47,10 +48,12 @@ namespace Arkeng
 		void MoveLeft( const float distance );
 		void MoveUp( const float distance );
 		void MoveDown( const float distance );
-
 	protected:
 		XMVECTOR		m_vRotation;
 		XMVECTOR		m_vTranslation;
+
+
+
 	};
 
 	#include "ArkSpatialController.inl"
