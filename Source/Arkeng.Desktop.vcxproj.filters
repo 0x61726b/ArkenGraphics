@@ -43,9 +43,6 @@
     <Filter Include="Rendering\Direct3D11\Task System">
       <UniqueIdentifier>{1d75fd87-9089-45b7-a21a-ae8502d41300}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rendering\Direct3D11\Render Views">
-      <UniqueIdentifier>{3efabf6b-d377-4992-99b3-4327fcf6a20c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rendering\Direct3D11\Pipeline\Output Merger Stage">
       <UniqueIdentifier>{992e0c69-c2b6-4a1c-a9eb-c79850c10033}</UniqueIdentifier>
     </Filter>
@@ -126,6 +123,15 @@
     </Filter>
     <Filter Include="Rendering\Direct3D11\Command List">
       <UniqueIdentifier>{511ed5aa-9888-473d-b549-ad2eb48c475f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Font System">
+      <UniqueIdentifier>{fd987d39-392e-49dd-9325-02837aa2be5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Material System\Components">
+      <UniqueIdentifier>{770f80c1-6de8-48fa-b878-79abda2d0e08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Direct3D11\Material System\Components\Tasks">
+      <UniqueIdentifier>{f1d99064-efae-47d4-bf9c-67e990e018e5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -218,9 +224,6 @@
     </ClInclude>
     <ClInclude Include="Rendering\RenderTask.h">
       <Filter>Rendering\Direct3D11\Task System</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\PerspectiveView.h">
-      <Filter>Rendering\Direct3D11\Render Views</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\DxOutputMergerStage.h">
       <Filter>Rendering\Direct3D11\Pipeline\Output Merger Stage</Filter>
@@ -492,6 +495,36 @@
     <ClInclude Include="Rendering\ArkShaderResourceParameterWriter11.h">
       <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\ArkSpriteFont11.h">
+      <Filter>Rendering\Direct3D11\Font System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkSpriteRenderer11.h">
+      <Filter>Rendering\Direct3D11\Font System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkDrawIndexedInstancedExecutor11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\SpriteVertex11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors\Vertex Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\TGrowableVertexBuffer11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\TGrowableIndexBuffer11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkSamplerParameter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkFontLoader.h">
+      <Filter>Rendering\Direct3D11\Font System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ViewTextOverlay.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\PerspectiveView.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -577,9 +610,6 @@
     </ClCompile>
     <ClCompile Include="Rendering\TaskCore.cpp">
       <Filter>Rendering\Direct3D11\Task System</Filter>
-    </ClCompile>
-    <ClCompile Include="Perspective\PerspectiveView.cpp">
-      <Filter>Rendering\Direct3D11\Render Views</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\DxOutputMergerStage.cpp">
       <Filter>Rendering\Direct3D11\Pipeline\Output Merger Stage</Filter>
@@ -824,6 +854,27 @@
     <ClCompile Include="Rendering\ArkShaderResourceParameterWriter11.cpp">
       <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\ArkSpriteFont11.cpp">
+      <Filter>Rendering\Direct3D11\Font System</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\SpriteVertex11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors\Vertex Layouts</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkSpriteRenderer11.cpp">
+      <Filter>Rendering\Direct3D11\Font System</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkSamplerParameter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkFontLoader.cpp">
+      <Filter>Rendering\Direct3D11\Font System</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ViewTextOverlay.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Perspective\PerspectiveView.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Rendering\TStateMonitor.inl">
@@ -849,6 +900,15 @@
     </None>
     <None Include="Utility\TConfiguration.inl">
       <Filter>Utility</Filter>
+    </None>
+    <None Include="Rendering\ArkDrawIndexedInstancedExecutor11.inl">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </None>
+    <None Include="Rendering\TGrowableVertexBuffer11.inl">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </None>
+    <None Include="Rendering\TGrowableIndexBuffer11.inl">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

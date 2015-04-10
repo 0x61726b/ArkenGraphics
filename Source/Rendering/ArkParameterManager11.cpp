@@ -94,7 +94,10 @@ void ArkParameterManager11::SetVectorParameter(const std::wstring& name,DirectX:
 	{
 		if(pParameter->GetParameterType() == ArkParamType::VECTOR)
 		{
-			pParameter->SetParameterData(reinterpret_cast<void*>(pV),GetID());
+			auto pVParam = std::dynamic_pointer_cast<ArkVectorParameter11>(pParameter);
+			pVParam->SetVector( *pV );
+
+			/*pParameter->SetParameterData(reinterpret_cast<void*>(pV),GetID());*/
 		}
 		else
 		{
@@ -177,6 +180,29 @@ void ArkParameterManager11::SetShaderResourceParameter(const std::wstring& name,
 	}
 }
 //--------------------------------------------------------------------------------
+void ArkParameterManager11::SetSamplerParameter( const std::wstring& name, int* pID )
+{
+	std::shared_ptr<ArkRenderParameter11> pParameter = m_Parameters[name];
+
+	// Only create the new parameter if it hasn't already been registered
+	if ( pParameter == 0 )
+	{
+		pParameter = std::make_shared<ArkSamplerParameter11>();
+		pParameter->SetName( name );
+		m_Parameters[name] = std::dynamic_pointer_cast<ArkRenderParameter11>( pParameter );
+
+		// Initialize the parameter with the current data in all slots
+		pParameter->InitializeParameterData( reinterpret_cast<void*>( pID ) );
+	}
+	else
+	{
+		if ( pParameter->GetParameterType() == SAMPLER )
+			pParameter->SetParameterData( reinterpret_cast<void*>( pID ), GetID() );
+		else
+			ArkLog::Get(LogType::Renderer).Output( L"Sampler parameter name collision!" );
+	}
+}
+//--------------------------------------------------------------------------------
 void ArkParameterManager11::SetConstantBufferParameter(std::shared_ptr<ArkRenderParameter11> pParameter,ResourcePtr resource)
 {
 	if(pParameter->GetParameterType() == CBUFFER)
@@ -216,6 +242,14 @@ void ArkParameterManager11::SetShaderResourceParameter(std::shared_ptr<ArkRender
 		pParameter->SetParameterData(reinterpret_cast<void*>(&resource->m_iResourceSRV),GetID());
 	else
 		ArkLog::Get(LogType::Renderer).Output(L"Shader resource view parameter name collision!");
+}
+//--------------------------------------------------------------------------------
+void ArkParameterManager11::SetSamplerParameter( std::shared_ptr<ArkRenderParameter11> pParameter, int* pID )
+{
+	if ( pParameter->GetParameterType() == SAMPLER )
+		pParameter->SetParameterData( reinterpret_cast<void*>( pID ), GetID() );
+	else
+		ArkLog::Get(LogType::Renderer).Output( L"Sampler parameter name collision!" );
 }
 //--------------------------------------------------------------------------------
 DirectX::XMVECTOR ArkParameterManager11::GetVectorParameter(const std::wstring& name)
@@ -286,6 +320,7 @@ int ArkParameterManager11::GetConstantBufferParameter(const std::wstring& name)
 
 	return(result);
 }
+//--------------------------------------------------------------------------------
 DirectX::XMMATRIX ArkParameterManager11::GetMatrixParameter(const std::wstring& name)
 {
 	XMMATRIX pM;
@@ -330,6 +365,34 @@ DirectX::XMMATRIX ArkParameterManager11::GetMatrixArrayParameter(const std::wstr
 	return pmA;
 }
 //--------------------------------------------------------------------------------
+int ArkParameterManager11::GetSamplerStateParameter( const std::wstring& name )
+{
+	int result;
+	result = -1;
+
+	// Check for the existence of this parameter.  This search includes any
+	// parent parameter managers if the parameter doesn't exist in this one.
+
+	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef( name );
+
+	// If the parameter is not found, create a new default one.  This goes 
+	// into the bottom level manager.
+
+	if ( pParam != 0 )
+	{
+		if ( pParam->GetParameterType() == SAMPLER ) 
+			result = std::dynamic_pointer_cast<ArkSamplerParameter11>( pParam )->GetIndex( GetID() );
+	}
+	else
+	{
+		pParam = std::make_shared<ArkSamplerParameter11>();
+		pParam->SetName( name );
+		m_Parameters[name] = pParam;
+	}
+
+	return( result );	
+}
+//--------------------------------------------------------------------------------
 std::shared_ptr<ArkShaderResourceParameter11> ArkParameterManager11::GetShaderResourceParameterRef(const std::wstring& name)
 {
 	std::shared_ptr<ArkRenderParameter11> pParam = GetParameterRef(name);
@@ -347,6 +410,25 @@ std::shared_ptr<ArkShaderResourceParameter11> ArkParameterManager11::GetShaderRe
 	return(std::dynamic_pointer_cast<ArkShaderResourceParameter11>(pParam));
 }
 //--------------------------------------------------------------------------------
+std::shared_ptr<ArkSamplerParameter11> ArkParameterManager11::GetSamplerStateParameterRef( const std::wstring& name )
+{
+	// Check for the existence of this parameter.  This search includes any
+	// parent parameter managers if the parameter doesn't exist in this one.
+
+	std::shared_ptr<ArkRenderParameter11> pParam= GetParameterRef( name );
+
+	// If the parameter is not found, create a new default one.  This goes 
+	// into the bottom level manager.
+
+	if ( pParam == 0 )
+	{
+		pParam = std::make_shared<ArkSamplerParameter11>();
+		pParam->SetName( name );
+		m_Parameters[name] = pParam;
+	}
+
+	return( std::dynamic_pointer_cast<ArkSamplerParameter11>( pParam ) );	
+}
 DirectX::XMVECTOR ArkParameterManager11::GetVectorParameter(std::shared_ptr<ArkRenderParameter11> pP)
 {
 	assert(pP != 0);
@@ -415,6 +497,24 @@ int ArkParameterManager11::GetShaderResourceParameter(std::shared_ptr<ArkRenderP
 		result = std::dynamic_pointer_cast<ArkShaderResourceParameter11>(pParameter)->GetIndex(GetID());
 
 	return(result);
+}
+//--------------------------------------------------------------------------------
+int ArkParameterManager11::GetSamplerStateParameter( std::shared_ptr<ArkRenderParameter11> pParameter ) 
+{
+	assert( pParameter != 0 );
+
+	int result = -1;
+
+	// If the parameter is not found, create a new default one.  This goes 
+	// into the bottom level manager.
+
+	if ( pParameter != 0 )
+	{
+		if ( pParameter->GetParameterType() == SAMPLER ) 
+			result = std::dynamic_pointer_cast<ArkSamplerParameter11>( pParameter )->GetIndex( GetID() );
+	}
+
+	return( result );	
 }
 //--------------------------------------------------------------------------------
 std::shared_ptr<ArkVectorParameter11> ArkParameterManager11::GetVectorParameterRef(const std::wstring& name)

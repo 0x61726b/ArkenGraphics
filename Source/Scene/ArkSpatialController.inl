@@ -36,13 +36,13 @@ void ArkSpatialController<T>::Update(float fTime)
 
 	if(m_pEntity)
 	{
-		XMFLOAT3 rot3 = XMFLOAT3(0,0,0);
+		/*XMFLOAT3 rot3 = XMFLOAT3(0,0,0);
 		std::wstring rotationw = L"";
 		rotationw.append(std::to_wstring(rot3.x) + L" ");
 		rotationw.append(std::to_wstring(rot3.y)+ L" ");
 		rotationw.append(std::to_wstring(rot3.z));
 
-		ArkLog::Get(LogType::Renderer).Output(rotationw);
+		ArkLog::Get(LogType::Renderer).Output(rotationw);*/
 
 		/*rot1 = DirectX::XMMatrixTranspose( rot1 );*/
 

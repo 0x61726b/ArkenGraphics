@@ -51,6 +51,7 @@
 
 #define COM_Release( x ) {if(x){(x)->Release();(x)=NULL;}}
 #define Safe_Delete( x ) {if(x){delete (x);(x)=NULL;}}
+#define SAFE_DELETE_ARRAY( x ) {if(x){delete[] (x);(x)=NULL;}}
 #define HR_CHECK( x ) { if( FAILED(x) ) return false;}
 
 #define NUM_THREADS 4

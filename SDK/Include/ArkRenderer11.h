@@ -61,7 +61,7 @@ namespace Arkeng
 	typedef Microsoft::WRL::ComPtr<ID3D11RasterizerState>		RasterizerStateComPtr;
 	typedef Microsoft::WRL::ComPtr<ID3D11DepthStencilState>		DepthStencilStateComPtr;
 	typedef Microsoft::WRL::ComPtr<ID3D11BlendState>			BlendStateComPtr;
-
+	typedef Microsoft::WRL::ComPtr<ID3D11SamplerState>			SamplerStateComPtr;
 	typedef std::shared_ptr<ArkShader11>						ArkShader11SPtr;
 
 	typedef Microsoft::WRL::ComPtr<ID3D11Query>				    QueryComPtr;
@@ -119,12 +119,20 @@ namespace Arkeng
 			Dx11DepthStencilViewConfig* pDSVConfig= NULL);
 
 		int CreateDepthStencilView( int ResourceID,D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc );
+		int CreateShaderResourceView( int ResourceID, D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc );
 
 		
 
 		int CreateRenderTargetView(int ResourceID,D3D11_RENDER_TARGET_VIEW_DESC* pDesc);
-		Dx11RenderTargetView& GetRenderTargetViewByIndex(int rid);
-		Dx11DepthStencilView& GetDepthStencilViewByIndex(int rid);
+
+
+		Dx11RenderTargetView&					GetRenderTargetViewByIndex(int rid);
+		Dx11DepthStencilView&					GetDepthStencilViewByIndex(int rid);
+		Dx11ShaderResourceView&					GetShaderResourceViewByIndex(int rid);
+
+
+
+
 		int LoadShader(ShaderType type,std::wstring& filename,std::wstring& function,
 			std::wstring& model,bool enablelogging = true);
 
@@ -151,6 +159,8 @@ namespace Arkeng
 		DepthStencilStateComPtr		GetDepthState( int index );
 		int CreateDepthStencilState( Dx11DepthStencilStateConfig* pConfig );
 
+		int CreateSamplerState( D3D11_SAMPLER_DESC* pDesc );
+		SamplerStateComPtr GetSamplerState( int index );
 
 		void ResizeSwapChain(int ID,UINT width,UINT height);
 		void ResizeViewport(int ID,UINT width,UINT height);
@@ -165,10 +175,15 @@ namespace Arkeng
 
 		std::shared_ptr<Dx11Texture2D>		GetTexture2DByIndex(int ID);
 
+		
+
 
 		Microsoft::WRL::ComPtr<ID3D11Debug>			GetDebugDevice();
 
 		TConfiguration<bool>						MultiThreadingConfig;
+
+		void DeleteResource( ResourcePtr ptr );
+		void DeleteResource( int index );
 	protected:
 		static ArkRenderer11* m_spRenderer;
 
@@ -196,6 +211,7 @@ namespace Arkeng
 		std::vector<Dx11DepthStencilView>			m_vDepthStencilViews;
 		std::vector<DepthStencilStateComPtr>		m_vDepthStencilStates;
 		std::vector<BlendStateComPtr>				m_vBlendStates;
+		std::vector<SamplerStateComPtr>				m_vSamplerStates;
 
 		std::vector<ArkShader11SPtr>					m_vShaders;
 

@@ -20,7 +20,7 @@ ArkDrawIndexedExecutor11<TVertex>::~ArkDrawIndexedExecutor11()
 }
 //--------------------------------------------------------------------------------
 template <class TVertex>
-void ArkDrawIndexedExecutor11<TVertex>::Execute( PipelineManagerDX11* pPipeline, IParameterManager* pParamManager )
+void ArkDrawIndexedExecutor11<TVertex>::Execute( PipelineManager* pPipeline, IParameterManager* pParamManager )
 {
 	// Since we are doing indexed rendering, we only want to proceed if some
 	// indices are available (otherwise no primitives would be generated).
@@ -31,16 +31,16 @@ void ArkDrawIndexedExecutor11<TVertex>::Execute( PipelineManagerDX11* pPipeline,
 		VertexBuffer.UploadData( pPipeline );
 		IndexBuffer.UploadData( pPipeline );
 	
-		pPipeline->InputAssemblerStage.ClearDesiredState();
+		pPipeline->InputAssemblerStage.ClearCurrentState();
 
 		// Set the Input Assembler state, then perform the draw call.
-		int layout = GetInputLayout( pPipeline->ShaderStages[VERTEX_SHADER]->DesiredState.ShaderProgram.GetState() );
-		pPipeline->InputAssemblerStage.DesiredState.InputLayout.SetState( layout );
-		pPipeline->InputAssemblerStage.DesiredState.PrimitiveTopology.SetState( m_ePrimType );
-		pPipeline->InputAssemblerStage.DesiredState.VertexBuffers.SetState( 0, VertexBuffer.GetBuffer()->m_iResource );
-		pPipeline->InputAssemblerStage.DesiredState.VertexBufferStrides.SetState( 0, sizeof( TVertex ) );
-		pPipeline->InputAssemblerStage.DesiredState.VertexBufferOffsets.SetState( 0, 0 );
-		pPipeline->InputAssemblerStage.DesiredState.IndexBuffer.SetState( IndexBuffer.GetBuffer()->m_iResource );
+		int layout = GetInputLayout( pPipeline->ShaderStages[VERTEX_SHADER]->CurrentState.ShaderProgram.GetState() );
+		pPipeline->InputAssemblerStage.CurrentState.InputLayout.SetState( layout );
+		pPipeline->InputAssemblerStage.CurrentState.PrimitiveTopology.SetState( m_ePrimType );
+		pPipeline->InputAssemblerStage.CurrentState.VertexBuffers.SetState( 0, VertexBuffer.GetBuffer()->m_iResource );
+		pPipeline->InputAssemblerStage.CurrentState.VertexBufferStrides.SetState( 0, sizeof( TVertex ) );
+		pPipeline->InputAssemblerStage.CurrentState.VertexBufferOffsets.SetState( 0, 0 );
+		pPipeline->InputAssemblerStage.CurrentState.IndexBuffer.SetState( IndexBuffer.GetBuffer()->m_iResource );
 
 		pPipeline->ApplyInputResources();
 
@@ -58,7 +58,7 @@ void ArkDrawIndexedExecutor11<TVertex>::ResetGeometry()
 	// allow the super class to reset its buffers as well.
 
 	ResetIndices();
-	DrawExecutorDX11::ResetGeometry();
+	ArkDrawExecutor11::ResetGeometry();
 }
 //--------------------------------------------------------------------------------
 template <class TVertex>

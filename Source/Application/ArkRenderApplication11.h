@@ -17,6 +17,7 @@
 #include "ArkRenderer11.h"
 #include "RenderTask.h"
 #include "Camera.h"
+#include "ViewTextOverlay.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -36,12 +37,15 @@ namespace Arkeng
 		virtual void HandleWindowResize(HWND handle,UINT width,UINT height);
 		virtual bool HandleEvent(EventPtr pEvent);
 
+		void SetMultiThreadedMode( bool mode );
 		virtual Win32RenderWindow* CreateRenderWindow();
 
 	protected:
 		ArkRenderer11*			m_pRenderer;
 		Win32RenderWindow*		m_pWindow;
+
 		RenderTask*				m_pRenderView;
+		ViewTextOverlay*		m_pTextOverlayView;
 
 		Camera*					m_pCamera;
 

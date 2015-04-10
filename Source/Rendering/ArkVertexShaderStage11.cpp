@@ -48,3 +48,19 @@ void ArkVertexShaderStage11::BindConstantBuffers( ID3D11DeviceContext* pContext,
 		CurrentState.ConstantBuffers.GetRange(),
 		CurrentState.ConstantBuffers.GetFirstSlotLocation() );
 }
+//--------------------------------------------------------------------------------
+void ArkVertexShaderStage11::BindSamplerStates( ID3D11DeviceContext* pContext,int count )
+{
+	pContext->VSSetSamplers( 
+		CurrentState.SamplerStates.GetStartSlot(),
+		CurrentState.SamplerStates.GetRange(),
+		CurrentState.SamplerStates.GetFirstSlotLocation() );
+}
+//--------------------------------------------------------------------------------
+void ArkVertexShaderStage11::BindShaderResourceViews( ID3D11DeviceContext* pContext,int count )
+{
+		pContext->VSSetShaderResources( 
+		CurrentState.ShaderResourceViews.GetStartSlot(),
+		CurrentState.ShaderResourceViews.GetRange(),
+		CurrentState.ShaderResourceViews.GetFirstSlotLocation() ); 
+}

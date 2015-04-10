@@ -39,6 +39,7 @@ ArkRenderApplication11::ArkRenderApplication11()
 	m_pCamera = 0;
 	m_pRenderView = 0;
 	m_pRenderer = 0;
+	m_pTextOverlayView = 0;
 
 	RequestEvent( WINDOW_RESIZE );
 	RequestEvent( RENDER_FRAME_START );
@@ -105,16 +106,24 @@ bool ArkRenderApplication11::ConfigureRenderingSetup()
 	PerspectiveView* pPerspView = new PerspectiveView( *m_pRenderer,m_pBackBuffer );
 	m_pRenderView = pPerspView;
 
+	m_pTextOverlayView = new ViewTextOverlay( *m_pRenderer, m_pBackBuffer );
+
 	m_pCamera = new ArkFirstPersonCamera();
 	m_pCamera->SetEventManager( &CameraEventHub );
 	XMVECTOR rot = XMVectorSet(0,0,0,0);
 	m_pCamera->GetNode()->Transform.Rotation() = XMMatrixRotationRollPitchYawFromVector(rot);
 	m_pCamera->GetNode()->Transform.Position() = XMVectorSet( 0.0f, 10.0f, -20.0f,0.0f );
 	m_pCamera->SetCameraView( m_pRenderView );
+	m_pCamera->SetOverlayView( m_pTextOverlayView );
 	m_pCamera->SetProjectionParams(0.1f,1000.0f, static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight), DirectX::XM_PIDIV2);
 
 	m_pScene->AddCamera( m_pCamera );
 	return true;
+}
+//--------------------------------------------------------------------------------
+void ArkRenderApplication11::SetMultiThreadedMode( bool mode )
+{
+	m_pRenderer->MultiThreadingConfig.SetConfiguration( mode );
 }
 //--------------------------------------------------------------------------------
 void ArkRenderApplication11::ShutdownRenderingEngineComponents()

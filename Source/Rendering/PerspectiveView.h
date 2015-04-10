@@ -10,6 +10,8 @@
 #define __PerspectiveView_h__
 //--------------------------------------------------------------------------------
 #include "RenderTask.h"
+#include "ArkSpriteRenderer11.h"
+#include "ArkFontLoader.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {

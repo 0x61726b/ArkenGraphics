@@ -13,6 +13,8 @@ using namespace Arkeng;
 //--------------------------------------------------------------------------------
 ArkShaderStageState11::ArkShaderStageState11()
 	:ShaderProgram(-1),
+	SamplerStates(nullptr),
+	ShaderResourceViews(nullptr),
 	ConstantBuffers( nullptr )
 {
 	ClearState();
@@ -33,18 +35,24 @@ void ArkShaderStageState11::SetPreviousState( ArkShaderStageState11* pPrev )
 
 	ShaderProgram.SetSister( &pPrev->ShaderProgram );
 	ConstantBuffers.SetSister( &pPrev->ConstantBuffers );
+	ShaderResourceViews.SetSister( &pPrev->ShaderResourceViews );
+	SamplerStates.SetSister( &pPrev->SamplerStates );
 }
 //--------------------------------------------------------------------------------
 void ArkShaderStageState11::ClearState()
 {
 	ShaderProgram.InitializeState();
 	ConstantBuffers.InitializeStates();
+	ShaderResourceViews.InitializeStates();
+	SamplerStates.InitializeStates();
 }
 //--------------------------------------------------------------------------------
 void ArkShaderStageState11::ResetUpdate()
 {
 	ShaderProgram.ResetTracking();
 	ConstantBuffers.ResetTracking();
+	ShaderResourceViews.ResetTracking();
+	SamplerStates.ResetTracking();
 }
 //--------------------------------------------------------------------------------
 

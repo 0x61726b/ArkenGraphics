@@ -6,8 +6,8 @@
 //
 //TGrowableBuffer11.h
 //--------------------------------------------------------------------------------
-#ifndef TGrowableBuffer11_h
-#define TGrowableBufferDX_h
+#ifndef __TGrowableBuffer11_h__
+#define __TGrowableBuffer11_h__
 //--------------------------------------------------------------------------------
 #include "PipelineManager.h"
 #include "ArkBuffer11Config.h"
@@ -15,11 +15,11 @@
 namespace Arkeng
 {
 	template <class T>
-	class TGrowableBufferDX11
+	class TGrowableBuffer11
 	{
 	public:
-		TGrowableBufferDX11();
-		virtual ~TGrowableBufferDX11();
+		TGrowableBuffer11();
+		virtual ~TGrowableBuffer11();
 
 		// Setting the size of the buffer will create a new array, and 
 		// copy as much of the existing array as possible.
@@ -42,7 +42,7 @@ namespace Arkeng
 		// array).  Each subclass is responsible for properly implementing
         // the upload method.
 
-		virtual void UploadData( PipelineManagerDX11* pPipeline ) = 0;
+		virtual void UploadData( PipelineManager* pPipeline ) = 0;
 		void ResetData();
 
 		virtual ResourcePtr GetBuffer() = 0;

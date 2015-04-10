@@ -323,6 +323,8 @@ void ArkRenderer11::Shutdown()
 	m_vShaderResourceViews.clear();
 	m_vDepthStencilViews.clear();
 	m_vRenderTargetViews.clear();
+	m_vRasterizerStates.clear();
+	m_vSamplerStates.clear();
 	m_vInputLayouts.clear();
 	m_vViewports.clear();
 
@@ -592,10 +594,12 @@ int ArkRenderer11::CreateDepthStencilView(int ResourceID,D3D11_DEPTH_STENCIL_VIE
 	ComPtr<ID3D11Resource> pRawResource = 0;
 	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex(ResourceID);
 
-	if(pResource) {
+	if(pResource)
+	{
 		pRawResource = pResource->GetResource();
 
-		if(pRawResource) {
+		if(pRawResource)
+		{
 
 			DepthStencilViewComPtr pView;
 			HRESULT hr = m_pDevice->CreateDepthStencilView(pRawResource.Get(),pDesc,pView.GetAddressOf());
@@ -603,6 +607,31 @@ int ArkRenderer11::CreateDepthStencilView(int ResourceID,D3D11_DEPTH_STENCIL_VIE
 			if(pView) {
 				m_vDepthStencilViews.push_back(pView);
 				return(m_vDepthStencilViews.size() - 1);
+			}
+		}
+	}
+
+	return(-1);
+}
+//--------------------------------------------------------------------------------
+int ArkRenderer11::CreateShaderResourceView( int ResourceID, D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc )
+{
+	ComPtr<ID3D11Resource> pRawResource = 0;
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex(ResourceID);
+
+	if(pResource) 
+	{
+		pRawResource = pResource->GetResource();
+
+		if(pRawResource) 
+		{
+
+			ShaderResourceViewComPtr pView;
+			HRESULT hr = m_pDevice->CreateShaderResourceView(pRawResource.Get(),pDesc,pView.GetAddressOf());
+
+			if(pView) {
+				m_vShaderResourceViews.push_back(pView);
+				return(m_vShaderResourceViews.size() - 1);
 			}
 		}
 	}
@@ -660,7 +689,28 @@ int ArkRenderer11::CreateBlendState(Dx11BlendStateConfig* pConfig)
 
 	return(m_vBlendStates.size() - 1);
 }
+//--------------------------------------------------------------------------------
+int ArkRenderer11::CreateSamplerState( D3D11_SAMPLER_DESC* pDesc )
+{
+	SamplerStateComPtr pState;
 
+	HRESULT hr = m_pDevice->CreateSamplerState( pDesc, pState.GetAddressOf() );
+
+	if ( FAILED( hr ) )
+	{
+		ArkLog::Get(LogType::Renderer).Output( L"Failed to create sampler state!" );
+		return( -1 );
+	}
+
+	m_vSamplerStates.push_back( pState );
+
+	return( m_vSamplerStates.size() - 1 );
+}
+//--------------------------------------------------------------------------------
+SamplerStateComPtr ArkRenderer11::GetSamplerState( int index )
+{
+	return( m_vSamplerStates[index] );
+}
 //--------------------------------------------------------------------------------
 Dx11RenderTargetView& ArkRenderer11::GetRenderTargetViewByIndex(int rid)
 {
@@ -676,6 +726,14 @@ Dx11DepthStencilView& ArkRenderer11::GetDepthStencilViewByIndex(int rid)
 	assert(rid < m_vDepthStencilViews.size());
 
 	return(m_vDepthStencilViews[rid]);
+}
+//--------------------------------------------------------------------------------
+Dx11ShaderResourceView& ArkRenderer11::GetShaderResourceViewByIndex(int rid)
+{
+	assert(rid >= 0 );
+	assert(rid < m_vShaderResourceViews.size());
+
+	return(m_vShaderResourceViews[rid]);
 }
 //--------------------------------------------------------------------------------
 std::shared_ptr<Dx11Texture2D> ArkRenderer11::GetTexture2DByIndex(int rid)
@@ -1103,4 +1161,19 @@ std::shared_ptr<ArkIndexBuffer11> ArkRenderer11::GetIndexBufferByIndex(int index
 		}
 	}
 	return pResult;
+}
+//--------------------------------------------------------------------------------
+void ArkRenderer11::DeleteResource( ResourcePtr ptr )
+{
+	DeleteResource( ptr->m_iResource );
+}
+//--------------------------------------------------------------------------------
+void ArkRenderer11::DeleteResource( int index )
+{
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex(index);
+
+	if( pResource != nullptr )
+	{
+		m_vResources[ index & 0xffff ] = nullptr;
+	}
 }

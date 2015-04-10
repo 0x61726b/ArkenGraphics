@@ -4,9 +4,8 @@
 //
 //Copyright (c) Alperen Gezer.All rights reserved.
 //
-//RenderAppSimple.h
+//PhongShading.h
 //--------------------------------------------------------------------------------
-
 #include "ArkRenderApplication11.h"
 #include "Win32RenderWindow.h"
 #include "ArkRenderer11.h"
@@ -15,6 +14,8 @@
 #include "Camera.h"
 #include "Scene.h"
 
+#include "ArkSpriteRenderer11.h"
+#include "ArkFontLoader.h"
 using namespace Arkeng;
 
 class PhongShading : public ArkRenderApplication11
@@ -46,4 +47,6 @@ protected:
 	ResourcePtr										m_pVertexBuffer;
 	int												m_VertexLayout;
 	ResourcePtr										m_pIndexBuffer;
+
+
 };

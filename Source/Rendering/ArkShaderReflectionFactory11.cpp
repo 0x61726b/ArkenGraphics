@@ -149,14 +149,14 @@ ArkShaderReflection11* ArkShaderReflectionFactory11::GenerateReflection( ArkShad
 		{
 			binddesc.pParamRef = pParamMgr->GetConstantBufferParameterRef( binddesc.Name );
 		}
-		/*else if ( resource_desc.Type == D3D_SIT_TEXTURE || resource_desc.Type == D3D_SIT_STRUCTURED )
+		else if ( resource_desc.Type == D3D_SIT_TEXTURE || resource_desc.Type == D3D_SIT_STRUCTURED )
 		{
 			binddesc.pParamRef = pParamMgr->GetShaderResourceParameterRef( binddesc.Name );
 		}
 		else if ( resource_desc.Type == D3D_SIT_SAMPLER )
 		{
 			binddesc.pParamRef = pParamMgr->GetSamplerStateParameterRef( binddesc.Name );
-		}
+		}/*
 		else if ( resource_desc.Type == D3D_SIT_UAV_RWTYPED || resource_desc.Type == D3D_SIT_UAV_RWSTRUCTURED
 			|| resource_desc.Type == D3D_SIT_BYTEADDRESS || resource_desc.Type == D3D_SIT_UAV_RWBYTEADDRESS
 			|| resource_desc.Type == D3D_SIT_UAV_APPEND_STRUCTURED || resource_desc.Type == D3D_SIT_UAV_CONSUME_STRUCTURED

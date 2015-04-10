@@ -29,6 +29,7 @@ void ArkVectorParameter11::SetParameterData(void* pData,unsigned int thread )
 {
 	if(0 != memcpy(pData,&m_Vector,sizeof(DirectX::XMVECTOR)))
 	{
+		DirectX::XMVECTOR* test = reinterpret_cast<DirectX::XMVECTOR*>(pData);
 		m_Vector = *reinterpret_cast<DirectX::XMVECTOR*>(pData);
 	}
 }

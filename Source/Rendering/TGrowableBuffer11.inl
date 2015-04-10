@@ -7,7 +7,7 @@
 //TGrowableBuffer11.inl
 //--------------------------------------------------------------------------------
 template <class T>
-TGrowableBufferDX11<T>::TGrowableBufferDX11() :
+TGrowableBuffer11<T>::TGrowableBuffer11() :
 	m_uiMaxElementCount( 0 ),
 	m_uiElementCount( 0 ),
 	m_bUploadNeeded( false ),
@@ -18,13 +18,13 @@ TGrowableBufferDX11<T>::TGrowableBufferDX11() :
 }
 //--------------------------------------------------------------------------------
 template <class T>
-TGrowableBufferDX11<T>::~TGrowableBufferDX11()
+TGrowableBuffer11<T>::~TGrowableBuffer11()
 {
 	SAFE_DELETE_ARRAY( m_pDataArray );
 }
 //--------------------------------------------------------------------------------
 template <class T>
-void TGrowableBufferDX11<T>::SetMaxElementCount( unsigned int max )
+void TGrowableBuffer11<T>::SetMaxElementCount( unsigned int max )
 {
 	// if this is different than the current size, then release the existing
 	// local array, plus resize the resource.
@@ -71,19 +71,19 @@ void TGrowableBufferDX11<T>::SetMaxElementCount( unsigned int max )
 }
 //--------------------------------------------------------------------------------
 template <class T>
-unsigned int TGrowableBufferDX11<T>::GetMaxElementCount()
+unsigned int TGrowableBuffer11<T>::GetMaxElementCount()
 {
 	return( m_uiMaxElementCount );
 }
 //--------------------------------------------------------------------------------
 template <class T>
-unsigned int TGrowableBufferDX11<T>::GetElementCount()
+unsigned int TGrowableBuffer11<T>::GetElementCount()
 {
 	return( m_uiElementCount );
 }
 //--------------------------------------------------------------------------------
 template <class T>
-void TGrowableBufferDX11<T>::AddElement( const T& element )
+void TGrowableBuffer11<T>::AddElement( const T& element )
 {
 	EnsureCapacity( );
 
@@ -116,7 +116,7 @@ void TGrowableBufferDX11<T>::AddElement( const T& element )
 //}
 //--------------------------------------------------------------------------------
 template <class T>
-void TGrowableBufferDX11<T>::ResetData()
+void TGrowableBuffer11<T>::ResetData()
 {
 	// Reset the vertex count here to prepare for the next drawing pass.
 	m_uiElementCount = 0;
@@ -125,7 +125,7 @@ void TGrowableBufferDX11<T>::ResetData()
 }
 //--------------------------------------------------------------------------------
 template <class T>
-void TGrowableBufferDX11<T>::EnsureCapacity( )
+void TGrowableBuffer11<T>::EnsureCapacity( )
 {
 	// If the next vertex would put us over the limit, then resize the array.
 	if ( m_uiElementCount + 1 >= m_uiMaxElementCount ) {

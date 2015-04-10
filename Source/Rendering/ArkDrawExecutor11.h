@@ -11,7 +11,7 @@
 //--------------------------------------------------------------------------------
 #include "Pch.h"
 #include "PipelineExecutor11.h"
-#include "TGrowableBuffer11.h"
+#include "TGrowableVertexBuffer11.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -22,7 +22,7 @@ namespace Arkeng
 		ArkDrawExecutor11( );
 		virtual ~ArkDrawExecutor11( );
 	
-		virtual void Execute( PipelineManagerDX11* pPipeline, IParameterManager* pParamManager );
+		virtual void Execute( PipelineManager* pPipeline, IParameterManager* pParamManager );
 		virtual void ResetGeometry();
 		virtual void ResetVertices();
 
@@ -42,7 +42,7 @@ namespace Arkeng
 		D3D11_PRIMITIVE_TOPOLOGY m_ePrimType;
 
 		// Use a growable vertex buffer to hold the vertex data.
-		TGrowableVertexBufferDX11<TVertex> VertexBuffer;
+		TGrowableVertexBuffer11<TVertex> VertexBuffer;
 	};
 	#include "ArkDrawExecutor11.inl"
 };

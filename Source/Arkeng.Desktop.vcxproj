@@ -207,6 +207,8 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkConstantBufferParameterWriter11.h" />
     <ClInclude Include="Rendering\ArkDrawExecutor11.h" />
     <ClInclude Include="Rendering\ArkDrawIndexedExecutor11.h" />
+    <ClInclude Include="Rendering\ArkDrawIndexedInstancedExecutor11.h" />
+    <ClInclude Include="Rendering\ArkFontLoader.h" />
     <ClInclude Include="Rendering\ArkGeometry11.h" />
     <ClInclude Include="Rendering\ArkGeometryGenerator11.h" />
     <ClInclude Include="Rendering\ArkIndexBuffer11.h" />
@@ -225,6 +227,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkRenderable.h" />
     <ClInclude Include="Rendering\ArkRenderEffect11.h" />
     <ClInclude Include="Rendering\ArkRenderParameter11.h" />
+    <ClInclude Include="Rendering\ArkSamplerParameter11.h" />
     <ClInclude Include="Rendering\ArkSceneGraph.h" />
     <ClInclude Include="Rendering\ArkShader11.h" />
     <ClInclude Include="Rendering\ArkShaderFactory11.h" />
@@ -233,6 +236,8 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkShaderResourceParameter11.h" />
     <ClInclude Include="Rendering\ArkShaderResourceParameterWriter11.h" />
     <ClInclude Include="Rendering\ArkShaderStageState11.h" />
+    <ClInclude Include="Rendering\ArkSpriteFont11.h" />
+    <ClInclude Include="Rendering\ArkSpriteRenderer11.h" />
     <ClInclude Include="Rendering\ArkVectorParameter11.h" />
     <ClInclude Include="Rendering\ArkVectorParameterWriter11.h" />
     <ClInclude Include="Rendering\ArkVertexBuffer11.h" />
@@ -272,12 +277,16 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\PointIndices.h" />
     <ClInclude Include="Rendering\RenderTask.h" />
     <ClInclude Include="Rendering\ArkShape3D.h" />
+    <ClInclude Include="Rendering\SpriteVertex11.h" />
     <ClInclude Include="Rendering\TaskCore.h" />
     <ClInclude Include="Rendering\TGrowableBuffer11.h" />
+    <ClInclude Include="Rendering\TGrowableIndexBuffer11.h" />
+    <ClInclude Include="Rendering\TGrowableVertexBuffer11.h" />
     <ClInclude Include="Rendering\TriangleIndices.h" />
     <ClInclude Include="Rendering\TStateArrayMonitor.h" />
     <ClInclude Include="Rendering\TStateMonitor.h" />
     <ClInclude Include="Rendering\VertexElement11.h" />
+    <ClInclude Include="Rendering\ViewTextOverlay.h" />
     <ClInclude Include="Scene\Actor.h" />
     <ClInclude Include="Scene\ArkEntity3D.h" />
     <ClInclude Include="Scene\ArkFirstPersonCamera.h" />
@@ -329,6 +338,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkConstantBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkConstantBufferParameter11.cpp" />
     <ClCompile Include="Rendering\ArkConstantBufferParameterWriter11.cpp" />
+    <ClCompile Include="Rendering\ArkFontLoader.cpp" />
     <ClCompile Include="Rendering\ArkGeometry11.cpp" />
     <ClCompile Include="Rendering\ArkGeometryGenerator11.cpp" />
     <ClCompile Include="Rendering\ArkIndexBuffer11.cpp" />
@@ -347,6 +357,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkRenderEffect11.cpp" />
     <ClCompile Include="Rendering\ArkRenderer11.cpp" />
     <ClCompile Include="Rendering\ArkRenderParameter11.cpp" />
+    <ClCompile Include="Rendering\ArkSamplerParameter11.cpp" />
     <ClCompile Include="Rendering\ArkShader11.cpp" />
     <ClCompile Include="Rendering\ArkShadeResourceParameter11.cpp" />
     <ClCompile Include="Rendering\ArkShaderFactory11.cpp" />
@@ -356,6 +367,8 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkShaderStage11.cpp" />
     <ClCompile Include="Rendering\ArkShaderStageState11.cpp" />
     <ClCompile Include="Rendering\ArkShape3D.cpp" />
+    <ClCompile Include="Rendering\ArkSpriteFont11.cpp" />
+    <ClCompile Include="Rendering\ArkSpriteRenderer11.cpp" />
     <ClCompile Include="Rendering\ArkVectorParameter11.cpp" />
     <ClCompile Include="Rendering\ArkVectorParameterWriter11.cpp" />
     <ClCompile Include="Rendering\ArkVertexBuffer11.cpp" />
@@ -390,9 +403,11 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\PointIndices.cpp" />
     <ClCompile Include="Rendering\RenderTask.cpp" />
     <ClCompile Include="Rendering\ArkMaterial11.cpp" />
+    <ClCompile Include="Rendering\SpriteVertex11.cpp" />
     <ClCompile Include="Rendering\TaskCore.cpp" />
     <ClCompile Include="Rendering\TriangleIndices.cpp" />
     <ClCompile Include="Rendering\VertexElement11.cpp" />
+    <ClCompile Include="Rendering\ViewTextOverlay.cpp" />
     <ClCompile Include="Scene\Actor.cpp" />
     <ClCompile Include="Scene\ArkEntity3D.cpp" />
     <ClCompile Include="Scene\ArkFirstPersonCamera.cpp" />
@@ -412,7 +427,10 @@ copy Utility\*.inl ..\SDK\Include</Command>
   <ItemGroup>
     <None Include="Rendering\ArkDrawExecutor11.inl" />
     <None Include="Rendering\ArkDrawIndexedExecutor11.inl" />
+    <None Include="Rendering\ArkDrawIndexedInstancedExecutor11.inl" />
     <None Include="Rendering\TGrowableBuffer11.inl" />
+    <None Include="Rendering\TGrowableIndexBuffer11.inl" />
+    <None Include="Rendering\TGrowableVertexBuffer11.inl" />
     <None Include="Rendering\TStateArrayMonitor.inl" />
     <None Include="Rendering\TStateMonitor.inl" />
     <None Include="Scene\ArkSpatialController.inl" />

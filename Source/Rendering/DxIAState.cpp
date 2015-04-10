@@ -71,9 +71,10 @@ void DxIAState::SetFeatureLevel( D3D_FEATURE_LEVEL FeatureLevel )
 {
 	m_FeatureLevel = FeatureLevel;
 
-	if( FeatureLevel == D3D_FEATURE_LEVEL_11_0 )
-	{
-		m_uiAvailableSlotCount = D3D11_IA_INDEX_INPUT_RESOURCE_SLOT_COUNT;
+	if ( m_FeatureLevel == D3D_FEATURE_LEVEL_11_0 ) {
+		m_uiAvailableSlotCount = D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT;
+	} else {
+		m_uiAvailableSlotCount = D3D10_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT;
 	}
 }
 //--------------------------------------------------------------------------------

@@ -94,7 +94,11 @@ void Dx11ResourceProxy::CommonConstructor(UINT BindFlags,int ResourceID,ArkRende
 		*m_pDSVConfig = *pDSVConfig;
 	}
 
-
+	if ( ( BindFlags & D3D11_BIND_SHADER_RESOURCE ) == D3D11_BIND_SHADER_RESOURCE )
+    {
+        D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc = pSRVConfig ? &pSRVConfig->GetSRVDesc() : nullptr;
+        m_iResourceSRV = pRenderer->CreateShaderResourceView( m_iResource, pDesc );
+    }
 	//Add suitable methods to the renderer to create default views
 	if((BindFlags & D3D11_BIND_RENDER_TARGET) == D3D11_BIND_RENDER_TARGET)
 	{

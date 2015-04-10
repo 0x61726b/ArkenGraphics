@@ -28,6 +28,7 @@ PhongShading AppInstance;
 //--------------------------------------------------------------------------------
 PhongShading::PhongShading()
 {
+	
 }
 //--------------------------------------------------------------------------------
 bool PhongShading::ConfigureEngineComponents()
@@ -47,6 +48,8 @@ bool PhongShading::ConfigureEngineComponents()
 		return(false);
 	}
 
+	SetMultiThreadedMode( false );
+
 	return(true);
 }
 ////--------------------------------------------------------------------------------
@@ -55,15 +58,21 @@ bool PhongShading::ConfigureRenderingSetup()
 	PerspectiveView* pPerspView = new PerspectiveView(*m_pRenderer,m_pBackBuffer);
 	m_pRenderView = pPerspView;
 
+	m_pTextOverlayView = new ViewTextOverlay( *m_pRenderer, m_pBackBuffer );
+	
 	m_pCamera = new ArkFirstPersonCamera();
 	m_pCamera->SetEventManager(&CameraEventHub);
 
 
-	m_pCamera->Spatial().SetTranslation(XMVectorSet(0.0f,20.0f,-25,0.0f));
+	m_pCamera->Spatial().SetTranslation(XMVectorSet(10,2.5f,-2,0.0f));
+
+
 	m_pCamera->SetCameraView(m_pRenderView);
-	m_pCamera->SetProjectionParams(0.1f,100.0f,static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight),DirectX::XM_PIDIV4);
+	m_pCamera->SetOverlayView(m_pTextOverlayView);
+	m_pCamera->SetProjectionParams(0.1f,100.0f,static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight),DirectX::XM_PIDIV2);
 
 	m_pScene->AddCamera(m_pCamera);
+
 
 	return true;
 }
@@ -97,28 +106,23 @@ void PhongShading::Initialize()
 	//Create geometry object and actor
 
 	GeometryPtr pGeometry = GeometryPtr(new ArkGeometry11());
-	ArkGeometryGenerator11::GenerateSphere(pGeometry,50,50,3);
+	ArkGeometryGenerator11::GenerateSphere(pGeometry,50,50,1);
 	pGeometry->LoadToBuffers();
 	pGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	int sphereCount = 10;
 
-	for(int i=0; i < sphereCount; ++i)
-	{
-		for(int j=0; j < sphereCount; j++)
-		{
+
 			m_pActor = new Actor();
 			m_pActor->GetBody()->Visual.SetGeometry(pGeometry);
 			m_pActor->GetBody()->Visual.SetMaterial(m_pMaterial);
 
-			m_pActor->GetNode()->Transform.Position() = XMVectorSet(1 + 10*i + rand() % 10,1.6f,10*j + rand() % 10,0.0f );
+			m_pActor->GetNode()->Transform.Position() = XMVectorSet(10,0.8f,2.0f,0.0f);
 			m_pActor->GetNode()->SetName(L"Sphere");
 			m_pScene->AddActor(m_pActor);
-		}
-	}
+
 
 
 	GeometryPtr planeGeo = GeometryPtr(new ArkGeometry11());
-	ArkGeometryGenerator11::GenerateTexturedPlane(planeGeo,100,100);
+	ArkGeometryGenerator11::GenerateTexturedPlane(planeGeo,50,50);
 
 	planeGeo->LoadToBuffers();
 	planeGeo->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -138,6 +142,8 @@ void PhongShading::Initialize()
 	m_pLightPositionWriter = m_pRenderer->m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightPositionWS"));
 	m_pLightPositionWriter->InitializeParameterData(&LightPos);
 
+
+
 }
 //--------------------------------------------------------------------------------
 void PhongShading::Update()
@@ -145,14 +151,23 @@ void PhongShading::Update()
 	m_pTimer->Update();
 	EvtManager.ProcessEvent(EFrameStartPtr(new EFrameStart(m_pTimer->Elapsed())));
 
+	XMMATRIX transform = XMMatrixIdentity();
+	transform *= XMMatrixTranslation( 30.0f,30.0f,0.0f );
+	XMFLOAT4X4 transform4;
+    XMStoreFloat4x4( &transform4, transform );
+    std::wstring text = L"FPS: " + std::to_wstring( m_pTimer->Framerate() );
+    m_pTextOverlayView->WriteText( text, transform4, XMFLOAT4( 1.0f, 0.0f,0.0f, 1.0f ) );
+
 	m_pScene->Update(m_pTimer->Elapsed());
 	m_pScene->Render(m_pRenderer);
 
 	m_pRenderer->Present(m_pWindow->GetHandle(),m_pWindow->GetSwapChain());
+
 }
 //--------------------------------------------------------------------------------
 void PhongShading::Shutdown()
 {
+	
 }
 //--------------------------------------------------------------------------------
 bool PhongShading::HandleEvent(EventPtr pEvent)
@@ -171,5 +186,5 @@ bool PhongShading::HandleEvent(EventPtr pEvent)
 //--------------------------------------------------------------------------------
 std::wstring PhongShading::GetName()
 {
-	return L"RenderAppSimple";
+	return std::wstring(L"RenderAppSimple");
 }

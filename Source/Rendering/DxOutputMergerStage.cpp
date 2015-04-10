@@ -71,7 +71,7 @@ void DxOutputMergerStage::ApplyRenderTargets( ID3D11DeviceContext* pContext )
 		Dx11DepthStencilView& DSV = pRenderer->GetDepthStencilViewByIndex( CurrentState.DepthTarget.GetState() );
 		dsv = DSV.m_pDepthStencilView.Get();
 
-		pContext->OMSetRenderTargets(1,rtvs,dsv);
+		pContext->OMSetRenderTargets(D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT,rtvs,dsv);
 
 		for ( int i = 0; i < D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT; i++ ) {
 			PreviousState.RenderTargetViews.SetState( i, CurrentState.RenderTargetViews.GetState( i ) );

@@ -16,6 +16,7 @@ using namespace Arkeng;
 Camera::Camera()
 	: m_pCameraView(nullptr),
 	m_pScene(nullptr),
+	m_pOverlayView(nullptr),
 	m_fNear(0.01f),
 	m_fFar(100.0f),
 	m_fAspect(1280.0f / 800.0f),
@@ -34,10 +35,20 @@ Camera::Camera()
 Camera::~Camera()
 {
 	Safe_Delete(m_pCameraView);
+	Safe_Delete(m_pOverlayView);
+}
+//--------------------------------------------------------------------------------
+void Camera::SetOverlayView( TaskCore* pTask )
+{
+	m_pOverlayView = pTask;
 }
 //--------------------------------------------------------------------------------
 void Camera::RenderFrame(ArkRenderer11* pRenderer)
 {
+
+	if( m_pOverlayView )
+		pRenderer->QueueTask( m_pOverlayView );
+
 	if(m_pCameraView)
 	{
 		if(m_pScene)
@@ -109,7 +120,10 @@ void Camera::ApplyProjectionParams()
 //--------------------------------------------------------------------------------
 void Camera::ApplyOrthographicParams()
 {
-	//
+	m_ProjMatrix = DirectX::XMMatrixOrthographicLH(m_fWidth,m_fHeight,m_fNear,m_fFar );
+
+	if( m_pCameraView)
+		m_pCameraView->SetProjMatrix(m_ProjMatrix);
 }
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------

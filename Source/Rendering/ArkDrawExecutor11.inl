@@ -7,19 +7,19 @@
 //ArkDrawExecutor11.h
 //--------------------------------------------------------------------------------
 template <class TVertex>
-ArkDrawExecutor11<TVertex>::ArkDrawIndexedExecutor11( )
+ArkDrawExecutor11<TVertex>::ArkDrawExecutor11( )
 {
 	// Default to triangle list...
 	m_ePrimType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 }
 //--------------------------------------------------------------------------------
 template <class TVertex>
-ArkDrawExecutor11<TVertex>::~ArkDrawIndexedExecutor11()
+ArkDrawExecutor11<TVertex>::~ArkDrawExecutor11()
 {
 }
 //--------------------------------------------------------------------------------
 template <class TVertex>
-void ArkDrawExecutor11<TVertex>::Execute( PipelineManagerDX11* pPipeline, IParameterManager* pParamManager )
+void ArkDrawExecutor11<TVertex>::Execute( PipelineManager* pPipeline, IParameterManager* pParamManager )
 {
 	// If any vertices have been added, then render them!
 
@@ -29,15 +29,15 @@ void ArkDrawExecutor11<TVertex>::Execute( PipelineManagerDX11* pPipeline, IParam
 		// if something has been changed since last upload).
 		VertexBuffer.UploadData( pPipeline );
 	
-		pPipeline->InputAssemblerStage.ClearDesiredState();
+		pPipeline->InputAssemblerStage.ClearCurrentState();
 
 		// Set the Input Assembler state, then perform the draw call.
-		int layout = GetInputLayout( pPipeline->ShaderStages[VERTEX_SHADER]->DesiredState.ShaderProgram.GetState() );
-		pPipeline->InputAssemblerStage.DesiredState.InputLayout.SetState( layout );
-		pPipeline->InputAssemblerStage.DesiredState.PrimitiveTopology.SetState( m_ePrimType );
-		pPipeline->InputAssemblerStage.DesiredState.VertexBuffers.SetState( 0, VertexBuffer.GetBuffer()->m_iResource );
-		pPipeline->InputAssemblerStage.DesiredState.VertexBufferStrides.SetState( 0, sizeof( TVertex ) );
-		pPipeline->InputAssemblerStage.DesiredState.VertexBufferOffsets.SetState( 0, 0 );
+		int layout = GetInputLayout( pPipeline->ShaderStages[VERTEX_SHADER]->CurrentState.ShaderProgram.GetState() );
+		pPipeline->InputAssemblerStage.CurrentState.InputLayout.SetState( layout );
+		pPipeline->InputAssemblerStage.CurrentState.PrimitiveTopology.SetState( m_ePrimType );
+		pPipeline->InputAssemblerStage.CurrentState.VertexBuffers.SetState( 0, VertexBuffer.GetBuffer()->m_iResource );
+		pPipeline->InputAssemblerStage.CurrentState.VertexBufferStrides.SetState( 0, sizeof( TVertex ) );
+		pPipeline->InputAssemblerStage.CurrentState.VertexBufferOffsets.SetState( 0, 0 );
 	
 		pPipeline->ApplyInputResources();
 

@@ -213,6 +213,14 @@ void ArkShaderReflection11::BindParameters( ShaderType type, PipelineManager* pP
 		case D3D_SIT_TBUFFER:
 			pPipeline->BindConstantBufferParameter( type, ResourceBindings[i].pParamRef, slot, pParamManager );
 			break;
+		case D3D_SIT_SAMPLER:
+			pPipeline->BindSamplerStateParameter( type, ResourceBindings[i].pParamRef, slot, pParamManager );
+			break;
+		case D3D_SIT_TEXTURE:
+		case D3D_SIT_STRUCTURED:
+		case D3D_SIT_BYTEADDRESS:
+			pPipeline->BindShaderResourceParameter( type, ResourceBindings[i].pParamRef, slot, pParamManager );
+			break;
 		}
 	}
 }

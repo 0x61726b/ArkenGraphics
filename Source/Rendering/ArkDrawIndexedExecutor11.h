@@ -10,19 +10,19 @@
 #define __ArkDrawIndexedExecutor11_h__
 //--------------------------------------------------------------------------------
 #include "Pch.h"
-#include "PipelineExecutor11.h"
-#include "TGrowableBuffer11.h"
+#include "ArkDrawExecutor11.h"
+#include "TGrowableIndexBuffer11.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
 	template <class TVertex>
-	class ArkDrawIndexedExecutor11 : public PipelineExecutor11
+	class ArkDrawIndexedExecutor11 : public ArkDrawExecutor11<TVertex>
 	{
 	public:
 		ArkDrawIndexedExecutor11( );
 		virtual ~ArkDrawIndexedExecutor11( );
 	
-		virtual void Execute( PipelineManagerDX11* pPipeline, IParameterManager* pParamManager );
+		virtual void Execute( PipelineManager* pPipeline, IParameterManager* pParamManager );
 		virtual void ResetGeometry();
 		virtual void ResetIndices();
 
@@ -36,7 +36,7 @@ namespace Arkeng
 		void SetMaxIndexCount( unsigned int count );
 	protected:
 		
-		TGrowableIndexBufferDX11<unsigned int> IndexBuffer;
+		TGrowableIndexBuffer11<unsigned int> IndexBuffer;
 	};
 	#include "ArkDrawIndexedExecutor11.inl"
 };

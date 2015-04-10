@@ -89,7 +89,7 @@ void PerspectiveView::ExecuteTask(PipelineManager* pPipelineManager,IParameterMa
 	pPipelineManager->OutputMergerStage.CurrentState.DepthTarget.SetState( m_pDepthTarget->m_iResourceDSV );
 	pPipelineManager->ApplyRenderTargets();
 
-	float vColor[4] ={0,0,0,0};
+	float vColor[4] ={0.78f,0.80f,0.82f,0};
 
 	pPipelineManager->ClearBuffers(vColor,1.0f);
 
@@ -114,5 +114,5 @@ void PerspectiveView::Resize(UINT width,UINT height)
 //--------------------------------------------------------------------------------
 std::wstring PerspectiveView::GetName()
 {
-	return L"Perspective View";
+	return std::wstring(L"Perspective View");
 }

@@ -70,7 +70,7 @@ void ArkConstantBuffer11::EvaluateMappings(PipelineManager* pPipeline,IParameter
 				// buffer already.
 
 				D3D11_MAPPED_SUBRESOURCE resource = 
-					pPipeline->MapResource( this, 0, D3D11_MAP_WRITE_DISCARD, 0 );
+					pPipeline->MapResource(this, 0, D3D11_MAP_WRITE_DISCARD, 0 );
 
 				// Update each variable in the constant buffer.  These variables are identified
 				// by their type, and are currently allowed to be Vector4f, Matrix4f, or Matrix4f
@@ -107,20 +107,20 @@ void ArkConstantBuffer11::EvaluateMappings(PipelineManager* pPipeline,IParameter
 						}
 						else 
 						{
-							//// If a matrix array, then use the corresponding parameter type.
-							//if ( size == elements * sizeof( DirectX::XMMATRIX ) ) {
-							//	DirectX::XMFLOAT4X4 pM= pParamManager->GetMatrixArrayParameter( pParam );
-							//	memcpy( ((char*)resource.pData + offset), (char*)&pM, size );
-							//} else {
-							//	Log::Get().Write( L"Mismatch in matrix array count, update will not be performed!!!" );
-							//}
+							// If a matrix array, then use the corresponding parameter type.
+							if ( size == elements * sizeof( DirectX::XMMATRIX ) ) {
+								DirectX::XMMATRIX* pM= pParamManager->GetMatrixArrayParameter( pParam );
+								memcpy( ((char*)resource.pData + offset), (char*)&pM, size );
+							} else {
+								ArkLog::Get(LogType::Renderer).Output( L"Mismatch in matrix array count, update will not be performed!!!" );
+							}
 						}
 					} else {
 						ArkLog::Get(LogType::Renderer).Output( L"Non vector or matrix parameter specified in a constant buffer!  This will not be updated!" );
 					}
 				}
 
-				pPipeline->UnMapResource( this, 0 );
+				pPipeline->UnMapResource(this, 0 );
 			}
 		}
 	} else {

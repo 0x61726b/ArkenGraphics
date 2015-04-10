@@ -49,6 +49,12 @@ void ArkShaderStage11::ApplyCurrentState(ID3D11DeviceContext* pContext)
 		BindConstantBuffers(pContext,D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT-1);
 	}
 
+	if( CurrentState.SamplerStates.IsUpdateNeeded() )
+		BindSamplerStates( pContext,D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT-1 );
+
+	if( CurrentState.ShaderResourceViews.IsUpdateNeeded() )
+		BindShaderResourceViews( pContext,D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT-1);
+
 	CurrentState.ResetUpdate();
 	PreviousState = CurrentState;
 }

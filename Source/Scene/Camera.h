@@ -33,7 +33,7 @@ namespace Arkeng
 
 		void RenderFrame(ArkRenderer11* Renderer);
 
-		
+		void SetOverlayView( TaskCore* pTask );
 
 		void ApplyProjectionParams();
 		void ApplyOrthographicParams();
@@ -68,6 +68,8 @@ namespace Arkeng
 		ArkParameterContainer Parameters;
 	protected:
 		RenderTask*			m_pCameraView;
+		TaskCore*			m_pOverlayView;
+
 		Scene*				m_pScene;
 		std::shared_ptr<ArkVectorParameterWriter11>			m_pViewPositionWriter;
 		ArkSpatialController<ArkNode3D>*					m_pSpatialController;
