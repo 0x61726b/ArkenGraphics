@@ -4,6 +4,17 @@
 This is a hobby project of achieving a modern renderer coded in C++ D3D 11.I am planning it to extend to D3D 12 when it comes out.
 Changelog 
 
+_**Build Alpha 0.012b**_
+- Fully functional FPS camera with mouse and keyboard movement
+- Basic HUD text drawing with SpriteRenderer
+![HUD](/Resources/Images/2015-04-11 - 14.59.29 ~ capture.png)
+- Multi thread support for pipeline execution and resource creation
+- UOA,SRV and Sampler parameters
+- CS,SO,Domain,Geometry and Hull shaders added
+- DrawIndexedInstanced executor helper class
+- Phong Shading demo
+![Phong](/Resources/Images/phong.png)
+
 _**Build Alpha 0.012a**_
 - Complete rework of how engine handles matrices.
 - Added ArkTimer
