@@ -24,14 +24,18 @@ namespace Arkeng
 		virtual ~ArkRenderEffect11();
 
 		void SetVertexShader( int index );
-		
-
+		void SetHullShader( int index );
+		void SetDomainShader( int index );
+		void SetGeometryShader( int index );
 		void SetPixelShader( int index );
-
+		void SetComputeShader( int index );
 
 		int GetVertexShader( );
-
+		int GetHullShader( );
+		int GetDomainShader( );
+		int GetGeometryShader( );
 		int GetPixelShader( );
+		int GetComputeShader( );
 
 
 		void ConfigurePipeline( PipelineManager* pPipeline, IParameterManager* pParamManager );
@@ -45,8 +49,8 @@ namespace Arkeng
 
 		void UpdateConstantBufferList( );
 
-		int					m_aiIndices[2];
-		ArkShader11*		m_apShaders[2];
+		int					m_aiIndices[6];
+		ArkShader11*		m_apShaders[6];
 
 		std::vector< std::shared_ptr<ArkRenderParameter11> > m_uniqueConstBuffers;
 	};

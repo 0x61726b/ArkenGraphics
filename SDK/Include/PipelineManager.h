@@ -11,11 +11,16 @@
 //--------------------------------------------------------------------------------
 #include "ArkVertexShaderStage11.h"
 #include "ArkPixelShaderStage11.h"
+#include "ArkComputeShaderStage11.h"
+#include "ArkHullShaderStage11.h"
+#include "ArkGeometryShaderStage11.h"
+#include "ArkDomainShaderStage11.h"
 #include "Dx11ResourceProxy.h"
 #include "Dx11Resource.h"
 #include "DxOutputMergerStage.h"
 #include "DxRasterizerStage.h"
 #include "DxIAStage.h"
+#include "Dx11StreamOutputStage.h"
 #include "ArkRenderEffect11.h"
 #include "ArkGeometry11.h"
 //--------------------------------------------------------------------------------
@@ -35,7 +40,7 @@ namespace Arkeng
 		void BindConstantBufferParameter( ShaderType type,std::shared_ptr<ArkRenderParameter11> pParam, UINT slot,IParameterManager* pParamManager );
 		void BindSamplerStateParameter( ShaderType type,std::shared_ptr<ArkRenderParameter11> pParam, UINT slot,IParameterManager* pParamManager );
 		void BindShaderResourceParameter( ShaderType type,std::shared_ptr<ArkRenderParameter11> pParam, UINT slot,IParameterManager* pParamManager );
-
+		void BindUnorderedAccessParameter( ShaderType type,std::shared_ptr<ArkRenderParameter11> pParam, UINT slot,IParameterManager* pParamManager );
 		void BindShader( ShaderType type,int ID, IParameterManager* pParamManager );
 
 		void ClearRenderTargets();
@@ -89,19 +94,33 @@ namespace Arkeng
 		void EndEvent();
 		void SetMarker( std::wstring& name );
 
+		void StartPipelineStatistics( );
+		void EndPipelineStatistics( );
+		std::wstring PrintPipelineStatistics( );
+
 		D3D_FEATURE_LEVEL						m_FeatureLevel;
 		UserDefinedAnnotationComPtr				m_pAnnotation;
 
+		static const int                        NumQueries = 3;
+        int                                     m_iCurrentQuery;
+        QueryComPtr					            m_Queries[NumQueries];
+		D3D11_QUERY_DATA_PIPELINE_STATISTICS	m_PipelineStatsData;
+
 		DeviceContextComPtr			            m_pContext;
 
+		ArkComputeShaderStage11					ComputeShaderStage;
+		ArkDomainShaderStage11					DomainShaderStage;
+		ArkGeometryShaderStage11				GeometryShaderStage;
+		ArkHullShaderStage11					HullShaderStage;
 		ArkVertexShaderStage11					VertexShaderStage;
 		ArkPixelShaderStage11					PixelShaderStage;
 
-		ArkShaderStage11*						ShaderStages[2];
+		ArkShaderStage11*						ShaderStages[6];
 
 		DxOutputMergerStage						OutputMergerStage;
 		DxRasterizerStage						RasterizerStage;
 		DxIAStage								InputAssemblerStage;
+		Dx11StreamOutputStage					StreamOutputStage;
 	};
 };
 //--------------------------------------------------------------------------------

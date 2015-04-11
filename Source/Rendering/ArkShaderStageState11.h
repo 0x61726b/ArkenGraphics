@@ -34,6 +34,8 @@ namespace Arkeng
 			D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT>				ConstantBuffers;
 		TStateArrayMonitor< ID3D11SamplerState*, D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT > SamplerStates;
 		TStateArrayMonitor< ID3D11ShaderResourceView*, D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT > ShaderResourceViews;
+		TStateArrayMonitor< ID3D11UnorderedAccessView*, D3D11_PS_CS_UAV_REGISTER_COUNT > UnorderedAccessViews;
+		TStateArrayMonitor< unsigned int, D3D11_PS_CS_UAV_REGISTER_COUNT > UAVInitialCounts;
 
 	protected:
 		D3D_FEATURE_LEVEL			m_FeatureLevel;

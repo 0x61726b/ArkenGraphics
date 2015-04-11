@@ -133,6 +133,9 @@
     <Filter Include="Rendering\Direct3D11\Material System\Components\Tasks">
       <UniqueIdentifier>{f1d99064-efae-47d4-bf9c-67e990e018e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Direct3D11\Pipeline\Stream Output Stage">
+      <UniqueIdentifier>{b1b0724c-5273-466c-8fd3-b251c41ae3bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Pch.h">
@@ -190,15 +193,6 @@
       <Filter>Rendering\Direct3D11\Resource</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\Dx11Texture2DConfig.h">
-      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11DepthStencilViewConfig.h">
-      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11RenderTargetViewConfig.h">
-      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Dx11ShaderResourceViewConfig.h">
       <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\Dx11SwapChainConfig.h">
@@ -525,6 +519,54 @@
     <ClInclude Include="Rendering\PerspectiveView.h">
       <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\Dx11DepthStencilViewConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11ShaderResourceViewConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11RenderTargetViewConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11UnorderedAccessView.h">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11UnorderedAccessViewConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkComputeShader11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkDomainShader11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkDomainShaderStage11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkHullShader11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkHullShaderStage11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkGeometryShader11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkGeometryShaderStage11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkComputeShaderStage11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11StreamOutputStageState.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Stream Output Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11StreamOutputStage.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Stream Output Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkUnorderedAccessParameter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -574,15 +616,6 @@
     </ClCompile>
     <ClCompile Include="Rendering\Dx11ResourceProxy.cpp">
       <Filter>Rendering\Direct3D11\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Dx11DepthStencilViewConfig.cpp">
-      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Dx11RenderTargetViewConfig.cpp">
-      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Dx11ShaderResourceViewConfig.cpp">
-      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\Dx11SwapChainConfig.cpp">
       <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
@@ -874,6 +907,54 @@
     </ClCompile>
     <ClCompile Include="Perspective\PerspectiveView.cpp">
       <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11DepthStencilViewConfig.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11ShaderResourceViewConfig.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11RenderTargetViewConfig.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11UnorderedAccessView.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11UnorderedAccessViewConfig.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkComputeShader11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkDomainShader11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkDomainShaderStage11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkHullShader11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkHullShaderStage11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkGeometryShader11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkGeometryShaderStage11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkComputeShaderStage11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Shader Stage\Stages</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11StreamOutputStageState.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Stream Output Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11StreamOutputStage.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Stream Output Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkUnorderedAccessParameter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

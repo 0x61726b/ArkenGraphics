@@ -64,3 +64,9 @@ void ArkPixelShaderStage11::BindShaderResourceViews( ID3D11DeviceContext* pConte
 		CurrentState.ShaderResourceViews.GetRange(),
 		CurrentState.ShaderResourceViews.GetFirstSlotLocation() ); 
 }
+//--------------------------------------------------------------------------------
+void ArkPixelShaderStage11::BindUnorderedAccessViews( ID3D11DeviceContext* pContext,int count )
+{
+
+}
+//--------------------------------------------------------------------------------

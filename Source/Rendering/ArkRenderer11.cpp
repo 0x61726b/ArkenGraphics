@@ -33,10 +33,12 @@
 #include "Dx11Texture2D.h"
 #include "Dx11Resource.h"
 #include "Dx11SwapChain.h"
+
 #include "Dx11Texture2DConfig.h"
 #include "Dx11ShaderResourceView.h"
 #include "Dx11RenderTargetView.h"
 #include "Dx11DepthStencilView.h"
+#include "Dx11UnorderedAccessView.h"
 #include "Dx11Texture2DConfig.h"
 #include "Dx11SwapChainConfig.h"
 #include "Dx11ViewPort.h"
@@ -87,6 +89,73 @@ ArkRenderer11::~ArkRenderer11()
 ArkRenderer11* ArkRenderer11::Get()
 {
 	return m_spRenderer;
+}
+//--------------------------------------------------------------------------------
+D3D_FEATURE_LEVEL ArkRenderer11::GetAvailableFeatureLevel( D3D_DRIVER_TYPE DriverType )
+{
+	D3D_FEATURE_LEVEL FeatureLevel;
+	HRESULT hr;
+
+	// If the device has already been created, simply return the feature level.
+	// Otherwise perform a test with null inputs to get the returned feature level
+	// without creating the device.  The application can then do whatever it needs
+	// to for a given feature level.
+
+	if ( m_pDevice ) {
+		FeatureLevel = m_pDevice->GetFeatureLevel();
+	} else {
+		hr = D3D11CreateDevice(
+			nullptr,
+			DriverType,
+			nullptr,
+			0,
+			nullptr,
+			0,
+			D3D11_SDK_VERSION,
+			nullptr,
+			&FeatureLevel,
+			nullptr );
+
+		if ( FAILED( hr ) ) {
+			ArkLog::Get(LogType::Renderer).Output( L"Failed to determine the available hardware feature level!" );
+		}
+
+	}
+
+	return( FeatureLevel );
+
+}
+//--------------------------------------------------------------------------------
+D3D_FEATURE_LEVEL ArkRenderer11::GetCurrentFeatureLevel()
+{
+	return m_FeatureLevel;
+}
+//--------------------------------------------------------------------------------
+UINT64 ArkRenderer11::GetAvailableVideoMemory()
+{
+	// Acquire the DXGI device, then the adapter.
+	// TODO: This method needs to be capable of checking on multiple adapters!
+
+    ComPtr<IDXGIDevice> pDXGIDevice;
+    ComPtr<IDXGIAdapter> pDXGIAdapter;
+    
+	HRESULT hr = m_pDevice.CopyTo( pDXGIDevice.GetAddressOf() );
+	pDXGIDevice->GetAdapter( pDXGIAdapter.GetAddressOf() );
+    
+	// Use the adapter interface to get its description.  Then grab the available
+	// video memory based on if there is dedicated or shared memory for the GPU.
+
+    DXGI_ADAPTER_DESC AdapterDesc;
+    pDXGIAdapter->GetDesc( &AdapterDesc );
+
+	UINT64 availableVideoMem = 0;
+
+    if ( AdapterDesc.DedicatedVideoMemory )
+        availableVideoMem = AdapterDesc.DedicatedVideoMemory;
+    else
+        availableVideoMem = AdapterDesc.SharedSystemMemory;
+
+    return( availableVideoMem );
 }
 //--------------------------------------------------------------------------------
 bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL FeatureLevel)
@@ -249,6 +318,22 @@ bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL Feat
 	m_vShaderResourceViews.emplace_back(ShaderResourceViewComPtr());
 	m_vRenderTargetViews.emplace_back(RenderTargetViewComPtr());
 	m_vDepthStencilViews.emplace_back(DepthStencilViewComPtr());
+
+	D3D11_QUERY_DESC queryDesc;
+	queryDesc.Query = D3D11_QUERY_PIPELINE_STATISTICS;
+	queryDesc.MiscFlags = 0;
+
+    for( int i = 0; i < PipelineManager::NumQueries; ++i)
+    {
+	    hr = m_pDevice->CreateQuery( &queryDesc, &pPipeline->m_Queries[i] );
+
+	    if ( FAILED( hr ) )
+	    {
+		    ArkLog::Get(LogType::Renderer).Output( L"Unable to create a query object!" );
+		    Shutdown();
+		    return( false );
+	    }
+    }
 
 	hr = m_pDevice.CopyTo(m_pDebugDevice.GetAddressOf());
 
@@ -487,6 +572,171 @@ ResourcePtr ArkRenderer11::GetSwapChainResource(int ID)
 	return(ResourcePtr(new Dx11ResourceProxy()));
 }
 //--------------------------------------------------------------------------------
+void ArkRenderer11::ResizeTexture( ResourcePtr texture, UINT width, UINT height )
+{
+	// For the texture, and then for each associated resource view create the new
+	// sized versions.  Afterwards, release the old versions and replace them with
+	// the new ones.
+	int rid = texture->m_iResource;
+
+	// Grab the old texture description and update it for the new size.
+	std::shared_ptr<Dx11Texture2D> pTexture = GetTexture2DByIndex( rid );
+	D3D11_TEXTURE2D_DESC TexDesc = pTexture->GetActualDescription();
+	TexDesc.Width = width;
+	TexDesc.Height = height;
+
+	// Release the old texture, and replace it with the new one.
+	if ( FAILED( m_pDevice->CreateTexture2D( &TexDesc, 0, pTexture->m_pTexture.ReleaseAndGetAddressOf() ) ) ) {
+		ArkLog::Get(LogType::Renderer).Output( L"Error trying to resize texture..." );
+	}
+	
+	// Update the description of the texture for future reference.
+	pTexture->m_ActualDesc = TexDesc;
+	pTexture->m_DesiredDesc = TexDesc;
+	texture->m_pTexture2dConfig->m_State = TexDesc; 
+
+	// Resize each of the resource views, if required.
+	ResizeTextureSRV( rid, texture->m_iResourceSRV, width, height );
+	ResizeTextureRTV( rid, texture->m_iResourceRTV, width, height );
+	ResizeTextureDSV( rid, texture->m_iResourceDSV, width, height );
+	ResizeTextureUAV( rid, texture->m_iResourceUAV, width, height );
+}
+//--------------------------------------------------------------------------------
+void ArkRenderer11::ResizeTextureSRV( int RID, int SRVID, UINT width,UINT height )
+{
+	if ( SRVID == 0 ) {
+		return;
+	}
+
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex( RID );
+
+	// Check that the input resources / views are legit.
+	unsigned int index = static_cast<unsigned int>( SRVID );
+
+	if ( !pResource || !( index < m_vShaderResourceViews.size() ) || (pResource->GetType() != RT_TEXTURE2D ) ) {
+		ArkLog::Get(LogType::Renderer).Output( L"Error trying to resize a SRV!!!!" );
+		return;
+	}
+
+	// Get the existing UAV.
+	Dx11ShaderResourceView& SRV = m_vShaderResourceViews[index];
+
+	// Get its description.
+	D3D11_SHADER_RESOURCE_VIEW_DESC SRVDesc;
+	SRV.m_pShaderResourceView->GetDesc( &SRVDesc );
+	
+	// Create the new one.
+	if ( FAILED( m_pDevice->CreateShaderResourceView( 
+		pResource->GetResource(), 
+		&SRVDesc, 
+		SRV.m_pShaderResourceView.ReleaseAndGetAddressOf() ) ) )
+	{
+		ArkLog::Get(LogType::Renderer).Output( L"Error trying to resize a SRV!!!!" );
+	}
+}
+//--------------------------------------------------------------------------------
+void ArkRenderer11::ResizeTextureRTV( int RID, int RTVID, UINT width, UINT height )
+{
+	// Check to make sure we are supposed to do anything...
+	if ( RTVID == 0 ) {
+		return;
+	}
+
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex( RID );
+
+	// Check that the input resources / views are legit.
+	unsigned int index = static_cast<unsigned int>( RTVID );
+
+	if ( !pResource || !( index < m_vRenderTargetViews.size() ) || (pResource->GetType() != RT_TEXTURE2D ) ) {
+		ArkLog::Get(LogType::Renderer).Output( L"Error trying to resize a RTV!!!!" );
+		return;
+	}
+
+	// Get the existing UAV.
+	Dx11RenderTargetView& RTV = m_vRenderTargetViews[index];
+
+	// Get its description.
+	D3D11_RENDER_TARGET_VIEW_DESC RTVDesc;
+	RTV.m_pRenderTargetView->GetDesc( &RTVDesc );
+	
+	// Create the new one.
+	if ( FAILED( m_pDevice->CreateRenderTargetView( 
+		pResource->GetResource(), 
+		&RTVDesc, 
+		RTV.m_pRenderTargetView.ReleaseAndGetAddressOf() ) ) )
+	{
+		ArkLog::Get(LogType::Renderer).Output( L"Error trying to resize a RTV!!!!" );
+	}
+}
+//--------------------------------------------------------------------------------
+void ArkRenderer11::ResizeTextureDSV( int RID, int DSVID, UINT width, UINT height )
+{
+	// Check to make sure we are supposed to do anything...
+	if ( DSVID == 0 ) {
+		return;
+	}
+
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex( RID );
+
+	// Check that the input resources / views are legit.
+	unsigned int index = static_cast<unsigned int>( DSVID );
+
+	if ( !pResource || !( index < m_vDepthStencilViews.size() ) || (pResource->GetType() != RT_TEXTURE2D ) ) {
+		ArkLog::Get(LogType::Renderer).Output( L"Error trying to resize a DSV!!!!" );
+		return;
+	}
+
+	// Get the existing UAV.
+	Dx11DepthStencilView& DSV = m_vDepthStencilViews[index];
+
+	// Get its description.
+	D3D11_DEPTH_STENCIL_VIEW_DESC DSVDesc;
+	DSV.m_pDepthStencilView->GetDesc( &DSVDesc );
+	
+	// Create the new one.
+	if ( FAILED(  m_pDevice->CreateDepthStencilView( 
+		pResource->GetResource(), 
+		&DSVDesc,
+		DSV.m_pDepthStencilView.ReleaseAndGetAddressOf() ) ) )
+	{
+		ArkLog::Get(LogType::Renderer).Output( L"Error trying to resize a DSV!!!!" );
+	}
+}
+//--------------------------------------------------------------------------------
+void ArkRenderer11::ResizeTextureUAV( int RID, int UAVID, UINT width, UINT height )
+{
+	// Check to make sure we are supposed to do anything...
+	if ( UAVID == 0 ) {
+		return;
+	}
+
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex( RID );
+
+	// Check that the input resources / views are legit.
+	unsigned int index = static_cast<unsigned int>( UAVID );
+
+	if ( !pResource || !( index < m_vUnorderedAccessViews.size() ) || (pResource->GetType() != RT_TEXTURE2D ) ) {
+		ArkLog::Get(LogType::Renderer).Output( L"Error trying to resize a UAV!!!!" );
+		return;
+	}
+
+	// Get the existing UAV.
+	Dx11UnorderedAccessView& UAV = m_vUnorderedAccessViews[index];
+
+	// Get its description.
+	D3D11_UNORDERED_ACCESS_VIEW_DESC UAVDesc;
+	UAV.m_pUnorderedAccessView->GetDesc( &UAVDesc );
+	
+	// Create the new one.
+	if ( FAILED( m_pDevice->CreateUnorderedAccessView( 
+		pResource->GetResource(),
+		&UAVDesc,
+		UAV.m_pUnorderedAccessView.ReleaseAndGetAddressOf() ) ) )
+	{
+		ArkLog::Get(LogType::Renderer).Output( L"Error trying to resize a UAV!!!!" );
+	}
+}
+//--------------------------------------------------------------------------------
 void ArkRenderer11::ResizeSwapChain(int ID,UINT width,UINT height)
 {
 	unsigned int index = static_cast<unsigned int>(ID);
@@ -534,17 +784,10 @@ void ArkRenderer11::ResizeViewport(int ID,UINT width,UINT height)
 	Dx11ViewPort& pViewport = m_vViewports[index];
 
 	std::wstring log = L"Resized viewport ";
-	log.append(std::to_wstring(width));
-	log.append(L"x");
-	log.append(std::to_wstring(height));
-
 
 	pViewport.m_ViewPort.Width = static_cast<float>(width);
 	pViewport.m_ViewPort.Height = static_cast<float>(height);
 
-
-
-	ArkLog::Get(LogType::Renderer).Output(log);
 }
 //--------------------------------------------------------------------------------
 ResourcePtr ArkRenderer11::CreateTexture2D(Dx11Texture2DConfig* pConfig,D3D11_SUBRESOURCE_DATA* pData,
@@ -637,6 +880,28 @@ int ArkRenderer11::CreateShaderResourceView( int ResourceID, D3D11_SHADER_RESOUR
 	}
 
 	return(-1);
+}
+//--------------------------------------------------------------------------------
+int ArkRenderer11::CreateUnorderedAccessView( int ResourceID, D3D11_UNORDERED_ACCESS_VIEW_DESC* pDesc )
+{
+	ComPtr<ID3D11Resource> pRawResource = 0;
+	std::shared_ptr<Dx11Resource> pResource = GetResourceByIndex(ResourceID);
+	
+	if ( pResource ) {
+		pRawResource = pResource->GetResource();
+
+		if ( pRawResource ) {
+			UnorderedAccessViewComPtr pView;
+			HRESULT hr = m_pDevice->CreateUnorderedAccessView( pRawResource.Get(), pDesc, pView.GetAddressOf() );
+
+			if ( pView ) {
+				m_vUnorderedAccessViews.push_back( pView );
+				return( m_vUnorderedAccessViews.size() - 1 );
+			}
+		}
+	}
+
+	return( -1 );
 }
 //--------------------------------------------------------------------------------
 int ArkRenderer11::CreateDepthStencilState(Dx11DepthStencilStateConfig* pConfig)
@@ -734,6 +999,14 @@ Dx11ShaderResourceView& ArkRenderer11::GetShaderResourceViewByIndex(int rid)
 	assert(rid < m_vShaderResourceViews.size());
 
 	return(m_vShaderResourceViews[rid]);
+}
+//--------------------------------------------------------------------------------
+Dx11UnorderedAccessView& ArkRenderer11::GetUnorderedAccessViewByIndex(int rid)
+{
+	assert( rid >= 0 );
+	assert( rid < m_vUnorderedAccessViews.size() );
+
+	return( m_vUnorderedAccessViews[rid] );
 }
 //--------------------------------------------------------------------------------
 std::shared_ptr<Dx11Texture2D> ArkRenderer11::GetTexture2DByIndex(int rid)

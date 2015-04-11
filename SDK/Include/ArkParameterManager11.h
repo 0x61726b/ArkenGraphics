@@ -25,6 +25,7 @@ namespace Arkeng
 		void SetConstantBufferParameter( const std::wstring& name,ResourcePtr resource );
 		void SetShaderResourceParameter( const std::wstring& name, ResourcePtr resource );
 		void SetSamplerParameter( const std::wstring& name, int* pID ) ;
+		void SetUnorderedAccessParameter( const std::wstring& name, ResourcePtr resource, unsigned int initial = -1 );
 
 		virtual void SetVectorParameter( std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMVECTOR* pV);
 		virtual void SetMatrixParameter(std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMMATRIX* pM) ;
@@ -32,6 +33,7 @@ namespace Arkeng
 		virtual void SetConstantBufferParameter( std::shared_ptr<ArkRenderParameter11> pParameter, ResourcePtr resource );
 		virtual void SetShaderResourceParameter( std::shared_ptr<ArkRenderParameter11> pParameter, ResourcePtr resource );
 		virtual void SetSamplerParameter( std::shared_ptr<ArkRenderParameter11> pParameter, int* pID );
+		virtual void SetUnorderedAccessParameter( std::shared_ptr<ArkRenderParameter11> pParameter, ResourcePtr resource, unsigned int initial = -1 );
 
 		virtual DirectX::XMVECTOR GetVectorParameter(const std::wstring& name);
 		virtual DirectX::XMMATRIX GetMatrixParameter(const std::wstring& name);
@@ -39,6 +41,7 @@ namespace Arkeng
 		virtual std::shared_ptr<ArkConstantBufferParameter11> GetConstantBufferParameterRef( const std::wstring& name );
 		virtual std::shared_ptr<ArkShaderResourceParameter11> GetShaderResourceParameterRef( const std::wstring& name );
 		virtual std::shared_ptr<ArkSamplerParameter11> GetSamplerStateParameterRef( const std::wstring& name );
+		virtual std::shared_ptr<ArkUnorderedAccessParameter11> GetUnorderedAccessParameterRef( const std::wstring& name );
 
 		virtual DirectX::XMVECTOR GetVectorParameter(std::shared_ptr<ArkRenderParameter11> pP);
 		virtual DirectX::XMMATRIX GetMatrixParameter(std::shared_ptr<ArkRenderParameter11> pP);
@@ -46,6 +49,7 @@ namespace Arkeng
 		virtual int GetConstantBufferParameter( std::shared_ptr<ArkRenderParameter11> pParameter ) ;
 		virtual int GetShaderResourceParameter( std::shared_ptr<ArkRenderParameter11> pParameter );
 		virtual int GetSamplerStateParameter( std::shared_ptr<ArkRenderParameter11> pParameter );
+		virtual int GetUnorderedAccessParameter( std::shared_ptr<ArkRenderParameter11> pParameter );
 
 		virtual std::shared_ptr<ArkRenderParameter11> GetParameterRef(const std::wstring& name) ;
 		virtual std::shared_ptr<ArkVectorParameter11> GetVectorParameterRef(const std::wstring& name) ;
@@ -54,6 +58,7 @@ namespace Arkeng
 		virtual int GetConstantBufferParameter( const std::wstring& name );
 		virtual int GetShaderResourceParameter( const std::wstring& name );
 		virtual int GetSamplerStateParameter( const std::wstring& name );
+		virtual int GetUnorderedAccessParameter( const std::wstring& name );
 
 		virtual void SetWorldMatrix(DirectX::XMMATRIX* w);
 		virtual void SetViewMatrix(DirectX::XMMATRIX* v);

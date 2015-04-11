@@ -55,6 +55,14 @@ void ArkShaderStage11::ApplyCurrentState(ID3D11DeviceContext* pContext)
 	if( CurrentState.ShaderResourceViews.IsUpdateNeeded() )
 		BindShaderResourceViews( pContext,D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT-1);
 
+	if ( CurrentState.UnorderedAccessViews.IsUpdateNeeded() 
+		|| CurrentState.UAVInitialCounts.IsUpdateNeeded() ) {
+		if ( m_FeatureLevel != D3D_FEATURE_LEVEL_11_0 )
+			BindUnorderedAccessViews( pContext, 1 );
+		else
+			BindUnorderedAccessViews( pContext, D3D11_PS_CS_UAV_REGISTER_COUNT-1 );
+	}
+
 	CurrentState.ResetUpdate();
 	PreviousState = CurrentState;
 }

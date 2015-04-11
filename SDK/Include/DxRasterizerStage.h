@@ -29,7 +29,7 @@ namespace Arkeng
 
 
 		void SetFeatureLevel( D3D_FEATURE_LEVEL FeatureLevel );
-		const DxRasterizerState& GetCurrentState() const;
+		const DxRasterizerState& GetPreviousState() const;
 	public:
 		DxRasterizerState		CurrentState;
 

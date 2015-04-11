@@ -26,7 +26,7 @@ namespace Arkeng
 
 		void ApplyCurrentState( ID3D11DeviceContext* pContext );
 
-		const DxIAState& GetCurrentState() const;
+		const DxIAState& GetPreviousState() const;
 
 		DxIAState				CurrentState;
 		DxIAState				PreviousState;

@@ -17,11 +17,10 @@ using namespace Arkeng;
 //--------------------------------------------------------------------------------
 ArkRenderEffect11::ArkRenderEffect11()
 {
-	for(int i = 0; i < 2; i++) {
+	for(int i = 0; i < 6; i++) {
 		m_aiIndices[i] = -1;
 		m_apShaders[i] = nullptr;
 	}
-	m_uniqueConstBuffers.resize(0);
 
 	m_iBlendState = -1;
 	m_iDepthStencilState = -1;
@@ -33,13 +32,69 @@ ArkRenderEffect11::~ArkRenderEffect11()
 {
 }
 //--------------------------------------------------------------------------------
+void ArkRenderEffect11::SetVertexShader(int index)
+{
+	m_aiIndices[VERTEX_SHADER] = index;
+	m_apShaders[VERTEX_SHADER] = ArkRenderer11::Get()->GetShader(index).get();
+
+	if(m_apShaders[VERTEX_SHADER] != nullptr) {
+		if(m_apShaders[VERTEX_SHADER]->GetType() != VERTEX_SHADER) {
+			ArkLog::Get(LogType::Renderer).Output(L"Trying to bind a non-vertex shader to the vertex shader...");
+		}
+	}
+
+	UpdateConstantBufferList();
+}
+//--------------------------------------------------------------------------------
+void ArkRenderEffect11::SetHullShader(int index)
+{
+	m_aiIndices[HULL_SHADER] = index;
+	m_apShaders[HULL_SHADER] = ArkRenderer11::Get()->GetShader(index).get();
+
+	if(m_apShaders[HULL_SHADER] != nullptr) {
+		if(m_apShaders[HULL_SHADER]->GetType() != HULL_SHADER) {
+			ArkLog::Get(LogType::Renderer).Write(L"Trying to bind a non-HULL_SHADER shader to the HULL_SHADER shader...");
+		}
+	}
+
+	UpdateConstantBufferList();
+}
+//--------------------------------------------------------------------------------
+void ArkRenderEffect11::SetDomainShader(int index)
+{
+	m_aiIndices[DOMAIN_SHADER] = index;
+	m_apShaders[DOMAIN_SHADER] = ArkRenderer11::Get()->GetShader(index).get();
+
+	if(m_apShaders[DOMAIN_SHADER] != nullptr) {
+		if(m_apShaders[DOMAIN_SHADER]->GetType() != DOMAIN_SHADER) {
+			ArkLog::Get(LogType::Renderer).Write(L"Trying to bind a non-DOMAIN_SHADER shader to the DOMAIN_SHADER shader...");
+		}
+	}
+
+	UpdateConstantBufferList();
+}
+//--------------------------------------------------------------------------------
+void ArkRenderEffect11::SetGeometryShader(int index)
+{
+	m_aiIndices[GEOMETRY_SHADER] = index;
+	m_apShaders[GEOMETRY_SHADER] = ArkRenderer11::Get()->GetShader(index).get();
+
+	if(m_apShaders[GEOMETRY_SHADER] != nullptr) {
+		if(m_apShaders[GEOMETRY_SHADER]->GetType() != GEOMETRY_SHADER) {
+			ArkLog::Get(LogType::Renderer).Write(L"Trying to bind a non-GEOMETRY_SHADER shader to the GEOMETRY_SHADER shader...");
+		}
+	}
+
+	UpdateConstantBufferList();
+}
+//--------------------------------------------------------------------------------
 void ArkRenderEffect11::SetPixelShader(int index)
 {
-	m_aiIndices[1] = index;
-	m_apShaders[1] = ArkRenderer11::Get()->GetShader(index).get();
+	m_aiIndices[PIXEL_SHADER] = index;
+	m_apShaders[PIXEL_SHADER] = ArkRenderer11::Get()->GetShader(index).get();
 
-	if(m_apShaders[1] != nullptr) {
-		if(m_apShaders[1]->GetType() != PIXEL_SHADER) {
+	if(m_apShaders[PIXEL_SHADER] != nullptr) {
+		if(m_apShaders[PIXEL_SHADER]->GetType() != PIXEL_SHADER) {
 			ArkLog::Get(LogType::Renderer).Write(L"Trying to bind a non-pixel shader to the pixel shader...");
 		}
 	}
@@ -47,14 +102,14 @@ void ArkRenderEffect11::SetPixelShader(int index)
 	UpdateConstantBufferList();
 }
 //--------------------------------------------------------------------------------
-void ArkRenderEffect11::SetVertexShader(int index)
+void ArkRenderEffect11::SetComputeShader(int index)
 {
-	m_aiIndices[0] = index;
-	m_apShaders[0] = ArkRenderer11::Get()->GetShader(index).get();
+	m_aiIndices[COMPUTE_SHADER] = index;
+	m_apShaders[COMPUTE_SHADER] = ArkRenderer11::Get()->GetShader(index).get();
 
-	if(m_apShaders[0] != nullptr) {
-		if(m_apShaders[0]->GetType() != 0) {
-			ArkLog::Get(LogType::Renderer).Output(L"Trying to bind a non-vertex shader to the vertex shader...");
+	if(m_apShaders[COMPUTE_SHADER] != nullptr) {
+		if(m_apShaders[COMPUTE_SHADER]->GetType() != COMPUTE_SHADER) {
+			ArkLog::Get(LogType::Renderer).Write(L"Trying to bind a non-COMPUTE_SHADER shader to the COMPUTE_SHADER shader...");
 		}
 	}
 
@@ -72,7 +127,7 @@ void ArkRenderEffect11::UpdateConstantBufferList()
 	// inspect its reflection data to ensure that the overall list of constant
 	// buffers includes that stage's needs.
 
-	for(int stage = 0; stage < 2; stage++) {
+	for(int stage = 0; stage < 6; stage++) {
 
 		ArkShader11* pShader = m_apShaders[stage];
 
@@ -142,16 +197,41 @@ void ArkRenderEffect11::ConfigurePipeline(PipelineManager* pPipeline,IParameterM
 		cbuffer->EvaluateMappings(pPipeline,pParamManager);
 	}
 
-	pPipeline->BindShader(VERTEX_SHADER,m_aiIndices[VERTEX_SHADER],pParamManager);
-	pPipeline->BindShader(PIXEL_SHADER,m_aiIndices[PIXEL_SHADER],pParamManager);
+	pPipeline->BindShader( VERTEX_SHADER, m_aiIndices[VERTEX_SHADER], pParamManager );
+	pPipeline->BindShader( HULL_SHADER, m_aiIndices[HULL_SHADER], pParamManager );
+	pPipeline->BindShader( DOMAIN_SHADER, m_aiIndices[DOMAIN_SHADER], pParamManager );
+	pPipeline->BindShader( GEOMETRY_SHADER, m_aiIndices[GEOMETRY_SHADER], pParamManager );
+	pPipeline->BindShader( PIXEL_SHADER, m_aiIndices[PIXEL_SHADER], pParamManager );
+	pPipeline->BindShader( COMPUTE_SHADER, m_aiIndices[COMPUTE_SHADER], pParamManager );
 }
 //--------------------------------------------------------------------------------
-int ArkRenderEffect11::GetPixelShader()
+int ArkRenderEffect11::GetVertexShader( )
 {
-	return m_aiIndices[PIXEL_SHADER];
+	return( m_aiIndices[VERTEX_SHADER] );
 }
 //--------------------------------------------------------------------------------
-int ArkRenderEffect11::GetVertexShader()
+int ArkRenderEffect11::GetHullShader( )
 {
-	return m_aiIndices[VERTEX_SHADER];
+	return( m_aiIndices[HULL_SHADER] );
 }
+//--------------------------------------------------------------------------------
+int ArkRenderEffect11::GetDomainShader( )
+{
+	return( m_aiIndices[DOMAIN_SHADER] );
+}
+//--------------------------------------------------------------------------------
+int ArkRenderEffect11::GetGeometryShader( )
+{
+	return( m_aiIndices[GEOMETRY_SHADER] );
+}
+//--------------------------------------------------------------------------------
+int ArkRenderEffect11::GetPixelShader( )
+{
+	return( m_aiIndices[PIXEL_SHADER] );
+}
+//--------------------------------------------------------------------------------
+int ArkRenderEffect11::GetComputeShader( )
+{
+	return( m_aiIndices[COMPUTE_SHADER] );
+}
+//--------------------------------------------------------------------------------

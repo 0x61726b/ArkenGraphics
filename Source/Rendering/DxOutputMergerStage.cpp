@@ -125,9 +125,9 @@ void DxOutputMergerStage::ApplyDepthStencilStatesAndBlendStates( ID3D11DeviceCon
 	}
 }
 //--------------------------------------------------------------------------------
-const DxOutputMergerState& DxOutputMergerStage::GetCurrentState() const
+const DxOutputMergerState& DxOutputMergerStage::GetPreviousState() const
 {
-	return CurrentState;
+	return PreviousState;
 }
 //--------------------------------------------------------------------------------
 

@@ -36,6 +36,7 @@ namespace Arkeng
 	class Dx11ShaderResourceView;
 	class Dx11RenderTargetView;
 	class Dx11DepthStencilView;
+	class Dx11UnorderedAccessView;
 	class Dx11RasterizerStateConfig;
 	class Dx11DepthStencilStateConfig;
 	class Dx11BlendStateConfig;
@@ -62,7 +63,9 @@ namespace Arkeng
 	typedef Microsoft::WRL::ComPtr<ID3D11DepthStencilState>		DepthStencilStateComPtr;
 	typedef Microsoft::WRL::ComPtr<ID3D11BlendState>			BlendStateComPtr;
 	typedef Microsoft::WRL::ComPtr<ID3D11SamplerState>			SamplerStateComPtr;
+	typedef Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView>	UnorderedAccessViewComPtr;
 	typedef std::shared_ptr<ArkShader11>						ArkShader11SPtr;
+	
 
 	typedef Microsoft::WRL::ComPtr<ID3D11Query>				    QueryComPtr;
 
@@ -97,18 +100,21 @@ namespace Arkeng
 	public:
 		ArkRenderer11();
 		virtual ~ArkRenderer11();
-
 		static ArkRenderer11* Get();
+
+		UINT GetMSQualityLevels( DXGI_FORMAT, UINT  );
+		D3D_FEATURE_LEVEL GetAvailableFeatureLevel( D3D_DRIVER_TYPE DriverType );
+		D3D_FEATURE_LEVEL GetCurrentFeatureLevel();
+		UINT64 GetAvailableVideoMemory();
 
 		virtual bool Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL FeatureLevel);
 		virtual void Shutdown();
-
 		virtual void Present(HWND hWnd = 0,int swapchain = -1);
-
-		UINT GetMSQualityLevels( DXGI_FORMAT, UINT  );
 
 		int CreateSwapChain(Dx11SwapChainConfig* Config);
 
+
+		//Create buffer methods
 		ResourcePtr CreateVertexBuffer(ArkBuffer11Config* pConfig,D3D11_SUBRESOURCE_DATA* pData);
 		ResourcePtr CreateIndexBuffer(ArkBuffer11Config* pConfig,D3D11_SUBRESOURCE_DATA* pData);
 		ResourcePtr CreateConstantBuffer(ArkBuffer11Config* pConfig,D3D11_SUBRESOURCE_DATA* pData,bool bAutoUpdate = true);
@@ -118,19 +124,48 @@ namespace Arkeng
 			Dx11RenderTargetViewConfig* pRTVConfig = NULL,
 			Dx11DepthStencilViewConfig* pDSVConfig= NULL);
 
+
+		//Create Resource Views
 		int CreateDepthStencilView( int ResourceID,D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc );
 		int CreateShaderResourceView( int ResourceID, D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc );
-
-		
-
 		int CreateRenderTargetView(int ResourceID,D3D11_RENDER_TARGET_VIEW_DESC* pDesc);
+		int CreateUnorderedAccessView( int ResourceID, D3D11_UNORDERED_ACCESS_VIEW_DESC* pDesc);
+
+		int CreateInputLayout(std::vector<D3D11_INPUT_ELEMENT_DESC>& elements,int ShaderID);
+
+		int	CreateRasterizerState( Dx11RasterizerStateConfig* Config );
+		int CreateDepthStencilState( Dx11DepthStencilStateConfig* pConfig );
+		int CreateSamplerState( D3D11_SAMPLER_DESC* pDesc );
+		int CreateBlendState( Dx11BlendStateConfig* Config );
+		int CreateViewport(D3D11_VIEWPORT v);
+
+		/////////////////////////////////////////////////////////////////////////////////
+
+		std::shared_ptr<Dx11Resource>					GetResourceByIndex(int index);
+
+		//Texture Resource accessors
+		std::shared_ptr<Dx11Texture2D>					GetTexture2DByIndex(int ID);
+		
+		//Buffer Resource accessors
+		std::shared_ptr<ArkVertexBuffer11>				GetVertexBufferByIndex(int index);
+		std::shared_ptr<ArkIndexBuffer11>				GetIndexBufferByIndex(int index);
+		std::shared_ptr<ArkConstantBuffer11>			GetConstantBufferByIndex(int index);
+
+		//Resource View accessors
+		Dx11RenderTargetView&							GetRenderTargetViewByIndex(int rid);
+		Dx11DepthStencilView&							GetDepthStencilViewByIndex(int rid);
+		Dx11ShaderResourceView&							GetShaderResourceViewByIndex(int rid);
+		Dx11UnorderedAccessView&						GetUnorderedAccessViewByIndex(int rid);
 
 
-		Dx11RenderTargetView&					GetRenderTargetViewByIndex(int rid);
-		Dx11DepthStencilView&					GetDepthStencilViewByIndex(int rid);
-		Dx11ShaderResourceView&					GetShaderResourceViewByIndex(int rid);
-
-
+		//Pipeline States
+		RasterizerStateComPtr							GetRasterizerState(int index);
+		BlendStateComPtr								GetBlendState( int index );
+		DepthStencilStateComPtr							GetDepthState( int index );
+		SamplerStateComPtr								GetSamplerState( int index );
+		InputLayoutComPtr								GetInputLayout(int index);
+		const Dx11ViewPort&								GetViewPort(int index);
+		ArkShader11SPtr									GetShader(int ID);
 
 
 		int LoadShader(ShaderType type,std::wstring& filename,std::wstring& function,
@@ -139,43 +174,21 @@ namespace Arkeng
 		int LoadShader(ShaderType type,std::wstring& filename,std::wstring& function,
 			std::wstring& model,const D3D_SHADER_MACRO* pDefines,bool enablelogging = true);
 
-		ArkShader11SPtr GetShader(int ID);
-
-
-		InputLayoutComPtr				GetInputLayout(int index);
-		int CreateInputLayout(std::vector<D3D11_INPUT_ELEMENT_DESC>& elements,int ShaderID);
-
-		std::shared_ptr<ArkVertexBuffer11>				GetVertexBufferByIndex(int index);
-		std::shared_ptr<ArkIndexBuffer11>				GetIndexBufferByIndex(int index);
-
-		std::shared_ptr<ArkConstantBuffer11> GetConstantBufferByIndex(int ID);
-
-		RasterizerStateComPtr		GetRasterizerState(int index);
-		int							CreateRasterizerState( Dx11RasterizerStateConfig* Config );
-
-		int							CreateBlendState( Dx11BlendStateConfig* Config );
-		BlendStateComPtr			GetBlendState( int index );
-
-		DepthStencilStateComPtr		GetDepthState( int index );
-		int CreateDepthStencilState( Dx11DepthStencilStateConfig* pConfig );
-
-		int CreateSamplerState( D3D11_SAMPLER_DESC* pDesc );
-		SamplerStateComPtr GetSamplerState( int index );
-
+		
+		void ResizeTexture( ResourcePtr texture, UINT width, UINT height );
+		void ResizeTextureSRV( int RID, int SRVID, UINT width, UINT height );
+		void ResizeTextureRTV( int RID, int RTVID, UINT width, UINT height );
+		void ResizeTextureDSV( int RID, int DSVID, UINT width, UINT height );
+		void ResizeTextureUAV( int RID, int UAVID, UINT width, UINT height );
 		void ResizeSwapChain(int ID,UINT width,UINT height);
 		void ResizeViewport(int ID,UINT width,UINT height);
+
+
+
 
 		void QueueTask(TaskCore* pTask);
 		void ProcessTaskQueue();
 
-
-		int			CreateViewport(D3D11_VIEWPORT v);
-		const Dx11ViewPort&			GetViewPort(int index);
-
-
-		std::shared_ptr<Dx11Texture2D>		GetTexture2DByIndex(int ID);
-
-		
 
 
 		Microsoft::WRL::ComPtr<ID3D11Debug>			GetDebugDevice();
@@ -188,52 +201,52 @@ namespace Arkeng
 		static ArkRenderer11* m_spRenderer;
 
 
-		Microsoft::WRL::ComPtr<ID3D11Device>	m_pDevice;
-		Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_pDeviceContext;
+		Microsoft::WRL::ComPtr<ID3D11Device>						m_pDevice;
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext>					m_pDeviceContext;
 
-		Microsoft::WRL::ComPtr<ID3D11Debug>				m_pDebugDevice;
+		Microsoft::WRL::ComPtr<ID3D11Debug>							m_pDebugDevice;
 
 
+		D3D_DRIVER_TYPE												m_driverType;
 
-		D3D_DRIVER_TYPE							m_driverType;
-
-		std::vector<Dx11SwapChain*>				m_vSwapChains;
+		std::vector<Dx11SwapChain*>									m_vSwapChains;
 
 		std::vector<std::shared_ptr<Dx11Resource>>					m_vResources;
 
-		std::vector<Dx11ViewPort>					m_vViewports;
-		std::vector<RasterizerStateComPtr>			m_vRasterizerStates;
+		std::vector<Dx11ViewPort>									m_vViewports;
+		std::vector<RasterizerStateComPtr>							m_vRasterizerStates;
 
-		std::vector<InputLayoutComPtr>				m_vInputLayouts;
+		std::vector<InputLayoutComPtr>								m_vInputLayouts;
 
-		std::vector<Dx11ShaderResourceView>			m_vShaderResourceViews;
-		std::vector<Dx11RenderTargetView>			m_vRenderTargetViews;
-		std::vector<Dx11DepthStencilView>			m_vDepthStencilViews;
-		std::vector<DepthStencilStateComPtr>		m_vDepthStencilStates;
-		std::vector<BlendStateComPtr>				m_vBlendStates;
-		std::vector<SamplerStateComPtr>				m_vSamplerStates;
+		std::vector<Dx11ShaderResourceView>							m_vShaderResourceViews;
+		std::vector<Dx11RenderTargetView>							m_vRenderTargetViews;
+		std::vector<Dx11DepthStencilView>							m_vDepthStencilViews;
+		std::vector<Dx11UnorderedAccessView>						m_vUnorderedAccessViews;
+		std::vector<DepthStencilStateComPtr>						m_vDepthStencilStates;
+		std::vector<BlendStateComPtr>								m_vBlendStates;
+		std::vector<SamplerStateComPtr>								m_vSamplerStates;
 
-		std::vector<ArkShader11SPtr>					m_vShaders;
-
-
-		std::vector< TaskCore* >						m_vQueuedTasks;
+		std::vector<ArkShader11SPtr>								m_vShaders;
 
 
-		D3D_FEATURE_LEVEL			m_FeatureLevel;
+		std::vector< TaskCore* >									m_vQueuedTasks;
+
+
+		D3D_FEATURE_LEVEL											m_FeatureLevel;
 
 	public:
-		PipelineManager*								pPipeline;
-		IParameterManager*								m_pParamMgr;
+		PipelineManager*											pPipeline;
+		IParameterManager*											m_pParamMgr;
 	public:
-		std::shared_ptr<Dx11Resource>				GetResourceByIndex(int index);
+		
 
-		int							GetUnusedResourceIndex();
-		int							StoreNewResource(std::shared_ptr<Dx11Resource> pResource);
+		int															GetUnusedResourceIndex();
+		int															StoreNewResource(std::shared_ptr<Dx11Resource> pResource);
 
-		ResourcePtr					GetSwapChainResource(int ID);
+		ResourcePtr													GetSwapChainResource(int ID);
 
 	private:
-			bool								m_bVsyncEnabled;
+			bool													m_bVsyncEnabled;
 	};
 
 };

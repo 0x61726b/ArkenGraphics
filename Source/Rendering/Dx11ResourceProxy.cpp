@@ -13,6 +13,7 @@
 #include "Dx11DepthStencilViewConfig.h"
 #include "Dx11ShaderResourceViewConfig.h"
 #include "Dx11RenderTargetViewConfig.h"
+#include "Dx11UnorderedAccessViewConfig.h"
 #include "ArkRenderer11.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
@@ -21,13 +22,14 @@ Dx11ResourceProxy::Dx11ResourceProxy()
 {
 	m_iResource = -1;
 
-	m_iResourceDSV = m_iResourceRTV = m_iResourceSRV = 0;
+	m_iResourceDSV = m_iResourceRTV = m_iResourceSRV = m_iResourceUAV = 0;
 
 	m_pBufferConfig = 0;
 	m_pTexture2dConfig = nullptr;
 	m_pSRVConfig = nullptr;
 	m_pRTVConfig = nullptr;
 	m_pDSVConfig = nullptr;
+	m_pUAVConfig = nullptr;
 }
 //--------------------------------------------------------------------------------
 Dx11ResourceProxy::~Dx11ResourceProxy()
@@ -41,10 +43,11 @@ Dx11ResourceProxy::~Dx11ResourceProxy()
 //--------------------------------------------------------------------------------
 Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig,ArkRenderer11* pRenderer,Dx11ShaderResourceViewConfig* pSRVConfig,
 	Dx11RenderTargetViewConfig* pRTVConfig,
-	Dx11DepthStencilViewConfig* pDSVConfig)
+	Dx11DepthStencilViewConfig* pDSVConfig,
+	Dx11UnorderedAccessViewConfig* pUAVConfig)
 {
 	D3D11_TEXTURE2D_DESC desc = pConfig->GetTextureDesc();
-	CommonConstructor(desc.BindFlags,ResourceID,pRenderer,pSRVConfig,pRTVConfig,pDSVConfig);
+	CommonConstructor(desc.BindFlags,ResourceID,pRenderer,pSRVConfig,pRTVConfig,pUAVConfig,pDSVConfig);
 
 	m_pTexture2dConfig = new Dx11Texture2DConfig();
 	*m_pTexture2dConfig = *pConfig;
@@ -52,10 +55,11 @@ Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig
 //--------------------------------------------------------------------------------
 Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,ArkBuffer11Config* pConfig,ArkRenderer11* pRenderer,Dx11ShaderResourceViewConfig* pSRVConfig,
 	Dx11RenderTargetViewConfig* pRTVConfig,
-	Dx11DepthStencilViewConfig* pDSVConfig)
+	Dx11DepthStencilViewConfig* pDSVConfig,
+	Dx11UnorderedAccessViewConfig* pUAVConfig)
 {
 	D3D11_BUFFER_DESC desc = pConfig->GetBufferDesc();
-	CommonConstructor(desc.BindFlags,ResourceID,pRenderer,pSRVConfig,pRTVConfig,pDSVConfig);
+	CommonConstructor(desc.BindFlags,ResourceID,pRenderer,pSRVConfig,pRTVConfig,pUAVConfig,pDSVConfig);
 
 	m_pBufferConfig = new ArkBuffer11Config();
 	*m_pBufferConfig = *pConfig;
@@ -64,12 +68,14 @@ Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,ArkBuffer11Config* pConfig,A
 void Dx11ResourceProxy::CommonConstructor(UINT BindFlags,int ResourceID,ArkRenderer11* pRenderer,
 	Dx11ShaderResourceViewConfig* pSRVConfig,
 	Dx11RenderTargetViewConfig* pRTVConfig,
+	Dx11UnorderedAccessViewConfig* pUAVConfig,
 	Dx11DepthStencilViewConfig* pDSVConfig)
 {
 	m_iResource = ResourceID;
 	m_iResourceSRV = 0;
 	m_iResourceRTV = 0;
 	m_iResourceDSV = 0;
+	m_iResourceUAV = 0;
 
 	m_pTexture2dConfig = nullptr;
 	m_pBufferConfig = nullptr;
@@ -93,7 +99,11 @@ void Dx11ResourceProxy::CommonConstructor(UINT BindFlags,int ResourceID,ArkRende
 		m_pDSVConfig = new Dx11DepthStencilViewConfig();
 		*m_pDSVConfig = *pDSVConfig;
 	}
-
+	if( pUAVConfig )
+	{
+		m_pUAVConfig = new Dx11UnorderedAccessViewConfig();
+		*m_pUAVConfig = *pUAVConfig;
+	}
 	if ( ( BindFlags & D3D11_BIND_SHADER_RESOURCE ) == D3D11_BIND_SHADER_RESOURCE )
     {
         D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc = pSRVConfig ? &pSRVConfig->GetSRVDesc() : nullptr;
@@ -110,4 +120,9 @@ void Dx11ResourceProxy::CommonConstructor(UINT BindFlags,int ResourceID,ArkRende
 		D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc = pDSVConfig ? &pDSVConfig->GetDSVDesc() : nullptr;
 		m_iResourceDSV = pRenderer->CreateDepthStencilView(m_iResource,pDesc);
 	}
+	if ( ( BindFlags & D3D11_BIND_UNORDERED_ACCESS ) == D3D11_BIND_UNORDERED_ACCESS )
+    {
+        D3D11_UNORDERED_ACCESS_VIEW_DESC* pDesc = pUAVConfig ? &pUAVConfig->GetUAVDesc() : nullptr;
+        m_iResourceUAV = pRenderer->CreateUnorderedAccessView( m_iResource, pDesc );
+    }
 }

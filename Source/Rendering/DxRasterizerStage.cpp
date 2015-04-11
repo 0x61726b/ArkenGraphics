@@ -83,8 +83,9 @@ void DxRasterizerStage::ApplyCurrentState( ID3D11DeviceContext* pContext )
 	PreviousState = CurrentState;
 
 }
-const DxRasterizerState& DxRasterizerStage::GetCurrentState() const
+//--------------------------------------------------------------------------------
+const DxRasterizerState& DxRasterizerStage::GetPreviousState() const
 {
-	return CurrentState;
+	return PreviousState;
 }
 //--------------------------------------------------------------------------------

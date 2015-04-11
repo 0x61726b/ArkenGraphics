@@ -33,7 +33,7 @@ namespace Arkeng
 		
 		void SetFeatureLevel( D3D_FEATURE_LEVEL Fl );
 
-		const DxOutputMergerState& GetCurrentState() const;
+		const DxOutputMergerState& GetPreviousState() const;
 
 		DxOutputMergerState			CurrentState;
 		DxOutputMergerState			PreviousState;

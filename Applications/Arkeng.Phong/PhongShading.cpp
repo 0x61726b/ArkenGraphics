@@ -148,6 +148,7 @@ void PhongShading::Initialize()
 //--------------------------------------------------------------------------------
 void PhongShading::Update()
 {
+	m_pRenderer->pPipeline->StartPipelineStatistics();
 	m_pTimer->Update();
 	EvtManager.ProcessEvent(EFrameStartPtr(new EFrameStart(m_pTimer->Elapsed())));
 
@@ -158,9 +159,22 @@ void PhongShading::Update()
     std::wstring text = L"FPS: " + std::to_wstring( m_pTimer->Framerate() );
     m_pTextOverlayView->WriteText( text, transform4, XMFLOAT4( 1.0f, 0.0f,0.0f, 1.0f ) );
 
+	
+	
+	
+	
+
+	
+
 	m_pScene->Update(m_pTimer->Elapsed());
 	m_pScene->Render(m_pRenderer);
 
+	m_pRenderer->pPipeline->EndPipelineStatistics();
+	text = m_pRenderer->pPipeline->PrintPipelineStatistics();
+	transform *= XMMatrixTranslation( 0.0f,500,0.0f );
+	XMStoreFloat4x4( &transform4, transform );
+	m_pTextOverlayView->WriteText( text,transform4,XMFLOAT4(1,0,0,1));
+	
 	m_pRenderer->Present(m_pWindow->GetHandle(),m_pWindow->GetSwapChain());
 
 }

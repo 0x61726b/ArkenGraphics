@@ -26,6 +26,7 @@ namespace Arkeng
 		virtual void BindConstantBuffers(ID3D11DeviceContext* pContext,int);
 		virtual void BindSamplerStates( ID3D11DeviceContext* pContext, int count );
 		virtual void BindShaderResourceViews( ID3D11DeviceContext* pContext, int count );
+		virtual void BindUnorderedAccessViews( ID3D11DeviceContext* pContext, int count );
 	};
 };
 

@@ -109,6 +109,7 @@ void PerspectiveView::ExecuteTask(PipelineManager* pPipelineManager,IParameterMa
 //--------------------------------------------------------------------------------
 void PerspectiveView::Resize(UINT width,UINT height)
 {
+	ArkRenderer11::Get()->ResizeTexture( m_pDepthTarget,width,height );
 	ArkRenderer11::Get()->ResizeViewport(m_iViewports[0],width,height);
 }
 //--------------------------------------------------------------------------------

@@ -15,7 +15,9 @@ ArkShaderStageState11::ArkShaderStageState11()
 	:ShaderProgram(-1),
 	SamplerStates(nullptr),
 	ShaderResourceViews(nullptr),
-	ConstantBuffers( nullptr )
+	ConstantBuffers( nullptr ),
+	UnorderedAccessViews( nullptr ),
+	UAVInitialCounts( -1 )
 {
 	ClearState();
 }
@@ -37,6 +39,8 @@ void ArkShaderStageState11::SetPreviousState( ArkShaderStageState11* pPrev )
 	ConstantBuffers.SetSister( &pPrev->ConstantBuffers );
 	ShaderResourceViews.SetSister( &pPrev->ShaderResourceViews );
 	SamplerStates.SetSister( &pPrev->SamplerStates );
+	UnorderedAccessViews.SetSister( &pPrev->UnorderedAccessViews );
+	UAVInitialCounts.SetSister( &pPrev->UAVInitialCounts );
 }
 //--------------------------------------------------------------------------------
 void ArkShaderStageState11::ClearState()
@@ -45,6 +49,8 @@ void ArkShaderStageState11::ClearState()
 	ConstantBuffers.InitializeStates();
 	ShaderResourceViews.InitializeStates();
 	SamplerStates.InitializeStates();
+	UnorderedAccessViews.InitializeStates();
+	UAVInitialCounts.InitializeStates();
 }
 //--------------------------------------------------------------------------------
 void ArkShaderStageState11::ResetUpdate()
@@ -53,6 +59,8 @@ void ArkShaderStageState11::ResetUpdate()
 	ConstantBuffers.ResetTracking();
 	ShaderResourceViews.ResetTracking();
 	SamplerStates.ResetTracking();
+	UnorderedAccessViews.ResetTracking();
+	UAVInitialCounts.ResetTracking();
 }
 //--------------------------------------------------------------------------------
 

@@ -221,6 +221,13 @@ void ArkShaderReflection11::BindParameters( ShaderType type, PipelineManager* pP
 		case D3D_SIT_BYTEADDRESS:
 			pPipeline->BindShaderResourceParameter( type, ResourceBindings[i].pParamRef, slot, pParamManager );
 			break;
+		case D3D_SIT_UAV_RWSTRUCTURED:
+		case D3D_SIT_UAV_RWTYPED:
+		case D3D_SIT_UAV_RWBYTEADDRESS:
+		case D3D_SIT_UAV_APPEND_STRUCTURED:
+		case D3D_SIT_UAV_CONSUME_STRUCTURED:
+		case D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER:
+			pPipeline->BindUnorderedAccessParameter( type, ResourceBindings[i].pParamRef, slot, pParamManager );
 		}
 	}
 }

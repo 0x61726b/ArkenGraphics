@@ -185,4 +185,7 @@ void ArkRenderApplication11::HandleWindowResize(HWND handle,UINT width,UINT heig
 	{
 		m_pRenderView->Resize( width,height );
 	}
+	if ( m_pTextOverlayView != 0 ) {
+		m_pTextOverlayView->Resize( width, height );
+	}
 }

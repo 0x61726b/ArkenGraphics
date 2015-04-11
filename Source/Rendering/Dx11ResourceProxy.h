@@ -17,6 +17,7 @@ namespace Arkeng
 	class Dx11ShaderResourceViewConfig;
 	class Dx11RenderTargetViewConfig;
 	class Dx11DepthStencilViewConfig;
+	class Dx11UnorderedAccessViewConfig;
 	class ArkRenderer11;
 	class ArkBuffer11Config;
 
@@ -28,12 +29,14 @@ namespace Arkeng
 		Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig,ArkRenderer11* pRenderer,
 			Dx11ShaderResourceViewConfig* pSRVConfig = NULL,
 			Dx11RenderTargetViewConfig* pRTVConfig = NULL,
-			Dx11DepthStencilViewConfig* pDSVConfig = NULL);
+			Dx11DepthStencilViewConfig* pDSVConfig = NULL,
+			Dx11UnorderedAccessViewConfig* pUAVConfig = NULL );
 
 		Dx11ResourceProxy(int ResourceID,ArkBuffer11Config* pConfig,ArkRenderer11* pRenderer,
 			Dx11ShaderResourceViewConfig* pSRVConfig = NULL,
 			Dx11RenderTargetViewConfig* pRTVConfig = NULL,
-			Dx11DepthStencilViewConfig* pDSVConfig = NULL);
+			Dx11DepthStencilViewConfig* pDSVConfig = NULL,
+			Dx11UnorderedAccessViewConfig* pUAVConfig = NULL );
 
 		virtual ~Dx11ResourceProxy();
 
@@ -42,19 +45,22 @@ namespace Arkeng
 		int								m_iResourceSRV;
 		int								m_iResourceRTV;
 		int								m_iResourceDSV;
+		int								m_iResourceUAV;
 
 		ArkBuffer11Config*				m_pBufferConfig;
 		Dx11Texture2DConfig*	        m_pTexture2dConfig;
 		Dx11ShaderResourceViewConfig*   m_pSRVConfig;
 		Dx11RenderTargetViewConfig*     m_pRTVConfig;
 		Dx11DepthStencilViewConfig*		m_pDSVConfig;
+		Dx11UnorderedAccessViewConfig*  m_pUAVConfig;
 
 		friend ArkRenderer11;
 	protected:
 		void CommonConstructor(UINT BindFlags,int ResourceID,ArkRenderer11* pRenderer,
 			Dx11ShaderResourceViewConfig* pSRVConfig,
 			Dx11RenderTargetViewConfig* pRTVConfig,
-			Dx11DepthStencilViewConfig* pDSVConfig);
+			Dx11UnorderedAccessViewConfig* pUAVConfig,
+			Dx11DepthStencilViewConfig* pDSVConfig = NULL);
 	};
 	typedef std::shared_ptr<Dx11ResourceProxy> ResourcePtr;
 };
