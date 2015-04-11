@@ -13,7 +13,9 @@ _**Build Alpha 0.012b**_
 - CS,SO,Domain,Geometry and Hull shaders added
 - DrawIndexedInstanced executor helper class
 - Phong Shading demo
+
 ![Phong](/Resources/Images/phong.png)
+- GDI+ Font Loader
 
 _**Build Alpha 0.012a**_
 - Complete rework of how engine handles matrices.
