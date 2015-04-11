@@ -7,6 +7,7 @@ Changelog
 _**Build Alpha 0.012b**_
 - Fully functional FPS camera with mouse and keyboard movement
 - Basic HUD text drawing with SpriteRenderer
+
 ![HUD](/Resources/Images/2015-04-11 - 14.59.29 ~ capture.png)
 - Multi thread support for pipeline execution and resource creation
 - UOA,SRV and Sampler parameters
