@@ -17,17 +17,18 @@ namespace Arkeng
 	
 	struct ArkConfig
 	{
-		float BuildNumber;
+		std::wstring BuildNumber;
 		int DesiredResolutionX;
 		int DesiredResolutionY;
 
-		ArkConfig(float bn,int x,int y)
+		ArkConfig(std::wstring& bn,int x,int y)
+			: BuildNumber(bn),
+			DesiredResolutionX(x),
+			DesiredResolutionY(y)
 		{
-			BuildNumber = bn;
-			DesiredResolutionX = x;
-			DesiredResolutionY = y;
 		}
-		ArkConfig() { }
+		ArkConfig() : BuildNumber(std::wstring(L"0"))
+		{ }
 	};
 	class ArkConfigFile
 	{

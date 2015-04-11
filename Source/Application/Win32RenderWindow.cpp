@@ -8,6 +8,7 @@
 //--------------------------------------------------------------------------------
 #include "Pch.h"
 #include "Win32RenderWindow.h"
+#include "ArkConfigFile.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -86,12 +87,14 @@ void Win32RenderWindow::Initialize(IWndProc* WindowProcObj)
 	log.append(L" H = ");
 	log.append(std::to_wstring(m_iHeight));
 
+	
+
 	ArkLog::Get( Arkeng::LogType::Renderer ).Output(log);
 	// Create an instance of the window
 	m_hWnd = CreateWindowEx(
 		NULL,							// extended style
 		wc.lpszClassName, 				// class name
-		L"Arkengine Build 0.1",				// instance title
+		ArkConfigFile::Get().GetConfig().BuildNumber.c_str(),				// instance title
 		m_dStyle,						// window style
 		lleft, ltop,					// initial x, y
 		lwidth,							// initial width

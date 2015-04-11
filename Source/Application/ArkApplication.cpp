@@ -37,10 +37,9 @@ m_bLoop(true)
 	l->Open();
 	l->Output(L"Log Started.");
 
-	float buildNumber = m_cConfig->GetConfig().BuildNumber;
-	std::wstring b = std::to_wstring(buildNumber);
+	std::wstring& buildNumber = m_cConfig->GetConfig().BuildNumber;
 
-	l->Output(L"Arkengine Build " + b);
+	l->Output(L"Arkengine Build " + buildNumber);
 }
 //--------------------------------------------------------------------------------
 ArkApplication::~ArkApplication()

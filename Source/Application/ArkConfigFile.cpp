@@ -83,7 +83,7 @@ bool ArkConfigFile::Open()
 					
 					if( newToken == "Build" )
 					{
-						ac.BuildNumber = std::stof(value);
+						ac.BuildNumber.assign(value.begin(),value.end());
 					}
 					if( newToken == "ResX" )
 					{
