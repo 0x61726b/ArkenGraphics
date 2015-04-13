@@ -54,14 +54,16 @@ namespace Arkeng
 
 		virtual void SetEntity( ArkEntity3D* pEntity );
 
-
+		virtual void SetBackColor( XMFLOAT4& c );
+		
 	protected:
 		Scene*			m_pScene;
 		ArkEntity3D*	m_pEntity;
 		DirectX::XMMATRIX ViewMatrix;
 		DirectX::XMMATRIX ProjMatrix;
 
-		
+		XMFLOAT4		  vColor;
+
 		int				m_iViewports[ D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE ];
 		unsigned int	m_uiViewportCount;
 		

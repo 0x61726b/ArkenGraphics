@@ -205,9 +205,9 @@ void PipelineManager::ClearBuffers(float color[],float depth,UINT stencil)
 		}
 	}
 
-	if(OutputMergerStage.CurrentState.DepthTarget.GetState() != -1)
+	if(OutputMergerStage.CurrentState.DepthTargetViews.GetState() != -1)
 	{
-		int dsv = OutputMergerStage.CurrentState.DepthTarget.GetState();
+		int dsv = OutputMergerStage.CurrentState.DepthTargetViews.GetState();
 		Dx11DepthStencilView DSV = ArkRenderer11::Get()->GetDepthStencilViewByIndex(dsv);
 		pDepthStencilView = DSV.m_pDepthStencilView.Get();
 
@@ -704,6 +704,15 @@ void PipelineManager::DrawInstanced(ArkRenderEffect11& effect,ResourcePtr vb,
 	ApplyPipelineResources();
 
 	m_pContext->DrawIndexedInstanced(numIndices,numInstances,0,0,0);
+}
+//--------------------------------------------------------------------------------
+void PipelineManager::Dispatch( ArkRenderEffect11& effect, UINT x, UINT y, UINT z, IParameterManager* pParamManager )
+{
+	ClearPipelineResources();
+	effect.ConfigurePipeline( this, pParamManager );
+	ApplyPipelineResources();
+
+	m_pContext->Dispatch( x, y, z );
 }
 //--------------------------------------------------------------------------------
 void PipelineManager::StartPipelineStatistics()

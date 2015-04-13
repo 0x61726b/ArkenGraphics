@@ -25,16 +25,11 @@ namespace Arkeng
 
 		virtual const ArkParamType GetParameterType();
 		
-		DirectX::XMVECTOR GetVector();
-		void SetVector( DirectX::XMVECTOR v );
-
-	public:
-		//for XM classes containing SSE data
-		void* operator new(size_t i);
-		void operator delete(void* p);
+		DirectX::XMVECTOR GetVector( unsigned int thread );
+		void SetVector( DirectX::XMVECTOR v, unsigned int thread );
 
 	protected:
-		DirectX::XMVECTOR m_Vector;
+		DirectX::XMVECTOR m_Vector[NUM_THREADS+1];
 	};
 };
 //--------------------------------------------------------------------------------

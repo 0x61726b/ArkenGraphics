@@ -30,7 +30,6 @@ ArkMaterial11::ArkMaterial11()
 //--------------------------------------------------------------------------------
 ArkMaterial11::~ArkMaterial11()
 {
-	// Delete the effects that have been added to this material
 
 }
 //--------------------------------------------------------------------------------

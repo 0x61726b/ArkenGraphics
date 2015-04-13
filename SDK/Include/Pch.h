@@ -40,7 +40,7 @@
 //Direct3D Includes
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
-#define _XM_NO_INTRINSICS_
+//#define _XM_NO_INTRINSICS_
 #include <DirectXMath.h>
 
 

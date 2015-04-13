@@ -13,10 +13,12 @@ using namespace Arkeng;
 //--------------------------------------------------------------------------------
 DxOutputMergerState::DxOutputMergerState()
 	: RenderTargetViews(0),
-	DepthTarget(0),
+	DepthTargetViews(0),
 	BlendState( -1 ),
 	DepthStencilState( -1 ),
-	StencilRef(0)
+	StencilRef(0),
+	UnorderedAccessViews( 0 ),
+	UAVInitialCounts( -1 )
 {
 	ClearState();
 }
@@ -32,33 +34,37 @@ void DxOutputMergerState::SetFeatureLevel(D3D_FEATURE_LEVEL FeatureLevel)
 //--------------------------------------------------------------------------------
 void DxOutputMergerState::ClearState()
 {
-	RenderTargetViews.InitializeStates();
-	DepthTarget.InitializeState();
-
 	BlendState.InitializeState();
 	DepthStencilState.InitializeState();
 	StencilRef.InitializeState();
+	RenderTargetViews.InitializeStates();
+	DepthTargetViews.InitializeState();
+	UnorderedAccessViews.InitializeStates();
+	UAVInitialCounts.InitializeStates();
 }
 //--------------------------------------------------------------------------------
 void DxOutputMergerState::ResetUpdate()
 {
+	BlendState.ResetTracking();
+	DepthStencilState.ResetTracking();
+	StencilRef.ResetTracking();
 	RenderTargetViews.ResetTracking();
-	DepthTarget.ResetTracking();
-
-	BlendState.InitializeState();
-	DepthStencilState.InitializeState();
-	StencilRef.InitializeState();
+	DepthTargetViews.ResetTracking();
+	UnorderedAccessViews.ResetTracking();
+	UAVInitialCounts.ResetTracking();
 }
 //--------------------------------------------------------------------------------
 void DxOutputMergerState::SetPreviosState( DxOutputMergerState* pPrev )
 {
 	m_pPrevState = pPrev;
 
-	RenderTargetViews.SetSister( &pPrev->RenderTargetViews );
-	DepthTarget.SetSister( &pPrev->DepthTarget );
-	BlendState.SetSister( &pPrev->BlendState );
-	DepthStencilState.SetSister( &pPrev->DepthStencilState );
-	StencilRef.SetSister( &pPrev->StencilRef );
+	BlendState.SetSister( &m_pPrevState->BlendState );
+	DepthStencilState.SetSister( &m_pPrevState->DepthStencilState );
+	StencilRef.SetSister( &m_pPrevState->StencilRef );
+	RenderTargetViews.SetSister( &m_pPrevState->RenderTargetViews );
+	DepthTargetViews.SetSister( &m_pPrevState->DepthTargetViews );
+	UnorderedAccessViews.SetSister( &m_pPrevState->UnorderedAccessViews );
+	UAVInitialCounts.SetSister( &m_pPrevState->UAVInitialCounts );
 }
 //--------------------------------------------------------------------------------
 int DxOutputMergerState::GetRenderTargetCount() const 

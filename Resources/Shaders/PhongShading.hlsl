@@ -14,8 +14,8 @@ cbuffer LightBuffer
 struct VS_INPUT
 {
 	float3 position : POSITION;
-	float3 normal   : NORMAL;
-	float2 tex      : TEXCOORDS;
+	float2 tex		: TEXCOORDS0;
+	float3 normal	: NORMAL;
 };
 
 struct VS_OUTPUT

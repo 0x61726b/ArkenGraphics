@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<ProjectsMetrics>
-  <Assembly Assembly="Arkeng.Desktop v1.0.0.0" NTypes="24" NAbstractTypes="3" NILInstructionInAsm="8" NbLinesOfCodeInAsm="541" NbLinesOfCommentInAsm="258" PercentageCommentInAsm="32" PercentageCoverageInAsm="-" AfferentCoupling="0" EfferentCoupling="88" RelationalCohesion="1.19" Instability="1" Abstractness="0.15" DistFrMainSeq="0.11" NormDistFrMainSeq="0.15" />
-  <Assembly Assembly="Project1 v1.0.0.0" NTypes="2" NAbstractTypes="0" NILInstructionInAsm="0" NbLinesOfCodeInAsm="10" NbLinesOfCommentInAsm="8" PercentageCommentInAsm="44" PercentageCoverageInAsm="-" AfferentCoupling="0" EfferentCoupling="9" RelationalCohesion="0.5" Instability="1" Abstractness="0" DistFrMainSeq="0" NormDistFrMainSeq="0" />
-</ProjectsMetrics>

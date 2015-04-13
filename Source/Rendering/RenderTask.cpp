@@ -18,7 +18,8 @@ RenderTask::RenderTask()
 		ProjMatrix(),
 		m_pEntity( nullptr ),
 		m_pScene( nullptr ),
-		m_iViewports()
+		m_iViewports(),
+		vColor(0,0,0,0)
 {
 }
 //--------------------------------------------------------------------------------
@@ -29,6 +30,11 @@ RenderTask::~RenderTask()
 void RenderTask::SetScene(Scene* pScene)
 {
 	m_pScene = pScene;
+}
+//--------------------------------------------------------------------------------
+void RenderTask::SetBackColor( XMFLOAT4& c )
+{
+	vColor = c;
 }
 //--------------------------------------------------------------------------------
 void RenderTask::SetEntity( ArkEntity3D* pEntity )

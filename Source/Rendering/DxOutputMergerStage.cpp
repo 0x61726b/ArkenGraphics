@@ -10,6 +10,7 @@
 #include "DxOutputMergerStage.h"
 #include "Dx11RenderTargetView.h"
 #include "Dx11DepthStencilView.h"
+#include "Dx11UnorderedAccessView.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -49,15 +50,19 @@ void DxOutputMergerStage::ApplyCurrentState( ID3D11DeviceContext* pContext )
 void DxOutputMergerStage::ApplyRenderTargets( ID3D11DeviceContext* pContext )
 {
 	int rtvCount = 0;
+	int uavCount = 0;
+
 
 	if( CurrentState.RenderTargetViews.IsUpdateNeeded() 
-		|| CurrentState.DepthTarget.IsUpdateNeeded() )
+		|| CurrentState.DepthTargetViews.IsUpdateNeeded() )
 	{
 		ArkRenderer11* pRenderer = ArkRenderer11::Get();
 
 		ID3D11RenderTargetView* rtvs[ D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT ];
 
 		ID3D11DepthStencilView* dsv = 0;
+
+		ID3D11UnorderedAccessView* uavs[D3D11_PS_CS_UAV_REGISTER_COUNT];
 
 		for( int i=0; i < D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT; ++i )
 		{
@@ -68,7 +73,17 @@ void DxOutputMergerStage::ApplyRenderTargets( ID3D11DeviceContext* pContext )
 				rtvCount =  i+1;
 		}
 
-		Dx11DepthStencilView& DSV = pRenderer->GetDepthStencilViewByIndex( CurrentState.DepthTarget.GetState() );
+		for ( int i = 0; i < D3D11_PS_CS_UAV_REGISTER_COUNT; i++ ) {
+
+			Dx11UnorderedAccessView& uav = pRenderer->GetUnorderedAccessViewByIndex( CurrentState.UnorderedAccessViews.GetState( i ) );
+			uavs[i] = uav.m_pUnorderedAccessView.Get();
+
+			if ( uavs[i] != nullptr ) {
+				uavCount = i+1; // Record the number of non-null uavs...
+			}
+		}
+
+		Dx11DepthStencilView& DSV = pRenderer->GetDepthStencilViewByIndex( CurrentState.DepthTargetViews.GetState() );
 		dsv = DSV.m_pDepthStencilView.Get();
 
 		pContext->OMSetRenderTargets(D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT,rtvs,dsv);
@@ -77,10 +92,18 @@ void DxOutputMergerStage::ApplyRenderTargets( ID3D11DeviceContext* pContext )
 			PreviousState.RenderTargetViews.SetState( i, CurrentState.RenderTargetViews.GetState( i ) );
 		}
 
-		PreviousState.DepthTarget.SetState( CurrentState.DepthTarget.GetState() );
+		for ( int i = 0; i < D3D11_PS_CS_UAV_REGISTER_COUNT; i++ ) {
+			PreviousState.UnorderedAccessViews.SetState( i, CurrentState.UnorderedAccessViews.GetState( i ) );
+			PreviousState.UAVInitialCounts.SetState( i, CurrentState.UAVInitialCounts.GetState( i ) );
+		}
+
+		PreviousState.DepthTargetViews.SetState( CurrentState.DepthTargetViews.GetState() );
 
 		CurrentState.RenderTargetViews.ResetTracking();
-		CurrentState.DepthTarget.ResetTracking();
+		CurrentState.UnorderedAccessViews.ResetTracking();
+		CurrentState.UAVInitialCounts.ResetTracking();
+		CurrentState.DepthTargetViews.ResetTracking();
+
 	}
 }
 //--------------------------------------------------------------------------------

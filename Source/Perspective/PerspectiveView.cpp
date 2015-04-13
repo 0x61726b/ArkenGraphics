@@ -15,21 +15,25 @@
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
-PerspectiveView::PerspectiveView(ArkRenderer11& Renderer,ResourcePtr RenderTarget)
+PerspectiveView::PerspectiveView(ArkRenderer11& Renderer,ResourcePtr RenderTarget,ResourcePtr DepthTarget)
 {
 	ViewMatrix = DirectX::XMMatrixIdentity();
 	ProjMatrix = DirectX::XMMatrixIdentity();
-	SetRenderTargets( RenderTarget );
+	SetRenderTargets( RenderTarget,DepthTarget );
 }
 //--------------------------------------------------------------------------------
 PerspectiveView::~PerspectiveView()
 {
 }
 //--------------------------------------------------------------------------------
-void PerspectiveView::SetRenderTargets(ResourcePtr RenderTarget)
+void PerspectiveView::SetRenderTargets(ResourcePtr RenderTarget,ResourcePtr DepthTarget)
 {
 	m_pRenderTarget = RenderTarget;
 
+	if ( nullptr != m_pDepthTarget ) {
+		ArkRenderer11::Get()->DeleteResource( m_pDepthTarget );
+		m_pDepthTarget = nullptr;
+	}
 
 	if(m_pRenderTarget != nullptr)
 	{
@@ -40,23 +44,26 @@ void PerspectiveView::SetRenderTargets(ResourcePtr RenderTarget)
 		{
 			std::shared_ptr<Dx11Texture2D> pTexture = std::dynamic_pointer_cast<Dx11Texture2D>(pResource);
 			D3D11_TEXTURE2D_DESC desc = pTexture->GetActualDescription();
-
-			if(m_pDepthTarget == NULL)
+			if ( DepthTarget != NULL )
+			{
+				m_pDepthTarget = DepthTarget;
+			} 
+			else
 			{
 				Dx11Texture2DConfig DepthConfig;
-				DepthConfig.SetDepthBuffer(desc.Width,desc.Height);
-				m_pDepthTarget = ArkRenderer11::Get()->CreateTexture2D(&DepthConfig,0);
-
-				D3D11_VIEWPORT viewport;
-				viewport.Width = static_cast<float>(desc.Width);
-				viewport.Height = static_cast<float>(desc.Height);
-				viewport.MinDepth = 0.0f;
-				viewport.MaxDepth = 1.0f;
-				viewport.TopLeftX = 0;
-				viewport.TopLeftY = 0;
-
-				SetViewport( ArkRenderer11::Get()->CreateViewport(viewport) );
+				DepthConfig.SetDepthBuffer( desc.Width, desc.Height );
+				m_pDepthTarget = ArkRenderer11::Get()->CreateTexture2D( &DepthConfig, 0 );			
 			}
+			D3D11_VIEWPORT viewport;
+			viewport.Width = static_cast<float>(desc.Width);
+			viewport.Height = static_cast<float>(desc.Height);
+			viewport.MinDepth = 0.0f;
+			viewport.MaxDepth = 1.0f;
+			viewport.TopLeftX = 0;
+			viewport.TopLeftY = 0;
+
+			SetViewport( ArkRenderer11::Get()->CreateViewport(viewport) );
+			
 		}
 
 	}
@@ -86,12 +93,11 @@ void PerspectiveView::ExecuteTask(PipelineManager* pPipelineManager,IParameterMa
 {
 	pPipelineManager->ClearRenderTargets();
 	pPipelineManager->OutputMergerStage.CurrentState.RenderTargetViews.SetState(0,m_pRenderTarget->m_iResourceRTV);
-	pPipelineManager->OutputMergerStage.CurrentState.DepthTarget.SetState( m_pDepthTarget->m_iResourceDSV );
+	pPipelineManager->OutputMergerStage.CurrentState.DepthTargetViews.SetState( m_pDepthTarget->m_iResourceDSV );
 	pPipelineManager->ApplyRenderTargets();
 
-	float vColor[4] ={0.78f,0.80f,0.82f,0};
-
-	pPipelineManager->ClearBuffers(vColor,1.0f);
+	float color[4] = { vColor.x,vColor.y,vColor.z,vColor.w };
+	pPipelineManager->ClearBuffers(color,1.0f);
 
 	ConfigureViewports( pPipelineManager );
 

@@ -98,9 +98,8 @@ void ArkParameterManager11::SetVectorParameter(const std::wstring& name,DirectX:
 		if(pParameter->GetParameterType() == ArkParamType::VECTOR)
 		{
 			auto pVParam = std::dynamic_pointer_cast<ArkVectorParameter11>(pParameter);
-			pVParam->SetVector( *pV );
 
-			/*pParameter->SetParameterData(reinterpret_cast<void*>(pV),GetID());*/
+			pParameter->SetParameterData(reinterpret_cast<void*>(pV),GetID());
 		}
 		else
 		{
@@ -310,7 +309,7 @@ DirectX::XMVECTOR ArkParameterManager11::GetVectorParameter(const std::wstring& 
 	if(pParam != 0)
 	{
 		if(pParam->GetParameterType() == ArkParamType::VECTOR)
-			pV = std::dynamic_pointer_cast<ArkVectorParameter11>(pParam)->GetVector();
+			pV = std::dynamic_pointer_cast<ArkVectorParameter11>(pParam)->GetVector( GetID() );
 	}
 	else
 	{
@@ -535,7 +534,7 @@ DirectX::XMVECTOR ArkParameterManager11::GetVectorParameter(std::shared_ptr<ArkR
 
 	if(pP->GetParameterType() == ArkParamType::VECTOR)
 	{
-		result = std::dynamic_pointer_cast<ArkVectorParameter11>(pP)->GetVector();
+		result = std::dynamic_pointer_cast<ArkVectorParameter11>(pP)->GetVector( GetID() );
 	}
 	return result;
 }

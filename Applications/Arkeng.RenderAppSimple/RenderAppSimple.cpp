@@ -114,7 +114,7 @@ void RenderAppSimple::Initialize()
 
 	DirectX::XMVECTOR LightParams = DirectX::XMVectorSet( 1.0f, 1.0f, 1.0f, 1.0f );
 	m_pLightColor = m_pRenderer->m_pParamMgr->GetVectorParameterRef( std::wstring( L"LightColor" ) );
-	m_pLightColor->SetVector(LightParams);
+	/*m_pLightColor->SetVector(LightParams);*/
 
 	DirectX::XMVECTOR LightPos = DirectX::XMVectorSet( 10.0f,20.0f,-20.0f,0.0f );
 	m_pLightPositionWriter = m_pRenderer->m_pParamMgr->GetVectorParameterRef( std::wstring(L"LightPositionWS"));
@@ -122,7 +122,7 @@ void RenderAppSimple::Initialize()
 	
 
 
-	DirectX::XMVECTOR test = m_pLightColor->GetVector();
+	/*DirectX::XMVECTOR test = m_pLightColor->GetVector();*/
 	
 
 	

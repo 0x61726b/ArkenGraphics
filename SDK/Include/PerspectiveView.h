@@ -18,7 +18,7 @@ namespace Arkeng
 	class PerspectiveView : public RenderTask
 	{
 	public:
-		PerspectiveView(ArkRenderer11& Renderer, ResourcePtr RenderTarget );
+		PerspectiveView(ArkRenderer11& Renderer, ResourcePtr RenderTarget,ResourcePtr DepthTarget = 0 );
 		virtual ~PerspectiveView();
 
 		//TaskCore Interface
@@ -31,7 +31,7 @@ namespace Arkeng
 		virtual void Resize( UINT width,UINT height );
 		//~
 
-		void SetRenderTargets(ResourcePtr RenderTarget);
+		void SetRenderTargets(ResourcePtr RenderTarget,ResourcePtr DepthTarget);
 
 		virtual std::wstring GetName();
 	protected:

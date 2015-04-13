@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Arkeng.RenderAppSimple", "A
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Arkeng.Phong", "Applications\Arkeng.Phong\Arkeng.Phong.vcxproj", "{8A87BCE0-A72E-4A58-8310-216F27DC85C6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Arkeng.AO", "Applications\Arkeng.AO\Arkeng.AO.vcxproj", "{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -60,6 +62,19 @@ Global
 		{8A87BCE0-A72E-4A58-8310-216F27DC85C6}.Release|Win32.ActiveCfg = Release|Win32
 		{8A87BCE0-A72E-4A58-8310-216F27DC85C6}.Release|Win32.Build.0 = Release|Win32
 		{8A87BCE0-A72E-4A58-8310-216F27DC85C6}.Release|x64.ActiveCfg = Release|Win32
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Debug|ARM.ActiveCfg = Debug|Win32
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Debug|Win32.Build.0 = Debug|Win32
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Debug|x64.ActiveCfg = Debug|x64
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Debug|x64.Build.0 = Debug|x64
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Release|ARM.ActiveCfg = Release|Win32
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Release|Win32.ActiveCfg = Release|Win32
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Release|Win32.Build.0 = Release|Win32
+		{0FA7831F-F88F-494A-A0E5-C0ECEBCBDA6B}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

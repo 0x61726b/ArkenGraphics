@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<NamespacesMetrics>
-  <Namespace Namespace="Arkeng.Desktop::GlobalNamespace" NTypes="1" NILInstruction="0" NbLinesOfCode="16" NbLinesOfComment="0" PercentageComment="0" PercentageCoverage="-" AfferentCoupling="1" EfferentCoupling="3" />
-  <Namespace Namespace="Arkeng.Desktop::Arkeng" NTypes="23" NILInstruction="8" NbLinesOfCode="525" NbLinesOfComment="0" PercentageComment="0" PercentageCoverage="-" AfferentCoupling="1" EfferentCoupling="7" />
-  <Namespace Namespace="Project1::GlobalNamespace" NTypes="2" NILInstruction="0" NbLinesOfCode="10" NbLinesOfComment="0" PercentageComment="0" PercentageCoverage="-" AfferentCoupling="0" EfferentCoupling="3" />
-</NamespacesMetrics>

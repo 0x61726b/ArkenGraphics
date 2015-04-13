@@ -20,6 +20,7 @@
 #include "ArkBuffer11Config.h"
 #include "ArkGeometryGenerator11.h"
 #include "ArkMaterial11.h"
+#include "ArkGeometryLoader11.h"
 
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
@@ -69,7 +70,7 @@ bool PhongShading::ConfigureRenderingSetup()
 
 	m_pCamera->SetCameraView(m_pRenderView);
 	m_pCamera->SetOverlayView(m_pTextOverlayView);
-	m_pCamera->SetProjectionParams(0.1f,100.0f,static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight),DirectX::XM_PIDIV2);
+	m_pCamera->SetProjectionParams(0.1f,10000.0f,static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight),DirectX::XM_PIDIV2);
 
 	m_pScene->AddCamera(m_pCamera);
 
@@ -106,7 +107,9 @@ void PhongShading::Initialize()
 	//Create geometry object and actor
 
 	GeometryPtr pGeometry = GeometryPtr(new ArkGeometry11());
-	ArkGeometryGenerator11::GenerateSphere(pGeometry,50,50,1);
+	ArkGeometryLoader11 geoGen;
+	pGeometry = geoGen.LoadFbxFile(std::wstring(L"sponza.fbx"));
+
 	pGeometry->LoadToBuffers();
 	pGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
@@ -121,7 +124,7 @@ void PhongShading::Initialize()
 
 
 
-	GeometryPtr planeGeo = GeometryPtr(new ArkGeometry11());
+	/*GeometryPtr planeGeo = GeometryPtr(new ArkGeometry11());
 	ArkGeometryGenerator11::GenerateTexturedPlane(planeGeo,50,50);
 
 	planeGeo->LoadToBuffers();
@@ -131,12 +134,12 @@ void PhongShading::Initialize()
 	m_pPlane->GetBody()->Visual.SetGeometry(planeGeo);
 	m_pPlane->GetBody()->Visual.SetMaterial(m_pMaterial);
 	m_pPlane->GetNode()->Transform.Position() = XMVectorSet(0.0f,0.0f,0.0f,0.0f);
-	m_pScene->AddActor(m_pPlane);
+	m_pScene->AddActor(m_pPlane);*/
 
 
 	DirectX::XMVECTOR LightParams = DirectX::XMVectorSet(1.0f,1.0f,1.0f,1.0f);
 	m_pLightColor = m_pRenderer->m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightColor"));
-	m_pLightColor->SetVector(LightParams);
+	m_pLightColor->InitializeParameterData(&LightParams);
 
 	DirectX::XMVECTOR LightPos = DirectX::XMVectorSet(10.0f,20.0f,-20.0f,0.0f);
 	m_pLightPositionWriter = m_pRenderer->m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightPositionWS"));

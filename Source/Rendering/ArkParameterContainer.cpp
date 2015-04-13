@@ -203,6 +203,37 @@ std::shared_ptr<ArkVectorParameterWriter11> ArkParameterContainer::GetVectorPara
 	return(pVectorWriter);
 }
 //--------------------------------------------------------------------------------
+std::shared_ptr<ArkSamplerParameterWriter11> ArkParameterContainer::GetSamplerParameterWriter( const std::wstring& name )
+{
+	std::shared_ptr<ArkParameterWriter> pWriter = nullptr;
+	std::shared_ptr<ArkSamplerParameterWriter11> pSamplerWriter = nullptr;
+
+	// Check if the parameter already exists in this container.
+	pWriter = GetRenderParameter( name );
+
+	if ( nullptr != pWriter )
+	{
+		// The parameter is there, so now check its parameter type...
+		std::shared_ptr<ArkRenderParameter11> pParameter = pWriter->GetRenderParameterRef();
+
+		if ( nullptr != pParameter )
+		{
+			// If the type is correct, then set the value.
+			if ( pParameter->GetParameterType() == SAMPLER ) {
+				pSamplerWriter = std::dynamic_pointer_cast<ArkSamplerParameterWriter11>( pWriter );
+			} else {
+				ArkLog::Get(LogType::Renderer).Output( L"ERROR: Trying to access a sampler in a non-sampler parameter writer!!!" );
+			}
+		} else {
+			// Parameter was there, but didn't have a reference set so you can't tell what type it is.
+			// This shouldn't happen, so log an error if it does...
+			ArkLog::Get(LogType::Renderer).Output( L"ERROR: Trying to access a parameter writer without any reference set!!!" );
+		}
+	}
+
+	return( pSamplerWriter );
+}
+//--------------------------------------------------------------------------------
 void ArkParameterContainer::SetRenderParams(IParameterManager* pParamManager)
 {
 	// Scroll through each parameter and set it in the provided parameter manager.
@@ -288,4 +319,22 @@ std::shared_ptr<ArkVectorParameterWriter11> ArkParameterContainer::SetVectorPara
 
 	return(pMatrixWriter);
 }
+//--------------------------------------------------------------------------------
+std::shared_ptr<ArkSamplerParameterWriter11> ArkParameterContainer::SetSamplerParameter( const std::wstring& name, int value )
+{
+	// Check if the parameter already exists in this container
+	std::shared_ptr<ArkSamplerParameterWriter11> pSamplerWriter = GetSamplerParameterWriter( name );
 
+	// If not, then create one...
+	if ( nullptr == pSamplerWriter ) {
+		pSamplerWriter = std::make_shared<ArkSamplerParameterWriter11>();
+		pSamplerWriter->SetRenderParameterRef( ArkRenderer11::Get()->m_pParamMgr->GetSamplerStateParameterRef( name ) );
+		AddRenderParameter( pSamplerWriter );
+	}
+
+	// ... and set the value.
+	pSamplerWriter->SetValue( value );
+
+	return( pSamplerWriter );
+}
+//--------------------------------------------------------------------------------

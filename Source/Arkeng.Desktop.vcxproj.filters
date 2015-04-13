@@ -40,9 +40,6 @@
     <Filter Include="Rendering\Direct3D11\Resource\Textures">
       <UniqueIdentifier>{92e219a1-151a-4846-a7bf-f2e658fd2954}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rendering\Direct3D11\Task System">
-      <UniqueIdentifier>{1d75fd87-9089-45b7-a21a-ae8502d41300}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rendering\Direct3D11\Pipeline\Output Merger Stage">
       <UniqueIdentifier>{992e0c69-c2b6-4a1c-a9eb-c79850c10033}</UniqueIdentifier>
     </Filter>
@@ -212,12 +209,6 @@
     </ClInclude>
     <ClInclude Include="Rendering\Dx11Texture2D.h">
       <Filter>Rendering\Direct3D11\Resource\Textures</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\TaskCore.h">
-      <Filter>Rendering\Direct3D11\Task System</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\RenderTask.h">
-      <Filter>Rendering\Direct3D11\Task System</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\DxOutputMergerStage.h">
       <Filter>Rendering\Direct3D11\Pipeline\Output Merger Stage</Filter>
@@ -567,6 +558,36 @@
     <ClInclude Include="Rendering\ArkUnorderedAccessParameter11.h">
       <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\ViewOcclusion.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ViewAmbientOcclusion.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ViewDepthNormal.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\RenderTask.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\TaskCore.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Dx11SamplerStateConfig.h">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkGeometryLoader11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkMaterialGenerator11.h">
+      <Filter>Rendering\Direct3D11\Material System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkSamplerParameterWriter11.h">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ms3dspec.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -637,12 +658,6 @@
     </ClCompile>
     <ClCompile Include="Rendering\Dx11Texture2D.cpp">
       <Filter>Rendering\Direct3D11\Resource\Textures</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\RenderTask.cpp">
-      <Filter>Rendering\Direct3D11\Task System</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\TaskCore.cpp">
-      <Filter>Rendering\Direct3D11\Task System</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\DxOutputMergerStage.cpp">
       <Filter>Rendering\Direct3D11\Pipeline\Output Merger Stage</Filter>
@@ -956,6 +971,33 @@
     <ClCompile Include="Rendering\ArkUnorderedAccessParameter11.cpp">
       <Filter>Rendering\Direct3D11\Parameter System\Parameters</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\ViewOcclusion.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ViewDepthNormal.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\RenderTask.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\TaskCore.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ViewAmbientOcclusion.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Dx11SamplerStateConfig.cpp">
+      <Filter>Rendering\Direct3D11\Resource\Configs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkGeometryLoader11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkMaterialGenerator11.cpp">
+      <Filter>Rendering\Direct3D11\Material System</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkSamplerParameterWriter11.cpp">
+      <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Rendering\TStateMonitor.inl">
@@ -1000,6 +1042,24 @@
       <Filter>Shaders</Filter>
     </FxCompile>
     <FxCompile Include="..\Resources\Shaders\SimpleApp.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\AmbientOcclusionCS_32.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\DepthPS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\DepthVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\FinalPS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\FinalVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\SeparableBilateralCS.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
   </ItemGroup>

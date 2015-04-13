@@ -76,8 +76,8 @@
     <OutDir>..\SDK\Library\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>Bin\$(Platform)\$(Configuration)\</IntDir>
     <TargetExt>.lib</TargetExt>
-    <IncludePath>$(DXSDK_DIR);$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Program Files\Autodesk\FBX\FBX SDK\2015.1\include;$(DXSDK_DIR);$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Program Files\Autodesk\FBX\FBX SDK\2015.1\lib\vs2013\x64\debug;$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -129,7 +129,8 @@ copy Scene\*.inl ..\SDK\Include
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <PostBuildEvent>
-      <Command>copy Utility\*.h ..\SDK\Include
+      <Command>copy Utility\*.h ..\SDK\Include
+
 copy Application\*.h ..\SDK\Include
 copy Events\*.h ..\SDK\Include
 copy Rendering\*.h ..\SDK\Include
@@ -215,6 +216,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkFontLoader.h" />
     <ClInclude Include="Rendering\ArkGeometry11.h" />
     <ClInclude Include="Rendering\ArkGeometryGenerator11.h" />
+    <ClInclude Include="Rendering\ArkGeometryLoader11.h" />
     <ClInclude Include="Rendering\ArkGeometryShader11.h" />
     <ClInclude Include="Rendering\ArkGeometryShaderStage11.h" />
     <ClInclude Include="Rendering\ArkHullShader11.h" />
@@ -222,6 +224,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkIndexBuffer11.h" />
     <ClInclude Include="Rendering\ArkLight.h" />
     <ClInclude Include="Rendering\ArkMaterial11.h" />
+    <ClInclude Include="Rendering\ArkMaterialGenerator11.h" />
     <ClInclude Include="Rendering\ArkMatrixArrayParameter11.h" />
     <ClInclude Include="Rendering\ArkMatrixArrayParameterWriter11.h" />
     <ClInclude Include="Rendering\ArkMatrixParameter11.h" />
@@ -236,6 +239,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkRenderEffect11.h" />
     <ClInclude Include="Rendering\ArkRenderParameter11.h" />
     <ClInclude Include="Rendering\ArkSamplerParameter11.h" />
+    <ClInclude Include="Rendering\ArkSamplerParameterWriter11.h" />
     <ClInclude Include="Rendering\ArkSceneGraph.h" />
     <ClInclude Include="Rendering\ArkShader11.h" />
     <ClInclude Include="Rendering\ArkShaderFactory11.h" />
@@ -262,6 +266,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\Dx11RenderTargetView.h" />
     <ClInclude Include="Rendering\Dx11RenderTargetViewConfig.h" />
     <ClInclude Include="Rendering\Dx11ResourceProxy.h" />
+    <ClInclude Include="Rendering\Dx11SamplerStateConfig.h" />
     <ClInclude Include="Rendering\Dx11ShaderResourceView.h" />
     <ClInclude Include="Rendering\Dx11ShaderResourceViewConfig.h" />
     <ClInclude Include="Rendering\Dx11StreamOutputStage.h" />
@@ -281,6 +286,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\IRenderer.h" />
     <ClInclude Include="Rendering\ArkRenderer11.h" />
     <ClInclude Include="Rendering\LineIndices.h" />
+    <ClInclude Include="Rendering\ms3dspec.h" />
     <ClInclude Include="Rendering\PerspectiveView.h" />
     <ClInclude Include="Rendering\PipelineExecutor11.h" />
     <ClInclude Include="Rendering\PipelineManager.h" />
@@ -299,6 +305,9 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\TStateArrayMonitor.h" />
     <ClInclude Include="Rendering\TStateMonitor.h" />
     <ClInclude Include="Rendering\VertexElement11.h" />
+    <ClInclude Include="Rendering\ViewAmbientOcclusion.h" />
+    <ClInclude Include="Rendering\ViewDepthNormal.h" />
+    <ClInclude Include="Rendering\ViewOcclusion.h" />
     <ClInclude Include="Rendering\ViewTextOverlay.h" />
     <ClInclude Include="Scene\Actor.h" />
     <ClInclude Include="Scene\ArkEntity3D.h" />
@@ -358,12 +367,14 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkFontLoader.cpp" />
     <ClCompile Include="Rendering\ArkGeometry11.cpp" />
     <ClCompile Include="Rendering\ArkGeometryGenerator11.cpp" />
+    <ClCompile Include="Rendering\ArkGeometryLoader11.cpp" />
     <ClCompile Include="Rendering\ArkGeometryShader11.cpp" />
     <ClCompile Include="Rendering\ArkGeometryShaderStage11.cpp" />
     <ClCompile Include="Rendering\ArkHullShader11.cpp" />
     <ClCompile Include="Rendering\ArkHullShaderStage11.cpp" />
     <ClCompile Include="Rendering\ArkIndexBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkLight.cpp" />
+    <ClCompile Include="Rendering\ArkMaterialGenerator11.cpp" />
     <ClCompile Include="Rendering\ArkMatrixArrayParameter.cpp" />
     <ClCompile Include="Rendering\ArkMatrixArrayParameterWriter11.cpp" />
     <ClCompile Include="Rendering\ArkMatrixParameter11.cpp" />
@@ -379,6 +390,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkRenderer11.cpp" />
     <ClCompile Include="Rendering\ArkRenderParameter11.cpp" />
     <ClCompile Include="Rendering\ArkSamplerParameter11.cpp" />
+    <ClCompile Include="Rendering\ArkSamplerParameterWriter11.cpp" />
     <ClCompile Include="Rendering\ArkShader11.cpp" />
     <ClCompile Include="Rendering\ArkShadeResourceParameter11.cpp" />
     <ClCompile Include="Rendering\ArkShaderFactory11.cpp" />
@@ -404,6 +416,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\Dx11RasterizerStateConfig.cpp" />
     <ClCompile Include="Rendering\Dx11RenderTargetView.cpp" />
     <ClCompile Include="Rendering\Dx11RenderTargetViewConfig.cpp" />
+    <ClCompile Include="Rendering\Dx11SamplerStateConfig.cpp" />
     <ClCompile Include="Rendering\Dx11ShaderResourceView.cpp" />
     <ClCompile Include="Rendering\Dx11ShaderResourceViewConfig.cpp" />
     <ClCompile Include="Rendering\Dx11StreamOutputStage.cpp" />
@@ -433,6 +446,9 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\TaskCore.cpp" />
     <ClCompile Include="Rendering\TriangleIndices.cpp" />
     <ClCompile Include="Rendering\VertexElement11.cpp" />
+    <ClCompile Include="Rendering\ViewAmbientOcclusion.cpp" />
+    <ClCompile Include="Rendering\ViewDepthNormal.cpp" />
+    <ClCompile Include="Rendering\ViewOcclusion.cpp" />
     <ClCompile Include="Rendering\ViewTextOverlay.cpp" />
     <ClCompile Include="Scene\Actor.cpp" />
     <ClCompile Include="Scene\ArkEntity3D.cpp" />
@@ -464,10 +480,28 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <None Include="Utility\TConfiguration.inl" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\Resources\Shaders\AmbientOcclusionCS_32.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\DepthPS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\DepthVS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\FinalPS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\FinalVS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
     <FxCompile Include="..\Resources\Shaders\PhongShading.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="..\Resources\Shaders\RotatingCube.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\SeparableBilateralCS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="..\Resources\Shaders\SimpleApp.hlsl">
