@@ -23,7 +23,7 @@ namespace Arkeng
 	public:
 		virtual ~IRenderer() {}
 
-		virtual bool Initialize(int w,int h,bool windowed,HWND handle) { return false; };
+		/*virtual bool Initialize(int w,int h,bool windowed,HWND handle) { return false; };*/
 		virtual void Shutdown() = 0;
 		virtual void Present(HWND hWnd = 0,int SwapChain = -1) = 0;
 

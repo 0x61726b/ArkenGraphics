@@ -122,6 +122,7 @@ namespace Arkeng
 		ResourcePtr CreateTexture2D(Dx11Texture2DConfig* pConfig,D3D11_SUBRESOURCE_DATA* pData,
 			Dx11ShaderResourceViewConfig* pSRVConfig = NULL,
 			Dx11RenderTargetViewConfig* pRTVConfig = NULL,
+			Dx11UnorderedAccessViewConfig* pUAVConfig = NULL,
 			Dx11DepthStencilViewConfig* pDSVConfig= NULL);
 
 
@@ -173,6 +174,8 @@ namespace Arkeng
 
 		int LoadShader(ShaderType type,std::wstring& filename,std::wstring& function,
 			std::wstring& model,const D3D_SHADER_MACRO* pDefines,bool enablelogging = true);
+
+		ResourcePtr LoadTexture( std::wstring filename, bool sRBG = false );
 
 		
 		void ResizeTexture( ResourcePtr texture, UINT width, UINT height );

@@ -48,5 +48,6 @@ unsigned int ArkRenderParameter11::GetValueID(unsigned int threadID)
 	assert( threadID >= 0 );
 	assert( threadID < NUM_THREADS+1 );
 
+
 	return( m_auiValueID[threadID] );
 }

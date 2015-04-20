@@ -25,14 +25,14 @@ void Arkeng::GetAllEntities( ArkNode3D* node, std::vector< ArkEntity3D* >& set )
 	}
 }
 //--------------------------------------------------------------------------------
-void Arkeng::GetIntersectingEntities( ArkNode3D* node, std::vector< ArkEntity3D* >& set, ArkFrustum& bounds )
+void Arkeng::GetIntersectingEntities( ArkNode3D* node, std::vector< ArkEntity3D* >& set, ArkFrustum& )
 {
 	// TODO: THis has to be fixed!
 	//if ( bounds.Intersects( GetWorldBoundingSphere() ) )
 	//	set.push_back( this );
 }
 //--------------------------------------------------------------------------------
-void Arkeng::GetIntersectingEntities( ArkNode3D* node, std::vector< ArkEntity3D* >& set, ArkSphere3& bounds )
+void Arkeng::GetIntersectingEntities( ArkNode3D* node, std::vector< ArkEntity3D* >& set, ArkSphere3& )
 {
 	// TODO: THis has to be fixed!
 	//if ( bounds.Intersects( GetWorldBoundingSphere() ) )

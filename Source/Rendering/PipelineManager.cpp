@@ -455,6 +455,19 @@ void PipelineManager::UnMapResource(Dx11Resource* pArkResource,UINT subresource)
 	m_pContext->Unmap(pResource,subresource);
 }
 //--------------------------------------------------------------------------------
+void PipelineManager::ResolveSubresource( ResourcePtr DestResource, UINT DstSubresource, 
+                                              ResourcePtr SrcResource, UINT SrcSubresource, 
+                                              DXGI_FORMAT format )
+{
+    int DestID = DestResource->m_iResource;
+    ID3D11Resource* pDestResource = ArkRenderer11::Get()->GetResourceByIndex(DestID)->GetResource();
+
+    int SrcID = SrcResource->m_iResource;
+    ID3D11Resource* pSrcResource = ArkRenderer11::Get()->GetResourceByIndex(SrcID)->GetResource();
+ 
+    m_pContext->ResolveSubresource( pDestResource, DstSubresource, pSrcResource, SrcSubresource, format );
+}
+//--------------------------------------------------------------------------------
 void PipelineManager::GenerateCommandList(ArkCommandList11* plist)
 {
 	if(m_pContext->GetType() == D3D11_DEVICE_CONTEXT_DEFERRED)

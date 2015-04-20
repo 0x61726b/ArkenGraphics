@@ -58,6 +58,8 @@
 #include "PipelineManager.h"
 #include "TaskCore.h"
 
+#include "DDSTextureLoader.h"
+#include "WICTextureLoader.h"
 // Library imports
 #pragma comment( lib, "d3d11.lib" )
 #pragma comment( lib, "DXGI.lib" )
@@ -84,6 +86,8 @@ ArkRenderer11::ArkRenderer11()
 	m_FeatureLevel = D3D_FEATURE_LEVEL_9_1;
 
 	m_bVsyncEnabled = true;
+
+	
 }
 //--------------------------------------------------------------------------------
 ArkRenderer11::~ArkRenderer11()
@@ -171,7 +175,7 @@ bool ArkRenderer11::Initialize(D3D_DRIVER_TYPE DriverType,D3D_FEATURE_LEVEL Feat
 	HRESULT hr = S_OK;
 
 	ComPtr<IDXGIFactory1> pFactory;
-	HR_CHECK(hr = CreateDXGIFactory1(__uuidof(IDXGIFactory),reinterpret_cast<void**>(pFactory.GetAddressOf())));
+	HR_CHECK(hr = CreateDXGIFactory1(__uuidof(IDXGIFactory1),reinterpret_cast<void**>(pFactory.GetAddressOf())));
 
 	ArkLog::Get(LogType::Renderer).Output(L"Enumerating D3D11 video adapters");
 
@@ -450,9 +454,9 @@ void ArkRenderer11::Present(HWND hwnd,int swapchain)
 		Dx11SwapChain* pSwapChain = m_vSwapChains[index];
 		HRESULT hr;
 		if(m_bVsyncEnabled)
-			hr = pSwapChain->m_pSwapChain->Present(0,0) ;
+			hr = pSwapChain->m_pSwapChain->Present(1,0) ;
 		else
-			hr = pSwapChain->m_pSwapChain->Present(0,0) ;
+			hr = pSwapChain->m_pSwapChain->Present(1,0) ;
 	}
 	//TODO: Log check.
 
@@ -486,7 +490,7 @@ int ArkRenderer11::CreateSwapChain(Dx11SwapChainConfig* pConfig)
 	if(FAILED(hr))
 	{
 		//Todo
-		MessageBox(0,L"Can't create swapchain.",L"Arkengine",MB_ICONEXCLAMATION | MB_SYSTEMMODAL);
+		MessageBoxW(0,L"Can't create swapchain.",L"Arkengine",MB_ICONEXCLAMATION | MB_SYSTEMMODAL);
 		return -1;
 	}
 
@@ -496,7 +500,7 @@ int ArkRenderer11::CreateSwapChain(Dx11SwapChainConfig* pConfig)
 	if(FAILED(hr))
 	{
 		//Todo
-		MessageBox(0,L"Can't create swap chain buffer.",L"Arkengine",MB_ICONEXCLAMATION | MB_SYSTEMMODAL);
+		MessageBoxW(0,L"Can't create swap chain buffer.",L"Arkengine",MB_ICONEXCLAMATION | MB_SYSTEMMODAL);
 		return -1;
 	}
 
@@ -799,6 +803,7 @@ void ArkRenderer11::ResizeViewport(int ID,UINT width,UINT height)
 ResourcePtr ArkRenderer11::CreateTexture2D(Dx11Texture2DConfig* pConfig,D3D11_SUBRESOURCE_DATA* pData,
 	Dx11ShaderResourceViewConfig* pSRVConfig,
 	Dx11RenderTargetViewConfig* pRTVConfig,
+	Dx11UnorderedAccessViewConfig* pUAVConfig,
 	Dx11DepthStencilViewConfig* pDSVConfig)
 {
 	Texture2DComPtr pTexture;
@@ -809,7 +814,7 @@ ResourcePtr ArkRenderer11::CreateTexture2D(Dx11Texture2DConfig* pConfig,D3D11_SU
 		std::shared_ptr<Dx11Texture2D> pTex = std::make_shared<Dx11Texture2D>(pTexture);
 		pTex->SetDesiredDescription(pConfig->GetTextureDesc());
 		int ResourceID = StoreNewResource(pTex);
-		ResourcePtr Proxy(new Dx11ResourceProxy(ResourceID,pConfig,this,pSRVConfig,pRTVConfig,pDSVConfig));
+		ResourcePtr Proxy(new Dx11ResourceProxy(ResourceID,pConfig,this,pSRVConfig,pRTVConfig,pUAVConfig,pDSVConfig));
 
 		return Proxy;
 	}
@@ -1425,6 +1430,68 @@ int ArkRenderer11::LoadShader(ShaderType type,std::wstring& filename,std::wstrin
 
 	return(m_vShaders.size() - 1);
 
+}
+//--------------------------------------------------------------------------------
+ResourcePtr ArkRenderer11::LoadTexture( std::wstring filename, bool sRGB )
+{
+	ComPtr<ID3D11Resource> pResource;
+
+	ArkFileSystem fs;
+	filename = fs.GetTexturesDirectory() + filename;
+
+	// Test whether this is a DDS file or not.
+	std::wstring extension = filename.substr( filename.size()-3, 3 );
+	std::transform( extension.begin(), extension.end(), extension.begin(), ::tolower );
+
+	HRESULT hr = S_OK;
+
+	if ( extension == L"dds" ) 
+	{
+		hr = DirectX::CreateDDSTextureFromFile(
+			m_pDevice.Get(),
+			filename.c_str(),
+			//0,
+			//D3D11_USAGE_DEFAULT,
+			//D3D11_BIND_SHADER_RESOURCE,
+			//0,
+			//0,
+			//sRGB,
+			pResource.GetAddressOf(),
+			nullptr );
+	}
+	else
+	{
+		hr = DirectX::CreateWICTextureFromFileEx(
+			m_pDevice.Get(),
+			pPipeline->m_pContext.Get(),
+			filename.c_str(),
+			0,
+			D3D11_USAGE_DEFAULT,
+			D3D11_BIND_SHADER_RESOURCE,
+			0,
+			0,
+			sRGB,
+			pResource.GetAddressOf(),
+			0 );
+	}
+
+
+
+	if ( FAILED( hr ) )
+	{
+		ArkLog::Get(LogType::Renderer).Output( L"Failed to load texture from file!" );
+		return( ResourcePtr( new Dx11ResourceProxy() ) );
+	}
+
+	ComPtr<ID3D11Texture2D> pTexture;
+	pResource.CopyTo( pTexture.GetAddressOf() );
+
+	int ResourceID = StoreNewResource( std::make_shared<Dx11Texture2D>( pTexture ) );
+
+	Dx11Texture2DConfig TextureConfig;
+	pTexture->GetDesc( &TextureConfig.m_State );
+
+	return( ResourcePtr( new Dx11ResourceProxy( ResourceID, &TextureConfig, this ) ) );
 }
 //--------------------------------------------------------------------------------
 ArkShader11SPtr ArkRenderer11::GetShader(int ID)

@@ -86,6 +86,9 @@ namespace Arkeng
 
 		D3D11_MAPPED_SUBRESOURCE MapResource( Dx11Resource* pArkResource, UINT subresource, D3D11_MAP actions, UINT flags );
 
+		void ResolveSubresource(  ResourcePtr DestResource, UINT DstSubresource, 
+                                              ResourcePtr SrcResource, UINT SrcSubresource, 
+                                              DXGI_FORMAT format  );
 
 		void Dispatch( ArkRenderEffect11& effect, UINT x, UINT y, UINT z, IParameterManager* pParamManager );
 		void UnMapResource(Dx11Resource* pArkResource,UINT subresource);

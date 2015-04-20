@@ -588,6 +588,9 @@
     <ClInclude Include="Rendering\ms3dspec.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\ViewShadowMap.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -998,6 +1001,9 @@
     <ClCompile Include="Rendering\ArkSamplerParameterWriter11.cpp">
       <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\ViewShadowMap.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Rendering\TStateMonitor.inl">
@@ -1033,6 +1039,7 @@
     <None Include="Rendering\TGrowableIndexBuffer11.inl">
       <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Resources\Shaders\PhongShading.hlsl">
@@ -1060,6 +1067,9 @@
       <Filter>Shaders</Filter>
     </FxCompile>
     <FxCompile Include="..\Resources\Shaders\SeparableBilateralCS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Resources\Shaders\RenderShadowMap.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
   </ItemGroup>

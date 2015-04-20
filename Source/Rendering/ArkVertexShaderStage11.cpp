@@ -41,7 +41,7 @@ void ArkVertexShaderStage11::BindShaderProgram( ID3D11DeviceContext* pContext )
 	pContext->VSSetShader( pS,0,0 );
 }
 //--------------------------------------------------------------------------------
-void ArkVertexShaderStage11::BindConstantBuffers( ID3D11DeviceContext* pContext,int count )
+void ArkVertexShaderStage11::BindConstantBuffers( ID3D11DeviceContext* pContext,int )
 {
 	pContext->VSSetConstantBuffers( 
 		CurrentState.ConstantBuffers.GetStartSlot(),
@@ -49,7 +49,7 @@ void ArkVertexShaderStage11::BindConstantBuffers( ID3D11DeviceContext* pContext,
 		CurrentState.ConstantBuffers.GetFirstSlotLocation() );
 }
 //--------------------------------------------------------------------------------
-void ArkVertexShaderStage11::BindSamplerStates( ID3D11DeviceContext* pContext,int count )
+void ArkVertexShaderStage11::BindSamplerStates( ID3D11DeviceContext* pContext,int )
 {
 	pContext->VSSetSamplers( 
 		CurrentState.SamplerStates.GetStartSlot(),
@@ -57,7 +57,7 @@ void ArkVertexShaderStage11::BindSamplerStates( ID3D11DeviceContext* pContext,in
 		CurrentState.SamplerStates.GetFirstSlotLocation() );
 }
 //--------------------------------------------------------------------------------
-void ArkVertexShaderStage11::BindShaderResourceViews( ID3D11DeviceContext* pContext,int count )
+void ArkVertexShaderStage11::BindShaderResourceViews( ID3D11DeviceContext* pContext,int )
 {
 		pContext->VSSetShaderResources( 
 		CurrentState.ShaderResourceViews.GetStartSlot(),
@@ -65,7 +65,7 @@ void ArkVertexShaderStage11::BindShaderResourceViews( ID3D11DeviceContext* pCont
 		CurrentState.ShaderResourceViews.GetFirstSlotLocation() ); 
 }
 //--------------------------------------------------------------------------------
-void ArkVertexShaderStage11::BindUnorderedAccessViews( ID3D11DeviceContext* pContext, int count )
+void ArkVertexShaderStage11::BindUnorderedAccessViews( ID3D11DeviceContext* pContext, int )
 {
 
 }

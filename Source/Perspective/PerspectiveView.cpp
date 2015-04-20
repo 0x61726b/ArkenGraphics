@@ -30,7 +30,8 @@ void PerspectiveView::SetRenderTargets(ResourcePtr RenderTarget,ResourcePtr Dept
 {
 	m_pRenderTarget = RenderTarget;
 
-	if ( nullptr != m_pDepthTarget ) {
+	if ( nullptr != m_pDepthTarget ) 
+	{
 		ArkRenderer11::Get()->DeleteResource( m_pDepthTarget );
 		m_pDepthTarget = nullptr;
 	}

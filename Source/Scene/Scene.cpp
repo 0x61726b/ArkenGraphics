@@ -22,6 +22,7 @@ Scene::~Scene()
 {
 	// Delete all the actors that have been added to the scene.
 	for ( auto pActor : m_vActors ) {
+
 		Safe_Delete( pActor );
 	}
 
@@ -107,5 +108,10 @@ unsigned int Scene::GetLightCount( )
 ArkNode3D* Scene:: GetRoot()
 {
 	return m_pRoot;
+}
+//--------------------------------------------------------------------------------
+Camera* Scene::GetCamera()
+{
+	return m_vCameras[0];
 }
 //--------------------------------------------------------------------------------

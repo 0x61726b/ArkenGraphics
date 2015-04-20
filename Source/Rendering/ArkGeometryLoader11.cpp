@@ -58,6 +58,7 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 	UINT triangleCount = 0;
 	std::vector<XMFLOAT3> pPos;
 	std::vector<XMFLOAT3> pNrm;
+	std::vector<XMFLOAT2> PTex;
 	if(pFbxRootNode)
 	{
 		for(int i = 0; i < pFbxRootNode->GetChildCount(); i++)
@@ -75,17 +76,34 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 			FbxMesh* pMesh = (FbxMesh*)pFbxChildNode->GetNodeAttribute();
 
 			FbxVector4* pVertices = pMesh->GetControlPoints();
-			
+			FbxArray<FbxVector4> pNormals;
+			pMesh->GetPolygonVertexNormals(pNormals);
+
 			for(int j = 0; j < pMesh->GetPolygonCount(); j++)
 			{
 				int iNumVertices = pMesh->GetPolygonSize(j);
-				
+
 				assert(iNumVertices == 3);
 				triangleCount++;
-				
+
 				for(int k = 0; k < iNumVertices; k++)
 				{
 					int iControlPointIndex = pMesh->GetPolygonVertex(j,k);
+
+					FbxVector4 normalFbx;
+					bool s = pMesh->GetPolygonVertexNormal(j,k,normalFbx);
+
+					FbxVector2 fbxTexCoord;
+					FbxStringList UVSetNameList;
+
+					// Get the name of each set of UV coords
+					pMesh->GetUVSetNames(UVSetNameList);
+
+					// Get the UV coords for this vertex in this poly which belong to the first UV set
+					// Note: Using 0 as index into UV set list as this example supports only one UV set
+					bool unmapped;
+					s = pMesh->GetPolygonVertexUV(j,k,UVSetNameList.GetStringAt(0),fbxTexCoord,unmapped);
+
 
 					XMFLOAT3 vertex;
 					vertex.x = (float)pVertices[iControlPointIndex].mData[0];
@@ -94,16 +112,20 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 					pPos.push_back(vertex);
 
 					XMFLOAT3 norm;
-					FbxVector4 normalFbx;
-					pMesh->GetPolygonVertexNormal(j,iControlPointIndex,normalFbx);
 					norm.x = (float)normalFbx.mData[0];
 					norm.y = (float)normalFbx.mData[1];
-					norm.z = (float)normalFbx.mData[2];
+					norm.z = -(float)normalFbx.mData[2];
 					pNrm.push_back(norm);
+
+					XMFLOAT2 tex;
+					tex.x = (float)fbxTexCoord.mData[0];
+					tex.y = (float)fbxTexCoord.mData[1];
+					PTex.push_back(tex);
+
 				}
 			}
 			pMesh->Destroy();
-			
+
 			pFbxChildNode->Destroy();
 
 		}
@@ -143,14 +165,14 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 
 	XMFLOAT3* pPos3 = pPositions->Get3f(0);
 	XMFLOAT3* pNormal3 = pNormals->Get3f(0);
-	XMFLOAT2* pTex = (XMFLOAT2*)((*pTexcoords)[0]);
+	XMFLOAT2* pTex = pTexcoords->Get2f(0);
 
 	GeometryPtr MeshPtr = GeometryPtr(new ArkGeometry11());
 
 	TriangleIndices face;
 
 
-	for( int i=0; i < pPos.size(); ++i )
+	for(int i=0; i < pPos.size(); ++i)
 	{
 
 		face.P1() = i*3 + 0;
@@ -162,17 +184,17 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 		pPos3[i].z = pPos[i].z;
 
 		pNormal3[i] = pNrm[i];
-		pTex[i] = XMFLOAT2(0,0);
+		pTex[i] = PTex[i];
 
 		MeshPtr->AddFace(face);
 	}
-	
+
 	MeshPtr->AddElement(pPositions);
 	MeshPtr->AddElement(pNormals);
 	MeshPtr->AddElement(pTexcoords);
 
-	 
-	
+
+
 	return MeshPtr;
 }
 GeometryPtr ArkGeometryLoader11::loadMS3DFile2(std::wstring filename)

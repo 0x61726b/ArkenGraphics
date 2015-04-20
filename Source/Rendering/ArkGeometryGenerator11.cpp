@@ -306,12 +306,6 @@ void ArkGeometryGenerator11::GenerateSphere( GeometryPtr pGeometry, unsigned int
     _ASSERT( URes >= 4 );
     _ASSERT( Radius > 0.0f );
 
-	/*if ( pGeometry == NULL ) {
-		EventManager::Get()->ProcessEvent( EvtErrorMessagePtr( new EvtErrorMessage( std::wstring( 
-			L"Attempted to generate a sphere on null geometry object!" ) ) ) );
-
-		return;
-	}*/
 
 
     const unsigned int NumVertexRings = VRes - 2;
@@ -329,34 +323,13 @@ void ArkGeometryGenerator11::GenerateSphere( GeometryPtr pGeometry, unsigned int
     pPositions->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
     pPositions->m_uiInstanceDataStepRate = 0;
 
-	VertexElement11* pNormals = new VertexElement11( 3, NumVerts );
-    pNormals->m_SemanticName = "NORMAL";
-    pNormals->m_uiSemanticIndex = 0;
-    pNormals->m_Format = DXGI_FORMAT_R32G32B32_FLOAT;
-    pNormals->m_uiInputSlot = 0;
-    pNormals->m_uiAlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
-    pNormals->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-    pNormals->m_uiInstanceDataStepRate = 0;
-
-	VertexElement11* pTexCoords = new VertexElement11( 2, NumVerts);
-	pTexCoords->m_SemanticName = "TEXCOORDS";
-	pTexCoords->m_uiSemanticIndex = 0;
-	pTexCoords->m_Format = DXGI_FORMAT_R32G32_FLOAT;
-	pTexCoords->m_uiInputSlot = 0;
-	pTexCoords->m_uiAlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
-	pTexCoords->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-	pTexCoords->m_uiInstanceDataStepRate = 0;
-
-    XMFLOAT3* pVerts = pPositions->Get3f( 0 );
-	XMFLOAT3* pNorms = pNormals->Get3f(0);
-	XMFLOAT2* pTex3 = pTexCoords->Get2f(0);
     // Calculate all of the vertex positions
-
+    XMFLOAT3* pVerts = pPositions->Get3f( 0 );
     int currVert = 0;
 
     // First vertex will be at the top pole
-    pVerts[currVert] = XMFLOAT3( 0.0f, Radius, 0.0f );
-	pNorms[currVert++] = XMFLOAT3( 0.0f,1.0f,0.0f );
+    pVerts[currVert++] = XMFLOAT3( 0.0f, Radius, 0.0f );
+
     // Add in the vertical rings of vertices
     for ( unsigned int v = 1; v <= NumVertexRings; ++v )
     {
@@ -368,11 +341,7 @@ void ArkGeometryGenerator11::GenerateSphere( GeometryPtr pGeometry, unsigned int
             float x = sinf( vAngle ) * cosf( uAngle ) * Radius;
             float y = cosf( vAngle ) * Radius;
             float z = -sinf( vAngle ) * sinf( uAngle ) * Radius;
-            pVerts[currVert] = XMFLOAT3( x, y, z );
-
-			XMVECTOR normal = XMLoadFloat3( &XMFLOAT3(x,y,z ) );
-			normal = XMVector3Normalize(normal);
-			XMStoreFloat3( &pNorms[currVert++],normal );
+            pVerts[currVert++] = XMFLOAT3( x, y, z );
         }
     }
 
@@ -381,8 +350,6 @@ void ArkGeometryGenerator11::GenerateSphere( GeometryPtr pGeometry, unsigned int
     _ASSERT( currVert == NumVerts );
 
     pGeometry->AddElement( pPositions );
-	pGeometry->AddElement( pNormals );
-	pGeometry->AddElement( pTexCoords );
 
     // Now we'll add the triangles
     TriangleIndices face;

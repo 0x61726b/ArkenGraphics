@@ -184,6 +184,21 @@ float Camera::GetAspectRatio()
 	return(m_fAspect);
 }
 //--------------------------------------------------------------------------------
+XMFLOAT3 Camera::GetPosition()
+{
+	return XMFLOAT3();
+}
+//--------------------------------------------------------------------------------
+XMFLOAT3 Camera::GetTarget()
+{
+	return XMFLOAT3();
+}
+//--------------------------------------------------------------------------------
+XMFLOAT3 Camera::GetUp()
+{
+	return XMFLOAT3();
+}
+//--------------------------------------------------------------------------------
 float Camera::GetFieldOfView()
 {
 	return(m_fFov);

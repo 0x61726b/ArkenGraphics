@@ -15,6 +15,7 @@
 #include "ArkMatrixArrayParameterWriter11.h"
 #include "ArkVectorParameterWriter11.h"
 #include "ArkSamplerParameterWriter11.h"
+#include "ArkShaderResourceParameterWriter11.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -33,12 +34,14 @@ namespace Arkeng
 		std::shared_ptr<ArkMatrixParameterWriter11> GetMatrixParameterWriter(const std::wstring& name);
 		std::shared_ptr<ArkVectorParameterWriter11> GetVectorParameterWriter(const std::wstring& name);
 		std::shared_ptr<ArkSamplerParameterWriter11>  GetSamplerParameterWriter( const std::wstring& name );
+		std::shared_ptr<ArkShaderResourceParameterWriter11> GetShaderResourceParameterWriter( const std::wstring& name );
 
 		std::shared_ptr<ArkVectorParameterWriter11> SetVectorParameter( const std::wstring& name,const DirectX::XMVECTOR& vec);
 		std::shared_ptr<ArkConstantBufferParameterWriter11> SetConstantBufferParameter(const std::wstring& name,const ResourcePtr& value);
 		std::shared_ptr<ArkMatrixArrayParameterWriter11> SetMatrixArrayParameter(const std::wstring& name,DirectX::XMMATRIX* values,int count);
 		std::shared_ptr<ArkMatrixParameterWriter11> SetMatrixParameter(const std::wstring& name,const DirectX::XMMATRIX& value);
 		std::shared_ptr<ArkSamplerParameterWriter11> SetSamplerParameter( const std::wstring& name, int value );
+		std::shared_ptr<ArkShaderResourceParameterWriter11> SetShaderResourceParameter( const std::wstring& name, const ResourcePtr& value );
 
 		void SetRenderParams(IParameterManager* pParamManager);
 		void InitRenderParams();

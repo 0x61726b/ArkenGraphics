@@ -29,6 +29,7 @@ namespace Arkeng
 		const std::wstring GetWorkingDirectory();
 		const std::wstring GetShadersDirectory();
 		const std::wstring GetModelsDirectory();
+		const std::wstring GetTexturesDirectory();
 		
 	};
 };

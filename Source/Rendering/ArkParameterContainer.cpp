@@ -20,7 +20,7 @@ ArkParameterContainer::ArkParameterContainer()
 //--------------------------------------------------------------------------------
 ArkParameterContainer::~ArkParameterContainer()
 {
-	
+
 }
 //--------------------------------------------------------------------------------
 void ArkParameterContainer::AddRenderParameter(std::shared_ptr<ArkParameterWriter> pWriter)
@@ -203,35 +203,69 @@ std::shared_ptr<ArkVectorParameterWriter11> ArkParameterContainer::GetVectorPara
 	return(pVectorWriter);
 }
 //--------------------------------------------------------------------------------
-std::shared_ptr<ArkSamplerParameterWriter11> ArkParameterContainer::GetSamplerParameterWriter( const std::wstring& name )
+std::shared_ptr<ArkSamplerParameterWriter11> ArkParameterContainer::GetSamplerParameterWriter(const std::wstring& name)
 {
 	std::shared_ptr<ArkParameterWriter> pWriter = nullptr;
 	std::shared_ptr<ArkSamplerParameterWriter11> pSamplerWriter = nullptr;
 
 	// Check if the parameter already exists in this container.
-	pWriter = GetRenderParameter( name );
+	pWriter = GetRenderParameter(name);
 
-	if ( nullptr != pWriter )
+	if(nullptr != pWriter)
 	{
 		// The parameter is there, so now check its parameter type...
 		std::shared_ptr<ArkRenderParameter11> pParameter = pWriter->GetRenderParameterRef();
 
-		if ( nullptr != pParameter )
+		if(nullptr != pParameter)
 		{
 			// If the type is correct, then set the value.
-			if ( pParameter->GetParameterType() == SAMPLER ) {
-				pSamplerWriter = std::dynamic_pointer_cast<ArkSamplerParameterWriter11>( pWriter );
-			} else {
-				ArkLog::Get(LogType::Renderer).Output( L"ERROR: Trying to access a sampler in a non-sampler parameter writer!!!" );
+			if(pParameter->GetParameterType() == SAMPLER) {
+				pSamplerWriter = std::dynamic_pointer_cast<ArkSamplerParameterWriter11>(pWriter);
 			}
-		} else {
+			else {
+				ArkLog::Get(LogType::Renderer).Output(L"ERROR: Trying to access a sampler in a non-sampler parameter writer!!!");
+			}
+		}
+		else {
 			// Parameter was there, but didn't have a reference set so you can't tell what type it is.
 			// This shouldn't happen, so log an error if it does...
-			ArkLog::Get(LogType::Renderer).Output( L"ERROR: Trying to access a parameter writer without any reference set!!!" );
+			ArkLog::Get(LogType::Renderer).Output(L"ERROR: Trying to access a parameter writer without any reference set!!!");
 		}
 	}
 
-	return( pSamplerWriter );
+	return(pSamplerWriter);
+}
+//--------------------------------------------------------------------------------
+std::shared_ptr<ArkShaderResourceParameterWriter11> ArkParameterContainer::GetShaderResourceParameterWriter(const std::wstring& name)
+{
+	std::shared_ptr<ArkParameterWriter> pWriter = nullptr;
+	std::shared_ptr<ArkShaderResourceParameterWriter11> pShaderResourceWriter = nullptr;
+
+	// Check if the parameter already exists in this container.
+	pWriter = GetRenderParameter(name);
+
+	if(nullptr != pWriter)
+	{
+		// The parameter is there, so now check its parameter type...
+			std::shared_ptr<ArkRenderParameter11> pParameter = pWriter->GetRenderParameterRef();
+
+		if(nullptr != pParameter)
+		{
+			if(pParameter->GetParameterType() == ArkParamType::SHADER_RESOURCE) {
+				pShaderResourceWriter = std::dynamic_pointer_cast<ArkShaderResourceParameterWriter11>(pWriter);
+			}
+			else {
+				ArkLog::Get(LogType::Renderer).Output(L"ERROR: Trying to access a sampler in a non-sampler parameter writer!!!");
+			}
+		}
+		else {
+			// Parameter was there, but didn't have a reference set so you can't tell what type it is.
+			// This shouldn't happen, so log an error if it does...
+			ArkLog::Get(LogType::Renderer).Output(L"ERROR: Trying to access a parameter writer without any reference set!!!");
+		}
+	}
+
+	return(pShaderResourceWriter);
 }
 //--------------------------------------------------------------------------------
 void ArkParameterContainer::SetRenderParams(IParameterManager* pParamManager)
@@ -320,21 +354,39 @@ std::shared_ptr<ArkVectorParameterWriter11> ArkParameterContainer::SetVectorPara
 	return(pMatrixWriter);
 }
 //--------------------------------------------------------------------------------
-std::shared_ptr<ArkSamplerParameterWriter11> ArkParameterContainer::SetSamplerParameter( const std::wstring& name, int value )
+std::shared_ptr<ArkSamplerParameterWriter11> ArkParameterContainer::SetSamplerParameter(const std::wstring& name,int value)
 {
 	// Check if the parameter already exists in this container
-	std::shared_ptr<ArkSamplerParameterWriter11> pSamplerWriter = GetSamplerParameterWriter( name );
+	std::shared_ptr<ArkSamplerParameterWriter11> pSamplerWriter = GetSamplerParameterWriter(name);
 
 	// If not, then create one...
-	if ( nullptr == pSamplerWriter ) {
+	if(nullptr == pSamplerWriter) {
 		pSamplerWriter = std::make_shared<ArkSamplerParameterWriter11>();
-		pSamplerWriter->SetRenderParameterRef( ArkRenderer11::Get()->m_pParamMgr->GetSamplerStateParameterRef( name ) );
-		AddRenderParameter( pSamplerWriter );
+		pSamplerWriter->SetRenderParameterRef(ArkRenderer11::Get()->m_pParamMgr->GetSamplerStateParameterRef(name));
+		AddRenderParameter(pSamplerWriter);
 	}
 
 	// ... and set the value.
-	pSamplerWriter->SetValue( value );
+	pSamplerWriter->SetValue(value);
 
-	return( pSamplerWriter );
+	return(pSamplerWriter);
+}
+//--------------------------------------------------------------------------------
+std::shared_ptr<ArkShaderResourceParameterWriter11> ArkParameterContainer::SetShaderResourceParameter(const std::wstring& name,const ResourcePtr& value)
+{
+	// Check if the parameter already exists in this container
+	std::shared_ptr<ArkShaderResourceParameterWriter11> pShaderResourceWriter = GetShaderResourceParameterWriter(name);
+
+	// If not, then create one...
+	if(nullptr == pShaderResourceWriter) {
+		pShaderResourceWriter = std::make_shared<ArkShaderResourceParameterWriter11>();
+		pShaderResourceWriter->SetRenderParameterRef(ArkRenderer11::Get()->m_pParamMgr->GetShaderResourceParameterRef(name));
+		AddRenderParameter(pShaderResourceWriter);
+	}
+
+	// ... and set the value.
+	pShaderResourceWriter->SetValue(value);
+
+	return(pShaderResourceWriter);
 }
 //--------------------------------------------------------------------------------

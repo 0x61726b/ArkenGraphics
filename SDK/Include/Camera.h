@@ -50,6 +50,10 @@ namespace Arkeng
 		float GetAspectRatio();
 		float GetFieldOfView();
 
+		XMFLOAT3 GetUp();
+		XMFLOAT3 GetTarget();
+		XMFLOAT3 GetPosition();
+
 		float m_fNear;
 		float m_fFar;
 		float m_fAspect;

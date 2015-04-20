@@ -13,7 +13,7 @@ using namespace Arkeng;
 //--------------------------------------------------------------------------------
 Dx11DepthStencilViewConfig::Dx11DepthStencilViewConfig( )
 {
-	
+	SetDefaults();
 }
 //--------------------------------------------------------------------------------
 Dx11DepthStencilViewConfig::~Dx11DepthStencilViewConfig()

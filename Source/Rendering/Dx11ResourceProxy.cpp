@@ -43,8 +43,8 @@ Dx11ResourceProxy::~Dx11ResourceProxy()
 //--------------------------------------------------------------------------------
 Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig,ArkRenderer11* pRenderer,Dx11ShaderResourceViewConfig* pSRVConfig,
 	Dx11RenderTargetViewConfig* pRTVConfig,
-	Dx11DepthStencilViewConfig* pDSVConfig,
-	Dx11UnorderedAccessViewConfig* pUAVConfig)
+	Dx11UnorderedAccessViewConfig* pUAVConfig,
+	Dx11DepthStencilViewConfig* pDSVConfig)
 {
 	D3D11_TEXTURE2D_DESC desc = pConfig->GetTextureDesc();
 	CommonConstructor(desc.BindFlags,ResourceID,pRenderer,pSRVConfig,pRTVConfig,pUAVConfig,pDSVConfig);
@@ -55,8 +55,8 @@ Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig
 //--------------------------------------------------------------------------------
 Dx11ResourceProxy::Dx11ResourceProxy(int ResourceID,ArkBuffer11Config* pConfig,ArkRenderer11* pRenderer,Dx11ShaderResourceViewConfig* pSRVConfig,
 	Dx11RenderTargetViewConfig* pRTVConfig,
-	Dx11DepthStencilViewConfig* pDSVConfig,
-	Dx11UnorderedAccessViewConfig* pUAVConfig)
+	Dx11UnorderedAccessViewConfig* pUAVConfig,
+	Dx11DepthStencilViewConfig* pDSVConfig)
 {
 	D3D11_BUFFER_DESC desc = pConfig->GetBufferDesc();
 	CommonConstructor(desc.BindFlags,ResourceID,pRenderer,pSRVConfig,pRTVConfig,pUAVConfig,pDSVConfig);
@@ -82,6 +82,7 @@ void Dx11ResourceProxy::CommonConstructor(UINT BindFlags,int ResourceID,ArkRende
 	m_pRTVConfig = nullptr;
 	m_pDSVConfig = nullptr;
 	m_pSRVConfig = nullptr;
+	m_pUAVConfig = nullptr;
 
 	if(pSRVConfig)
 	{

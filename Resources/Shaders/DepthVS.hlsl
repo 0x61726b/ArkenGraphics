@@ -16,28 +16,24 @@ cbuffer Transforms
 
 struct VS_INPUT
 {
-	float3 position : POSITION;
-	float2 tex		: TEXCOORDS0;
+	float4 position : POSITION;
 	float3 normal	: NORMAL;
+	float2 tex		: TEXCOORDS0;
+	
 };
 
 struct VS_OUTPUT
 {
 	float4 position : SV_Position;
-	float4 depth	: COLOR;
+	float2 tex : TEXCOORDS;
 };
 
 
 VS_OUTPUT VSMAIN( in VS_INPUT v )
 {
 	VS_OUTPUT output;
-	output.position = mul( float4( v.position, 1.0f ), WorldViewProjMatrix );
-	
-	float3 ViewSpaceNormals = mul( float4( v.normal, 0.0f ), WorldViewMatrix ).xyz;
-	output.depth.xyz = ViewSpaceNormals * 0.5f + 0.5f;
-
-	output.depth.w = output.position.w / 25.0f;
-		
+	output.position = mul( ( v.position), WorldViewProjMatrix );
+	output.tex = v.tex;
 	return output;
 }
 

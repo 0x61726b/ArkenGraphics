@@ -58,3 +58,9 @@ const std::wstring ArkFileSystem::GetModelsDirectory()
 {
 	return GetWorkingDirectory() + L"\\Resources\\Models\\";
 }
+//--------------------------------------------------------------------------------
+const std::wstring ArkFileSystem::GetTexturesDirectory()
+{
+	return GetWorkingDirectory() + L"\\Resources\\Textures\\";
+}
+//--------------------------------------------------------------------------------

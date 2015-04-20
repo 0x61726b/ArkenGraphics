@@ -14,7 +14,7 @@
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
-	class Entity3D;
+	class ArkEntity3D;
 
 	class ViewDepthNormal : public PerspectiveView
 	{

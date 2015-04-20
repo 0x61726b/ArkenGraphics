@@ -29,14 +29,14 @@ namespace Arkeng
 		Dx11ResourceProxy(int ResourceID,Dx11Texture2DConfig* pConfig,ArkRenderer11* pRenderer,
 			Dx11ShaderResourceViewConfig* pSRVConfig = NULL,
 			Dx11RenderTargetViewConfig* pRTVConfig = NULL,
-			Dx11DepthStencilViewConfig* pDSVConfig = NULL,
-			Dx11UnorderedAccessViewConfig* pUAVConfig = NULL );
+			Dx11UnorderedAccessViewConfig* pUAVConfig = NULL,
+			Dx11DepthStencilViewConfig* pDSVConfig = NULL );
 
 		Dx11ResourceProxy(int ResourceID,ArkBuffer11Config* pConfig,ArkRenderer11* pRenderer,
 			Dx11ShaderResourceViewConfig* pSRVConfig = NULL,
 			Dx11RenderTargetViewConfig* pRTVConfig = NULL,
-			Dx11DepthStencilViewConfig* pDSVConfig = NULL,
-			Dx11UnorderedAccessViewConfig* pUAVConfig = NULL );
+			Dx11UnorderedAccessViewConfig* pUAVConfig = NULL,
+			Dx11DepthStencilViewConfig* pDSVConfig = NULL );
 
 		virtual ~Dx11ResourceProxy();
 
