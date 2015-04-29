@@ -27,6 +27,18 @@ ArkPlane::ArkPlane(float a, float b, float c, float d)
 	m_fComponents[3] = d;
 }
 //--------------------------------------------------------------------------------
+ArkPlane::ArkPlane( DirectX::XMVECTOR Plane )
+{
+	DirectX::XMFLOAT4 P;
+	DirectX::XMStoreFloat4( &P,Plane );
+
+	m_fComponents[0] = P.x;
+	m_fComponents[1] = P.y;
+	m_fComponents[2] = P.z;
+	m_fComponents[3] = P.w;
+
+}
+//--------------------------------------------------------------------------------
 ArkPlane::~ArkPlane()
 {
 }

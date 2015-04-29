@@ -204,6 +204,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Logging\ArkLog.h" />
     <ClInclude Include="Math\ArkCompositeShape.h" />
     <ClInclude Include="Math\ArkFrustum.h" />
+    <ClInclude Include="Math\ArkMath.h" />
     <ClInclude Include="Math\ArkPlane.h" />
     <ClInclude Include="Math\ArkRay3.h" />
     <ClInclude Include="Math\ArkSphere3.h" />
@@ -294,6 +295,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkRenderer11.h" />
     <ClInclude Include="Rendering\LineIndices.h" />
     <ClInclude Include="Rendering\ms3dspec.h" />
+    <ClInclude Include="Rendering\OrthoCamera.h" />
     <ClInclude Include="Rendering\PerspectiveView.h" />
     <ClInclude Include="Rendering\PipelineExecutor11.h" />
     <ClInclude Include="Rendering\PipelineManager.h" />
@@ -357,6 +359,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Logging\ArkLog.cpp" />
     <ClCompile Include="Math\ArkCompositeShape.cpp" />
     <ClCompile Include="Math\ArkFrustum.cpp" />
+    <ClCompile Include="Math\ArkMath.cpp" />
     <ClCompile Include="Math\ArkPlane.cpp" />
     <ClCompile Include="Math\ArkRay3.cpp" />
     <ClCompile Include="Math\ArkSceneGraph.cpp" />
@@ -443,6 +446,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\DxRasterizerState.cpp" />
     <ClCompile Include="Rendering\Dx11StreamOutputStageState.cpp" />
     <ClCompile Include="Rendering\LineIndices.cpp" />
+    <ClCompile Include="Rendering\OrthoCamera.cpp" />
     <ClCompile Include="Rendering\PipelineExecutor11.cpp" />
     <ClCompile Include="Rendering\PipelineManager.cpp" />
     <ClCompile Include="Rendering\Dx11Resource.cpp" />

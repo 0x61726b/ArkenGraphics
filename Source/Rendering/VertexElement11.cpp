@@ -21,6 +21,7 @@ std::string VertexElement11::TexCoordSemantic = "TEXCOORDS";
 //std::string VertexElement11::BoneIDSemantic = "BONEIDS";
 //std::string VertexElementDX11::BoneWeightSemantic = "BONEWEIGHTS";
 std::string VertexElement11::TangentSemantic = "TANGENT";
+std::string VertexElement11::BinormalSemantic = "BINORMAL";
 
 //--------------------------------------------------------------------------------
 VertexElement11::VertexElement11( int float_tuple, int elementCount )

@@ -19,15 +19,18 @@ namespace Arkeng
 	class ViewDepthNormal : public PerspectiveView
 	{
 	public:
-		ViewDepthNormal( ArkRenderer11& Renderer, ResourcePtr RenderTarget, ResourcePtr DepthTarget );
+		ViewDepthNormal(ArkRenderer11& Renderer,ResourcePtr RenderTarget,ResourcePtr DepthTarget);
 		virtual ~ViewDepthNormal();
 
-		virtual void QueuePreTasks( ArkRenderer11* pRenderer );
-		virtual void ExecuteTask( PipelineManager* pPipelineManager, IParameterManager* pParamManager );
+		virtual void QueuePreTasks(ArkRenderer11* pRenderer);
+		virtual void ExecuteTask(PipelineManager* pPipelineManager,IParameterManager* pParamManager);
 
-		virtual void SetUsageParams( IParameterManager* pParamManager );
+		virtual void SetUsageParams(IParameterManager* pParamManager);
 
-		virtual std::wstring GetName( );
+		virtual std::wstring GetName();
+
+		virtual void SetViewMatrix(const XMMATRIX& matrix);
+		virtual void SetProjMatrix(const XMMATRIX& matrix);
 
 	protected:
 		std::shared_ptr<ArkShaderResourceParameter11> m_pDepthNormalBuffer;

@@ -85,12 +85,14 @@ void ArkConstantBuffer11::EvaluateMappings(PipelineManager* pPipeline,IParameter
 					unsigned int valueID								= m_Mappings[j].valueID;
 					unsigned int threadID								= pParamManager->GetID();
 
+					if( pParam == nullptr )
+						continue;
 
 					m_Mappings[j].valueID = pParam->GetValueID( threadID );
 
 					if ( m_Mappings[j].varclass == D3D_SVC_VECTOR )
 					{
-						DirectX::XMVECTOR vector = pParamManager->GetVectorParameter( pParam );
+						Float4Align DirectX::XMVECTOR vector = pParamManager->GetVectorParameter( pParam );
 						DirectX::XMVECTOR* pBuf = (DirectX::XMVECTOR*)((char*)resource.pData + offset);
 						*pBuf = vector;
 						int x = 0;
@@ -101,16 +103,19 @@ void ArkConstantBuffer11::EvaluateMappings(PipelineManager* pPipeline,IParameter
 						// Check if it is an array of matrices first...
 						if ( elements == 0 ) 
 						{
-							DirectX::XMMATRIX matrix = pParamManager->GetMatrixParameter( pParam );
+							Float4Align DirectX::XMMATRIX matrix = pParamManager->GetMatrixParameter( pParam );
 							DirectX::XMMATRIX* pBuf = (DirectX::XMMATRIX*)((char*)resource.pData + offset);
 							*pBuf = matrix;
 						}
 						else 
 						{
 							// If a matrix array, then use the corresponding parameter type.
-							if ( size == elements * sizeof( DirectX::XMMATRIX ) ) {
-								DirectX::XMMATRIX* pM= pParamManager->GetMatrixArrayParameter( pParam );
-								memcpy( ((char*)resource.pData + offset), (char*)&pM, size );
+							if ( size == elements * sizeof( DirectX::XMFLOAT4X4 ) )
+							{
+								
+								DirectX::XMFLOAT4X4* pM = pParamManager->GetMatrixArrayParameter( pParam );
+								memcpy( ((char*)resource.pData + offset), (char*)pM, size );
+								
 							} else {
 								ArkLog::Get(LogType::Renderer).Output( L"Mismatch in matrix array count, update will not be performed!!!" );
 							}

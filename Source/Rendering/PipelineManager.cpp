@@ -193,18 +193,22 @@ void PipelineManager::ClearBuffers(float color[],float depth,UINT stencil)
 
 	UINT viewCount = OutputMergerStage.GetPreviousState().GetRenderTargetCount();
 
+
 	for(UINT i = 0; i < viewCount; ++i)
 	{
-		int rtv = OutputMergerStage.CurrentState.RenderTargetViews.GetState(i);
-		Dx11RenderTargetView& rtView = ArkRenderer11::Get()->GetRenderTargetViewByIndex(rtv);
-		pRenderTargetViews[i] = rtView.m_pRenderTargetView.Get();
-
-		if(pRenderTargetViews[i] != nullptr)
+		if(OutputMergerStage.CurrentState.RenderTargetViews.GetState(i) != -1)
 		{
-			m_pContext->ClearRenderTargetView(pRenderTargetViews[i],color);
+			int rtv = OutputMergerStage.CurrentState.RenderTargetViews.GetState(i);
+
+			Dx11RenderTargetView& rtView = ArkRenderer11::Get()->GetRenderTargetViewByIndex(rtv);
+			pRenderTargetViews[i] = rtView.m_pRenderTargetView.Get();
+
+			if(pRenderTargetViews[i] != nullptr)
+			{
+				m_pContext->ClearRenderTargetView(pRenderTargetViews[i],color);
+			}
 		}
 	}
-
 	if(OutputMergerStage.CurrentState.DepthTargetViews.GetState() != -1)
 	{
 		int dsv = OutputMergerStage.CurrentState.DepthTargetViews.GetState();
@@ -212,7 +216,7 @@ void PipelineManager::ClearBuffers(float color[],float depth,UINT stencil)
 		pDepthStencilView = DSV.m_pDepthStencilView.Get();
 
 		if(pDepthStencilView != nullptr)
-			m_pContext->ClearDepthStencilView(pDepthStencilView,D3D11_CLEAR_DEPTH,depth,stencil);
+			m_pContext->ClearDepthStencilView(pDepthStencilView,D3D11_CLEAR_DEPTH|D3D11_CLEAR_STENCIL,depth,stencil);
 	}
 }
 //--------------------------------------------------------------------------------
@@ -326,27 +330,29 @@ void PipelineManager::BindUnorderedAccessParameter(ShaderType type,std::shared_p
 
 	unsigned int tID = pParamManager->GetID();
 
-	if ( pParam != 0 ) {
+	if(pParam != 0) {
 
 		// Check the type of the parameter
-		if ( pParam->GetParameterType() == UOA ) {
+		if(pParam->GetParameterType() == UOA) {
 
-			std::shared_ptr<ArkUnorderedAccessParameter11> pResource = 
-				std::dynamic_pointer_cast<ArkUnorderedAccessParameter11>( pParam );
+			std::shared_ptr<ArkUnorderedAccessParameter11> pResource =
+				std::dynamic_pointer_cast<ArkUnorderedAccessParameter11>(pParam);
 
-			int ID = pResource->GetIndex( tID ); 
-			unsigned int initial = pResource->GetInitialCount( tID );
+			int ID = pResource->GetIndex(tID);
+			unsigned int initial = pResource->GetInitialCount(tID);
 
-			Dx11UnorderedAccessView& view = pRenderer->GetUnorderedAccessViewByIndex( ID );
+			Dx11UnorderedAccessView& view = pRenderer->GetUnorderedAccessViewByIndex(ID);
 
-			ShaderStages[type]->CurrentState.UnorderedAccessViews.SetState( slot, view.m_pUnorderedAccessView.Get() );
-			ShaderStages[type]->CurrentState.UAVInitialCounts.SetState( slot, initial );
+			ShaderStages[type]->CurrentState.UnorderedAccessViews.SetState(slot,view.m_pUnorderedAccessView.Get());
+			ShaderStages[type]->CurrentState.UAVInitialCounts.SetState(slot,initial);
 
-		} else {
-			ArkLog::Get(LogType::Renderer).Output( L"Tried to set a non-unordered access view ID as a unordered access view!" );
 		}
-	} else {
-		ArkLog::Get(LogType::Renderer).Output( L"Tried to set a non-existing parameter as a unordered access view!" );
+		else {
+			ArkLog::Get(LogType::Renderer).Output(L"Tried to set a non-unordered access view ID as a unordered access view!");
+		}
+	}
+	else {
+		ArkLog::Get(LogType::Renderer).Output(L"Tried to set a non-existing parameter as a unordered access view!");
 	}
 }
 //--------------------------------------------------------------------------------
@@ -455,17 +461,28 @@ void PipelineManager::UnMapResource(Dx11Resource* pArkResource,UINT subresource)
 	m_pContext->Unmap(pResource,subresource);
 }
 //--------------------------------------------------------------------------------
-void PipelineManager::ResolveSubresource( ResourcePtr DestResource, UINT DstSubresource, 
-                                              ResourcePtr SrcResource, UINT SrcSubresource, 
-                                              DXGI_FORMAT format )
+void PipelineManager::ResolveSubresource(ResourcePtr DestResource,UINT DstSubresource,
+	ResourcePtr SrcResource,UINT SrcSubresource,
+	DXGI_FORMAT format)
 {
-    int DestID = DestResource->m_iResource;
-    ID3D11Resource* pDestResource = ArkRenderer11::Get()->GetResourceByIndex(DestID)->GetResource();
+	int DestID = DestResource->m_iResource;
+	ID3D11Resource* pDestResource = ArkRenderer11::Get()->GetResourceByIndex(DestID)->GetResource();
 
-    int SrcID = SrcResource->m_iResource;
-    ID3D11Resource* pSrcResource = ArkRenderer11::Get()->GetResourceByIndex(SrcID)->GetResource();
- 
-    m_pContext->ResolveSubresource( pDestResource, DstSubresource, pSrcResource, SrcSubresource, format );
+	int SrcID = SrcResource->m_iResource;
+	ID3D11Resource* pSrcResource = ArkRenderer11::Get()->GetResourceByIndex(SrcID)->GetResource();
+
+	m_pContext->ResolveSubresource(pDestResource,DstSubresource,pSrcResource,SrcSubresource,format);
+}
+//--------------------------------------------------------------------------------
+void PipelineManager::CopyResource(ResourcePtr DestResource,ResourcePtr SrcResource)
+{
+	int DestID = DestResource->m_iResource;
+	ID3D11Resource* pDestResource = ArkRenderer11::Get()->GetResourceByIndex(DestID)->GetResource();
+
+	int SrcID = SrcResource->m_iResource;
+	ID3D11Resource* pSrcResource = ArkRenderer11::Get()->GetResourceByIndex(SrcID)->GetResource();
+
+	m_pContext->CopyResource(pDestResource,pSrcResource);
 }
 //--------------------------------------------------------------------------------
 void PipelineManager::GenerateCommandList(ArkCommandList11* plist)
@@ -719,13 +736,13 @@ void PipelineManager::DrawInstanced(ArkRenderEffect11& effect,ResourcePtr vb,
 	m_pContext->DrawIndexedInstanced(numIndices,numInstances,0,0,0);
 }
 //--------------------------------------------------------------------------------
-void PipelineManager::Dispatch( ArkRenderEffect11& effect, UINT x, UINT y, UINT z, IParameterManager* pParamManager )
+void PipelineManager::Dispatch(ArkRenderEffect11& effect,UINT x,UINT y,UINT z,IParameterManager* pParamManager)
 {
 	ClearPipelineResources();
-	effect.ConfigurePipeline( this, pParamManager );
+	effect.ConfigurePipeline(this,pParamManager);
 	ApplyPipelineResources();
 
-	m_pContext->Dispatch( x, y, z );
+	m_pContext->Dispatch(x,y,z);
 }
 //--------------------------------------------------------------------------------
 void PipelineManager::StartPipelineStatistics()

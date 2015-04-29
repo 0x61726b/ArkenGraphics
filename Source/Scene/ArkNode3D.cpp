@@ -43,7 +43,6 @@ void ArkNode3D::Render( PipelineManager* pPipelineManager, IParameterManager* pP
 	for ( auto node : m_Nodes ) {
 		if ( node ) node->Render( pPipelineManager, pParamManager, view );
 	}
-
 }
 //--------------------------------------------------------------------------------
 void ArkNode3D::Update( float time )

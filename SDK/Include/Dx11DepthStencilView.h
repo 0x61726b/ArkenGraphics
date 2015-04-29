@@ -19,7 +19,7 @@ namespace Arkeng
 		Dx11DepthStencilView( DepthStencilViewComPtr );
 		~Dx11DepthStencilView();
 
-	protected:
+	public:
 		DepthStencilViewComPtr			m_pDepthStencilView;
 
 		friend PipelineManager;

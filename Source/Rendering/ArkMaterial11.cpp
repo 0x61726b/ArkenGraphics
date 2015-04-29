@@ -62,6 +62,7 @@ void ArkMaterial11::SetRenderParams( IParameterManager* pParamManager, VIEWTYPE 
 
 	for ( auto pView : Params[type].Tasks )
 		pView->SetUsageParams( pParamManager);
+	
 
 	// Set the additional render parameters that have been added to the material.
 

@@ -49,18 +49,26 @@ namespace Arkeng
 
 		const Dx11ViewPort& GetViewport( unsigned int index );
 
+		virtual void SetWorldMatrix(const DirectX::XMMATRIX& matrix  );
+
 		virtual void SetViewMatrix( const DirectX::XMMATRIX& matrix );
 		virtual void SetProjMatrix( const DirectX::XMMATRIX& matrix );
+
+		const DirectX::XMMATRIX& GetWorldMatrix( );
 		const DirectX::XMMATRIX& GetViewMatrix( );
 		const DirectX::XMMATRIX& GetProjMatrix( );
 
 		virtual void SetEntity( ArkEntity3D* pEntity );
 
 		virtual void SetBackColor( XMFLOAT4& c );
+
+		virtual void InitializeResources();
 		
 	protected:
 		Scene*			m_pScene;
 		ArkEntity3D*	m_pEntity;
+
+		DirectX::XMMATRIX WorldMatrix;
 		DirectX::XMMATRIX ViewMatrix;
 		DirectX::XMMATRIX ProjMatrix;
 

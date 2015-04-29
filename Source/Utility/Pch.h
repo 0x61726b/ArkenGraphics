@@ -38,11 +38,13 @@
 //
 
 //Direct3D Includes
+#define _XM_NO_INTRINSICS_
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
-//#define _XM_NO_INTRINSICS_
+
 #include <DirectXMath.h>
 
+#define Float4Align __declspec(align(16))
 
 //Effects Library
 #include "d3dx11effect.h"

@@ -147,6 +147,7 @@ void ArkEntity3D::Render( PipelineManager* pPipelineManager, IParameterManager* 
 			// entities that don't specialize the parameters.
 			Visual.Material->SetRenderParams( pParamManager, view );
 
+			
 			// Set the entity render parameters
 			this->SetRenderParams( pParamManager );
 
@@ -163,6 +164,7 @@ void ArkEntity3D::Render( PipelineManager* pPipelineManager, IParameterManager* 
 			// Let the geometry execute its drawing operation.  This includes 
 			// configuring the input to the pipeline, plus calling an appropriate
 			// draw call.
+
 			Visual.Executor->Execute( pPipelineManager, pParamManager );
 		}
 	}

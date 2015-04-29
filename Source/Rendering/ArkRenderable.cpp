@@ -16,7 +16,7 @@
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
 ArkRenderable::ArkRenderable() :
-	iPass( GEOMETRY ),
+	iPass( Geometry ),
 	Executor( nullptr ),
 	Material( nullptr ) 
 {

@@ -21,7 +21,7 @@ namespace Arkeng
 
 		void SetVectorParameter(const std::wstring& name,DirectX::XMVECTOR* pV);
 		void SetMatrixParameter(const std::wstring& name,DirectX::XMMATRIX* pM);
-		void SetMatrixArrayParameter(const std::wstring& name,int count,DirectX::XMMATRIX* pmA);
+		void SetMatrixArrayParameter(const std::wstring& name,int count,DirectX::XMFLOAT4X4* pmA);
 		void SetConstantBufferParameter( const std::wstring& name,ResourcePtr resource );
 		void SetShaderResourceParameter( const std::wstring& name, ResourcePtr resource );
 		void SetSamplerParameter( const std::wstring& name, int* pID ) ;
@@ -29,7 +29,7 @@ namespace Arkeng
 
 		virtual void SetVectorParameter( std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMVECTOR* pV);
 		virtual void SetMatrixParameter(std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMMATRIX* pM) ;
-		virtual void SetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP,int count,DirectX::XMMATRIX* pV);
+		virtual void SetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP,int count,DirectX::XMFLOAT4X4* pV);
 		virtual void SetConstantBufferParameter( std::shared_ptr<ArkRenderParameter11> pParameter, ResourcePtr resource );
 		virtual void SetShaderResourceParameter( std::shared_ptr<ArkRenderParameter11> pParameter, ResourcePtr resource );
 		virtual void SetSamplerParameter( std::shared_ptr<ArkRenderParameter11> pParameter, int* pID );
@@ -45,7 +45,7 @@ namespace Arkeng
 
 		virtual DirectX::XMVECTOR GetVectorParameter(std::shared_ptr<ArkRenderParameter11> pP);
 		virtual DirectX::XMMATRIX GetMatrixParameter(std::shared_ptr<ArkRenderParameter11> pP);
-		virtual DirectX::XMMATRIX* GetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP) ;
+		virtual DirectX::XMFLOAT4X4* GetMatrixArrayParameter(std::shared_ptr<ArkRenderParameter11> pP) ;
 		virtual int GetConstantBufferParameter( std::shared_ptr<ArkRenderParameter11> pParameter ) ;
 		virtual int GetShaderResourceParameter( std::shared_ptr<ArkRenderParameter11> pParameter );
 		virtual int GetSamplerStateParameter( std::shared_ptr<ArkRenderParameter11> pParameter );

@@ -52,6 +52,8 @@ namespace Arkeng
 
 		virtual std::wstring GetName();
 
+		
+
 	protected:
 
 		int ResolutionX;

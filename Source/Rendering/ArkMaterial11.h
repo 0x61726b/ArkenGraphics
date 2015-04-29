@@ -22,6 +22,7 @@ namespace Arkeng
 	struct MaterialParams
 	{
 		bool										bRender;
+		bool										bCastShadow;
 		std::shared_ptr<ArkRenderEffect11>			pEffect;
 		std::vector<TaskCore*>						Tasks;
 	};

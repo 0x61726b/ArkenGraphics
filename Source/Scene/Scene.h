@@ -38,6 +38,8 @@ namespace Arkeng
 
 		ArkNode3D* GetRoot();
 
+		std::vector<Actor*> GetActors();
+
 		ArkParameterContainer Parameters;
 	protected:
 		ArkNode3D* m_pRoot;

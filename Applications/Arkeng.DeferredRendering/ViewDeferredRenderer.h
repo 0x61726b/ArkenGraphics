@@ -14,6 +14,7 @@
 #include "ViewLights.h"
 #include "ArkSpriteRenderer11.h"
 #include "ArkFontLoader.h"
+#include "ViewDepthNormal.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -60,13 +61,16 @@ namespace Arkeng
 		int							m_iViewport[AAMode::NumSettings];
 		ResourcePtr					m_ResolveTarget;
 		ResourcePtr					m_BackBuffer;
+		ResourcePtr					m_ShadowMap;
 
 		ViewGBuffer*				m_pGBufferView;
 		ViewLights*					m_pLightsView;
+		ViewDepthNormal*			m_pDepthView;
 
 		ArkSpriteRenderer11			m_SpriteRenderer;
 		SpriteFontPtr				m_pFont;
 
+		XMFLOAT3					InterpLightPos;
 	};
 };
 //--------------------------------------------------------------------------------

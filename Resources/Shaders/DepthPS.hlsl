@@ -16,7 +16,7 @@ struct VS_OUTPUT
 
 float4 PSMAIN( in VS_OUTPUT input ) : SV_Target
 {
-	float depth = float4(input.position.z,input.position.z,input.position.z,input.position.z);
-	return depth;
+	float color = input.position.z / input.position.w;
+	return color;
 }
 

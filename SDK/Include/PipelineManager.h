@@ -93,6 +93,8 @@ namespace Arkeng
 		void Dispatch( ArkRenderEffect11& effect, UINT x, UINT y, UINT z, IParameterManager* pParamManager );
 		void UnMapResource(Dx11Resource* pArkResource,UINT subresource);
 
+		void CopyResource( ResourcePtr,ResourcePtr );
+
 		void GenerateCommandList( ArkCommandList11* pList );
 		void ExecuteCommandList( ArkCommandList11* pList );
 

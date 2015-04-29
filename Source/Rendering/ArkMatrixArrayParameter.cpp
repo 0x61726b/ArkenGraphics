@@ -19,7 +19,10 @@ ArkMatrixArrayParameter11::ArkMatrixArrayParameter11(int count)
 	m_iMatrixCount = count; 
 
 	for ( int i = 0; i <= NUM_THREADS; i++ )
-		m_pMatrices[i] = new DirectX::XMMATRIX[count];
+	{
+		/*m_pMatrices[i] = new DirectX::XMMATRIX[count];*/
+		m_pTestMatrices[i] = new DirectX::XMFLOAT4X4[count];
+	}
 	
 }
 //--------------------------------------------------------------------------------
@@ -59,7 +62,7 @@ ArkMatrixArrayParameter11& ArkMatrixArrayParameter11::operator=( ArkMatrixArrayP
 ArkMatrixArrayParameter11::~ArkMatrixArrayParameter11()
 {
 	for ( int i = 0; i <= NUM_THREADS; i++ )
-		delete [] m_pMatrices[i];
+		delete [] m_pTestMatrices[i];
 }
 //--------------------------------------------------------------------------------
 void ArkMatrixArrayParameter11::SetParameterData(void* pData,unsigned int thread)
@@ -67,12 +70,10 @@ void ArkMatrixArrayParameter11::SetParameterData(void* pData,unsigned int thread
 	assert( thread >= 0 );
 	assert( thread < NUM_THREADS+1 );
 
-	// TODO: This isn't very safe - the caller could supply less than the correct 
-	//       amount of matrices...  I need a better way to set this parameter data.
-
-	if ( 0 != memcmp( pData, &(m_pMatrices[thread]), m_iMatrixCount * sizeof( DirectX::XMMATRIX ) ) ) {
+	if ( 0 != memcmp( pData, &(m_pTestMatrices[thread]), m_iMatrixCount * sizeof( DirectX::XMFLOAT4X4 ) ) )
+	{
 		m_auiValueID[thread]++;
-		memcpy( m_pMatrices[thread], pData, m_iMatrixCount * sizeof( DirectX::XMMATRIX ) );
+		memcpy( m_pTestMatrices[thread], pData, m_iMatrixCount * sizeof( DirectX::XMFLOAT4X4 ) );
 	}
 	
 }
@@ -88,6 +89,14 @@ DirectX::XMMATRIX* ArkMatrixArrayParameter11::GetMatrices(unsigned int threadID)
 	assert( threadID < NUM_THREADS+1 );
 
 	return( m_pMatrices[threadID] );
+}
+//--------------------------------------------------------------------------------
+DirectX::XMFLOAT4X4* ArkMatrixArrayParameter11::GetMatrices4x4(unsigned int threadID)
+{
+	assert( threadID >= 0 );
+	assert( threadID < NUM_THREADS+1 );
+
+	return( m_pTestMatrices[threadID] );
 }
 //--------------------------------------------------------------------------------
 int ArkMatrixArrayParameter11::GetMatrixCount()

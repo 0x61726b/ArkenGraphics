@@ -18,6 +18,7 @@ namespace Arkeng
 	public:
 		ArkPlane( );
 		ArkPlane( float a, float b, float c, float d );
+		ArkPlane( DirectX::XMVECTOR plane );
 		virtual ~ArkPlane( );
 
 		// Operations

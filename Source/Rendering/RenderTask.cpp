@@ -16,6 +16,7 @@ RenderTask::RenderTask()
 	:	m_uiViewportCount(0),
 		ViewMatrix(),
 		ProjMatrix(),
+		WorldMatrix(),
 		m_pEntity( nullptr ),
 		m_pScene( nullptr ),
 		m_iViewports(),
@@ -67,6 +68,10 @@ void RenderTask::ConfigureViewports(PipelineManager* pPipeline)
 	}
 }
 //--------------------------------------------------------------------------------
+void RenderTask::InitializeResources()
+{
+}
+//--------------------------------------------------------------------------------
 const Dx11ViewPort& RenderTask::GetViewport(unsigned int index)
 {
 	assert(index < m_uiViewportCount);
@@ -77,6 +82,12 @@ void RenderTask::SetProjMatrix(const DirectX::XMMATRIX& v)
 {
 	ProjMatrix = v;
 }
+//--------------------------------------------------------------------------------
+void RenderTask::SetWorldMatrix(const DirectX::XMMATRIX& v)
+{
+	ProjMatrix = v;
+}
+
 //--------------------------------------------------------------------------------
 void RenderTask::SetViewMatrix(const DirectX::XMMATRIX& v)
 {
@@ -101,5 +112,10 @@ const DirectX::XMMATRIX& RenderTask::GetViewMatrix()
 const DirectX::XMMATRIX& RenderTask::GetProjMatrix()
 {
 	return ProjMatrix;
+}
+//--------------------------------------------------------------------------------
+const DirectX::XMMATRIX& RenderTask::GetWorldMatrix()
+{
+	return WorldMatrix;
 }
 //--------------------------------------------------------------------------------

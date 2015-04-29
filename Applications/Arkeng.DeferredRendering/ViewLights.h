@@ -39,9 +39,11 @@ namespace Arkeng
         float SpotInnerAngle;
         float SpotOuterAngle;
         LightType Type;
+		XMMATRIX View;
+		XMMATRIX Proj;
 
         LightParams() : Position( 0.0f, 0.0f, 0.0f ), Color( 1.0f, 1.0f, 1.0f ), Direction( -1.0f, -1.0f, 1.0f ),
-                Range( 2.0f ), SpotInnerAngle( 0 ), SpotOuterAngle ( 0 ), Type ( Point ) {}
+                Range( 2.0f ), SpotInnerAngle( 0 ), SpotOuterAngle ( 0 ), Type ( Point ), View( XMMatrixIdentity() ),Proj( XMMatrixIdentity() ) {}
     };
 
 	class ViewLights : public RenderTask
@@ -101,6 +103,8 @@ namespace Arkeng
         std::vector<LightParams>		m_Lights;
         XMFLOAT4X4						m_WorldMatrix;
 
+		std::shared_ptr<ArkMatrixParameter11>			m_pLightViewMatrix;
+		std::shared_ptr<ArkMatrixParameter11>			m_pLightProjMatrix;
 		std::shared_ptr<ArkMatrixParameter11>			m_pInvProjMatrix;
 		std::shared_ptr<ArkMatrixParameter11>			m_pProjMatrix;
 		std::shared_ptr<ArkVectorParameter11>			m_pCameraPos;

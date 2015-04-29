@@ -19,6 +19,7 @@
 #include "IParameterManager.h"
 #include "Dx11DepthStencilViewConfig.h"
 #include "Dx11ShaderResourceViewConfig.h"
+
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -81,6 +82,8 @@ ViewDeferredRenderer::ViewDeferredRenderer(ArkRenderer11& Renderer,ResourcePtr R
 		// 4-component 8-bit unsigned normalized format for specular albedo and power
 		RTConfig.SetFormat(DXGI_FORMAT_R8G8B8A8_UNORM);
 		m_GBuffer[GBufferOptMode::OptEnabled][aaMode].push_back(Renderer.CreateTexture2D(&RTConfig,NULL));
+
+		
 
 		// We need one last render target for the final image
 		RTConfig.SetFormat(DXGI_FORMAT_R10G10B10A2_UNORM);
@@ -155,9 +158,12 @@ ViewDeferredRenderer::ViewDeferredRenderer(ArkRenderer11& Renderer,ResourcePtr R
 
 	m_pGBufferView = new ViewGBuffer(Renderer);
 	m_pLightsView = new ViewLights(Renderer);
+	
 
 	m_SpriteRenderer.Initialize();
 	m_pFont = ArkFontLoader::LoadFont(std::wstring(L"Arial"),14,0,true);
+
+
 }
 //--------------------------------------------------------------------------------
 ViewDeferredRenderer::~ViewDeferredRenderer()
@@ -196,6 +202,7 @@ void ViewDeferredRenderer::QueuePreTasks(ArkRenderer11* pRenderer)
 	SetupViews();
 	m_pLightsView->QueuePreTasks(pRenderer);
 	m_pGBufferView->QueuePreTasks(pRenderer);
+	
 }
 //--------------------------------------------------------------------------------
 void ViewDeferredRenderer::ExecuteTask(PipelineManager* pPipelineManager,IParameterManager* pParamManager)
@@ -344,6 +351,7 @@ void ViewDeferredRenderer::Resize(UINT width,UINT height)
 	// behavior in the future.
 	m_pGBufferView->Resize(width,height);
 	m_pLightsView->Resize(width,height);
+	
 }
 //--------------------------------------------------------------------------------
 void ViewDeferredRenderer::SetRenderParams(IParameterManager* pParamManager)
@@ -367,8 +375,10 @@ void ViewDeferredRenderer::SetViewMatrix(const XMMATRIX& matrix)
 	RenderTask::SetViewMatrix(matrix);
 
 	// Propagate the view matrix.
+	
 	m_pGBufferView->SetViewMatrix(matrix);
 	m_pLightsView->SetViewMatrix(matrix);
+	
 }
 //--------------------------------------------------------------------------------
 void ViewDeferredRenderer::SetProjMatrix(const XMMATRIX& matrix)
@@ -379,6 +389,7 @@ void ViewDeferredRenderer::SetProjMatrix(const XMMATRIX& matrix)
 	// Propagate the projection matrix.
 	m_pGBufferView->SetProjMatrix(matrix);
 	m_pLightsView->SetProjMatrix(matrix);
+	
 }
 //--------------------------------------------------------------------------------
 void ViewDeferredRenderer::SetScene(Scene* pScene)
@@ -389,6 +400,7 @@ void ViewDeferredRenderer::SetScene(Scene* pScene)
 	// Propagate the root setting call.
 	m_pGBufferView->SetScene(pScene);
 	m_pLightsView->SetScene(pScene);
+	
 }
 //--------------------------------------------------------------------------------
 void ViewDeferredRenderer::SetEntity(ArkEntity3D* pEntity)
@@ -399,6 +411,7 @@ void ViewDeferredRenderer::SetEntity(ArkEntity3D* pEntity)
 	// Propagate the entity call.
 	m_pGBufferView->SetEntity(pEntity);
 	m_pLightsView->SetEntity(pEntity);
+	
 }
 //--------------------------------------------------------------------------------
 void ViewDeferredRenderer::SetClipPlanes(float NearClip,float FarClip)
@@ -443,7 +456,10 @@ void ViewDeferredRenderer::SetupViews()
 			}
 		}
 	}
-
+	light.Type = LightType::Directional;
+	light.Direction = XMFLOAT3(0,-1,1);
+	light.Color = XMFLOAT3(1,1,1);
+	m_pLightsView->AddLight(light);
 	int vpWidth = ResolutionX;
 	int vpHeight = ResolutionY;
 	if(AAMode::Value == AAMode::SSAA)

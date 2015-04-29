@@ -26,6 +26,7 @@ namespace Arkeng
   //      static std::string BoneIDSemantic;
 		//static std::string BoneWeightSemantic;
         static std::string TangentSemantic;
+		static std::string BinormalSemantic;
 
 	public:
 		VertexElement11( int tuple, int elementCount );

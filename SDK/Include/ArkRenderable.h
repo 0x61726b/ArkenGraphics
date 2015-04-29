@@ -25,13 +25,7 @@ namespace Arkeng
 	public:
 		enum ENTITYTYPE
 		{
-			GUI_TEXT,
-			GUI,
-			ALPHA,
-			SKY,
-			BACKGROUND,
-			GEOMETRY,
-			NUMPASSES
+			Geometry,
 		};
 
 		ArkRenderable();
@@ -43,7 +37,7 @@ namespace Arkeng
 		void SetGeometry( ExecutorPtr pExecutor );
 		ExecutorPtr GetGeometry( );
 
-
+		
 		ENTITYTYPE				iPass;
 		ExecutorPtr				Executor;
 		MaterialPtr				Material;

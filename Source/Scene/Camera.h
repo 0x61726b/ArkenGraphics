@@ -35,6 +35,8 @@ namespace Arkeng
 
 		void SetOverlayView( TaskCore* pTask );
 
+		void LookAt(const XMFLOAT3 &eye, const XMFLOAT3 &lookAt, const XMFLOAT3 &up);
+
 		void ApplyProjectionParams();
 		void ApplyOrthographicParams();
 
@@ -67,7 +69,12 @@ namespace Arkeng
 
 		ArkSpatialController<ArkNode3D>& Spatial(); 
 
+		XMVECTOR Position;
+		DirectX::XMMATRIX m_World;
+		DirectX::XMMATRIX m_ViewMatrix;
 		DirectX::XMMATRIX m_ProjMatrix;
+
+		/*const DirectX::XMMATRIX& GetViewProj();*/
 
 		ArkParameterContainer Parameters;
 	protected:

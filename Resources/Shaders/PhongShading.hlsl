@@ -5,12 +5,6 @@ cbuffer Transforms
 	matrix   WorldViewProjMatrix;
 };
 //-----------------------------------------------------------------------------
-cbuffer LightBuffer
-{
-	float3 LightPositionWS;
-	float4 LightColor;
-};
-//-----------------------------------------------------------------------------
 struct VS_INPUT
 {
 	float3 position : POSITION;
@@ -35,6 +29,7 @@ VS_OUTPUT VSMain( in VS_INPUT input )
 	float3 NormalWS = mul( input.normal, (float3x3)gWorld );
 	float diffuse = dot( normalize( float3( 1.0f, 1.0f, -1.0f ) ), NormalWS );
 
+	float4 LightColor = float4(1,1,1,1);
 	output.color.rgb = LightColor.rgb * diffuse;
 
 	output.color.a = 1.0f;

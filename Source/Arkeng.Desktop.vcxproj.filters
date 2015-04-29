@@ -591,6 +591,12 @@
     <ClInclude Include="Rendering\ViewShadowMap.h">
       <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
     </ClInclude>
+    <ClInclude Include="Math\ArkMath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\OrthoCamera.h">
+      <Filter>Scene\Cameras</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -1003,6 +1009,12 @@
     </ClCompile>
     <ClCompile Include="Rendering\ViewShadowMap.cpp">
       <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\ArkMath.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\OrthoCamera.cpp">
+      <Filter>Scene\Cameras</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

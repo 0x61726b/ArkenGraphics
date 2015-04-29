@@ -32,11 +32,12 @@ ViewAmbientOcclusion::ViewAmbientOcclusion( ArkRenderer11& Renderer, ResourcePtr
 	Dx11Texture2DConfig config;
 	config.SetColorBuffer( ResolutionX, ResolutionY );
 	config.SetBindFlags( D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET );
+	
 	DepthNormalBuffer = Renderer.CreateTexture2D( &config, 0 );
 	
 	// The occlusion buffer is calculated in the compute shader, so requires
 	// an unordered access view as well as a shader resource.
-
+	config.SetColorBuffer( ResolutionX, ResolutionY );
 	config.SetFormat( DXGI_FORMAT_R32_FLOAT );
 	config.SetBindFlags( D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS );
 	OcclusionBuffer = Renderer.CreateTexture2D( &config, 0 );

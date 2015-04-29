@@ -18,6 +18,7 @@ namespace Arkeng
 	public:
 		static MaterialPtr GenerateWireFrame( ArkRenderer11& Renderer );
 
+		static MaterialPtr GenerateCascadedShadowMaps(ArkRenderer11& Renderer );
 		
 		static MaterialPtr GenerateStaticTextured( ArkRenderer11& Renderer );
 		static MaterialPtr GenerateSkinnedTextured( ArkRenderer11& Renderer );

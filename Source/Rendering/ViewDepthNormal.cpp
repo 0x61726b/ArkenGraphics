@@ -26,7 +26,7 @@ ViewDepthNormal::ViewDepthNormal( ArkRenderer11& Renderer, ResourcePtr RenderTar
 	// In addition, the render target that gets passed to this view will serve as
 	// the depth/normal buffer as opposed to a standard render target.
 
-	m_pDepthNormalBuffer = Renderer.m_pParamMgr->GetShaderResourceParameterRef( std::wstring( L"DepthNormalBuffer" ) );
+	m_pDepthNormalBuffer = Renderer.m_pParamMgr->GetShaderResourceParameterRef( std::wstring( L"ShadowMap" ) );
 }
 //--------------------------------------------------------------------------------
 ViewDepthNormal::~ViewDepthNormal()
@@ -86,5 +86,15 @@ void ViewDepthNormal::SetUsageParams( IParameterManager* pParamManager )
 std::wstring ViewDepthNormal::GetName()
 {
 	return( L"ViewDepthNormal" );
+}
+//--------------------------------------------------------------------------------
+void ViewDepthNormal::SetViewMatrix( const XMMATRIX& View )
+{
+	RenderTask::SetViewMatrix( View );
+}
+//--------------------------------------------------------------------------------
+void ViewDepthNormal::SetProjMatrix( const XMMATRIX& Proj )
+{
+	RenderTask::SetProjMatrix( Proj );
 }
 //--------------------------------------------------------------------------------

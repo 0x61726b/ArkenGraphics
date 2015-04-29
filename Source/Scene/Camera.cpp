@@ -29,7 +29,7 @@ Camera::Camera()
 	m_pSpatialController = new ArkSpatialController<ArkNode3D>();
 	GetNode()->Controllers.Attach(m_pSpatialController);
 
-	m_pViewPositionWriter = Parameters.SetVectorParameter(L"ViewPosition",XMVectorSet(0.0f,0.0f,0.0f,0.0f));
+	m_pViewPositionWriter = Parameters.SetVectorParameter(L"CameraPosWS",XMVectorSet(0.0f,0.0f,0.0f,0.0f));
 }
 //--------------------------------------------------------------------------------
 Camera::~Camera()
@@ -41,6 +41,15 @@ Camera::~Camera()
 void Camera::SetOverlayView( TaskCore* pTask )
 {
 	m_pOverlayView = pTask;
+}
+//--------------------------------------------------------------------------------
+void Camera::LookAt(const XMFLOAT3 &eye, const XMFLOAT3 &lookAt, const XMFLOAT3 &up)
+{
+    XMVECTOR det;
+    m_ViewMatrix = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&lookAt), XMLoadFloat3(&up));
+    m_World = XMMatrixInverse(&det, m_ViewMatrix);
+    Position = XMLoadFloat3(&eye);
+
 }
 //--------------------------------------------------------------------------------
 void Camera::RenderFrame(ArkRenderer11* pRenderer)
@@ -126,6 +135,10 @@ void Camera::ApplyOrthographicParams()
 		m_pCameraView->SetProjMatrix(m_ProjMatrix);
 }
 //--------------------------------------------------------------------------------
+//const DirectX::XMMATRIX& Camera::GetViewProj()
+//{
+//	
+//}
 //--------------------------------------------------------------------------------
 void Camera::SetProjectionParams(float zn,float zf,float aspect,float fov)
 {

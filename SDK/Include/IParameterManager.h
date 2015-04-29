@@ -30,7 +30,7 @@ namespace Arkeng
 
 		virtual void SetVectorParameter( const std::wstring& name,DirectX::XMVECTOR* pV ) = 0;
 		virtual void SetMatrixParameter( const std::wstring& name,DirectX::XMMATRIX* pM ) = 0;
-		virtual void SetMatrixArrayParameter( const std::wstring& name,int count,DirectX::XMMATRIX* pmA ) = 0;
+		virtual void SetMatrixArrayParameter( const std::wstring& name,int count,DirectX::XMFLOAT4X4* pmA ) = 0;
 		virtual void SetConstantBufferParameter( const std::wstring& name, ResourcePtr resource ) = 0;
 		virtual void SetShaderResourceParameter( const std::wstring& name, ResourcePtr resource ) = 0;
 		virtual void SetSamplerParameter( const std::wstring& name, int* pID ) = 0;
@@ -38,7 +38,7 @@ namespace Arkeng
 
 		virtual void SetVectorParameter( std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMVECTOR* pV ) = 0;
 		virtual void SetMatrixParameter( std::shared_ptr<ArkRenderParameter11> pP,DirectX::XMMATRIX* pM ) = 0;
-		virtual void SetMatrixArrayParameter( std::shared_ptr<ArkRenderParameter11> pP,int count,DirectX::XMMATRIX* pV ) = 0;
+		virtual void SetMatrixArrayParameter( std::shared_ptr<ArkRenderParameter11> pP,int count,DirectX::XMFLOAT4X4* pV ) = 0;
 		virtual void SetConstantBufferParameter( std::shared_ptr<ArkRenderParameter11> pParameter, ResourcePtr resource ) = 0;
 		virtual void SetShaderResourceParameter( std::shared_ptr<ArkRenderParameter11> pParameter, ResourcePtr resource ) = 0;
 		virtual void SetSamplerParameter( std::shared_ptr<ArkRenderParameter11> pParameter, int* pID ) = 0;
@@ -55,7 +55,7 @@ namespace Arkeng
 
 		virtual DirectX::XMVECTOR GetVectorParameter( std::shared_ptr<ArkRenderParameter11> pP ) = 0;
 		virtual DirectX::XMMATRIX GetMatrixParameter( std::shared_ptr<ArkRenderParameter11> pP ) = 0;
-		virtual DirectX::XMMATRIX* GetMatrixArrayParameter( std::shared_ptr<ArkRenderParameter11> pP) = 0;
+		virtual DirectX::XMFLOAT4X4* GetMatrixArrayParameter( std::shared_ptr<ArkRenderParameter11> pP) = 0;
 		virtual int GetConstantBufferParameter( std::shared_ptr<ArkRenderParameter11> pParameter ) = 0;
 		virtual int GetShaderResourceParameter( std::shared_ptr<ArkRenderParameter11> pParameter ) = 0;
 		virtual int GetSamplerStateParameter( std::shared_ptr<ArkRenderParameter11> pParameter ) = 0;

@@ -33,7 +33,7 @@ namespace Arkeng
 
 		virtual eEShape GetShapeType( ) const;		
 
-	protected:
+	public:
 		ArkPlane m_Planes[6];
 			
 	};

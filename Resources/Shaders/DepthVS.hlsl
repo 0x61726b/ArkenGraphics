@@ -7,33 +7,33 @@
 // Copyright (C) 2009 Jason Zink.  All rights reserved.
 //--------------------------------------------------------------------------------
 
-cbuffer Transforms
+cbuffer TransformsDepth
 {
+	matrix gWorld;
+	matrix gView;
 	matrix WorldViewProjMatrix;	
-	matrix WorldViewMatrix;
 };
 
 
 struct VS_INPUT
 {
-	float4 position : POSITION;
-	float3 normal	: NORMAL;
-	float2 tex		: TEXCOORDS0;
-	
+	float4 PositionOS : POSITION;
 };
 
 struct VS_OUTPUT
 {
-	float4 position : SV_Position;
-	float2 tex : TEXCOORDS;
+	float4 PositionCS : SV_Position;
 };
 
 
 VS_OUTPUT VSMAIN( in VS_INPUT v )
 {
 	VS_OUTPUT output;
-	output.position = mul( ( v.position), WorldViewProjMatrix );
-	output.tex = v.tex;
+	output.PositionCS = mul( ( v.PositionOS), WorldViewProjMatrix );
 	return output;
 }
 
+float4 PSMAIN() : SV_Target
+{
+    return float4(1.0f, 1.0f, 1.0f, 1.0f);
+}

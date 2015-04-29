@@ -23,6 +23,7 @@
 #include "Dx11BlendStateConfig.h"
 #include "AppSettings.h"
 #include "Dx11RasterizerStateConfig.h"
+#include "Dx11SamplerStateConfig.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -37,10 +38,16 @@ static float Clamp(float x,float low,float high)
 //--------------------------------------------------------------------------------
 ViewLights::ViewLights(ArkRenderer11& Renderer)
 {
-	 ViewMatrix =  XMMatrixIdentity() ;
-	 ProjMatrix =  XMMatrixIdentity() ;
-	
+	ViewMatrix =  XMMatrixIdentity() ;
+	ProjMatrix =  XMMatrixIdentity() ;
 
+	Dx11SamplerStateConfig SamplerConfig;
+	SamplerConfig.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	SamplerConfig.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	SamplerConfig.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+	int iShadowSamplerState = Renderer.CreateSamplerState(&SamplerConfig);
+	auto samplerParam = Renderer.m_pParamMgr->GetSamplerStateParameterRef( std::wstring( L"ShadowMapSampler" ) );
+	samplerParam->InitializeParameterData( &iShadowSamplerState );
 	// Create a depth stencil state with no depth testing, and with stencil testing
 	// enabled to make sure we only light pixels where we rendered to the G-Buffer
 	Dx11DepthStencilStateConfig dsConfig;
@@ -225,6 +232,7 @@ ViewLights::ViewLights(ArkRenderer11& Renderer)
 				m_DirectionalLightEffect[gBufferOptMode][lightOptMode][aaMode].m_iDepthStencilState = m_iDisabledDSState;
 				m_DirectionalLightEffect[gBufferOptMode][lightOptMode][aaMode].m_iRasterizerState = m_iBackFaceCullRSState;
 				m_DirectionalLightEffect[gBufferOptMode][lightOptMode][aaMode].m_uStencilRef = 1;
+				
 			}
 		}
 	}
@@ -232,6 +240,8 @@ ViewLights::ViewLights(ArkRenderer11& Renderer)
 	m_pInvProjMatrix = Renderer.m_pParamMgr->GetMatrixParameterRef(std::wstring(L"InvProjMatrix"));
 	m_pProjMatrix = Renderer.m_pParamMgr->GetMatrixParameterRef(std::wstring(L"ProjMatrix"));
 	m_pCameraPos = Renderer.m_pParamMgr->GetVectorParameterRef(std::wstring(L"CameraPos"));
+	m_pLightViewMatrix = Renderer.m_pParamMgr->GetMatrixParameterRef(std::wstring(L"LightView"));
+	m_pLightProjMatrix= Renderer.m_pParamMgr->GetMatrixParameterRef(std::wstring(L"LightProj"));
 
 	m_pLightPos = Renderer.m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightPos"));
 	m_pLightColor = Renderer.m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightColor"));
@@ -254,6 +264,7 @@ ViewLights::~ViewLights()
 //--------------------------------------------------------------------------------
 void ViewLights::Update(float fTime)
 {
+
 }
 //--------------------------------------------------------------------------------
 void ViewLights::QueuePreTasks(ArkRenderer11* pRenderer)
@@ -339,10 +350,10 @@ void ViewLights::ExecuteTask(PipelineManager* pPipelineManager,IParameterManager
 			{
 				pEffect->m_iRasterizerState = m_iScissorRSState;
 
-				
-				
+
+
 				// Set the scissor rectangle
-				D3D11_RECT rect = CalcScissorRect(XMLoadFloat3( &light.Position ),light.Range);
+				D3D11_RECT rect = CalcScissorRect(XMLoadFloat3(&light.Position),light.Range);
 
 				// Set it
 				pPipelineManager->RasterizerStage.CurrentState.ScissorRectCount.SetState(1);
@@ -389,7 +400,7 @@ void ViewLights::ExecuteTask(PipelineManager* pPipelineManager,IParameterManager
 					// Set the orientation based on the light direction
 					XMVECTOR zAxis = XMVector3Normalize(XMLoadFloat3(&light.Direction));
 					XMFLOAT3 zAxis3;
-					XMStoreFloat3( &zAxis3,zAxis );
+					XMStoreFloat3(&zAxis3,zAxis);
 
 					//Get Perpendicular 
 					float xAbs = fabs(zAxis3.x);
@@ -398,22 +409,22 @@ void ViewLights::ExecuteTask(PipelineManager* pPipelineManager,IParameterManager
 					float minVal = min(min(xAbs,yAbs),zAbs);
 					XMVECTOR cross;
 					if(xAbs == minVal)
-						cross = XMVector3Cross( zAxis, XMVectorSet(1.0f,0.0f,0.0,0.0f) );
+						cross = XMVector3Cross(zAxis,XMVectorSet(1.0f,0.0f,0.0,0.0f));
 					else if(yAbs == minVal)
-						cross = XMVector3Cross( zAxis, XMVectorSet(0.0f,1.0f,0.0,0.0f) );
+						cross = XMVector3Cross(zAxis,XMVectorSet(0.0f,1.0f,0.0,0.0f));
 					else
-						cross = XMVector3Cross( zAxis, XMVectorSet(0.0f,0.0f,1.0,0.0f) );
+						cross = XMVector3Cross(zAxis,XMVectorSet(0.0f,0.0f,1.0,0.0f));
 					//
 
 					XMVECTOR yAxis = cross;
 					XMVECTOR xAxis = XMVector3Cross(yAxis,zAxis);
 
 					//Load to 3
-					XMStoreFloat3( &zAxis3,zAxis );
+					XMStoreFloat3(&zAxis3,zAxis);
 					XMFLOAT3 yAxis3,xAxis3;
-					XMStoreFloat3( &xAxis3,xAxis );
-					XMStoreFloat3( &yAxis3,yAxis );
-					
+					XMStoreFloat3(&xAxis3,xAxis);
+					XMStoreFloat3(&yAxis3,yAxis);
+
 					m_WorldMatrix.m[0][0] = xAxis3.x * scaleXY;
 					m_WorldMatrix.m[0][1] = xAxis3.y * scaleXY;
 					m_WorldMatrix.m[0][2] = xAxis3.z * scaleXY;
@@ -430,13 +441,13 @@ void ViewLights::ExecuteTask(PipelineManager* pPipelineManager,IParameterManager
 				{
 					// Determine the scaling factor based on the attenuation
 					const float scaleXYZ = light.Range * 1.1f;
-					
-					XMStoreFloat4x4( &m_WorldMatrix,XMMatrixScaling(scaleXYZ,scaleXYZ,scaleXYZ));
+
+					XMStoreFloat4x4(&m_WorldMatrix,XMMatrixScaling(scaleXYZ,scaleXYZ,scaleXYZ));
 				}
-				XMMATRIX w = XMLoadFloat4x4( &m_WorldMatrix );
+				XMMATRIX w = XMLoadFloat4x4(&m_WorldMatrix);
 				
-				XMStoreFloat4x4( &m_WorldMatrix,w*XMMatrixTranslationFromVector( XMLoadFloat3( &light.Position ) ) );
-				pParamManager->SetWorldMatrix( &XMLoadFloat4x4( &m_WorldMatrix ) );
+				XMStoreFloat4x4(&m_WorldMatrix,w*XMMatrixTranslationFromVector(XMLoadFloat3(&light.Position)));
+				pParamManager->SetWorldMatrix(&XMLoadFloat4x4(&m_WorldMatrix));
 
 				// Render back-faces, unless we intersect with the far clip plane
 				if(intersectsFarPlane)
@@ -449,7 +460,7 @@ void ViewLights::ExecuteTask(PipelineManager* pPipelineManager,IParameterManager
 					pEffect->m_iRasterizerState = m_iFrontFaceCullRSState;
 					pEffect->m_iDepthStencilState = m_iGreaterThanDSState;
 				}
-
+				
 				if(light.Type == Spot)
 					pPipelineManager->Draw(*pEffect,m_ConeGeometry,pParamManager);
 				else if(light.Type == Point)
@@ -461,6 +472,7 @@ void ViewLights::ExecuteTask(PipelineManager* pPipelineManager,IParameterManager
 	pPipelineManager->ClearPipelineResources();
 
 	// Clear the lights
+	
 	m_Lights.clear();
 }
 //--------------------------------------------------------------------------------
@@ -477,10 +489,15 @@ void ViewLights::SetRenderParams(IParameterManager* pParamManager)
 
 	XMMATRIX inv;
 	XMVECTOR det;
-	inv = XMMatrixInverse( &det,ProjMatrix);
-	
+	inv = XMMatrixInverse(&det,ProjMatrix);
+
 	pParamManager->SetMatrixParameter(m_pInvProjMatrix,&inv);
 	pParamManager->SetMatrixParameter(m_pProjMatrix,&ProjMatrix);
+
+	XMMATRIX testView = XMMatrixLookAtLH(XMVectorSet(0,10,-1,0),XMVectorSet(0,0,0,0),XMVectorSet(0,1,0,0) );
+	XMMATRIX testProj = XMMatrixPerspectiveFovLH( XM_PIDIV4,1280/720,m_fNearClip,m_fFarClip);
+	pParamManager->SetMatrixParameter(m_pLightViewMatrix,&inv);
+	pParamManager->SetMatrixParameter(m_pLightProjMatrix,&inv);
 
 	if(m_pScene != NULL)
 	{
@@ -542,10 +559,10 @@ D3D11_RECT ViewLights::CalcScissorRect(const XMVECTOR& lightPos,float lightRange
 	XMVECTOR rightVS = centerVS + XMVectorSet(radius,0.0f,0.0f,0.0f);
 
 	XMFLOAT3 topVS3,bottomVS3,leftVS3,rightVS3;
-	XMStoreFloat3( &topVS3,topVS );
-	XMStoreFloat3( &bottomVS3,bottomVS );
-	XMStoreFloat3( &leftVS3,leftVS );
-	XMStoreFloat3( &rightVS3,rightVS );
+	XMStoreFloat3(&topVS3,topVS);
+	XMStoreFloat3(&bottomVS3,bottomVS);
+	XMStoreFloat3(&leftVS3,leftVS);
+	XMStoreFloat3(&rightVS3,rightVS);
 
 	// Figure out whether we want to use the top and right from quad
 	// tangent to the front of the sphere, or the back of the sphere
@@ -562,7 +579,7 @@ D3D11_RECT ViewLights::CalcScissorRect(const XMVECTOR& lightPos,float lightRange
 
 	//Load Projection Matrix
 	XMFLOAT4X4 p;
-	XMStoreFloat4x4( &p, ProjMatrix );
+	XMStoreFloat4x4(&p,ProjMatrix);
 
 	// Figure out the rectangle in clip-space by applying the perspective transform.
 	// We assume that the perspective transform is symmetrical with respect to X and Y.

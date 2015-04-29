@@ -59,6 +59,8 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 	std::vector<XMFLOAT3> pPos;
 	std::vector<XMFLOAT3> pNrm;
 	std::vector<XMFLOAT2> PTex;
+	std::vector<XMFLOAT3> biNorms;
+	std::vector<TriangleIndices> faces;
 	if(pFbxRootNode)
 	{
 		for(int i = 0; i < pFbxRootNode->GetChildCount(); i++)
@@ -79,16 +81,24 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 			FbxArray<FbxVector4> pNormals;
 			pMesh->GetPolygonVertexNormals(pNormals);
 
+
+			int polyCount = pMesh->GetPolygonCount();
+			
 			for(int j = 0; j < pMesh->GetPolygonCount(); j++)
 			{
 				int iNumVertices = pMesh->GetPolygonSize(j);
 
 				assert(iNumVertices == 3);
 				triangleCount++;
-
+				TriangleIndices face;
+				face.P1() = j*3 + 0;
+				face.P2() = j*3 + 1;
+				face.P3() = j*3 + 2;
+				faces.push_back(face);
 				for(int k = 0; k < iNumVertices; k++)
 				{
 					int iControlPointIndex = pMesh->GetPolygonVertex(j,k);
+
 
 					FbxVector4 normalFbx;
 					bool s = pMesh->GetPolygonVertexNormal(j,k,normalFbx);
@@ -106,9 +116,9 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 
 
 					XMFLOAT3 vertex;
-					vertex.x = (float)pVertices[iControlPointIndex].mData[0];
-					vertex.y = (float)pVertices[iControlPointIndex].mData[1];
-					vertex.z = (float)pVertices[iControlPointIndex].mData[2];
+					vertex.x = ((float)pVertices[iControlPointIndex].mData[0]);
+					vertex.y = ((float)pVertices[iControlPointIndex].mData[1]);
+					vertex.z = ((float)pVertices[iControlPointIndex].mData[2]);
 					pPos.push_back(vertex);
 
 					XMFLOAT3 norm;
@@ -123,9 +133,9 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 					PTex.push_back(tex);
 
 				}
+
 			}
 			pMesh->Destroy();
-
 			pFbxChildNode->Destroy();
 
 		}
@@ -134,6 +144,8 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 	pFbxScene->Destroy();
 	m_pFbxSdkManager->Destroy();
 	m_pFbxSdkManager = nullptr;
+
+
 
 
 	VertexElement11* pPositions = new VertexElement11(3,triangleCount*3);
@@ -169,24 +181,20 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 
 	GeometryPtr MeshPtr = GeometryPtr(new ArkGeometry11());
 
-	TriangleIndices face;
 
+	for(int i=0; i < faces.size(); ++i)
+	{
+		MeshPtr->AddFace(faces[i]);
+	}
 
 	for(int i=0; i < pPos.size(); ++i)
 	{
-
-		face.P1() = i*3 + 0;
-		face.P2() = i*3 + 1;
-		face.P3() = i*3 + 2;
-
 		pPos3[i].x = pPos[i].x;
 		pPos3[i].y = pPos[i].y;
 		pPos3[i].z = pPos[i].z;
 
 		pNormal3[i] = pNrm[i];
 		pTex[i] = PTex[i];
-
-		MeshPtr->AddFace(face);
 	}
 
 	MeshPtr->AddElement(pPositions);

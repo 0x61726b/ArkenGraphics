@@ -28,7 +28,7 @@ void ArkMatrixArrayParameterWriter11::SetRenderParameterRef( std::shared_ptr<Ark
 //--------------------------------------------------------------------------------
 void ArkMatrixArrayParameterWriter11::WriteParameter( IParameterManager* pParamMgr )
 {
-	pParamMgr->SetMatrixArrayParameter( m_pParameter, m_iCount, m_pValue );
+	/*pParamMgr->SetMatrixArrayParameter( m_pParameter, m_iCount, m_pValue );*/
 }
 //--------------------------------------------------------------------------------
 void ArkMatrixArrayParameterWriter11::SetValue( DirectX::XMMATRIX* Value )

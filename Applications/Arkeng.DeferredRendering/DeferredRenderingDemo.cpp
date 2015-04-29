@@ -82,7 +82,7 @@ bool DeferredRenderingDemo::ConfigureRenderingSetup()
 
 	m_pCamera->SetCameraView(m_pRenderView);
 	m_pCamera->SetOverlayView(m_pTextOverlayView);
-
+	m_pCamera->SetEventManager(&CameraEventHub);
 	const float nearClip = 1.0f;
 	const float farClip = 15.0f;
 
@@ -107,7 +107,6 @@ void DeferredRenderingDemo::Initialize()
     _ASSERT( success );
 	pGeometry->LoadToBuffers();
 	pGeometry->SetPrimitiveType( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
-
 	// We'll make 2 effects for filling the G-Buffer: one without optimizations, and one with
     m_pGBufferEffect[GBufferOptMode::OptDisabled] = std::make_shared<ArkRenderEffect11>();
 	m_pGBufferEffect[GBufferOptMode::OptDisabled]->SetVertexShader( m_pRenderer->LoadShader( VERTEX_SHADER,
@@ -210,7 +209,6 @@ void DeferredRenderingDemo::Initialize()
 	// Enable the material to render the given view type
 	m_pMaterial->Params[VT_GBUFFER].bRender = true;
 	m_pMaterial->Params[VT_GBUFFER].pEffect = m_pGBufferEffect[GBufferOptMode::Value];
-
 
 	// Create the scene and add the entities to it.  Then add the camera to the
 	// scene so that it will be updated via the scene interface instead of

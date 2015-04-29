@@ -36,13 +36,8 @@ public:
 protected:
 	Actor* m_pActor;
 	MaterialPtr m_pMaterial;
-	ArkRenderEffect11	m_Effect;
+	
 
-	ArkLight*										m_pLight;
-	std::shared_ptr<ArkVectorParameter11>			m_pLightPositionWriter;
-	std::shared_ptr<ArkVectorParameter11>			m_pLightColor;
-
-	ResourcePtr										m_pVertexBuffer;
-	int												m_VertexLayout;
-	ResourcePtr										m_pIndexBuffer;
+	ResourcePtr             m_DiffuseTexture;
+	ResourcePtr             m_NormalMap;
 };
