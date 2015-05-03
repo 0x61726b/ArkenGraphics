@@ -133,6 +133,9 @@
     <Filter Include="Rendering\Direct3D11\Pipeline\Stream Output Stage">
       <UniqueIdentifier>{b1b0724c-5273-466c-8fd3-b251c41ae3bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Direct3D11\Material System\Components\View Manager">
+      <UniqueIdentifier>{fcca01e8-1cc7-4cdd-8e1c-7ac477f29cd7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\Pch.h">
@@ -588,14 +591,26 @@
     <ClInclude Include="Rendering\ms3dspec.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Rendering\ViewShadowMap.h">
-      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
-    </ClInclude>
     <ClInclude Include="Math\ArkMath.h">
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\OrthoCamera.h">
       <Filter>Scene\Cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ViewCascadedShadowMap.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ViewShadowMap.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ViewManager.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ViewSettings.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\CSMViewSettings.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1007,14 +1022,26 @@
     <ClCompile Include="Rendering\ArkSamplerParameterWriter11.cpp">
       <Filter>Rendering\Direct3D11\Parameter System\Parameter Writer</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\ViewShadowMap.cpp">
-      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
-    </ClCompile>
     <ClCompile Include="Math\ArkMath.cpp">
       <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\OrthoCamera.cpp">
       <Filter>Scene\Cameras</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ViewCascadedShadowMap.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ViewShadowMap.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ViewSettings.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\CSMViewSettings.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ViewManager.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

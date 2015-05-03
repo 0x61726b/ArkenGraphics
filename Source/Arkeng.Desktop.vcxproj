@@ -266,6 +266,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkVertexShader11.h" />
     <ClInclude Include="Rendering\ArkVertexShaderStage11.h" />
     <ClInclude Include="Rendering\BasicVertex11.h" />
+    <ClInclude Include="Rendering\CSMViewSettings.h" />
     <ClInclude Include="Rendering\Dx11BlendStateConfig.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilStateConfig.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilView.h" />
@@ -316,7 +317,10 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\VertexElement11.h" />
     <ClInclude Include="Rendering\ViewAmbientOcclusion.h" />
     <ClInclude Include="Rendering\ViewDepthNormal.h" />
+    <ClInclude Include="Rendering\ViewManager.h" />
     <ClInclude Include="Rendering\ViewOcclusion.h" />
+    <ClInclude Include="Rendering\ViewCascadedShadowMap.h" />
+    <ClInclude Include="Rendering\ViewSettings.h" />
     <ClInclude Include="Rendering\ViewShadowMap.h" />
     <ClInclude Include="Rendering\ViewTextOverlay.h" />
     <ClInclude Include="Scene\Actor.h" />
@@ -420,6 +424,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkVertexShader11.cpp" />
     <ClCompile Include="Rendering\ArkVertexShaderStage11.cpp" />
     <ClCompile Include="Rendering\BasicVertex11.cpp" />
+    <ClCompile Include="Rendering\CSMViewSettings.cpp" />
     <ClCompile Include="Rendering\Dx11BlendStateConfig.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilStateConfig.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilView.cpp" />
@@ -460,7 +465,10 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\VertexElement11.cpp" />
     <ClCompile Include="Rendering\ViewAmbientOcclusion.cpp" />
     <ClCompile Include="Rendering\ViewDepthNormal.cpp" />
+    <ClCompile Include="Rendering\ViewManager.cpp" />
     <ClCompile Include="Rendering\ViewOcclusion.cpp" />
+    <ClCompile Include="Rendering\ViewCascadedShadowMap.cpp" />
+    <ClCompile Include="Rendering\ViewSettings.cpp" />
     <ClCompile Include="Rendering\ViewShadowMap.cpp" />
     <ClCompile Include="Rendering\ViewTextOverlay.cpp" />
     <ClCompile Include="Scene\Actor.cpp" />

@@ -2,11 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="RenderAppSimple.h" />
-    <ClInclude Include="ViewCSM.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RenderAppSimple.cpp" />
-    <ClCompile Include="ViewCSM.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

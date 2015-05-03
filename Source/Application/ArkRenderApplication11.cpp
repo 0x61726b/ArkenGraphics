@@ -94,7 +94,7 @@ bool ArkRenderApplication11::ConfigureRenderingEngineComponents(UINT width,UINT 
 	//TODO: Pipeline Manager
 	//TODO: Adding more things to Renderer class
 
-
+	m_pViewManager = new ViewManager();
 
 
 	return true;
@@ -138,6 +138,7 @@ void ArkRenderApplication11::ShutdownRenderingEngineComponents()
 void ArkRenderApplication11::ShutdownRenderingSetup()
 {
 	Safe_Delete( m_pScene );
+	Safe_Delete( m_pViewManager );
 }
 //--------------------------------------------------------------------------------
 bool ArkRenderApplication11::HandleEvent(EventPtr pEvent)

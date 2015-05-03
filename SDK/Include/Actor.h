@@ -35,6 +35,8 @@ namespace Arkeng
 		//void AddSubtree( Node3D* pNode );
 		//void RemoveSubtree( Node3D* pNode );
 
+
+
 	protected:
 		ArkNode3D*					m_pRoot;
 		ArkEntity3D*				m_pBody;

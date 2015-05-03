@@ -18,6 +18,7 @@
 #include "RenderTask.h"
 #include "Camera.h"
 #include "ViewTextOverlay.h"
+#include "ViewManager.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -46,6 +47,8 @@ namespace Arkeng
 
 		RenderTask*				m_pRenderView;
 		ViewTextOverlay*		m_pTextOverlayView;
+
+		ViewManager*			m_pViewManager;
 
 		Camera*					m_pCamera;
 

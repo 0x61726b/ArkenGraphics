@@ -20,9 +20,11 @@
 #include "ArkBuffer11Config.h"
 #include "ArkGeometryGenerator11.h"
 #include "ArkMaterial11.h"
-#include "ViewShadowMap.h"
+#include "ViewCascadedShadowMap.h"
 #include "ArkGeometryLoader11.h"
-#include "ViewCSM.h"
+#include "ViewShadowMap.h"
+#include "CSMViewSettings.h"
+#include "ViewManager.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -62,9 +64,11 @@ bool RenderAppSimple::ConfigureEngineComponents()
 ////--------------------------------------------------------------------------------
 bool RenderAppSimple::ConfigureRenderingSetup()
 {
-	ViewShadowMap* pPerspView = new ViewShadowMap(*m_pRenderer,m_pBackBuffer);
-	m_pRenderView = pPerspView;
+	CSMViewSettings viewSettings(m_pBackBuffer,NULL);
 	
+	//ViewCascadedShadowMap* pPerspView = new ViewCascadedShadowMap(*m_pRenderer,m_pBackBuffer);
+	m_pRenderView = m_pViewManager->GetView(*m_pRenderer,ArkViewTypes::EViewCSM,viewSettings);
+	//
 	m_pCamera = new ArkFirstPersonCamera();
 	m_pCamera->SetEventManager(&CameraEventHub);
 
@@ -88,23 +92,23 @@ void RenderAppSimple::ShutdownEngineComponents()
 //--------------------------------------------------------------------------------
 void RenderAppSimple::Initialize()
 {
-	//GeometryPtr pGeometry = ArkGeometryLoader11::loadMS3DFile2( std::wstring( L"Sample_Scene.ms3d" ) );
- //   bool success = pGeometry->ComputeTangentFrame();
- //   _ASSERT( success );
-	//pGeometry->LoadToBuffers();
-	//pGeometry->SetPrimitiveType( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
-
-	ArkGeometryLoader11 geoLoader;
-	GeometryPtr pGeometry = geoLoader.LoadFbxFile( std::wstring( L"dragon.fbx" ) );
-	pGeometry->ComputeTangentFrame();
+	GeometryPtr pGeometry = ArkGeometryLoader11::loadMS3DFile2( std::wstring( L"Sample_Scene.ms3d" ) );
+    bool success = pGeometry->ComputeTangentFrame();
+    _ASSERT( success );
 	pGeometry->LoadToBuffers();
 	pGeometry->SetPrimitiveType( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
-	
 
-	GeometryPtr pPlaneGeometry = geoLoader.LoadFbxFile( std::wstring(L"plane.fbx"));
-	pPlaneGeometry->ComputeTangentFrame();
-	pPlaneGeometry->LoadToBuffers();
-	pPlaneGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	//ArkGeometryLoader11 geoLoader;
+	//GeometryPtr pGeometry = geoLoader.LoadFbxFile( std::wstring( L"dragon.fbx" ) );
+	//pGeometry->ComputeTangentFrame();
+	//pGeometry->LoadToBuffers();
+	//pGeometry->SetPrimitiveType( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
+	//
+
+	//GeometryPtr pPlaneGeometry = geoLoader.LoadFbxFile( std::wstring(L"plane.fbx"));
+	//pPlaneGeometry->ComputeTangentFrame();
+	//pPlaneGeometry->LoadToBuffers();
+	//pPlaneGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	
 
 	m_pMaterial = MaterialPtr(new ArkMaterial11());
@@ -120,50 +124,50 @@ void RenderAppSimple::Initialize()
 	m_pMaterial->Parameters.SetShaderResourceParameter(L"NormalMap",m_NormalMap);
 
 	m_pActor = new Actor();
-	m_pActor->GetBody()->Visual.SetGeometry(pPlaneGeometry);
+	m_pActor->GetBody()->Visual.SetGeometry(pGeometry);
 	m_pActor->GetBody()->Visual.SetMaterial(m_pMaterial);
 
 	m_pActor->GetNode()->Transform.Position() = XMVectorSet(0.0f,-0,0.0f,0.0f);
-	m_pActor->GetNode()->Transform.Scale() = XMVectorSet(4.0f,4,4.0f,1.0f);
+	
 	
 	/*m_pActor->GetNode()->Transform.Rotation() = XMMatrixRotationX(-XM_PI/2);*/
 	m_pActor->GetNode()->SetName(L"Down");
 	m_pScene->AddActor(m_pActor);
 
-	MaterialPtr dragonMat = MaterialPtr(new ArkMaterial11());
+	//MaterialPtr dragonMat = MaterialPtr(new ArkMaterial11());
 
-	m_DiffuseTexture = nullptr;
-	m_DiffuseTexture = m_pRenderer->LoadTexture(std::wstring(L"snow1.jpg"));
-	_ASSERT(m_DiffuseTexture->m_iResource != -1);
+	//m_DiffuseTexture = nullptr;
+	//m_DiffuseTexture = m_pRenderer->LoadTexture(std::wstring(L"snow1.jpg"));
+	//_ASSERT(m_DiffuseTexture->m_iResource != -1);
 
-	dragonMat->Parameters.SetShaderResourceParameter(L"DiffuseMap",m_DiffuseTexture);
+	//dragonMat->Parameters.SetShaderResourceParameter(L"DiffuseMap",m_DiffuseTexture);
 
-	Actor* dragonActor = new Actor();
-	dragonActor->GetBody()->Visual.SetGeometry(pGeometry);
-	dragonActor->GetBody()->Visual.SetMaterial(dragonMat);
+	//Actor* dragonActor = new Actor();
+	//dragonActor->GetBody()->Visual.SetGeometry(pGeometry);
+	//dragonActor->GetBody()->Visual.SetMaterial(dragonMat);
 
-	dragonActor->GetNode()->Transform.Position() = XMVectorSet(0.0f,-0,0.0f,0.0f);
-	dragonActor->GetNode()->Transform.Scale() = XMVectorSet(0.5f,0.5f,0.5f,1.0f);
+	//dragonActor->GetNode()->Transform.Position() = XMVectorSet(0.0f,-0,0.0f,0.0f);
+	//dragonActor->GetNode()->Transform.Scale() = XMVectorSet(0.5f,0.5f,0.5f,1.0f);
 
-	Actor* dragonActor2 = new Actor();
-	dragonActor2->GetBody()->Visual.SetGeometry(pGeometry);
-	dragonActor2->GetBody()->Visual.SetMaterial(dragonMat);
+	//Actor* dragonActor2 = new Actor();
+	//dragonActor2->GetBody()->Visual.SetGeometry(pGeometry);
+	//dragonActor2->GetBody()->Visual.SetMaterial(dragonMat);
 
-	dragonActor2->GetNode()->Transform.Position() = XMVectorSet(-10.0f,-0,0.0f,0.0f);
-	dragonActor2->GetNode()->Transform.Scale() = XMVectorSet(0.5f,0.5f,0.5f,1.0f);
+	//dragonActor2->GetNode()->Transform.Position() = XMVectorSet(-10.0f,-0,0.0f,0.0f);
+	//dragonActor2->GetNode()->Transform.Scale() = XMVectorSet(0.5f,0.5f,0.5f,1.0f);
 
-	Actor* dragonActor3 = new Actor();
-	dragonActor3->GetBody()->Visual.SetGeometry(pGeometry);
-	dragonActor3->GetBody()->Visual.SetMaterial(dragonMat);
+	//Actor* dragonActor3 = new Actor();
+	//dragonActor3->GetBody()->Visual.SetGeometry(pGeometry);
+	//dragonActor3->GetBody()->Visual.SetMaterial(dragonMat);
 
-	dragonActor3->GetNode()->Transform.Position() = XMVectorSet(-5.0f,0,5.0f,1.0f);
-	dragonActor3->GetNode()->Transform.Scale() = XMVectorSet(0.5f,0.5f,0.5f,1.0f);
+	//dragonActor3->GetNode()->Transform.Position() = XMVectorSet(-5.0f,0,5.0f,1.0f);
+	//dragonActor3->GetNode()->Transform.Scale() = XMVectorSet(0.5f,0.5f,0.5f,1.0f);
 	
 	/*m_pActor->GetNode()->Transform.Rotation() = XMMatrixRotationX(-XM_PI/2);*/
-	dragonActor->GetNode()->SetName(L"Down");
-	m_pScene->AddActor(dragonActor);
-	m_pScene->AddActor(dragonActor2);
-	m_pScene->AddActor(dragonActor3);
+	/*dragonActor->GetNode()->SetName(L"Down");*/
+	//m_pScene->AddActor(dragonActor);
+	//m_pScene->AddActor(dragonActor2);
+	//m_pScene->AddActor(dragonActor3);
 
 
 }

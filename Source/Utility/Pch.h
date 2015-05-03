@@ -57,6 +57,8 @@
 #define HR_CHECK( x ) { if( FAILED(x) ) return false;}
 
 #define NUM_THREADS 4
+#define DEFAULT_CSM_CASCADE_COUNT 4
+#define DEFAULT_CSM_SM_SIZE 2048
 
 
 //--------------------------------------------------------------------------------
