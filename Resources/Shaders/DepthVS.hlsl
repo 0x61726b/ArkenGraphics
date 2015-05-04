@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------
-// DepthVS
+//This is a file from Arkengine
 //
-// This vertex shader outputs the linear view space depth to the pixel shader.
-// The linear space is used to avoid precision issues on the later calculations.
 //
-// Copyright (C) 2009 Jason Zink.  All rights reserved.
+//Copyright (c) Alperen Gezer.All rights reserved.
+//
+//PerspectiveView.h
 //--------------------------------------------------------------------------------
 
 cbuffer TransformsDepth

@@ -4,34 +4,29 @@
 //
 //Copyright (c) Alperen Gezer.All rights reserved.
 //
-//ViewManager.h
+//ViewSettings.h
 //--------------------------------------------------------------------------------
-#ifndef __ViewManager_h__
-#define __ViewManager_h__
+#ifndef __DepthViewSettings_h__
+#define __DepthViewSettings_h__
 //--------------------------------------------------------------------------------
-#include "RenderTask.h"
 #include "ViewSettings.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
-	enum ArkViewTypes
-	{
-		EViewPerspective,
-		EViewCSM,
-		EViewShadowMap,
-		EViewTextOverlay,
-		EViewAmbientOcclusion,
-		EViewOmnidirectionalShadowMap
-	};
-	class ViewManager
+	class DepthViewSettings : public ViewSettings
 	{
 	public:
-		ViewManager();
-		~ViewManager();
+		DepthViewSettings(ResourcePtr BackBuffer,ResourcePtr DepthBuffer );
+		virtual ~DepthViewSettings();
 
-		RenderTask* GetView( ArkRenderer11& Renderer, ArkViewTypes view,const ViewSettings& ViewSetting );
+		
+		virtual void SetSettings(const ViewSettings&);
+
+	public:
+
 
 	};
+
 };
 //--------------------------------------------------------------------------------
 #endif

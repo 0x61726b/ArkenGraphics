@@ -4,9 +4,9 @@
 //
 //Copyright (c) Alperen Gezer.All rights reserved.
 //
-//RenderAppSimple.h
+//OmnidirectionalShadowMapDemo.h
 //--------------------------------------------------------------------------------
-#include "PhongShading.h"
+#include "OmnidirectionalShadowMapDemo.h"
 #include "ArkLog.h"
 #include "EventManager.h"
 #include "EFrameStart.h"
@@ -20,19 +20,22 @@
 #include "ArkBuffer11Config.h"
 #include "ArkGeometryGenerator11.h"
 #include "ArkMaterial11.h"
+#include "ViewCascadedShadowMap.h"
 #include "ArkGeometryLoader11.h"
+#include "ViewShadowMap.h"
 #include "CSMViewSettings.h"
+#include "ViewManager.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
-PhongShading AppInstance;
 //--------------------------------------------------------------------------------
-PhongShading::PhongShading()
+OmnidirectionalShadowMapDemo AppInstance;
+//--------------------------------------------------------------------------------
+OmnidirectionalShadowMapDemo::OmnidirectionalShadowMapDemo()
 {
-
 }
 //--------------------------------------------------------------------------------
-bool PhongShading::ConfigureEngineComponents()
+bool OmnidirectionalShadowMapDemo::ConfigureEngineComponents()
 {
 
 	int resX = 0;
@@ -54,104 +57,85 @@ bool PhongShading::ConfigureEngineComponents()
 	return(true);
 }
 ////--------------------------------------------------------------------------------
-bool PhongShading::ConfigureRenderingSetup()
+bool OmnidirectionalShadowMapDemo::ConfigureRenderingSetup()
 {
 	CSMViewSettings viewSettings(m_pBackBuffer,NULL);
-	m_pRenderView = m_pViewManager->GetView(*m_pRenderer,ArkViewTypes::EViewPerspective,viewSettings);
 
-
-	m_pTextOverlayView = new ViewTextOverlay(*m_pRenderer,m_pBackBuffer);
-
+	m_pRenderView = m_pViewManager->GetView(*m_pRenderer,ArkViewTypes::EViewOmnidirectionalShadowMap,viewSettings);
+	//
 	m_pCamera = new ArkFirstPersonCamera();
 	m_pCamera->SetEventManager(&CameraEventHub);
 
+	m_pTextOverlayView = new ViewTextOverlay(*m_pRenderer,m_pBackBuffer);
 
-	m_pCamera->Spatial().SetTranslation(XMVectorSet(0,5,0,0.0f));
-
+	m_pCamera->Spatial().SetTranslation(XMVectorSet(0.0f,5.0f,-10,0.0f));
 
 	m_pCamera->SetCameraView(m_pRenderView);
+	m_pCamera->SetProjectionParams(0.01f,40.0f,static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight),DirectX::XM_PIDIV2);
 	m_pCamera->SetOverlayView(m_pTextOverlayView);
-	m_pCamera->SetProjectionParams(0.1f,40,static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight),DirectX::XM_PIDIV2);
-
 	m_pScene->AddCamera(m_pCamera);
-
 
 	return true;
 }
 //--------------------------------------------------------------------------------
-void PhongShading::ShutdownEngineComponents()
+void OmnidirectionalShadowMapDemo::ShutdownEngineComponents()
 {
 	ShutdownRenderingSetup();
 	ShutdownRenderingEngineComponents();
 }
 //--------------------------------------------------------------------------------
-void PhongShading::Initialize()
+void OmnidirectionalShadowMapDemo::Initialize()
 {
-	//Create material used for the spheres
-
-	m_Effect.SetVertexShader(m_pRenderer->LoadShader(VERTEX_SHADER,
-		std::wstring(L"PhongShading.hlsl"),
-		std::wstring(L"VSMain"),
-		std::wstring(L"vs_4_0")
-		));
-	m_Effect.SetPixelShader(m_pRenderer->LoadShader(PIXEL_SHADER,
-		std::wstring(L"PhongShading.hlsl"),
-		std::wstring(L"PSMain"),
-		std::wstring(L"ps_4_0")
-		));
-
-	m_pMaterial = MaterialPtr(new ArkMaterial11());
-
-	m_pMaterial->Params[VT_PERSPECTIVE].bRender = true;
-	m_pMaterial->Params[VT_PERSPECTIVE].pEffect = std::make_shared<ArkRenderEffect11>(m_Effect);
-
-	//Create geometry object and actor
-
-	GeometryPtr pGeometry = GeometryPtr(new ArkGeometry11());
-	ArkGeometryLoader11 geoGen;
-	pGeometry = geoGen.LoadFbxFile(std::wstring(L"plane.fbx"));
-
+	GeometryPtr pGeometry = ArkGeometryLoader11::loadMS3DFile2(std::wstring(L"Sample_Scene.ms3d"));
+	/*bool success = pGeometry->ComputeTangentFrame();*/
+	/*_ASSERT(success);*/
 	pGeometry->LoadToBuffers();
 	pGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
+	/*ArkGeometryLoader11 geoLoader;
+	GeometryPtr pPlaneGeometry = geoLoader.LoadFbxFile(std::wstring(L"plane.fbx"));
+	pPlaneGeometry->LoadToBuffers();
+	pPlaneGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+*/
+	MaterialPtr pMaterial = MaterialPtr(new ArkMaterial11());
+	auto pDepthEffect = std::make_shared<ArkRenderEffect11>();
 
-	m_pActor = new Actor();
-	m_pActor->GetBody()->Visual.SetGeometry(pGeometry);
-	m_pActor->GetBody()->Visual.SetMaterial(m_pMaterial);
+	pDepthEffect->SetVertexShader(m_pRenderer->LoadShader(VERTEX_SHADER,
+		std::wstring(L"OmnidirectionalDepthVS.hlsl"),
+		std::wstring(L"VSMAIN"),
+		std::wstring(L"vs_5_0")));
+	pDepthEffect->SetPixelShader(m_pRenderer->LoadShader(PIXEL_SHADER,
+		std::wstring(L"OmnidirectionalDepthPS.hlsl"),
+		std::wstring(L"PSMAIN"),
+		std::wstring(L"ps_5_0")));
+	pDepthEffect->SetGeometryShader(m_pRenderer->LoadShader(GEOMETRY_SHADER,
+		std::wstring(L"OmnidirectionalDepthGS.hlsl"),
+		std::wstring(L"GSMAIN"),
+		std::wstring(L"gs_5_0")));
+	pMaterial->Params[VT_LINEAR_DEPTH_NORMAL].bRender = true;
+	pMaterial->Params[VT_LINEAR_DEPTH_NORMAL].pEffect = pDepthEffect;
 
-	m_pActor->GetNode()->Transform.Position() = XMVectorSet(0,0.0f,0.0f,0.0f);
-	m_pActor->GetNode()->Transform.Scale() = XMVectorSet(10,10.0f,10.0f,0.0f);
-	m_pActor->GetNode()->SetName(L"Sphere");
-	m_pScene->AddActor(m_pActor);
+	auto pPhong = std::make_shared<ArkRenderEffect11>();
+	pPhong->SetVertexShader(m_pRenderer->LoadShader(VERTEX_SHADER,
+		std::wstring(L"OmnidirectionalFinalVS.hlsl"),
+		std::wstring(L"VSMAIN"),
+		std::wstring(L"vs_5_0")));
+	pPhong->SetPixelShader(m_pRenderer->LoadShader(PIXEL_SHADER,
+		std::wstring(L"OmnidirectionalFinalPS.hlsl"),
+		std::wstring(L"PSMAIN"),
+		std::wstring(L"ps_5_0")));
+	pMaterial->Params[VT_PERSPECTIVE].bRender = true;
+	pMaterial->Params[VT_PERSPECTIVE].pEffect = pPhong;
 
-
-
-	/*GeometryPtr planeGeo = GeometryPtr(new ArkGeometry11());
-	ArkGeometryGenerator11::GenerateTexturedPlane(planeGeo,50,50);
-
-	planeGeo->LoadToBuffers();
-	planeGeo->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	m_pPlane = new Actor();
-	m_pPlane->GetBody()->Visual.SetGeometry(planeGeo);
-	m_pPlane->GetBody()->Visual.SetMaterial(m_pMaterial);
-	m_pPlane->GetNode()->Transform.Position() = XMVectorSet(0.0f,0.0f,0.0f,0.0f);
-	m_pScene->AddActor(m_pPlane);*/
-
-
-	DirectX::XMVECTOR LightParams = DirectX::XMVectorSet(1.0f,1.0f,1.0f,1.0f);
-	m_pLightColor = m_pRenderer->m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightColor"));
-	m_pLightColor->InitializeParameterData(&LightParams);
-
-	DirectX::XMVECTOR LightPos = DirectX::XMVectorSet(10.0f,20.0f,-20.0f,0.0f);
-	m_pLightPositionWriter = m_pRenderer->m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightPositionWS"));
-	m_pLightPositionWriter->InitializeParameterData(&LightPos);
-
-
-
+	Actor* mActor = new Actor();
+	mActor->GetBody()->Visual.SetGeometry(pGeometry);
+	mActor->GetBody()->Visual.SetMaterial(pMaterial);
+	mActor->GetBody()->Transform.Position() = DirectX::XMVectorSet(0,0.0f,0,0.0f);
+	
+	m_pScene->AddActor(mActor);
 }
 //--------------------------------------------------------------------------------
-void PhongShading::Update()
+void OmnidirectionalShadowMapDemo::Update()
 {
 	m_pRenderer->pPipeline->StartPipelineStatistics();
 	m_pTimer->Update();
@@ -172,7 +156,9 @@ void PhongShading::Update()
 
 
 	m_pScene->Update(m_pTimer->Elapsed());
+	XMVECTOR pos = m_pCamera->GetBody()->Transform.Position();
 	m_pScene->Render(m_pRenderer);
+
 
 	m_pRenderer->pPipeline->EndPipelineStatistics();
 	text = m_pRenderer->pPipeline->PrintPipelineStatistics();
@@ -181,15 +167,13 @@ void PhongShading::Update()
 	m_pTextOverlayView->WriteText(text,transform4,XMFLOAT4(1,0,0,1));
 
 	m_pRenderer->Present(m_pWindow->GetHandle(),m_pWindow->GetSwapChain());
-
 }
 //--------------------------------------------------------------------------------
-void PhongShading::Shutdown()
+void OmnidirectionalShadowMapDemo::Shutdown()
 {
-
 }
 //--------------------------------------------------------------------------------
-bool PhongShading::HandleEvent(EventPtr pEvent)
+bool OmnidirectionalShadowMapDemo::HandleEvent(EventPtr pEvent)
 {
 	eEvent e = pEvent->GetEventType();
 
@@ -203,7 +187,7 @@ bool PhongShading::HandleEvent(EventPtr pEvent)
 	return ArkRenderApplication11::HandleEvent(pEvent);
 }
 //--------------------------------------------------------------------------------
-std::wstring PhongShading::GetName()
+std::wstring OmnidirectionalShadowMapDemo::GetName()
 {
-	return std::wstring(L"RenderAppSimple");
+	return L"OmnidirectionalShadowMapDemo";
 }

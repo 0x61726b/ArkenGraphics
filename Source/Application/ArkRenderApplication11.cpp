@@ -103,21 +103,21 @@ bool ArkRenderApplication11::ConfigureRenderingEngineComponents(UINT width,UINT 
 bool ArkRenderApplication11::ConfigureRenderingSetup()
 {
 
-	PerspectiveView* pPerspView = new PerspectiveView( *m_pRenderer,m_pBackBuffer );
-	m_pRenderView = pPerspView;
+	//PerspectiveView* pPerspView = new PerspectiveView( *m_pRenderer,m_pBackBuffer );
+	//m_pRenderView = pPerspView;
 
-	m_pTextOverlayView = new ViewTextOverlay( *m_pRenderer, m_pBackBuffer );
+	//m_pTextOverlayView = new ViewTextOverlay( *m_pRenderer, m_pBackBuffer );
 
-	m_pCamera = new ArkFirstPersonCamera();
-	m_pCamera->SetEventManager( &CameraEventHub );
-	XMVECTOR rot = XMVectorSet(0,0,0,0);
-	m_pCamera->GetNode()->Transform.Rotation() = XMMatrixRotationRollPitchYawFromVector(rot);
-	m_pCamera->GetNode()->Transform.Position() = XMVectorSet( 0.0f, 10.0f, -20.0f,0.0f );
-	m_pCamera->SetCameraView( m_pRenderView );
-	m_pCamera->SetOverlayView( m_pTextOverlayView );
-	m_pCamera->SetProjectionParams(0.1f,1000.0f, static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight), DirectX::XM_PIDIV2);
+	//m_pCamera = new ArkFirstPersonCamera();
+	//m_pCamera->SetEventManager( &CameraEventHub );
+	//XMVECTOR rot = XMVectorSet(0,0,0,0);
+	//m_pCamera->GetNode()->Transform.Rotation() = XMMatrixRotationRollPitchYawFromVector(rot);
+	//m_pCamera->GetNode()->Transform.Position() = XMVectorSet( 0.0f, 10.0f, -20.0f,0.0f );
+	//m_pCamera->SetCameraView( m_pRenderView );
+	//m_pCamera->SetOverlayView( m_pTextOverlayView );
+	//m_pCamera->SetProjectionParams(0.1f,1000.0f, static_cast<float>(m_iWidth) / static_cast<float>(m_iHeight), DirectX::XM_PIDIV2);
 
-	m_pScene->AddCamera( m_pCamera );
+	//m_pScene->AddCamera( m_pCamera );
 	return true;
 }
 //--------------------------------------------------------------------------------

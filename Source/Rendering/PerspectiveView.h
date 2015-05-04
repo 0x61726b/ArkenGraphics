@@ -12,13 +12,14 @@
 #include "RenderTask.h"
 #include "ArkSpriteRenderer11.h"
 #include "ArkFontLoader.h"
+#include "ViewSettings.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
 	class PerspectiveView : public RenderTask
 	{
 	public:
-		PerspectiveView(ArkRenderer11& Renderer, ResourcePtr RenderTarget,ResourcePtr DepthTarget = 0 );
+		PerspectiveView(ArkRenderer11& Renderer, const ViewSettings&);
 		virtual ~PerspectiveView();
 
 		//TaskCore Interface

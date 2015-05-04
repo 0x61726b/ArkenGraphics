@@ -612,6 +612,15 @@
     <ClInclude Include="Rendering\CSMViewSettings.h">
       <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\DepthViewSettings.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\AOViewSettings.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ViewOmnidirectionalShadowMap.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -1042,6 +1051,15 @@
     </ClCompile>
     <ClCompile Include="Rendering\ViewManager.cpp">
       <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\DepthViewSettings.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\AOViewSettings.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\View Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ViewOmnidirectionalShadowMap.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

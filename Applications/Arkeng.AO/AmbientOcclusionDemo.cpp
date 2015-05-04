@@ -26,6 +26,7 @@
 #include "ArkParameterWriter.h"
 #include "ArkParameterContainer.h"
 #include "ArkVectorParameterWriter11.h"
+#include "AOViewSettings.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -42,8 +43,8 @@ bool AmbientOcclusionDemo::ConfigureEngineComponents()
 	int resX = 0;
 	int resY = 0;
 
-	resX = ArkConfigFile::Get().GetConfig().DesiredResolutionX;
-	resY = ArkConfigFile::Get().GetConfig().DesiredResolutionY;
+	resX = 640;
+	resY = 480;
 
 	if(!ConfigureRenderingEngineComponents(resX,resY,D3D_FEATURE_LEVEL_11_0)) {
 		return(false);
@@ -62,8 +63,9 @@ bool AmbientOcclusionDemo::ConfigureRenderingSetup()
 {
 	// Create the camera, and the render view that will produce an image of the 
 	// from the camera's point of view of the scene.
+	AOViewSettings vs(m_pBackBuffer,NULL);
 
-	m_pRenderView = new ViewAmbientOcclusion( *m_pRenderer, m_pBackBuffer );
+	m_pRenderView = m_pViewManager->GetView(*m_pRenderer,EViewAmbientOcclusion,vs);
 	m_pRenderView->SetBackColor( XMFLOAT4( 0.6f, 0.6f, 0.9f, 1.0f ) );
 
 	m_pTextOverlayView = new ViewTextOverlay( *m_pRenderer, m_pBackBuffer );

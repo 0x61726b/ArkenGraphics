@@ -655,7 +655,7 @@ void ViewCascadedShadowMap::RenderSceneNormally(PipelineManager* pPipelineManage
 	pParamManager->SetProjectionMatrix(std::wstring(L"gProj"),&proj);*/
 
 
-	/*pParamManager->SetWorldMatrix(&(world));*/
+	pParamManager->SetWorldMatrix(&(XMMatrixIdentity()));
 	pParamManager->SetViewMatrix(&(View));
 	pParamManager->SetProjectionMatrix(&(proj));
 

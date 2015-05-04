@@ -12,14 +12,15 @@
 #include "Dx11Texture2DConfig.h"
 #include "Dx11Texture2D.h"
 #include "Scene.h"
+#include "ViewSettings.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
-PerspectiveView::PerspectiveView(ArkRenderer11& Renderer,ResourcePtr RenderTarget,ResourcePtr DepthTarget)
+PerspectiveView::PerspectiveView(ArkRenderer11& Renderer,const ViewSettings& Settings)
 {
 	ViewMatrix = DirectX::XMMatrixIdentity();
 	ProjMatrix = DirectX::XMMatrixIdentity();
-	SetRenderTargets( RenderTarget,DepthTarget );
+	SetRenderTargets( Settings.BackBuffer,Settings.DepthBuffer );
 }
 //--------------------------------------------------------------------------------
 PerspectiveView::~PerspectiveView()

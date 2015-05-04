@@ -18,8 +18,8 @@
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
-ViewDepthNormal::ViewDepthNormal( ArkRenderer11& Renderer, ResourcePtr RenderTarget, ResourcePtr DepthTarget )
-	: PerspectiveView( Renderer, RenderTarget, DepthTarget )
+ViewDepthNormal::ViewDepthNormal( ArkRenderer11& Renderer, const ViewSettings& Settings)
+	: PerspectiveView( Renderer, Settings )
 {
 	// This view is more or less the same as a ViewPerspective, with only a 
 	// different scene rendering type (as indicated below with VT_LINEAR_DEPTH_NORMAL).  

@@ -23,6 +23,7 @@
 #include "ViewDepthNormal.h"
 #include "Actor.h"
 #include "ArkShaderResourceParameter11.h"
+#include "ViewSettings.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -31,7 +32,7 @@ namespace Arkeng
 	class ViewAmbientOcclusion : public PerspectiveView
 	{
 	public:
-		ViewAmbientOcclusion( ArkRenderer11& Renderer, ResourcePtr RenderTarget, ResourcePtr DepthTarget = 0 );
+		ViewAmbientOcclusion( ArkRenderer11& Renderer, const ViewSettings& Settings );
 		virtual ~ViewAmbientOcclusion();
 
 		virtual void Update( float fTime );

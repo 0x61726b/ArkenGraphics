@@ -11,6 +11,7 @@
 //--------------------------------------------------------------------------------
 #include "PerspectiveView.h"
 #include "ArkShaderResourceParameter11.h"
+#include "ViewSettings.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -19,7 +20,7 @@ namespace Arkeng
 	class ViewDepthNormal : public PerspectiveView
 	{
 	public:
-		ViewDepthNormal(ArkRenderer11& Renderer,ResourcePtr RenderTarget,ResourcePtr DepthTarget);
+		ViewDepthNormal(ArkRenderer11& Renderer,const ViewSettings& Settings);
 		virtual ~ViewDepthNormal();
 
 		virtual void QueuePreTasks(ArkRenderer11* pRenderer);

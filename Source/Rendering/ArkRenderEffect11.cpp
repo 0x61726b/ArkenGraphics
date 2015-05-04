@@ -192,7 +192,8 @@ void ArkRenderEffect11::ConfigurePipeline(PipelineManager* pPipeline,IParameterM
 		pPipeline->RasterizerStage.CurrentState.RasterizerState.SetState(0);
 	}
 
-	for(auto pParameter : m_uniqueConstBuffers) {
+	for(auto pParameter : m_uniqueConstBuffers) 
+	{
 		std::shared_ptr<ArkConstantBuffer11> cbuffer = ArkRenderer11::Get()->GetConstantBufferByIndex(pParamManager->GetConstantBufferParameter(pParameter));
 		cbuffer->EvaluateMappings(pPipeline,pParamManager);
 	}

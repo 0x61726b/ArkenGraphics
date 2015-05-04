@@ -208,6 +208,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Math\ArkPlane.h" />
     <ClInclude Include="Math\ArkRay3.h" />
     <ClInclude Include="Math\ArkSphere3.h" />
+    <ClInclude Include="Rendering\AOViewSettings.h" />
     <ClInclude Include="Rendering\ArkBuffer11.h" />
     <ClInclude Include="Rendering\ArkBuffer11Config.h" />
     <ClInclude Include="Rendering\ArkCommandList11.h" />
@@ -267,6 +268,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkVertexShaderStage11.h" />
     <ClInclude Include="Rendering\BasicVertex11.h" />
     <ClInclude Include="Rendering\CSMViewSettings.h" />
+    <ClInclude Include="Rendering\DepthViewSettings.h" />
     <ClInclude Include="Rendering\Dx11BlendStateConfig.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilStateConfig.h" />
     <ClInclude Include="Rendering\Dx11DepthStencilView.h" />
@@ -320,6 +322,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ViewManager.h" />
     <ClInclude Include="Rendering\ViewOcclusion.h" />
     <ClInclude Include="Rendering\ViewCascadedShadowMap.h" />
+    <ClInclude Include="Rendering\ViewOmnidirectionalShadowMap.h" />
     <ClInclude Include="Rendering\ViewSettings.h" />
     <ClInclude Include="Rendering\ViewShadowMap.h" />
     <ClInclude Include="Rendering\ViewTextOverlay.h" />
@@ -369,6 +372,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Math\ArkSceneGraph.cpp" />
     <ClCompile Include="Math\ArkSphere3.cpp" />
     <ClCompile Include="Perspective\PerspectiveView.cpp" />
+    <ClCompile Include="Rendering\AOViewSettings.cpp" />
     <ClCompile Include="Rendering\ArkBuffer11.cpp" />
     <ClCompile Include="Rendering\ArkBuffer11Config.cpp" />
     <ClCompile Include="Rendering\ArkCommandList11.cpp" />
@@ -425,6 +429,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkVertexShaderStage11.cpp" />
     <ClCompile Include="Rendering\BasicVertex11.cpp" />
     <ClCompile Include="Rendering\CSMViewSettings.cpp" />
+    <ClCompile Include="Rendering\DepthViewSettings.cpp" />
     <ClCompile Include="Rendering\Dx11BlendStateConfig.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilStateConfig.cpp" />
     <ClCompile Include="Rendering\Dx11DepthStencilView.cpp" />
@@ -468,6 +473,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ViewManager.cpp" />
     <ClCompile Include="Rendering\ViewOcclusion.cpp" />
     <ClCompile Include="Rendering\ViewCascadedShadowMap.cpp" />
+    <ClCompile Include="Rendering\ViewOmnidirectionalShadowMap.cpp" />
     <ClCompile Include="Rendering\ViewSettings.cpp" />
     <ClCompile Include="Rendering\ViewShadowMap.cpp" />
     <ClCompile Include="Rendering\ViewTextOverlay.cpp" />

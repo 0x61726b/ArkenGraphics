@@ -14,13 +14,14 @@
 #include "ArkLog.h"
 //#include "ActorGenerator.h"
 #include "IParameterManager.h"
+#include "DepthViewSettings.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
-ViewAmbientOcclusion::ViewAmbientOcclusion( ArkRenderer11& Renderer, ResourcePtr RenderTarget, ResourcePtr DepthTarget )
-: PerspectiveView( Renderer, RenderTarget, DepthTarget )
+ViewAmbientOcclusion::ViewAmbientOcclusion( ArkRenderer11& Renderer, const ViewSettings& Settings )
+: PerspectiveView( Renderer,Settings )
 {
-	D3D11_TEXTURE2D_DESC desc = RenderTarget->m_pTexture2dConfig->GetTextureDesc();
+	D3D11_TEXTURE2D_DESC desc = Settings.BackBuffer->m_pTexture2dConfig->GetTextureDesc();
 
 	ResolutionX = desc.Width;
 	ResolutionY = desc.Height;
@@ -51,7 +52,9 @@ ViewAmbientOcclusion::ViewAmbientOcclusion( ArkRenderer11& Renderer, ResourcePtr
 	// ambient occlusion.
 
 	pOcclusionView = new ViewOcclusion( Renderer, OcclusionBuffer, BilateralBuffer, DepthNormalBuffer );
-	pDepthNormalView = new ViewDepthNormal( Renderer, DepthNormalBuffer, DepthTarget );
+	DepthViewSettings DepthViewS(DepthNormalBuffer,Settings.DepthBuffer);
+
+	pDepthNormalView = new ViewDepthNormal( Renderer, DepthViewS );
 
 	// Create the visualization actor and send in the occlusion buffer.
 
@@ -74,7 +77,7 @@ ViewAmbientOcclusion::~ViewAmbientOcclusion()
 	Safe_Delete( pOcclusionView );
 	Safe_Delete( pDepthNormalView );
 
-	Safe_Delete( pVisActor );
+	
 }
 //--------------------------------------------------------------------------------
 void ViewAmbientOcclusion::Update( float fTime )

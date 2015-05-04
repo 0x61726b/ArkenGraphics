@@ -19,7 +19,9 @@ namespace Arkeng
 		EViewPerspective,
 		EViewCSM,
 		EViewShadowMap,
-		EViewTextOverlay
+		EViewTextOverlay,
+		EViewAmbientOcclusion,
+		EViewOmnidirectionalShadowMap
 	};
 	class ViewManager
 	{
