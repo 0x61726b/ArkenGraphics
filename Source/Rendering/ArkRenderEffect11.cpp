@@ -170,25 +170,31 @@ void ArkRenderEffect11::UpdateConstantBufferList()
 //--------------------------------------------------------------------------------
 void ArkRenderEffect11::ConfigurePipeline(PipelineManager* pPipeline,IParameterManager* pParamManager)
 {
-	if(m_iBlendState != -1) {
+	if(m_iBlendState != -1) 
+	{
 		pPipeline->OutputMergerStage.CurrentState.BlendState.SetState(m_iBlendState);
 	}
-	else {
+	else 
+	{
 		pPipeline->OutputMergerStage.CurrentState.BlendState.SetState(0);
 	}
 
-	if(m_iDepthStencilState != -1) {
+	if(m_iDepthStencilState != -1)
+	{
 		pPipeline->OutputMergerStage.CurrentState.DepthStencilState.SetState(m_iDepthStencilState);
 		pPipeline->OutputMergerStage.CurrentState.StencilRef.SetState(m_uStencilRef);
 	}
-	else {
+	else 
+	{
 		pPipeline->OutputMergerStage.CurrentState.DepthStencilState.SetState(0);
 	}
 
-	if(m_iRasterizerState != -1) {
+	if(m_iRasterizerState != -1)
+	{
 		pPipeline->RasterizerStage.CurrentState.RasterizerState.SetState(m_iRasterizerState);
 	}
-	else {
+	else
+	{
 		pPipeline->RasterizerStage.CurrentState.RasterizerState.SetState(0);
 	}
 

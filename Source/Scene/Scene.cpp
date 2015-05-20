@@ -79,7 +79,7 @@ void Scene::RemoveActor(Actor* pActor)
 	if(pParent) pParent->DetachChild(pActor->GetNode());
 }
 //--------------------------------------------------------------------------------
-ArkSphere3 Scene::GetSceneBoundingSphere()
+void Scene::CalculateSceneBoundaries()
 {
 	ArkNode3D* Root = GetRoot();
 	std::vector<ArkNode3D*> Nodes = Root->Nodes();
@@ -104,7 +104,17 @@ ArkSphere3 Scene::GetSceneBoundingSphere()
 
 		}
 	}
-	return ArkSphere3();
+	for( int i=0; i < Geometries.size(); ++i )
+	{
+		ArkGeometry11* pGeometry = Geometries[i];
+		ArkBox boundingBox = pGeometry->GetBoundingBox();
+		ActorBoundaries.push_back(boundingBox);
+	}
+	ArkBox bb;
+	bb.Center() = XMVectorSet(0,0,0,0);
+	bb.Extents() = XMVectorSet(10,10,10,0);
+	SceneBoundary = bb;
+
 }
 //--------------------------------------------------------------------------------
 void Scene::AddCamera(Camera* pCamera)

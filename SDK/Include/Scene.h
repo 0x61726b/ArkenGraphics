@@ -13,7 +13,7 @@
 #include "Camera.h"
 #include "ArkParameterContainer.h"
 #include "ArkLight.h"
-#include "ArkSphere3.h"
+#include "ArkBox.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -40,13 +40,17 @@ namespace Arkeng
 		ArkNode3D* GetRoot();
 
 		std::vector<Actor*> GetActors();
-		ArkSphere3 GetSceneBoundingSphere();
+		void CalculateSceneBoundaries();
+
+		std::vector<ArkBox> ActorBoundaries;
+		ArkBox	SceneBoundary;
 		ArkParameterContainer Parameters;
 	protected:
 		ArkNode3D* m_pRoot;
 		std::vector< Actor* >		m_vActors;
 		std::vector< Camera*>		m_vCameras;
 		std::vector< ArkLight* >    m_vLights;
+		
 
 	};
 };

@@ -30,6 +30,11 @@ ArkTransform3D::~ArkTransform3D()
 	
 }
 //--------------------------------------------------------------------------------
+void ArkTransform3D::SetPosition(const XMVECTOR& V)
+{
+	m_vTranslation = V;
+}
+//--------------------------------------------------------------------------------
 XMVECTOR& ArkTransform3D::Position()
 {
 	return(m_vTranslation);

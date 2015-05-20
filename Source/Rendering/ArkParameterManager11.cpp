@@ -28,6 +28,7 @@ ArkParameterManager11::ArkParameterManager11(unsigned int ID)
 	m_pParent = 0;
 
 	m_pWorldMatrix = GetMatrixParameterRef(std::wstring(L"gWorld"));
+	m_pWorldInverseTransposeMatrix= GetMatrixParameterRef(std::wstring(L"WorldInverseTranspose"));
 	m_pViewMatrix  = GetMatrixParameterRef(std::wstring(L"gView"));
 	m_pProjMatrix  = GetMatrixParameterRef(std::wstring(L"gProj"));
 
@@ -717,6 +718,10 @@ void ArkParameterManager11::SetWorldMatrix(DirectX::XMMATRIX* w)
 	SetMatrixParameter(m_pWorldMatrix,w);
 
 	XMMATRIX WorldMatrix = GetMatrixParameter(m_pWorldMatrix);
+	XMMATRIX Inverse;
+	XMVECTOR det;
+	Inverse = XMMatrixInverse(&det,WorldMatrix);
+	XMMATRIX InverseTranspose = XMMatrixTranspose(Inverse);
 	XMMATRIX ViewMatrix  = GetMatrixParameter(m_pViewMatrix);
 	XMMATRIX ProjMatrix  = GetMatrixParameter(m_pProjMatrix);
 
@@ -726,6 +731,7 @@ void ArkParameterManager11::SetWorldMatrix(DirectX::XMMATRIX* w)
 	XMMATRIX WorldViewProjMatrix = WorldMatrix * ViewProjMatrix;
 
 	SetMatrixParameter(m_pWorldViewMatrix,&WorldViewMatrix);
+	SetMatrixParameter(m_pWorldInverseTransposeMatrix,&InverseTranspose);
 	SetMatrixParameter(m_pViewProjMatrix,&ViewProjMatrix);
 	SetMatrixParameter(m_pWorldProjMatrix,&WorldProjMatrix);
 	SetMatrixParameter(m_pWorldViewProjMatrix,&WorldViewProjMatrix);
@@ -736,6 +742,10 @@ void ArkParameterManager11::SetViewMatrix(DirectX::XMMATRIX* w)
 	SetMatrixParameter(m_pViewMatrix,w);
 
 	XMMATRIX WorldMatrix = GetMatrixParameter(m_pWorldMatrix);
+	XMMATRIX Inverse;
+	XMVECTOR det;
+	Inverse = XMMatrixInverse(&det,WorldMatrix);
+	XMMATRIX InverseTranspose = XMMatrixTranspose(Inverse);
 	XMMATRIX ViewMatrix  = GetMatrixParameter(m_pViewMatrix);
 	XMMATRIX ProjMatrix  = GetMatrixParameter(m_pProjMatrix);
 
@@ -745,6 +755,7 @@ void ArkParameterManager11::SetViewMatrix(DirectX::XMMATRIX* w)
 	XMMATRIX WorldViewProjMatrix = WorldMatrix * ViewProjMatrix;
 
 	SetMatrixParameter(m_pWorldViewMatrix,&WorldViewMatrix);
+	SetMatrixParameter(m_pWorldInverseTransposeMatrix,&InverseTranspose);
 	SetMatrixParameter(m_pViewProjMatrix,&ViewProjMatrix);
 	SetMatrixParameter(m_pWorldProjMatrix,&WorldProjMatrix);
 	SetMatrixParameter(m_pWorldViewProjMatrix,&WorldViewProjMatrix);
@@ -755,6 +766,10 @@ void ArkParameterManager11::SetProjectionMatrix(DirectX::XMMATRIX* w)
 	SetMatrixParameter(m_pProjMatrix,w);
 
 	XMMATRIX WorldMatrix = GetMatrixParameter(m_pWorldMatrix);
+	XMMATRIX Inverse;
+	XMVECTOR det;
+	Inverse = XMMatrixInverse(&det,WorldMatrix);
+	XMMATRIX InverseTranspose = XMMatrixTranspose(Inverse);
 	XMMATRIX ViewMatrix  = GetMatrixParameter(m_pViewMatrix);
 	XMMATRIX ProjMatrix  = GetMatrixParameter(m_pProjMatrix);
 
@@ -764,6 +779,7 @@ void ArkParameterManager11::SetProjectionMatrix(DirectX::XMMATRIX* w)
 	XMMATRIX WorldViewProjMatrix = WorldMatrix * ViewProjMatrix;
 
 	SetMatrixParameter(m_pWorldViewMatrix,&WorldViewMatrix);
+	SetMatrixParameter(m_pWorldInverseTransposeMatrix,&InverseTranspose);
 	SetMatrixParameter(m_pViewProjMatrix,&ViewProjMatrix);
 	SetMatrixParameter(m_pWorldProjMatrix,&WorldProjMatrix);
 	SetMatrixParameter(m_pWorldViewProjMatrix,&WorldViewProjMatrix);

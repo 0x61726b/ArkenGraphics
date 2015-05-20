@@ -28,6 +28,8 @@ namespace Arkeng
 		unsigned int P3( ) const;
 		unsigned int& P3( );
 
+		unsigned int MaterialID;
+
 		void swapP1P2( );
 		void swapP2P3( );
 		void swapP3P1( );

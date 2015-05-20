@@ -17,11 +17,19 @@
 #include "PointIndices.h"
 #include "PipelineExecutor11.h"
 #include "DxIAState.h"
+#include "ArkBox.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
 	class ArkVertexBuffer11;
 	class ArkIndexBuffer11;
+	class ArkMaterial11;
+
+	struct SubMeshMaterial
+	{
+		std::vector<int> Indices;
+		int MaterialID;
+	};
 
 	class ArkGeometry11 : public PipelineExecutor11
 	{
@@ -60,13 +68,23 @@ namespace Arkeng
 
 		void LoadToBuffers( );
 
+		void CalculateMaterialIDs();
+
         bool ComputeTangentFrame( std::string positionSemantic = VertexElement11::PositionSemantic,
                                   std::string normalSemantic = VertexElement11::NormalSemantic,
                                   std::string texCoordSemantic = VertexElement11::TexCoordSemantic, 
                                   std::string tangentSemantic = VertexElement11::TangentSemantic );
+		bool CalculateBoundingBox( std::string positionSemantic = VertexElement11::PositionSemantic );
 
+
+		ArkBox GetBoundingBox();
 		std::vector<VertexElement11*>		m_vElements;
 		std::vector<UINT>					m_vIndices;
+		ArkBox								m_BoundingBox;		
+		ArkGeometry11*						Parent;
+		std::wstring&						NodeName();
+		std::wstring						m_NodeName;
+		std::vector<ArkGeometry11*>			Children;
 		
 		ResourcePtr m_VB;
 		ResourcePtr m_IB;

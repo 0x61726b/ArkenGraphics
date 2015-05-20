@@ -21,7 +21,8 @@ namespace Arkeng
 		EViewShadowMap,
 		EViewTextOverlay,
 		EViewAmbientOcclusion,
-		EViewOmnidirectionalShadowMap
+		EViewOmnidirectionalShadowMap,
+		EViewWireframe
 	};
 	class ViewManager
 	{

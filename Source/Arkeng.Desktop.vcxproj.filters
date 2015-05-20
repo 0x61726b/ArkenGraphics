@@ -621,6 +621,31 @@
     <ClInclude Include="Rendering\ViewOmnidirectionalShadowMap.h">
       <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\ViewCubicMap.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\ArkBox.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ViewWireframe.h">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ArkOctree.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ArkActor.h" />
+    <ClInclude Include="Rendering\ArkGeometryNode11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkNodedGeometryExecutor11.h">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\ArkFbxImporter.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ArkSurfaceMaterial.h">
+      <Filter>Rendering\Direct3D11\Material System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utility\Pch.cpp">
@@ -1060,6 +1085,33 @@
     </ClCompile>
     <ClCompile Include="Rendering\ViewOmnidirectionalShadowMap.cpp">
       <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ViewCubicMap.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\ArkBox.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ViewWireFrame.cpp">
+      <Filter>Rendering\Direct3D11\Material System\Components\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ArkOctree.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ArkActor.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkGeometryNode11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkNodedGeometryExecutor11.cpp">
+      <Filter>Rendering\Direct3D11\Pipeline\Executors</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\ArkFbxImporter.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ArkSurfaceMaterial.cpp">
+      <Filter>Rendering\Direct3D11\Material System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

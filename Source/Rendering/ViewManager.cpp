@@ -14,6 +14,7 @@
 #include "ViewShadowMap.h"
 #include "ViewTextOverlay.h"
 #include "ViewOmnidirectionalShadowMap.h"
+#include "ViewWireframe.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -46,6 +47,11 @@ RenderTask* ViewManager::GetView(ArkRenderer11& Renderer,ArkViewTypes type,const
 	if(type == ArkViewTypes::EViewOmnidirectionalShadowMap)
 	{
 		Arkeng::ViewOmnidirectionalShadowMap* mView = new Arkeng::ViewOmnidirectionalShadowMap(Renderer,Settings);
+		return mView;
+	}
+	if(type == ArkViewTypes::EViewWireframe)
+	{
+		Arkeng::ViewWireframe* mView = new Arkeng::ViewWireframe(Renderer,Settings);
 		return mView;
 	}
 	return nullptr;

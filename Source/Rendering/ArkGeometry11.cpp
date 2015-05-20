@@ -17,16 +17,23 @@
 #include "ArkLog.h"
 //#include "GlyphString.h"
 #include "PipelineManager.h"
+#include "ArkMaterial11.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
 ArkGeometry11::ArkGeometry11()
+	:m_NodeName(std::wstring(L"DefaultNode"))
 {
 	m_iVertexSize = 0;
 	m_iVertexCount = 0;
 
 	// Default to triangle lists
 	m_ePrimType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+}
+//--------------------------------------------------------------------------------
+std::wstring& ArkGeometry11::NodeName()
+{
+	return m_NodeName;
 }
 //--------------------------------------------------------------------------------
 ArkGeometry11::~ArkGeometry11()
@@ -51,12 +58,15 @@ void ArkGeometry11::Execute(PipelineManager* pPipeline,IParameterManager* pParam
 	pPipeline->InputAssemblerStage.CurrentState.VertexBufferStrides.SetState(0,m_iVertexSize);
 	pPipeline->InputAssemblerStage.CurrentState.VertexBufferOffsets.SetState(0,0);
 
+
+
 	pPipeline->InputAssemblerStage.CurrentState.IndexBuffer.SetState(m_IB->m_iResource);
 	pPipeline->InputAssemblerStage.CurrentState.IndexBufferFormat.SetState(DXGI_FORMAT_R32_UINT);
 
 	pPipeline->ApplyInputResources();
 
 	pPipeline->DrawIndexed(GetIndexCount(),0,0);
+
 }
 //--------------------------------------------------------------------------------
 void ArkGeometry11::AddElement(VertexElement11* element)
@@ -344,56 +354,121 @@ void ArkGeometry11::GenerateInputLayout(int ShaderID)
 //--------------------------------------------------------------------------------
 void ArkGeometry11::LoadToBuffers()
 {
-	// Check the number of vertices to be created
-	CalculateVertexCount();
-
-	// Check the size of the assembled vertices
-	CalculateVertexSize();
-
-	if(GetVertexSize() > 0)
+	if(m_NodeName != std::wstring(L"ArkSceneRoot") || m_vIndices.size() > 0)
 	{
-		// Load the vertex buffer first by calculating the required size
-		unsigned int vertices_length = GetVertexSize() * GetVertexCount();
 
-		char* pBytes = new char[vertices_length];
+		// Check the number of vertices to be created
+		CalculateVertexCount();
 
-		for(int j = 0; j < m_iVertexCount; j++)
+		// Check the size of the assembled vertices
+		CalculateVertexSize();
+
+		if(GetVertexSize() > 0)
 		{
-			int iElemOffset = 0;
-			for(unsigned int i = 0; i < m_vElements.size(); i++)
+			// Load the vertex buffer first by calculating the required size
+			unsigned int vertices_length = GetVertexSize() * GetVertexCount();
+
+			char* pBytes = new char[vertices_length];
+
+			for(int j = 0; j < m_iVertexCount; j++)
 			{
-				memcpy(pBytes + j * m_iVertexSize + iElemOffset,m_vElements[i]->GetPtr(j),m_vElements[i]->SizeInBytes());
-				iElemOffset += m_vElements[i]->SizeInBytes();
+				int iElemOffset = 0;
+				for(unsigned int i = 0; i < m_vElements.size(); i++)
+				{
+					memcpy(pBytes + j * m_iVertexSize + iElemOffset,m_vElements[i]->GetPtr(j),m_vElements[i]->SizeInBytes());
+					iElemOffset += m_vElements[i]->SizeInBytes();
+				}
 			}
+
+			D3D11_SUBRESOURCE_DATA data;
+			data.pSysMem = reinterpret_cast<void*>(pBytes);
+			data.SysMemPitch = 0;
+			data.SysMemSlicePitch = 0;
+
+			ArkBuffer11Config vbuffer;
+			vbuffer.SetDefaultVertexBuffer(vertices_length,false);
+			m_VB = ArkRenderer11::Get()->CreateVertexBuffer(&vbuffer,&data);
+
+			delete[] pBytes;
 		}
 
+		// Load the index buffer by calculating the required size
+		// based on the number of indices.
 		D3D11_SUBRESOURCE_DATA data;
-		data.pSysMem = reinterpret_cast<void*>(pBytes);
+		data.pSysMem = reinterpret_cast<void*>(&m_vIndices[0]);
 		data.SysMemPitch = 0;
 		data.SysMemSlicePitch = 0;
 
-		ArkBuffer11Config vbuffer;
-		vbuffer.SetDefaultVertexBuffer(vertices_length,false);
-		m_VB = ArkRenderer11::Get()->CreateVertexBuffer(&vbuffer,&data);
-
-		delete[] pBytes;
+		ArkBuffer11Config ibuffer;
+		ibuffer.SetDefaultIndexBuffer(sizeof(UINT) * GetIndexCount(),false);
+		m_IB = ArkRenderer11::Get()->CreateIndexBuffer(&ibuffer,&data);
 	}
-
-	// Load the index buffer by calculating the required size
-	// based on the number of indices.
-	D3D11_SUBRESOURCE_DATA data;
-	data.pSysMem = reinterpret_cast<void*>(&m_vIndices[0]);
-	data.SysMemPitch = 0;
-	data.SysMemSlicePitch = 0;
-
-	ArkBuffer11Config ibuffer;
-	ibuffer.SetDefaultIndexBuffer(sizeof(UINT) * GetIndexCount(),false);
-	m_IB = ArkRenderer11::Get()->CreateIndexBuffer(&ibuffer,&data);
 }
 //--------------------------------------------------------------------------------
 UINT ArkGeometry11::GetIndexCount()
 {
 	return(m_vIndices.size());
+}
+//--------------------------------------------------------------------------------
+void ArkGeometry11::CalculateMaterialIDs()
+{
+	//for(int i=0; i < 15; i++)
+	//{
+	//	SubMeshMaterial Sm;
+	//	Sm.MaterialID = i;
+	//	SubMeshes.push_back(Sm);
+	//}
+	//for(int i=0; i < SubMeshes.size(); i++)
+	//{
+	//	for(int k=0; k < MaterialIDs.size(); k++)
+	//	{
+
+	//		if(SubMeshes[i].MaterialID == MaterialIDs[k])
+	//		{
+	//			int P1 = k*3 + 0;
+	//			int P2 = k*3 + 1;
+	//			int P3 = k*3 + 2;
+
+	//			SubMeshes[i].Indices.push_back(P1);
+	//			SubMeshes[i].Indices.push_back(P2);
+	//			SubMeshes[i].Indices.push_back(P3);
+	//		}
+	//	}
+
+	//}
+	//////Split the Mesh
+	////int Size = SubMeshes.size();
+
+
+	////std::vector<SubMeshMaterial> NewSubMeshes;
+	////for( int i=0; i < Size; i++ )
+	////{
+	////	int IndexSize = SubMeshes[i].Indices.size();
+	////	int StartIndex = 0;
+	////	for( int k=0; k < IndexSize; k++ )
+	////	{
+	////		if( StartIndex >= IndexSize )
+	////			StartIndex--;
+	////		int CurrentIndex = SubMeshes[i].Indices[k];
+	////		int NextIndex = SubMeshes[i].Indices[k+1 == IndexSize ? k+1-1 : k+1];
+
+	////		if( NextIndex - CurrentIndex != 1 && NextIndex - CurrentIndex != 0)
+	////		{
+	////			
+	////			SubMeshMaterial ThisMesh;
+	////			ThisMesh.MaterialID = i;
+	////			for( int a = StartIndex; a < k; a++ )
+	////			{
+	////				ThisMesh.Indices.push_back( SubMeshes[i].Indices[a] );
+	////				
+	////			}
+	////			NewSubMeshes.push_back(ThisMesh);
+	////			
+	////			StartIndex = k;
+	////		}
+	////	}
+	////}
+	////int Count = NewSubMeshes.size();
 }
 //--------------------------------------------------------------------------------
 bool ArkGeometry11::ComputeTangentFrame(std::string positionSemantic,
@@ -547,5 +622,43 @@ bool ArkGeometry11::ComputeTangentFrame(std::string positionSemantic,
 	AddElement(pTangentElement);
 
 	return true;
+}
+//--------------------------------------------------------------------------------
+bool ArkGeometry11::CalculateBoundingBox(std::string positionSemantic)
+{
+	ArkBox bb;
+	std::vector<XMFLOAT3> points;
+
+	VertexElement11* pPositionElement = GetElement(positionSemantic);
+	if(pPositionElement == NULL)
+	{
+		ArkLog::Get(LogType::Renderer).Output(L"Calculate bounding box failed, unable to find position vertex element");
+		return false;
+	}
+
+	XMVECTOR VMax = XMVectorSet(-FLT_MAX,-FLT_MAX,-FLT_MAX,0.0f);
+	XMVECTOR VMin = XMVectorSet(FLT_MAX,FLT_MAX,FLT_MAX,0.0f);
+
+	for(int i=0; i < m_iVertexCount; ++i)
+	{
+		XMFLOAT3& p = *pPositionElement->Get3f(i);
+		XMVECTOR P = XMLoadFloat3(&p);
+
+		VMin = XMVectorMin(VMin,P);
+		VMax = XMVectorMax(VMax,P);
+	}
+	XMVECTOR Center = (VMin + VMax)*.5f;
+	XMVECTOR Extents = (VMax-VMin)*.5f;
+
+	bb.Center() = Center;
+	bb.Extents() = Extents;
+	m_BoundingBox = bb;
+
+	return true;
+}
+//--------------------------------------------------------------------------------
+ArkBox ArkGeometry11::GetBoundingBox()
+{
+	return m_BoundingBox;
 }
 //--------------------------------------------------------------------------------

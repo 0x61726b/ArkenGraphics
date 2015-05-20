@@ -18,6 +18,7 @@
 #include "ArkMatrixArrayParameter11.h"
 #include "ArkShaderResourceParameter11.h"
 #include "ArkSamplerParameter11.h"
+#include "ViewCubicMap.h"
 //--------------------------------------------------------------------------------
 namespace Arkeng
 {
@@ -35,6 +36,7 @@ namespace Arkeng
 
 		//RenderTask Interface
 		virtual void Resize( UINT width,UINT height );
+		virtual void SetScene(Scene* pScene);
 		//~
 
 		void RenderDepthOnly(PipelineManager* pPipelineManager,IParameterManager* pParamManager);
@@ -43,6 +45,7 @@ namespace Arkeng
 
 		static const UINT ShadowMapSize = 1024;
 	protected:
+		ViewCubicMap* m_pViewCubicMap;
 		ResourcePtr m_pRenderTarget;
 		ResourcePtr m_pDepthTarget;
 

@@ -1,24 +1,20 @@
 //--------------------------------------------------------------------------------
-// This file is a portion of the Hieroglyph 3 Rendering Engine.  It is distributed
-// under the MIT License, available in the root of this distribution and 
-// at the following URL:
+//This is a file from Arkengine
 //
-// http://www.opensource.org/licenses/mit-license.php
 //
-// Copyright (c) Jason Zink 
-//--------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------
-// GeometryLoaderDX11
+//Copyright (c) Alperen Gezer.All rights reserved.
 //
+//ArkGeometryLoader11.h
 //--------------------------------------------------------------------------------
 #ifndef __ArkGeometryLoader11_h__
 #define __ArkGeometryLoader11_h__
 //--------------------------------------------------------------------------------
 #include "ArkGeometry11.h"
+#include "ArkNodedGeometryExecutor11.h"
+#include "ArkGeometryNode11.h"
 //#include "SkinnedActor.h"
 #include <string>
-
+#include "Actor.h"
 #include <fbxsdk.h>
 //--------------------------------------------------------------------------------
 namespace Arkeng
@@ -40,6 +36,7 @@ namespace Arkeng
 
 
 		GeometryPtr LoadFbxFile( std::wstring filename );
+		std::vector<Actor*> LoadFbxRecursively( std::wstring filename );
 	public:
 		ArkGeometryLoader11();
 	private:

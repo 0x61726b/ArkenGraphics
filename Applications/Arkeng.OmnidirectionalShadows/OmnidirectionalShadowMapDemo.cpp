@@ -92,11 +92,21 @@ void OmnidirectionalShadowMapDemo::Initialize()
 	pGeometry->LoadToBuffers();
 	pGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	/*ArkGeometryLoader11 geoLoader;
-	GeometryPtr pPlaneGeometry = geoLoader.LoadFbxFile(std::wstring(L"plane.fbx"));
-	pPlaneGeometry->LoadToBuffers();
-	pPlaneGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-*/
+	ArkGeometryLoader11 geoLoader;
+	GeometryPtr pPlane = geoLoader.LoadFbxFile(std::wstring(L"jjplane.fbx"));
+	pPlane->LoadToBuffers();
+	pPlane->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	GeometryPtr pSphere = geoLoader.LoadFbxFile(std::wstring(L"jjsphere.fbx"));
+	pSphere->LoadToBuffers();
+	pSphere->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	GeometryPtr pCube = geoLoader.LoadFbxFile(std::wstring(L"jjcube.fbx"));
+	pCube->LoadToBuffers();
+	pCube->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+
+
 	MaterialPtr pMaterial = MaterialPtr(new ArkMaterial11());
 	auto pDepthEffect = std::make_shared<ArkRenderEffect11>();
 
@@ -127,12 +137,27 @@ void OmnidirectionalShadowMapDemo::Initialize()
 	pMaterial->Params[VT_PERSPECTIVE].bRender = true;
 	pMaterial->Params[VT_PERSPECTIVE].pEffect = pPhong;
 
-	Actor* mActor = new Actor();
-	mActor->GetBody()->Visual.SetGeometry(pGeometry);
-	mActor->GetBody()->Visual.SetMaterial(pMaterial);
-	mActor->GetBody()->Transform.Position() = DirectX::XMVectorSet(0,0.0f,0,0.0f);
+	Actor* mPlane = new Actor();
+	mPlane->GetBody()->Visual.SetGeometry(pPlane);
+	mPlane->GetBody()->Visual.SetMaterial(pMaterial);
+	mPlane->GetBody()->Transform.Position() = DirectX::XMVectorSet(0,-0.0f,0,0.0f);
+
+	Actor* mSphere = new Actor();
+	mSphere->GetBody()->Visual.SetGeometry(pGeometry);
+	mSphere->GetBody()->Visual.SetMaterial(pMaterial);
+	mSphere->GetBody()->Transform.Position() = DirectX::XMVectorSet(2.0f,0.8f,0,0.0f);
+	/*mSphere->GetBody()->Transform.Scale() = DirectX::XMVectorSet(0.01f,0.01f,0.01f,0.0f);*/
+
+	Actor* mCube = new Actor();
+	mCube->GetBody()->Visual.SetGeometry(pCube);
+	mCube->GetBody()->Visual.SetMaterial(pMaterial);
+	mCube->GetBody()->Transform.Position() = DirectX::XMVectorSet(-2.0f,0.45f,0,0.0f);
+	mCube->GetBody()->Transform.Scale() = DirectX::XMVectorSet(0.01f,0.01f,0.01f,0.0f);
+
+	m_pScene->AddActor(mPlane);
+	m_pScene->AddActor(mSphere);
+	m_pScene->AddActor(mCube);
 	
-	m_pScene->AddActor(mActor);
 }
 //--------------------------------------------------------------------------------
 void OmnidirectionalShadowMapDemo::Update()

@@ -12,17 +12,519 @@
 #include "PCH.h"
 #include "ArkGeometryLoader11.h"
 #include "ArkGeometry11.h"
+#include "ArkNodedGeometryExecutor11.h"
 #include "VertexElement11.h"
 #include "ms3dspec.h"
+#include "ArkMaterial11.h"
 #include "ArkLog.h"
-//#include "ArkMaterialGenerator11.h"
+#include "ArkGeometryNode11.h"
 #include <sstream>
 #include "ArkFileSystem.h"
+#include <fbxsdk.h>
+#include "ArkRenderer11.h"
+#include "Actor.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
+int GetMappingIndex(const FbxLayerElement::EMappingMode& MappingMode,const int PolygonIndex,const int PolygonVertexIndex,const int VertexIndex)
+{
+	switch(MappingMode)
+	{
+	case FbxLayerElement::eAllSame: return 0;
+	case FbxLayerElement::eByControlPoint: return VertexIndex;
+	case FbxLayerElement::eByPolygonVertex: return PolygonIndex * 3 + PolygonVertexIndex;
+	case FbxLayerElement::eByPolygon: return PolygonIndex;
+	}
+	return -1;
+}
+//--------------------------------------------------------------------------------
+int GetMaterialIndex(FbxScene* Scene,FbxMesh* FBXMesh,const int LayerIndex,const int PolygonIndex,const int PolygonVertexIndex,const int VertexIndex)
+{
+	// Check for valid params.
+	if(LayerIndex < 0 || LayerIndex > FBXMesh->GetLayerCount())
+		return -1;
+
+
+	// Get the node of the mesh.
+	FbxNode* Node = FBXMesh->GetNode();
+
+
+	// Check if the node is valid.
+	if(Node == NULL)
+		return -1;
+
+
+	// Get the layer element material.
+	FbxLayerElementMaterial* FBXMaterial = FBXMesh->GetLayer(LayerIndex)->GetMaterials();
+
+
+	// Check if the layer element material is valid.
+	if(FBXMaterial)
+	{
+		// Get the mapping index.
+		const int MappingIndex = GetMappingIndex(FBXMaterial->GetMappingMode(),PolygonIndex,0,VertexIndex);
+
+
+		// Check if the mapping index is valid.
+		if(MappingIndex < 0)
+			return -1;
+
+
+		// Get the reference mode.
+		const FbxLayerElement::EReferenceMode ReferenceMode = FBXMaterial->GetReferenceMode();
+
+
+		// Check the reference mode.
+		if(ReferenceMode == FbxLayerElement::eDirect)
+		{
+			// Check if the mapping index is valid.
+			if(MappingIndex < Node->GetMaterialCount())
+			{
+				// Get the node material.
+				FbxSurfaceMaterial* NodeMaterial = Node->GetMaterial(MappingIndex);
+
+
+				// Find the node material in the scene.
+				for(int i = 0; i < Scene->GetMaterialCount(); ++i)
+				{
+					FbxSurfaceMaterial* SceneMaterial = Scene->GetMaterial(i);
+					if(SceneMaterial == NodeMaterial)
+						return i;
+				}
+			}
+		}
+		else if(ReferenceMode == FbxLayerElement::eIndexToDirect)
+		{
+			// Get the material index array.
+			const FbxLayerElementArrayTemplate< int >& MaterialIndexArray = FBXMaterial->GetIndexArray();
+
+
+			// Check if the mapping index is valid.
+			if(MappingIndex < MaterialIndexArray.GetCount())
+			{
+				// Get the material index.
+				const int Index = MaterialIndexArray.GetAt(MappingIndex);
+
+
+				// Check if the index is valid.
+				if(Index < Node->GetMaterialCount())
+				{
+					// Get the node material.
+					FbxSurfaceMaterial* NodeMaterial = Node->GetMaterial(Index);
+
+
+					// Find the node material in the scene.
+					for(int i = 0; i < Scene->GetMaterialCount(); ++i)
+					{
+						FbxSurfaceMaterial* SceneMaterial = Scene->GetMaterial(i);
+						if(SceneMaterial == NodeMaterial)
+							return i;
+					}
+				}
+			}
+		}
+	}
+
+
+	// Return invalid material index.
+	return -1;
+}
+std::vector<int> GetMaterialIDsFromLayer(FbxNode* pNode,FbxMesh* pMesh,FbxLayer* pLayer)
+{
+	int lPolyCount = pMesh->GetPolygonCount();
+	std::string name = pMesh->GetName();
+
+	FbxLayerElementMaterial* pMaterialLayer = pLayer->GetMaterials();
+	/*if( pMaterialLayer == NULL )
+		return;*/
+
+	FbxLayerElement::EMappingMode MappingMode = pMaterialLayer->GetMappingMode();
+	FbxLayerElement::EReferenceMode ReferenceMode = pMaterialLayer->GetReferenceMode();
+
+	//if( ReferenceMode == FbxLayerElement::eIndex )
+	//	return;
+
+	FbxString lString;
+
+	std::vector<int> Ids;
+
+	if(MappingMode == FbxLayerElement::eAllSame)
+	{
+		int lMaterialIndexCount = pMaterialLayer->GetIndexArray().GetCount();
+		int index = pMaterialLayer->GetIndexArray().GetAt(0);
+
+		int MatID = 0;
+
+		if(pNode->GetMaterialCount())
+		{
+			FbxSurfaceMaterial* lMaterial = pNode->GetMaterial(index);
+			MatID = pMaterialLayer->GetIndexArray().GetAt(0);
+			if(MatID == -1)
+				MatID = 0;
+		}
+	}
+	if(MappingMode == FbxLayerElement::eByPolygon)
+	{
+		int lNbMat = pNode->GetSrcObjectCount<FbxSurfaceMaterial>();
+
+		if(pMaterialLayer->GetReferenceMode() == FbxLayerElement::eIndex || pMaterialLayer->GetReferenceMode() == FbxLayerElement::eIndexToDirect)
+		{
+			int lMaterialIndexCount = pMaterialLayer->GetIndexArray().GetCount();
+
+			for(int i=0; i < lMaterialIndexCount; i++)
+			{
+				int MatID = pMaterialLayer->GetIndexArray().GetAt(i);
+				if(MatID == -1)
+					MatID = 0;
+				if(MatID >= lNbMat)
+					MatID = 0;
+				Ids.push_back(MatID);
+			}
+		}
+	}
+	return Ids;
+}
+//--------------------------------------------------------------------------------
+struct FbxArkInterop
+{
+	std::vector<FbxNode*> Nodes;
+	std::vector<ArkGeometry11*> ArkNodes;
+	std::vector<Actor*> SubActors;
+	int TotalTriangleCount;
+};
+//--------------------------------------------------------------------------------
+int DisplayRecursive(FbxNode* child)
+{
+	int thisChildCount = 0;
+	for(int i=0; i < child->GetChildCount(); i++)
+	{
+		thisChildCount++;
+		thisChildCount +=DisplayRecursive(child->GetChild(i));
+	}
+	return thisChildCount;
+}
+//--------------------------------------------------------------------------------
+FbxArkInterop GetNodesRecursively(FbxNode* Root,FbxScene* pScene)
+{
+	FbxArkInterop FbA;
+
+	std::vector<FbxNode*> Nodes;
+	std::vector<ArkGeometry11*> ArkNodes;
+	std::vector<Actor*> SubActors;
+	for(int i=0; i < Root->GetChildCount(); i++)
+	{
+		UINT triangleCount = 0;
+		FbxNode* Child = Root->GetChild(i);
+		int Count = Child->GetChildCount();
+		ArkGeometry11* ArkNode = (new ArkGeometry11());
+		std::string sName = Child->GetName();
+		std::wstring NodeName = std::wstring(sName.begin(),sName.end());
+
+		ArkNode->Parent = nullptr;
+		ArkNode->NodeName() = NodeName;
+		Nodes.push_back(Child);
+		ArkNodes.push_back(ArkNode);
+		FbA.Nodes = Nodes;
+		FbA.ArkNodes = ArkNodes;
+
+		FbxArkInterop Children = GetNodesRecursively(Child,pScene);
+
+		for(int j=0; j < Children.Nodes.size();j++)
+		{
+			Children.ArkNodes[j]->Parent = ArkNode;;
+			ArkNode->Children.push_back(Children.ArkNodes[j]);
+
+		}
+		for(int k = 0; k < Children.SubActors.size(); k++)
+			FbA.SubActors.push_back(Children.SubActors[k]);
+
+		std::vector<XMFLOAT3> pPos;
+		std::vector<XMFLOAT3> pNrm;
+		std::vector<XMFLOAT2> PTex;
+		std::vector<XMFLOAT3> biNorms;
+		std::vector<TriangleIndices> faces;
+
+		if(Child->GetNodeAttribute() == NULL)
+			continue;
+
+		FbxNodeAttribute::EType AttributeType = Child->GetNodeAttribute()->GetAttributeType();
+
+		if(AttributeType != FbxNodeAttribute::eMesh)
+			continue;
+
+		FbxMesh* pMesh = (FbxMesh*)Child->GetNodeAttribute();
+
+		std::vector<int> Materials = GetMaterialIDsFromLayer(Child,pMesh,pMesh->GetLayer(0));
+
+#pragma region Pos Norm UV Tex Binorm loading
+
+
+		FbxVector4* pVertices = pMesh->GetControlPoints();
+		FbxArray<FbxVector4> pNormals;
+		pMesh->GetPolygonVertexNormals(pNormals);
+
+
+
+
+		int polyCount = pMesh->GetPolygonCount();
+
+		for(int j = 0; j < pMesh->GetPolygonCount(); j++)
+		{
+			int iNumVertices = pMesh->GetPolygonSize(j);
+
+
+			assert(iNumVertices == 3);
+			triangleCount++;
+			TriangleIndices face;
+			face.P1() = j*3 + 0;
+			face.P2() = j*3 + 1;
+			face.P3() = j*3 + 2;
+			faces.push_back(face);
+
+
+			for(int k = 0; k < iNumVertices; k++)
+			{
+				int iControlPointIndex = pMesh->GetPolygonVertex(j,k);
+
+
+				FbxVector4 normalFbx;
+				bool s = pMesh->GetPolygonVertexNormal(j,k,normalFbx);
+
+				FbxVector2 fbxTexCoord;
+				FbxStringList UVSetNameList;
+
+				pMesh->GetUVSetNames(UVSetNameList);
+				bool unmapped;
+				s = pMesh->GetPolygonVertexUV(j,k,UVSetNameList.GetStringAt(0),fbxTexCoord,unmapped);
+
+
+				XMFLOAT3 vertex;
+				vertex.x = ((float)pVertices[iControlPointIndex].mData[0]);
+				vertex.y = ((float)pVertices[iControlPointIndex].mData[1]);
+				vertex.z = ((float)pVertices[iControlPointIndex].mData[2]);
+				pPos.push_back(vertex);
+
+				XMFLOAT3 norm;
+				norm.x = (float)normalFbx.mData[0];
+				norm.y = (float)normalFbx.mData[1];
+				norm.z = -(float)normalFbx.mData[2];
+				pNrm.push_back(norm);
+
+				XMFLOAT2 tex;
+				tex.x = (float)fbxTexCoord.mData[0];
+				tex.y = (float)fbxTexCoord.mData[1];
+				PTex.push_back(tex);
+			}
+
+		}
+		pMesh->Destroy();
+#pragma endregion
+
+
+		int MaterialCount = Child->GetMaterialCount();
+		std::vector<SubMeshMaterial> SubMeshes;
+		for(int i=0; i < MaterialCount; i++)
+		{
+			SubMeshMaterial sm;
+			sm.MaterialID = i;
+			SubMeshes.push_back(sm);
+		}
+		for(int i=0; i < MaterialCount; i++)
+		{
+			for(int k=0; k < Materials.size(); k++)
+			{
+
+				if(SubMeshes[i].MaterialID == Materials[k])
+				{
+					int P1 = k*3 + 0;
+					int P2 = k*3 + 1;
+					int P3 = k*3 + 2;
+
+					SubMeshes[i].Indices.push_back(P1);
+					SubMeshes[i].Indices.push_back(P2);
+					SubMeshes[i].Indices.push_back(P3);
+				}
+			}
+
+		}
+		
+		for(int i=0; i < SubMeshes.size(); i++)
+		{
+			Actor* mActor = new Actor();
+			std::wstring ActorName = L"";
+			ActorName.append(L"SubMesh ");
+			ActorName.append(std::to_wstring(i));
+
+			GeometryPtr SubGeometry = GeometryPtr(new ArkGeometry11());
+			MaterialPtr SubMaterial = MaterialPtr(new ArkMaterial11());
+
+			SubGeometry->NodeName() = ActorName;
+
+			for(int k=0; k < SubMeshes[i].Indices.size(); k++)
+			{
+				SubGeometry->AddIndex(SubMeshes[i].Indices[k]);
+			}
+
+#pragma region Element Loading
+			VertexElement11* pPositions = new VertexElement11(3,triangleCount*3);
+			pPositions->m_SemanticName = VertexElement11::PositionSemantic;
+			pPositions->m_uiSemanticIndex = 0;
+			pPositions->m_Format = DXGI_FORMAT_R32G32B32_FLOAT;
+			pPositions->m_uiInputSlot = 0;
+			pPositions->m_uiAlignedByteOffset = 0;
+			pPositions->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+			pPositions->m_uiInstanceDataStepRate = 0;
+
+			VertexElement11* pTexcoords = new VertexElement11(2,triangleCount*3);
+			pTexcoords->m_SemanticName = VertexElement11::TexCoordSemantic;
+			pTexcoords->m_uiSemanticIndex = 0;
+			pTexcoords->m_Format = DXGI_FORMAT_R32G32_FLOAT;
+			pTexcoords->m_uiInputSlot = 0;
+			pTexcoords->m_uiAlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+			pTexcoords->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+			pTexcoords->m_uiInstanceDataStepRate = 0;
+
+			VertexElement11* pNormalsEl = new VertexElement11(3,triangleCount*3);
+			pNormalsEl->m_SemanticName = VertexElement11::NormalSemantic;
+			pNormalsEl->m_uiSemanticIndex = 0;
+			pNormalsEl->m_Format = DXGI_FORMAT_R32G32B32_FLOAT;
+			pNormalsEl->m_uiInputSlot = 0;
+			pNormalsEl->m_uiAlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+			pNormalsEl->m_InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+			pNormalsEl->m_uiInstanceDataStepRate = 0;
+
+			XMFLOAT3* pPos3 = pPositions->Get3f(0);
+			XMFLOAT3* pNormal3 = pNormalsEl->Get3f(0);
+			XMFLOAT2* pTex = pTexcoords->Get2f(0);
+
+			for(int i=0; i < faces.size(); ++i)
+			{
+				ArkNode->AddFace(faces[i]);
+			}
+
+			for(int i=0; i < pPos.size(); ++i)
+			{
+				pPos3[i].x = pPos[i].x;
+				pPos3[i].y = pPos[i].y;
+				pPos3[i].z = pPos[i].z;
+
+				pNormal3[i] = pNrm[i];
+				pTex[i] = PTex[i];
+			}
+#pragma endregion
+
+			SubGeometry->AddElement(pPositions);
+			SubGeometry->AddElement(pNormalsEl);
+			SubGeometry->AddElement(pTexcoords);
+
+			pPositions = NULL;
+			pNormalsEl = NULL;
+			pTexcoords = NULL;
+
+			FbxSurfaceMaterial* Material = Child->GetMaterial(i);
+			FbxProperty DiffuseProperty = Material->FindProperty(FbxSurfaceMaterial::sDiffuse);
+			FbxFileTexture* DiffuseTexture = FbxCast<FbxFileTexture>(DiffuseProperty.GetSrcObject<FbxTexture>(0));
+			if(DiffuseTexture != NULL)
+			{
+				// Then, you can get all the properties of the texture, include its name
+				const char* textureName = DiffuseTexture->GetRelativeFileName();
+				std::string t = std::string(textureName);
+				int index = t.find_last_of("\\");
+				int count = t.size();
+				std::string fileName = t.substr(index+1,count-index);
+				std::wstring textureToLoad;
+				textureToLoad.append(fileName.begin(),fileName.end());
+
+				ResourcePtr TextureResource = ArkRenderer11::Get()->LoadTexture(textureToLoad);
+
+				SubMaterial->Parameters.SetShaderResourceParameter(L"DiffuseMap",TextureResource);
+			}
+			FbxProperty BumpProp = Material->FindProperty(FbxSurfaceMaterial::sBump);
+			FbxFileTexture* BumpTexture = FbxCast<FbxFileTexture>(BumpProp.GetSrcObject<FbxTexture>(0));
+
+			int textureCount = BumpProp.GetSrcObjectCount<FbxTexture>();
+			for(int j = 0; j < textureCount; j++)
+			{
+				/*Then, you can get all the properties of the texture, include its name*/
+
+				const char* normalTextureName = BumpTexture->GetRelativeFileName();
+				std::string t = std::string(normalTextureName);
+				int index = t.find_last_of("\\");
+				int count = t.size();
+				std::string fileName = t.substr(index+1,count-index);
+				std::wstring textureToLoad;
+				textureToLoad.append(fileName.begin(),fileName.end());
+
+				ResourcePtr TextureResource = ArkRenderer11::Get()->LoadTexture(textureToLoad);
+
+				SubMaterial->Parameters.SetShaderResourceParameter(L"NormalMap",TextureResource);
+			}
+			mActor->GetBody()->Visual.SetGeometry(SubGeometry);
+			mActor->GetBody()->Visual.SetMaterial(SubMaterial);
+			mActor->GetBody()->Transform.Position() = DirectX::XMVectorSet(0,-0.0f,0,0.0f);
+			mActor->GetBody()->Transform.Rotation() = XMMatrixIdentity();
+			SubActors.push_back(mActor);
+			ArkNodes.push_back(SubGeometry.get());
+		}
+		for( int x = 0; x < SubActors.size(); x++)
+			FbA.SubActors.push_back(SubActors[x]);
+		FbA.SubActors = SubActors;
+		FbA.ArkNodes = ArkNodes;
+	}
+	return FbA;
+}
+//--------------------------------------------------------------------------------
 ArkGeometryLoader11::ArkGeometryLoader11()
 {
+}
+//--------------------------------------------------------------------------------
+std::vector<Actor*> ArkGeometryLoader11::LoadFbxRecursively(std::wstring filename)
+{
+	static FbxManager* m_pFbxSdkManager = nullptr;
+	m_pFbxSdkManager = FbxManager::Create();
+	FbxIOSettings* pIOsettings = FbxIOSettings::Create(m_pFbxSdkManager,IOSROOT);
+	m_pFbxSdkManager->SetIOSettings(pIOsettings);
+
+	FbxImporter* pImporter = FbxImporter::Create(m_pFbxSdkManager,"");
+	FbxScene* pFbxScene = FbxScene::Create(m_pFbxSdkManager,"");
+
+	ArkFileSystem fs;
+	filename = fs.GetModelsDirectory() + filename;
+	std::string fileName;
+	fileName.assign(filename.begin(),filename.end());
+	bool bSuccess = pImporter->Initialize(fileName.c_str(),-1,m_pFbxSdkManager->GetIOSettings());
+	/*	if(!bSuccess)
+			return NU*//*LL;*/
+	bSuccess = pImporter->Import(pFbxScene);
+	/*if(!bSuccess)
+		return NULL;*/
+	pImporter->Destroy();
+
+	FbxNode* pFbxRootNode = pFbxScene->GetRootNode();
+
+
+	FbxArkInterop Nodes = GetNodesRecursively(pFbxRootNode,pFbxScene);
+
+	pFbxRootNode->Destroy();
+	pFbxScene->Destroy();
+	m_pFbxSdkManager->Destroy();
+	m_pFbxSdkManager = nullptr;
+
+	//ArkGeometry11* SceneRoot = new ArkGeometry11;
+
+	//if(Nodes.ArkNodes[0]->m_vIndices.size() == 0)
+	//{
+	//	//Has Root
+	//	SceneRoot = Nodes.ArkNodes[0];
+	//	Nodes.ArkNodes[0]->NodeName() = std::wstring(L"ArkSceneRoot");
+	//}
+	//else
+	//{
+	//	SceneRoot->NodeName() = std::wstring(L"ArkSceneRoot");
+	//	SceneRoot->Children = Nodes.ArkNodes;
+	//}
+
+	return Nodes.SubActors;
 }
 //--------------------------------------------------------------------------------
 GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
@@ -63,9 +565,20 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 	std::vector<TriangleIndices> faces;
 	if(pFbxRootNode)
 	{
+
 		for(int i = 0; i < pFbxRootNode->GetChildCount(); i++)
 		{
+			int ChildCount = pFbxRootNode->GetChildCount();
 			FbxNode* pFbxChildNode = pFbxRootNode->GetChild(i);
+
+			GeometryNodePtr ThisNode = GeometryNodePtr(new ArkGeometryNode11());
+			NodeProperties& NodeProperty = *ThisNode->NodeProps;
+
+
+
+			std::string sName = pFbxChildNode->GetName();
+			std::wstring& NodeName = std::wstring(sName.begin(),sName.end());
+			NodeProperty.NodeName = NodeName;
 
 			if(pFbxChildNode->GetNodeAttribute() == NULL)
 				continue;
@@ -83,7 +596,7 @@ GeometryPtr ArkGeometryLoader11::LoadFbxFile(std::wstring filename)
 
 
 			int polyCount = pMesh->GetPolygonCount();
-			
+
 			for(int j = 0; j < pMesh->GetPolygonCount(); j++)
 			{
 				int iNumVertices = pMesh->GetPolygonSize(j);

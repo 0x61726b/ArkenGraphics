@@ -25,6 +25,8 @@
 #include "ViewShadowMap.h"
 #include "CSMViewSettings.h"
 #include "ViewManager.h"
+#include "ArkMaterialGenerator11.h"
+#include "ViewWireframe.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 //--------------------------------------------------------------------------------
@@ -109,7 +111,7 @@ void RenderAppSimple::Initialize()
 	//pPlaneGeometry->ComputeTangentFrame();
 	//pPlaneGeometry->LoadToBuffers();
 	//pPlaneGeometry->SetPrimitiveType(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	
+
 
 	m_pMaterial = MaterialPtr(new ArkMaterial11());
 
@@ -168,7 +170,6 @@ void RenderAppSimple::Initialize()
 	//m_pScene->AddActor(dragonActor);
 	//m_pScene->AddActor(dragonActor2);
 	//m_pScene->AddActor(dragonActor3);
-
 
 }
 //--------------------------------------------------------------------------------

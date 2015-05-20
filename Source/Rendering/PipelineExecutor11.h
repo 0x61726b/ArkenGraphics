@@ -37,11 +37,12 @@ namespace Arkeng
 		virtual void GenerateInputLayout( int ShaderID );
 		virtual int GetInputLayout( int ShaderID );
 
+		std::map<int,InputLayoutKey*>			m_InputLayouts;
 	protected:
 
 		// A description of our vertex elements
 		std::vector<D3D11_INPUT_ELEMENT_DESC>	m_elements;
-		std::map<int,InputLayoutKey*>			m_InputLayouts;
+		
 
 	};
 

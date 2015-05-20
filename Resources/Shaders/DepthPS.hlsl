@@ -11,12 +11,11 @@
 struct VS_OUTPUT
 {
 	float4 position : SV_Position;
-	
+	float4 depth	: COLOR;
 };
 
 float4 PSMAIN( in VS_OUTPUT input ) : SV_Target
 {
-	float color = input.position.z / input.position.w;
-	return color;
+	return input.depth;
 }
 

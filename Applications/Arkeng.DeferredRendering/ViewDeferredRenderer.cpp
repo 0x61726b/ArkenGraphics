@@ -433,7 +433,7 @@ void ViewDeferredRenderer::SetupViews()
 	const int cubeMin = -(cubeSize / 2);
 	const int cubeMax = cubeSize / 2;
 
-	const XMFLOAT3 minExtents(-4.0f,1.0f,-4.0f);
+	const XMFLOAT3 minExtents(-4.0f,-11.0f,-4.0f);
 	const XMFLOAT3 maxExtents(4.0f,11.0f,4.0f);
 	const XMFLOAT3 minColor(1.0f,0.0f,0.0f);
 	const XMFLOAT3 maxColor(0.0f,1.0f,1.0f);
@@ -456,8 +456,10 @@ void ViewDeferredRenderer::SetupViews()
 			}
 		}
 	}
+
+
 	light.Type = LightType::Directional;
-	light.Direction = XMFLOAT3(0,-1,1);
+	light.Direction = XMFLOAT3(-0.5337,-0.5337,-0.5337);
 	light.Color = XMFLOAT3(1,1,1);
 	m_pLightsView->AddLight(light);
 	int vpWidth = ResolutionX;

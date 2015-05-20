@@ -37,9 +37,9 @@ struct VS_OUTPUT
 VS_OUTPUT VSMAIN( in VS_INPUT input )
 {
 	VS_OUTPUT output;
-	float3 posWS = mul(gWorld, float4(input.PositionOS.xyz,1.0f)).xyz;
+	float3 posWS = mul(float4(input.PositionOS.xyz,1.0f),gWorld).xyz;
 	output.PositionCS = mul(input.PositionOS,WorldViewProjMatrix);
-	output.NormalWS = mul(float4(input.NormalOS.xyz,0.0f),WorldInverseTranspose);
+	output.NormalWS = mul(float4(input.NormalOS.xyz,0.0f),WorldInverseTranspose).xyz;
 	output.LightDirWS = LightPosWS.xyz - posWS;
 	output.ViewDirWS= ViewPosWS.xyz - posWS;
 	return output;

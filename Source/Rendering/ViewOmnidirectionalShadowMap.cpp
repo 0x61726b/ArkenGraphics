@@ -18,6 +18,7 @@
 #include "Dx11ShaderResourceViewConfig.h"
 #include "Dx11SamplerStateConfig.h"
 #include "Dx11DepthStencilView.h"
+#include "CSMViewSettings.h"
 //--------------------------------------------------------------------------------
 using namespace Arkeng;
 using namespace DirectX;
@@ -53,18 +54,6 @@ ViewOmnidirectionalShadowMap::ViewOmnidirectionalShadowMap(ArkRenderer11& Render
 
 	m_iViewport = iViewport;
 	//Setup resources
-
-	D3D11_VIEWPORT ShadowMapViewport;
-	ShadowMapViewport.TopLeftX = 0.0f;
-	ShadowMapViewport.TopLeftY = 0.0f;
-	ShadowMapViewport.Width = (FLOAT)this->ShadowMapSize;
-	ShadowMapViewport.Height = (FLOAT)this->ShadowMapSize;
-	ShadowMapViewport.MinDepth = 0.0f;
-	ShadowMapViewport.MaxDepth = 1.0f;
-
-	m_iShadowMapViewport = Renderer.CreateViewport(ShadowMapViewport);
-	SetViewport(m_iShadowMapViewport);
-
 	Dx11Texture2DConfig ShadowMapTexConfig;
 	ShadowMapTexConfig.SetWidth(this->ShadowMapSize);
 	ShadowMapTexConfig.SetHeight(this->ShadowMapSize);
@@ -100,7 +89,6 @@ ViewOmnidirectionalShadowMap::ViewOmnidirectionalShadowMap(ArkRenderer11& Render
 	SRVConfig.SetTextureCube(SRVTexCube);
 
 	ShadowMap = Renderer.CreateTexture2D(&ShadowMapTexConfig,0,&SRVConfig,0,0,&DSVConfig);
-
 	Dx11SamplerStateConfig descSampler;
 	descSampler.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_POINT;
 	descSampler.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
@@ -118,41 +106,20 @@ ViewOmnidirectionalShadowMap::ViewOmnidirectionalShadowMap(ArkRenderer11& Render
 
 	ShadowMapSampler = Renderer.CreateSamplerState(&descSampler);
 
-	m_vLightPosition = XMVectorSet(0,5,0,1.0f);
-	m_mLightProjMatrix = DirectX::XMMatrixPerspectiveFovLH(XM_PIDIV2,(FLOAT)this->ShadowMapSize /(FLOAT)this->ShadowMapSize,0.1f,40.0f);
-
-	//Eye(0,5,0)
-	//Focus(40,5,0)
-	// +x, -x, +y, -y, +z, -z
-	m_mLightViewMatrices[0] = XMMatrixLookAtLH(m_vLightPosition,m_vLightPosition + XMVectorSet(40.0f,0.0f,0.0f,0.0f),XMVectorSet(0.0f,1.0f,0.0f,0.0f)) * m_mLightProjMatrix;
-	m_mLightViewMatrices[1] = XMMatrixLookAtLH(m_vLightPosition,m_vLightPosition + XMVectorSet(-40.0f,0.0f,0.0f,0.0f),XMVectorSet(0.0f,1.0f,0.0f,0.0f)) * m_mLightProjMatrix;
-	m_mLightViewMatrices[2] = XMMatrixLookAtLH(m_vLightPosition,m_vLightPosition + XMVectorSet(0.0f,40.0f,0.0f,0.0f),XMVectorSet(0.0f,0.0f,-1.0f,0.0f)) * m_mLightProjMatrix;
-	m_mLightViewMatrices[3] = XMMatrixLookAtLH(m_vLightPosition,m_vLightPosition + XMVectorSet(0.0f,-40.0f,0.0f,0.0f),XMVectorSet(0.0f,0.0f,1.0f,0.0f)) * m_mLightProjMatrix;
-	m_mLightViewMatrices[4] = XMMatrixLookAtLH(m_vLightPosition,m_vLightPosition + XMVectorSet(0.0f,0.0f,40.0f,0.0f),XMVectorSet(0.0f,1.0f,0.0f,0.0f)) * m_mLightProjMatrix;
-	m_mLightViewMatrices[5] = XMMatrixLookAtLH(m_vLightPosition,m_vLightPosition + XMVectorSet(0.0f,0.0f,-40.0f,0.0f),XMVectorSet(0.0f,1.0f,0.0f,0.0f)) * m_mLightProjMatrix;
-
-	m_mLightView4x4 = new XMFLOAT4X4[6];
-	for(int i=0; i < 6; ++i)
-	{
-		XMFLOAT4X4 m;
-		XMStoreFloat4x4(&m,m_mLightViewMatrices[i]);
-		m_mLightView4x4[i] = m;
-
-	}
+	
 	LightPosWSParameter = Renderer.m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightPosWS"));
 	ViewPositionWS = Renderer.m_pParamMgr->GetVectorParameterRef(std::wstring(L"ViewPosWS"));
 	ViewDirectionWS = Renderer.m_pParamMgr->GetVectorParameterRef(std::wstring(L"ViewPosWS"));
 	
 	LightRangeParameter = Renderer.m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightRange"));
-	LightViewProjMatricesParameter = Renderer.m_pParamMgr->GetMatrixArrayParameterRef(std::wstring(L"LightViewProjMatrices"),6);
-	WorldInverseTranspose = Renderer.m_pParamMgr->GetMatrixParameterRef(std::wstring(L"WorldInverseTranspose"));
 	ShadowMapCubeParameter = Renderer.m_pParamMgr->GetShaderResourceParameterRef(std::wstring(L"ShadowMap"));
 	ShadowSamplerParameter = Renderer.m_pParamMgr->GetSamplerStateParameterRef(std::wstring(L"ShadowMapSampler"));
 	LightColorParameter = Renderer.m_pParamMgr->GetVectorParameterRef(std::wstring(L"LightColor"));
 
-	XMVECTOR lightDirV,lightColor;
-	lightColor = XMVectorSet(10.0f,8.0f,5.0f,1.0f);
-	lightDirV = XMVector3Normalize(XMVectorSet(0.577f,0.577f,0.577f,0.0f));
+
+	CSMViewSettings ns(ShadowMap,DepthBuffer);
+
+	m_pViewCubicMap = new ViewCubicMap(Renderer,ns);
 }
 //--------------------------------------------------------------------------------
 ViewOmnidirectionalShadowMap::~ViewOmnidirectionalShadowMap()
@@ -177,11 +144,12 @@ void ViewOmnidirectionalShadowMap::QueuePreTasks(ArkRenderer11* pRenderer)
 	{
 		m_pScene->PreRender(pRenderer,VT_PERSPECTIVE);
 	}
+	m_pViewCubicMap->QueuePreTasks(pRenderer);
 }
 //--------------------------------------------------------------------------------
 void ViewOmnidirectionalShadowMap::ExecuteTask(PipelineManager* pPipelineManager,IParameterManager* pParamManager)
 {
-	RenderDepthOnly(pPipelineManager,pParamManager);
+	/*RenderDepthOnly(pPipelineManager,pParamManager);*/
 	RenderNormally(pPipelineManager,pParamManager);
 }
 //--------------------------------------------------------------------------------
@@ -206,8 +174,6 @@ void ViewOmnidirectionalShadowMap::RenderDepthOnly(PipelineManager* pPipelineMan
 	SetViewport(m_iShadowMapViewport);
 	ConfigureViewports(pPipelineManager);
 
-	float lightRange = 40;
-	pParamManager->SetVectorParameter(LightRangeParameter,&XMVectorSet(lightRange,lightRange,lightRange,lightRange));
 
 
 	pParamManager->SetMatrixArrayParameter(LightViewProjMatricesParameter,6,m_mLightView4x4);
@@ -232,31 +198,29 @@ void ViewOmnidirectionalShadowMap::RenderNormally(PipelineManager* pPipelineMana
 	SetViewport(m_iViewport);
 	ConfigureViewports(pPipelineManager);
 
-	XMMATRIX world = XMMatrixIdentity();
-	pParamManager->SetWorldMatrix(&(world));
 
-	XMMATRIX worldInverse;
-	XMVECTOR determinant;
-	worldInverse = XMMatrixInverse(&determinant,world);
-	XMMATRIX worldInvTranspose = XMMatrixTranspose(worldInverse);
-
+	SetRenderParams(pParamManager);
 	XMMATRIX view = m_pScene->GetCamera()->GetBody()->Transform.GetView();
 	XMMATRIX proj = m_pScene->GetCamera()->m_ProjMatrix;
 
-
-	pParamManager->SetShaderResourceParameter(ShadowMapCubeParameter,ShadowMap);
+	m_vLightPosition = XMVectorSet(0,10.0f,0,1.0f);
+	pParamManager->SetVectorParameter(LightPosWSParameter,&m_vLightPosition);
+	
+	float lightRange = 10;
+	pParamManager->SetVectorParameter(LightRangeParameter,&XMVectorSet(lightRange,lightRange,lightRange,lightRange));
 	pParamManager->SetSamplerParameter(ShadowSamplerParameter,&ShadowMapSampler);
-	pParamManager->SetMatrixParameter(WorldInverseTranspose,&worldInvTranspose);
-	pParamManager->SetViewMatrix(&(view));
-	pParamManager->SetProjectionMatrix(&(proj));
-
-
 	XMVECTOR lightDirV,lightColor;
 	lightColor = XMVectorSet(0.8f,0.6f,0.5f,1.0f);
 	pParamManager->SetVectorParameter(LightColorParameter,&lightColor);
 
 
-
+	XMMATRIX m = m_pScene->GetCamera()->GetBody()->Transform.WorldMatrix();
+	XMVECTOR translate;
+	XMVECTOR scale;
+	XMVECTOR rot;
+	XMMatrixDecompose(&scale,&rot,&translate,m);
+	pParamManager->SetVectorParameter(ViewPositionWS,&translate);
+	pParamManager->SetShaderResourceParameter(ShadowMapCubeParameter,ShadowMap);
 
 	pPipelineManager->ClearPipelineResources();
 
@@ -268,6 +232,12 @@ void ViewOmnidirectionalShadowMap::Resize(UINT width,UINT height)
 {
 	//ArkRenderer11::Get()->ResizeTexture( m_pDepthTarget,width,height );
 	//ArkRenderer11::Get()->ResizeViewport(m_iViewports[0],width,height);
+}
+//--------------------------------------------------------------------------------
+void ViewOmnidirectionalShadowMap::SetScene(Scene* pScene)
+{
+	m_pScene = pScene;
+	m_pViewCubicMap->SetScene(pScene);
 }
 //--------------------------------------------------------------------------------
 std::wstring ViewOmnidirectionalShadowMap::GetName()

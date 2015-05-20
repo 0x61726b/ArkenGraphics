@@ -72,6 +72,7 @@ namespace Arkeng
 		unsigned int GetID();
 	protected:
 		std::shared_ptr<ArkMatrixParameter11>	m_pWorldMatrix;
+		std::shared_ptr<ArkMatrixParameter11>	m_pWorldInverseTransposeMatrix;
 		std::shared_ptr<ArkMatrixParameter11>	m_pViewMatrix;
 		std::shared_ptr<ArkMatrixParameter11>	m_pProjMatrix;
 		std::shared_ptr<ArkMatrixParameter11>	m_pWorldViewMatrix;

@@ -202,6 +202,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Logging\ArkFileSystem.h" />
     <ClInclude Include="Logging\DxDebugHelper.h" />
     <ClInclude Include="Logging\ArkLog.h" />
+    <ClInclude Include="Math\ArkBox.h" />
     <ClInclude Include="Math\ArkCompositeShape.h" />
     <ClInclude Include="Math\ArkFrustum.h" />
     <ClInclude Include="Math\ArkMath.h" />
@@ -226,6 +227,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkGeometry11.h" />
     <ClInclude Include="Rendering\ArkGeometryGenerator11.h" />
     <ClInclude Include="Rendering\ArkGeometryLoader11.h" />
+    <ClInclude Include="Rendering\ArkGeometryNode11.h" />
     <ClInclude Include="Rendering\ArkGeometryShader11.h" />
     <ClInclude Include="Rendering\ArkGeometryShaderStage11.h" />
     <ClInclude Include="Rendering\ArkHullShader11.h" />
@@ -239,6 +241,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkMatrixParameter11.h" />
     <ClInclude Include="Rendering\ArkMatrixParameterWriter11.h" />
     <ClInclude Include="Rendering\ArkMultiExecutor11.h" />
+    <ClInclude Include="Rendering\ArkNodedGeometryExecutor11.h" />
     <ClInclude Include="Rendering\ArkParameterContainer.h" />
     <ClInclude Include="Rendering\ArkParameterManager11.h" />
     <ClInclude Include="Rendering\ArkParameterWriter.h" />
@@ -259,6 +262,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ArkShaderStageState11.h" />
     <ClInclude Include="Rendering\ArkSpriteFont11.h" />
     <ClInclude Include="Rendering\ArkSpriteRenderer11.h" />
+    <ClInclude Include="Rendering\ArkSurfaceMaterial.h" />
     <ClInclude Include="Rendering\ArkUnorderedAccessParameter11.h" />
     <ClInclude Include="Rendering\ArkVectorParameter11.h" />
     <ClInclude Include="Rendering\ArkVectorParameterWriter11.h" />
@@ -318,6 +322,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\TStateMonitor.h" />
     <ClInclude Include="Rendering\VertexElement11.h" />
     <ClInclude Include="Rendering\ViewAmbientOcclusion.h" />
+    <ClInclude Include="Rendering\ViewCubicMap.h" />
     <ClInclude Include="Rendering\ViewDepthNormal.h" />
     <ClInclude Include="Rendering\ViewManager.h" />
     <ClInclude Include="Rendering\ViewOcclusion.h" />
@@ -326,10 +331,13 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Rendering\ViewSettings.h" />
     <ClInclude Include="Rendering\ViewShadowMap.h" />
     <ClInclude Include="Rendering\ViewTextOverlay.h" />
+    <ClInclude Include="Rendering\ViewWireframe.h" />
     <ClInclude Include="Scene\Actor.h" />
+    <ClInclude Include="Scene\ArkActor.h" />
     <ClInclude Include="Scene\ArkEntity3D.h" />
     <ClInclude Include="Scene\ArkFirstPersonCamera.h" />
     <ClInclude Include="Scene\ArkNode3D.h" />
+    <ClInclude Include="Scene\ArkOctree.h" />
     <ClInclude Include="Scene\ArkPickRecord.h" />
     <ClInclude Include="Scene\ArkSpatialController.h" />
     <ClInclude Include="Scene\ArkTransform3D.h" />
@@ -337,6 +345,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClInclude Include="Scene\IController.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Utility\ArkTimer.h" />
+    <ClInclude Include="Utility\ArkFbxImporter.h" />
     <ClInclude Include="Utility\Pch.h" />
     <ClInclude Include="Utility\TConfiguration.h" />
   </ItemGroup>
@@ -364,6 +373,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Logging\ArkFileSystem.cpp" />
     <ClCompile Include="Logging\DxDebugHelper.cpp" />
     <ClCompile Include="Logging\ArkLog.cpp" />
+    <ClCompile Include="Math\ArkBox.cpp" />
     <ClCompile Include="Math\ArkCompositeShape.cpp" />
     <ClCompile Include="Math\ArkFrustum.cpp" />
     <ClCompile Include="Math\ArkMath.cpp" />
@@ -387,6 +397,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkGeometry11.cpp" />
     <ClCompile Include="Rendering\ArkGeometryGenerator11.cpp" />
     <ClCompile Include="Rendering\ArkGeometryLoader11.cpp" />
+    <ClCompile Include="Rendering\ArkGeometryNode11.cpp" />
     <ClCompile Include="Rendering\ArkGeometryShader11.cpp" />
     <ClCompile Include="Rendering\ArkGeometryShaderStage11.cpp" />
     <ClCompile Include="Rendering\ArkHullShader11.cpp" />
@@ -399,6 +410,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkMatrixParameter11.cpp" />
     <ClCompile Include="Rendering\ArkMatrixParameterWriter11.cpp" />
     <ClCompile Include="Rendering\ArkMultiExecutor11..cpp" />
+    <ClCompile Include="Rendering\ArkNodedGeometryExecutor11.cpp" />
     <ClCompile Include="Rendering\ArkParameterContainer.cpp" />
     <ClCompile Include="Rendering\ArkParameterManager11.cpp" />
     <ClCompile Include="Rendering\ArkParameterWriter.cpp" />
@@ -421,6 +433,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ArkShape3D.cpp" />
     <ClCompile Include="Rendering\ArkSpriteFont11.cpp" />
     <ClCompile Include="Rendering\ArkSpriteRenderer11.cpp" />
+    <ClCompile Include="Rendering\ArkSurfaceMaterial.cpp" />
     <ClCompile Include="Rendering\ArkUnorderedAccessParameter11.cpp" />
     <ClCompile Include="Rendering\ArkVectorParameter11.cpp" />
     <ClCompile Include="Rendering\ArkVectorParameterWriter11.cpp" />
@@ -469,6 +482,7 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\TriangleIndices.cpp" />
     <ClCompile Include="Rendering\VertexElement11.cpp" />
     <ClCompile Include="Rendering\ViewAmbientOcclusion.cpp" />
+    <ClCompile Include="Rendering\ViewCubicMap.cpp" />
     <ClCompile Include="Rendering\ViewDepthNormal.cpp" />
     <ClCompile Include="Rendering\ViewManager.cpp" />
     <ClCompile Include="Rendering\ViewOcclusion.cpp" />
@@ -477,15 +491,19 @@ copy Utility\*.inl ..\SDK\Include</Command>
     <ClCompile Include="Rendering\ViewSettings.cpp" />
     <ClCompile Include="Rendering\ViewShadowMap.cpp" />
     <ClCompile Include="Rendering\ViewTextOverlay.cpp" />
+    <ClCompile Include="Rendering\ViewWireFrame.cpp" />
     <ClCompile Include="Scene\Actor.cpp" />
+    <ClCompile Include="Scene\ArkActor.cpp" />
     <ClCompile Include="Scene\ArkEntity3D.cpp" />
     <ClCompile Include="Scene\ArkFirstPersonCamera.cpp" />
     <ClCompile Include="Scene\ArkNode3D.cpp" />
+    <ClCompile Include="Scene\ArkOctree.cpp" />
     <ClCompile Include="Scene\ArkPickRecord.cpp" />
     <ClCompile Include="Scene\ArkTransform3D.cpp" />
     <ClCompile Include="Scene\Camera.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Utility\ArkTimer.cpp" />
+    <ClCompile Include="Utility\ArkFbxImporter.cpp" />
     <ClCompile Include="Utility\Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

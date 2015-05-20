@@ -34,6 +34,7 @@ namespace Arkeng
 		XMMATRIX& LocalMatrix( );
 		XMMATRIX& WorldMatrix( );
 
+		void SetPosition(const XMVECTOR& V);
 		XMMATRIX GetView( ) const;
 
 		XMVECTOR LocalToWorldSpace( const XMVECTOR& input );
